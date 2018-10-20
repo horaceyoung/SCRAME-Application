@@ -7,4 +7,12 @@ public class Coordinator {
         this.name = name;
         this.school = school;
     }
+
+    public String getCoordinatorName(){
+        return name;
+    }
+
+    public String getCoordinatorSchool(){
+        return school;
+    }
 }

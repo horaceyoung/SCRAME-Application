@@ -26,13 +26,16 @@ public class Course {
             if(!InputManager.ValidateNameInput(coordinatorSchool))
                 throw new NameNotValidException();
             this.coordinator = new Coordinator(coordinatorName, coordinatorSchool);
+            System.out.println("Assign Coordinator Success: Coordinator " + coordinator.getCoordinatorName() + "of school" + coordinator.getCoordinatorSchool()
+                    +"has been assigned to course" + courseTitle);
         }
         catch (NameNotValidException e){
             System.out.println(e.getMessage());
+            AssignCoordinator();
         }
     }
 
     public void AssignComponentWeightage(){
-
+        Scanner in = new Scanner(System.in);
     }
 }
