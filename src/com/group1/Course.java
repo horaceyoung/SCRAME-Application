@@ -23,12 +23,16 @@ public class Course {
                 throw new NameNotValidException();
             System.out.println("Assign the coordinator of the course" + courseTitle + "Please Input the School of the coordinator: ");
             String coordinatorSchool = in.nextLine();
-            if()
+            if(!InputManager.ValidateNameInput(coordinatorSchool))
+                throw new NameNotValidException();
+            this.coordinator = new Coordinator(coordinatorName, coordinatorSchool);
         }
         catch (NameNotValidException e){
             System.out.println(e.getMessage());
         }
+    }
 
+    public void AssignComponentWeightage(){
 
     }
 }
