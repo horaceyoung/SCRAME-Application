@@ -2,8 +2,10 @@ package com.group1;
 
 import java.io.*;
 import java.lang.*;
+import java.util.ArrayList;
+import java.util.Iterator;
 
-public class FileManager
+public class FileOutputManager
 {
     public static boolean writeStudent(String name, String matric)
     {
@@ -78,28 +80,56 @@ public class FileManager
     }
 
 
-    public static boolean writeCourse(Course course)
+    public static void CreateCourse(Course course)
     {
-        //Students.txt
-        //filed 0: name
-        //field 1: matric number
+        //Courses.text
         try
         {
             File file = new File("data/Courses.txt");
             file.createNewFile();   //create file if not exist
-            BufferedWriter writer = new BufferedWriter(new FileWriter(file));
+            BufferedWriter writer = new BufferedWriter(new FileWriter(file, true));
             String line = course.GetCourseTitle()+"\t"+course.GetCoordinator().getCoordinatorName()+"\t"+course.GetCoordinator().getCoordinatorSchool()+"\n";
             writer.write(line);
+            writer.newLine();
             writer.close();
-            return true;
         }
-        catch (IOException e2)
+        catch (IOException e)
         {
-            System.out.println("IOexception");
-            return false;
+            System.out.println(e.getMessage());
         }
+    }
+
+    public static void CreateSessions(Course course){
+        try
+        {
+            //Write all the tutorials
+            File tutFile = new File("data/Tutorials.txt");
+            BufferedWriter tutWriter = new BufferedWriter(new FileWriter(tutFile, true));
+            ArrayList<Tutorial> tutorialList = course.GetTutorialList();
+            for(Tutorial tutorialGroup : tutorialList){
+                String newTutGroup = course.GetCourseTitle() + "\t" + tutorialGroup.GetName() + "\t" + String.valueOf(tutorialGroup.GetTotalVacancy());
+                tutWriter.write(newTutGroup);
+                tutWriter.newLine();
+            }
+            tutWriter.close();
+
+            //Write all the labs
+            File labFile = new File("data/Labs.txt");
+            BufferedWriter labWriter = new BufferedWriter(new FileWriter(labFile, true));
+            ArrayList<Lab> labList = course.GetLabList();
+            for(Lab labGroup : labList){
+                String newLabGroup = course.GetCourseTitle() + "\t" + labGroup.GetName() + "\t" + String.valueOf(labGroup.GetTotalVacancy());
+                labWriter.write(newLabGroup);
+                labWriter.newLine();
+            }
+            labWriter.close();
 
 
+        }
+        catch (IOException e)
+        {
+            System.out.println(e.getMessage());
+        }
     }
 
 

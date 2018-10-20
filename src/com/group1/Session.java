@@ -9,11 +9,9 @@ public class Session {
         this.totalVacancy = totalVacancy;
     }
 
-    public String getName(){
+    public String GetName(){
         return sessionName;
     }
 
-    public int getTotalVacancy(){
-        return totalVacancy;
-    }
+    public int GetTotalVacancy(){ return totalVacancy; }
 }

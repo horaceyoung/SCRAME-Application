@@ -1,5 +1,6 @@
 package com.group1;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Main {
@@ -13,6 +14,7 @@ public class Main {
         System.out.println(intro);
         int choice = 0;
         while(choice!=7){
+            System.out.println(intro);
             choice = in.nextInt();
             in.nextLine();
             switch (choice){
@@ -20,12 +22,25 @@ public class Main {
                     // Create the course
                     Course newCourse = CourseManager.AddCourse();
                     // Assign the coordinator
-                    newCourse.AssignCoordinator();
-                    boolean writeResult = FileManager.writeCourse(newCourse);
-                    // Add Labs and Tutorials
-                    newCourse.AddTutorialLabGroups("Tutorial");
-                    newCourse.AddTutorialLabGroups("Lab");
+                    try{
+                        if(FileReadManager.CheckDuplicateCourses(newCourse.GetCourseTitle())){
+                            System.out.println("Add Course Failed: a course with the same course title has already been added");
+                        }
+                        else{
+                            newCourse.AssignCoordinator();
+                            FileOutputManager.CreateCourse(newCourse);
+                            // Add Labs and Tutorialss
+                            newCourse.AddTutorialLabGroups("Tutorial");
+                            newCourse.AddTutorialLabGroups("Lab");
+                            FileOutputManager.CreateSessions(newCourse);
+                        }
+                    }
+                    catch (IOException e){
+                        System.out.println(e.getMessage());
+                    }
+
                     break;
+
             }
         }
 
