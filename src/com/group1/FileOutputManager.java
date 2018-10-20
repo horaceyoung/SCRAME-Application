@@ -110,7 +110,7 @@ public class FileOutputManager
             BufferedWriter tutWriter = new BufferedWriter(new FileWriter(tutFile, true));
             ArrayList<Tutorial> tutorialList = course.GetTutorialList();
             for(Tutorial tutorialGroup : tutorialList){
-                String newTutGroup = course.GetCourseTitle() + "\t" + tutorialGroup.GetName() + "\t" + String.valueOf(tutorialGroup.GetTotalVacancy());
+                String newTutGroup = course.GetCourseTitle() + "\t" + tutorialGroup.GetName() + "\t" + String.valueOf(tutorialGroup.GetTotalVacancy())+ "\t" + String.valueOf(tutorialGroup.GetTotalVacancy());
                 tutWriter.write(newTutGroup);
                 tutWriter.newLine();
             }
@@ -121,7 +121,7 @@ public class FileOutputManager
             BufferedWriter labWriter = new BufferedWriter(new FileWriter(labFile, true));
             ArrayList<Lab> labList = course.GetLabList();
             for(Lab labGroup : labList){
-                String newLabGroup = course.GetCourseTitle() + "\t" + labGroup.GetName() + "\t" + String.valueOf(labGroup.GetTotalVacancy());
+                String newLabGroup = course.GetCourseTitle() + "\t" + labGroup.GetName() + "\t" + String.valueOf(labGroup.GetTotalVacancy())+ "\t" + String.valueOf(labGroup.GetTotalVacancy());
                 labWriter.write(newLabGroup);
                 labWriter.newLine();
             }
