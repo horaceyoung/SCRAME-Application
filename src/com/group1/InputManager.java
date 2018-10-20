@@ -10,6 +10,13 @@ public class InputManager {
         else return false;
     }
 
+    public static boolean ValidateGroupNameInput(String str){
+        if (str.matches("[a-zA-Z0-9]*")) {
+            return true;
+        }
+        else return false;
+    }
+
     public static boolean ValidateNumberInput(String str){
         try{
             int x = Integer.parseInt(str);
@@ -19,5 +26,15 @@ public class InputManager {
             return false;
         }
 
+    }
+
+    public static boolean ValidateWeightageInput(String str){
+        try{
+            float x = Float.parseFloat(str);
+            return true;
+        }
+        catch (NumberFormatException e){
+            return false;
+        }
     }
 }

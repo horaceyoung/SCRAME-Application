@@ -6,6 +6,9 @@ public class AssessmentComponent {
     private float weightage;
     private float result = -1;
     private String assessmentType;
-    private ArrayList<AssessmentComponent> subComponents;
 
+    public AssessmentComponent(float weightage, String assessmentType){
+        this.weightage = weightage;
+        this.assessmentType = assessmentType;
+    }
 }

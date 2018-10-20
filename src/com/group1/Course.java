@@ -1,7 +1,9 @@
 package com.group1;
 
 import Exceptions.NameNotValidException;
+import Exceptions.TutorialLabNameInvalidException;
 import Exceptions.TutorialLabNumberInvalidException;
+import Exceptions.WeightageNotValidException;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -10,10 +12,10 @@ import java.util.Scanner;
 public class Course {
     private String courseTitle;
     private Coordinator coordinator;
-    private ArrayList<AssessmentComponent> components;
-    private ArrayList<AssessmentComponent> subcomponents;
-    private ArrayList<Tutorial> tutorialGroups;
-    private ArrayList<Lab> labGroups;
+    private ArrayList<AssessmentComponent> components = new ArrayList<>();
+    private ArrayList<AssessmentComponent> subcomponents = new ArrayList<>();
+    private ArrayList<Tutorial> tutorialGroups = new ArrayList<>();
+    private ArrayList<Lab> labGroups = new ArrayList<>();
     private int maxTutorialsNumber = 20;
     private int maxLabsNumber = 20;
 
@@ -42,15 +44,41 @@ public class Course {
         }
     }
 
-    public void AddTutorialGroups(){
+    public void AddTutorialLabGroups(String Type){
         Scanner in = new Scanner(System.in);
+        String addType = Type;
         try{
+            System.out.println("Add "+ addType + ": Please input the total number of " + addType + " to add.");
             String rawNumTutorialGroups = in.nextLine();
             int numTutorialGroups;
             if(InputManager.ValidateNumberInput(rawNumTutorialGroups)){
                 numTutorialGroups = Integer.parseInt(rawNumTutorialGroups);
                 for(int i = 0 ; i < numTutorialGroups ; i++){
-                    System
+                    System.out.println("Add " + Type + " NO." + String.valueOf(i+1) + ". Please input the name of the tutorial Group: ");
+                    String GroupName = in.nextLine();
+                    if (!InputManager.ValidateGroupNameInput(GroupName))
+                        throw new TutorialLabNameInvalidException();
+                    System.out.println("Add " + Type + " NO." + String.valueOf(i+1) + ". Please input the vacancy of the tutorial Group: ");
+                    String rawTutorialVacancy = in.nextLine();
+                    int vacancy;
+                    if(InputManager.ValidateNumberInput(rawTutorialVacancy)){
+                        vacancy = Integer.parseInt(rawTutorialVacancy);
+                        if(addType.equals("Tutorial")) {
+                            Tutorial newSession = new Tutorial(GroupName, vacancy);
+                            tutorialGroups.add(newSession);
+                            System.out.println("Add " + Type + " No." + String.valueOf(i+1)+ " Success: " + "The tutorial group name is "+
+                                    newSession.getName() + " and the vacancy is " + String.valueOf(newSession.getTotalVacancy())+". ");
+                        }
+                        else if(addType.equals("Lab")){
+                            Lab newSession = new Lab(GroupName, vacancy);
+                            labGroups.add((newSession));
+                            System.out.println("Add " + Type + " No." + String.valueOf(i+1)+ " Success: " + "The lab group name is "+
+                                    newSession.getName() + " and the vacancy is " + String.valueOf(newSession.getTotalVacancy())+". ");
+                        }
+                    }
+                    else{
+                        throw new TutorialLabNumberInvalidException();
+                    }
                 }
             }
             else{
@@ -58,12 +86,37 @@ public class Course {
             }
         }
         catch (TutorialLabNumberInvalidException e){
-            e.getMessage();
-            AddTutorialGroups();
+            System.out.println(e.getMessage());
+            AddTutorialLabGroups(Type);
+        }
+        catch (TutorialLabNameInvalidException e){
+            System.out.println(e.getMessage());
+            AddTutorialLabGroups(Type);
         }
     }
 
-    public void AssignComponentWeightage(){
+    public void AssignComponentWeightage(ArrayList<AssessmentComponent> components, String assessmentType){
         Scanner in = new Scanner(System.in);
+        System.out.println("Assign Components and Weightages: Please input the weightage of the " + assessmentType + " : (a float number between 0-1)");
+        String rawExamWeightage = in.nextLine();
+        try{
+            if(!InputManager.ValidateWeightageInput(rawExamWeightage)){
+                throw new WeightageNotValidException();
+            }
+            float examWeightage = Float.parseFloat(rawExamWeightage);
+            AssessmentComponent newComponent = new AssessmentComponent(examWeightage, assessmentType);
+            components.add(newComponent);
+            System.out.println("Assign " + assessmentType + " Weightage Successful");
+        }
+        catch (WeightageNotValidException e){
+            System.out.println(e.getMessage());
+            AssignComponentWeightage(components, assessmentType);
+        }
+
     }
+
+    public String GetCourseTitle(){
+        return courseTitle;
+    }
+    public Coordinator GetCoordinator(){return coordinator;}
 }
