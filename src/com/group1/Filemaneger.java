@@ -38,7 +38,7 @@ public class FileManeger
                                                                                                 //            [2...]: different component
     {
 
-        //Students.txt
+        //Results.txt
         //filed 0: matric number
         //field 1: course name
         //field 2: final exam results
