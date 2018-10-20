@@ -1,4 +1,4 @@
 package com.group1;
 
-public class Tutorial {
+public class Tutorial extends Session {
 }
