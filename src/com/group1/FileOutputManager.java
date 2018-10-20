@@ -83,6 +83,9 @@ public class FileOutputManager
     public static void WriteCourse(Course course)
     {
         //Courses.text
+        //filed 0: course title
+        //field 1: course name
+        //field 2: final exam results
         try
         {
             File file = new File("data/Courses.txt");
@@ -101,7 +104,7 @@ public class FileOutputManager
 
     public static void WriteSessions(Course course){
 
-        
+
 
         try
         {
