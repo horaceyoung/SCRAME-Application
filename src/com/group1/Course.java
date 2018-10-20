@@ -35,6 +35,15 @@ public class Course {
         }
     }
 
+    public void AddTutorialGroups(){
+        Scanner in = new Scanner(System.in);
+        try{
+
+        }
+        catch (){
+
+        }
+    }
     public void AssignComponentWeightage(){
         Scanner in = new Scanner(System.in);
     }
