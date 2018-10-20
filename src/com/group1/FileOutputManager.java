@@ -7,7 +7,7 @@ import java.util.Iterator;
 
 public class FileOutputManager
 {
-    public static boolean writeStudent(String name, String matric)
+    public static boolean WriteStudent(String name, String matric)
     {
         //Students.txt
         //filed 0: name
@@ -17,7 +17,7 @@ public class FileOutputManager
         {
             File file = new File("data/Students.txt");
             file.createNewFile();   //create file if not exist
-            BufferedWriter writer = new BufferedWriter(new FileWriter(file));
+            BufferedWriter writer = new BufferedWriter(new FileWriter(file, true));
             String line = name+"\t"+matric+"\n";
             writer.write(line);
             writer.close();
@@ -34,7 +34,7 @@ public class FileOutputManager
 
     }
 
-    public static boolean writeResults(String matric, String coursecode, String[] resultsarray) //resultsarray[0]: exam;
+    public static boolean WriteResults(String matric, String coursecode, String[] resultsarray) //resultsarray[0]: exam;
                                                                                                 //            [1]; coursework;
                                                                                                 //            [2...]: different component
     {
@@ -49,24 +49,24 @@ public class FileOutputManager
         {
             File file = new File("data/Results.txt");
             file.createNewFile();   //create file if not exist
-            BufferedWriter writer = new BufferedWriter(new FileWriter(file));
+            BufferedWriter writer = new BufferedWriter(new FileWriter(file, true));
             String line = matric+"\t"+coursecode+"\t"+resultsarray[0]+"\t"+resultsarray[1]+"\t";
 
             writer.write(line);
 
             while (true)
             {
-                int x = 2;
-                if(resultsarray[x] != null)
+                int count = 2;
+                if(resultsarray[count] != null)
                 {
-                    writer.write(resultsarray[x]+" ");
+                    writer.write(resultsarray[count]+" ");
                 }
                 else
                 {
                     writer.write("\n");
                     break;
                 }
-                x++;
+                count++;
             }
             return true;
 
@@ -80,7 +80,7 @@ public class FileOutputManager
     }
 
 
-    public static void CreateCourse(Course course)
+    public static void WriteCourse(Course course)
     {
         //Courses.text
         try
@@ -99,7 +99,10 @@ public class FileOutputManager
         }
     }
 
-    public static void CreateSessions(Course course){
+    public static void WriteSessions(Course course){
+
+        
+
         try
         {
             //Write all the tutorials

@@ -28,11 +28,11 @@ public class Main {
                         }
                         else{
                             newCourse.AssignCoordinator();
-                            FileOutputManager.CreateCourse(newCourse);
+                            FileOutputManager.WriteCourse(newCourse);
                             // Add Labs and Tutorialss
                             newCourse.AddTutorialLabGroups("Tutorial");
                             newCourse.AddTutorialLabGroups("Lab");
-                            FileOutputManager.CreateSessions(newCourse);
+                            FileOutputManager.WriteSessions(newCourse);
                         }
                     }
                     catch (IOException e){
