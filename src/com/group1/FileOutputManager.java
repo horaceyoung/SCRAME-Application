@@ -68,6 +68,8 @@ public class FileOutputManager
                 }
                 count++;
             }
+            writer.newLine();
+            writer.close();
             return true;
 
 
@@ -84,14 +86,14 @@ public class FileOutputManager
     {
         //Courses.text
         //filed 0: course title
-        //field 1: course name
-        //field 2: final exam results
+        //field 1: coordinater
+        //field 2: coordinator school
         try
         {
             File file = new File("data/Courses.txt");
             file.createNewFile();   //create file if not exist
             BufferedWriter writer = new BufferedWriter(new FileWriter(file, true));
-            String line = course.GetCourseTitle()+"\t"+course.GetCoordinator().getCoordinatorName()+"\t"+course.GetCoordinator().getCoordinatorSchool()+"\n";
+            String line = course.GetCourseTitle()+"\t"+course.GetCoordinator().getCoordinatorName()+"\t"+course.GetCoordinator().getCoordinatorSchool();
             writer.write(line);
             writer.newLine();
             writer.close();
@@ -104,7 +106,11 @@ public class FileOutputManager
 
     public static void WriteSessions(Course course){
 
-
+        //Tutorial.text Lab.txt
+        //filed 0: course title
+        //field 1: groupname
+        //field 2: total vacancy
+        //field 3: current vacancy
 
         try
         {
