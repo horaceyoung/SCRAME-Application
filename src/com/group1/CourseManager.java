@@ -145,15 +145,98 @@ public class CourseManager {
 
         FileOutputManager.WriteComponents(newcourse6);
 
+    }
 
+    
+    public static ArrayList<String> printStudentListByTutorial(String courseTitle, String tutTitle) throws IOException {
 
+        //Read tutorial.txt
+        //Find same course name and same tutorial title
 
+        File courseFile = new File("data/Tutorials.txt");
+        Scanner tutScanner = new Scanner(courseFile);
+        String[] tutorials = null;
+        String studentID = "";
+        String name = "";
+        ArrayList<String> nameList = new ArrayList<>();
 
+        while(tutScanner.hasNext()) {
+            tutorials = tutScanner.nextLine().split("\t");
+            try {
+                if (tutorials[0].toUpperCase().equals(courseTitle.toUpperCase()) && tutorials[1].toUpperCase().equals(tutTitle.toUpperCase())) {
+                    for (int i = 3; i <tutorials.length; i++){
+                        studentID = tutorials[i];
+                        name = Student.getNameFromID(studentID);
+                        nameList.add(name);
+                    }
+                }
+            } catch (Exception e){
+                //
+            }
+        }
+        return nameList;
+    }
 
+    public static ArrayList<String> printStudentListByLab(String courseTitle, String labTitle) throws IOException {
 
+        //Read lab.txt
+        //Find same course name and same tutTitle
 
+        File courseFile = new File("data/Labs.txt");
+        Scanner labScanner = new Scanner(courseFile);
+        String[] labs = null;
+        String studentID = "";
+        String name = "";
+        ArrayList<String> nameList = new ArrayList<>();
 
+        while(labScanner.hasNext()) {
+            labs = labScanner.nextLine().split("\t");
+            try {
+                if (labs[0].toUpperCase().equals(courseTitle.toUpperCase()) && labs[1].toUpperCase().equals(labTitle.toUpperCase())) {
+                    for (int i = 3; i <labs.length; i++){
+                        studentID = labs[i];
+                        name = Student.getNameFromID(studentID);
+                        nameList.add(name);
+                        System.out.println("nameList: " + nameList);
+                    }
+                }
+            } catch (Exception e){
+                //
+            }
+        }
+        return nameList;
+    }
 
+    public static HashMap<String, ArrayList<String>> printStudentListByLecture(String courseTitle) throws IOException {
+
+        //Read tutorial.txt
+        //Find same course name and print all students in each tutorial
+
+        File courseFile = new File("data/Tutorials.txt");
+        Scanner labScanner = new Scanner(courseFile);
+        String[] lines = null;
+        String tutTitle = "";
+        ArrayList<String> nameList = new ArrayList<>();
+        ArrayList<String> tutorialList = new ArrayList<>();
+
+        while(labScanner.hasNext()) {
+            lines = labScanner.nextLine().split("\t");
+            try {
+                if (lines[0].toUpperCase().equals(courseTitle.toUpperCase()) ) {
+                    tutTitle = lines[1];
+                    tutorialList.add(tutTitle);
+                }
+            } catch (Exception e){
+                //
+            }
+        }
+
+        HashMap<String, ArrayList<String>> tutAndStudent = new HashMap<>();
+        for(int i = 0; i < tutorialList.size(); i++) {
+            tutTitle = tutorialList.get(i);
+            tutAndStudent.put(tutTitle, printStudentListByTutorial(courseTitle, tutorialList.get(i)));
+        }
+        return tutAndStudent;
     }
 
 
