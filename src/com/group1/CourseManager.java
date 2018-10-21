@@ -1,7 +1,9 @@
 package com.group1;
 
 import Exceptions.CourseNameNotValidException;
+import Exceptions.WeightageNotValidException;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 public class CourseManager {
@@ -25,6 +27,48 @@ public class CourseManager {
             }
         }
         return new Course(courseTitle);
+    }
+
+    public static void AddCourseComponent(String courtsetitle)
+    {
+        int[] weightage = new int[2];
+
+        String[] component = {"Exam", "Coursework"};
+        Course newcourse6 = new Course(courtsetitle);
+        for (int a = 0; a <= 1; a++)
+        {
+
+            while (true)
+            {
+                try
+                {
+                    Scanner s = new Scanner(System.in);
+
+                    System.out.println("Please enter the "+component[a]+" weightage:\n");
+
+                    weightage[a] = s.nextInt();
+                    if (weightage[a] <= 0 || weightage[a] >= 1)
+                    {
+                        throw new WeightageNotValidException();
+                    }
+                    else
+                    {
+                        break;
+
+                    }
+                }
+
+                catch (WeightageNotValidException e)
+                {
+                    System.out.println(e.getMessage());
+                }
+            }
+
+        }
+
+
+
+
     }
 
 
