@@ -8,7 +8,8 @@ public class Student {
 	private String studentMarticNumber;
 	private HashMap<String, ArrayList<AssessmentComponent>> courseRegistered;
 	
-	public Student(String studentName){
+	public Student(String studentName,String studentMarticNumber){
         this.studentName = studentName;
+	this.studentMarticNumber = studentMarticNumber;
     }
 }
