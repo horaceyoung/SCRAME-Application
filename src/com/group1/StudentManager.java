@@ -9,6 +9,7 @@ public class StudentManager {
         Scanner sc = new Scanner(System.in);
         System.out.println("Add Student: Please input the Student Name.");        
         String studentName = "Default";
+        String matric;
         boolean nameValid = false;
         while(!nameValid) {
             studentName = sc.nextLine();
@@ -17,13 +18,15 @@ public class StudentManager {
                       throw new NameNotValidException ();
                 
                 nameValid = true;
-                System.out.println("Add student Success: student " + studentName + " has been successfully added");
+                System.out.println("Please input the Student's Matric Number.");   
+                matric = sc.nextLine();
+                System.out.println("Add student Success: student " + studentName + ": "+  matric+ " has been successfully added");
 
             } catch (NameNotValidException e) {
                 System.out.println(e.getMessage());
             }
         }
-        return new Student(studentName);
+        return new Student(studentName,matric);
     }
 
 }
