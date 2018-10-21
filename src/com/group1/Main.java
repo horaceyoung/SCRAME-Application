@@ -9,7 +9,11 @@ public class Main {
 	// write your code here
         Scanner in = new Scanner(System.in);
         String intro = "Welcome to the SCRAME application console: \nPress the corresponding number to use: \n"
-                + "1: Add a new Course:\n"
+                + "1: Add a new student:\n"
+		+ "2: Add a new course:\n"
+		+ "3: Register student for a course:\n"
+		+ "4: Check available slot in a class:\n"
+		+ "5: Print student list by lecture, tutorial or laboratory:\n"
                 + "6. Enter course assessment components weightage and sub-component weightage.\n"
                 + "7: Exit:";
 
@@ -20,7 +24,14 @@ public class Main {
             in.nextLine();
             switch (choice){
                 case 1:
-                    // Create the course
+		     //Testcase 1: Add in student 
+			Student newStudent = StudentManager.AddStudent();
+			FileOutputManager.WriteStudent(newStudent.GetStudentName(),newStudent.GetMarticNumber());
+			break;
+                   
+			    
+		 case 2:
+		    // Testcase 2: Create the course
                     Course newCourse1 = CourseManager.AddCourse();
                     // Assign the coordinator
                     try{
@@ -41,8 +52,24 @@ public class Main {
                     }
 
                     break;
+			    
+			    
+		 case 3:
+			// Testcase 3: Register student for a course
+			break;
+			    
+			    
+		 case 4:
+			// Testcase 4: Check available slot in a class
+			break;   
+			    
+			    
+		 case 5:
+			// Testcase 5: Print student list by lecture, tutorial or laboratory 
+			break;
+			    
 
-                case 6:
+                 case 6:
                     //Enter component weightage
                     System.out.println("Adding course assessment weightage...\n" +
                                        "Please input the course title:");
@@ -65,6 +92,12 @@ public class Main {
                         System.out.println(e.getMessage());
                     }
                     break;
+			    
+			    
+			    
+		 case 7:
+			// Testcase 7: Enter coursework mark
+			break;
 
 
 
