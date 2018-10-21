@@ -20,6 +20,23 @@ public class Student
 	public String GetMarticNumber(){
         return marticNumber;
         }
+	
+	public static String getNameFromID (String marticNumber) throws IOException {
+
+			File courseFile = new File("data/Students.txt");
+			Scanner studentScanner = new Scanner(courseFile);
+			String name = "";
+
+			while(studentScanner.hasNext()) {
+				String[] studentInfo = studentScanner.nextLine().split("\t");
+				if(marticNumber.equals(studentInfo[1])) {
+					name = studentInfo[0];
+					return name;
+				}
+			}
+			return name;
+		}
+
 
         }
 	
