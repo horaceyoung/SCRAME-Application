@@ -21,7 +21,7 @@ public class Student
         return marticNumber;
         }
 	
-	public static String getNameFromID (String marticNumber) throws IOException {
+	public static String getNameFromMatric (String marticNumber) throws IOException {
 
 			File courseFile = new File("data/Students.txt");
 			Scanner studentScanner = new Scanner(courseFile);
