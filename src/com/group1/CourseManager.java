@@ -148,7 +148,7 @@ public class CourseManager {
     }
 
     
-    public static void printStudentListByLectures(String courseName) throws IOException {
+    public static void printStudentListByLecture(String courseName) throws IOException {
                         File tutFile = new File("data/Tutorials.txt");
                         Scanner tutScanner = new Scanner(tutFile);
                         boolean hasStudent=false;
@@ -171,7 +171,7 @@ public class CourseManager {
                         }
                     }
     
-     public static void printStudentListByTutorials(String courseName) throws IOException {
+     public static void printStudentListByTutorial(String courseName) throws IOException {
                         File tutFile = new File("data/Tutorials.txt");
                         
                         Scanner tutScanner = new Scanner(tutFile);
@@ -201,7 +201,7 @@ public class CourseManager {
                         }
                     }
                     
-        public static void printStudentListByLabs(String courseName) throws IOException {
+        public static void printStudentListByLab(String courseName) throws IOException {
                         File labFile = new File("data/Labs.txt");
                         
                         Scanner labScanner = new Scanner(labFile);
