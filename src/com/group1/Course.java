@@ -131,4 +131,6 @@ public class Course {
     public Coordinator GetCoordinator(){return coordinator;}
     public ArrayList<Tutorial> GetTutorialList(){return tutorialGroups;}
     public ArrayList<Lab> GetLabList(){return labGroups;}
+    public ArrayList<AssessmentComponent> GetComponents(){return components;}
+    public ArrayList<AssessmentComponent> GetSubComponents(){return subcomponents;}
 }

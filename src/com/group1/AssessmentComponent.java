@@ -11,4 +11,6 @@ public class AssessmentComponent {
         this.weightage = weightage;
         this.assessmentType = assessmentType;
     }
+
+    public float getWeightage(){return weightage;}
 }

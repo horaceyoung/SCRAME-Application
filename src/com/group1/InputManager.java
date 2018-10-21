@@ -37,4 +37,11 @@ public class InputManager {
             return false;
         }
     }
+    public static boolean ValidateWeightageSum(float f)
+    {
+        if (f == 1)
+            return true;
+        else
+            return false;
+    }
 }
