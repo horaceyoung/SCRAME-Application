@@ -5,11 +5,21 @@ import java.util.HashMap;
 
 public class Student {
 	private String studentName;
-	private String studentMarticNumber;
-	private HashMap<String, ArrayList<AssessmentComponent>> courseRegistered;
+	private String marticNumber;
+	private HashMap<String, ArrayList<Session>> courseRegistered;
+	private HashMap<String, ArrayList<AssessmentComponent>> courseResult;
 	
-	public Student(String studentName,String studentMarticNumber){
+	public Student(String studentName,String marticNumber){
            this.studentName = studentName;
-	   this.studentMarticNumber = studentMarticNumber;
-    }
+	   this.marticNumber = marticNumber;
+        }
+	public String GetStudentName(){
+        return studentName;
+        }
+	public String GetMarticNumber(){
+        return marticNumber;
+        }
+
+        }
+	
 }
