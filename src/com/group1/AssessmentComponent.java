@@ -13,4 +13,5 @@ public class AssessmentComponent {
     }
 
     public float getWeightage(){return weightage;}
+    private String getAssessmentType(){return assessmentType;}
 }

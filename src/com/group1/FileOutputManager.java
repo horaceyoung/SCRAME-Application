@@ -7,6 +7,12 @@ import java.util.Iterator;
 
 public class FileOutputManager
 {
+
+
+    //This output manage includes all method used to write or append data to respective data file.txt.
+    //The format for the txt file is that for each line, different field is separated by tab and different sub-field is separated by space
+
+
     public static void WriteStudent(String name, String matric)
     {
         //Students.txt
@@ -144,7 +150,40 @@ public class FileOutputManager
         }
     }
 
-    public static void Write
+    public static void WriteComponents(Course course)
+    {
+        //ResultComponent.txt
+        //field 0: course name
+        //field 1: Exam: 'Weightage'
+        //field 2: Coursework: 'weightage'
+        //field 3...: 'coursework sub-component name': 'Weightage'
+
+        try
+        {
+            File file = new File("data/Component.txt");
+            file.createNewFile();   //create file if not exist
+            BufferedWriter writer = new BufferedWriter(new FileWriter(file, true));
+            writer.write(course.GetCourseTitle()+"\t");
+            for (AssessmentComponent maincomp: course.GetComponents())
+            {
+
+                writer.write(maincomp.getWeightage() maincomp.getWeightage()+"\t");
+            }
+            for (AssessmentComponent subcomp: course.GetSubComponents())
+            {
+                writer.write(subcomp.getWeightage()+" ");
+            }
+
+
+            writer.write(line);
+            writer.newLine();
+            writer.close();
+        }
+        catch (IOException e)
+        {
+            System.out.println(e.getMessage());
+        }
+    }
 
 
 
