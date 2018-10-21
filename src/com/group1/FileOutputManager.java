@@ -7,7 +7,7 @@ import java.util.Iterator;
 
 public class FileOutputManager
 {
-    public static boolean WriteStudent(String name, String matric)
+    public static void WriteStudent(String name, String matric)
     {
         //Students.txt
         //filed 0: name
@@ -21,20 +21,20 @@ public class FileOutputManager
             String line = name+"\t"+matric+"\n";
             writer.write(line);
             writer.close();
-            return true;
+
 
 
         }
         catch (IOException e2)
         {
-            System.out.println("IOexception");
-            return false;
+            System.out.println(e2.getMessage());
+
         }
 
 
     }
 
-    public static boolean WriteResults(String matric, String coursecode, String[] resultsarray) //resultsarray[0]: exam;
+    public static void WriteResults(String matric, String coursecode, String[] resultsarray) //resultsarray[0]: exam;
                                                                                                 //            [1]; coursework;
                                                                                                 //            [2...]: different component
     {
@@ -70,14 +70,14 @@ public class FileOutputManager
             }
             writer.newLine();
             writer.close();
-            return true;
+
 
 
         }
         catch (IOException e2)
         {
-            System.out.println("IOexception");
-            return false;
+            System.out.println(e2.getMessage());
+
         }
     }
 
