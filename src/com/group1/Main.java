@@ -64,52 +64,36 @@ public class Main {
 			break;   
 			    
 			    
-		 
-                case 5:
+		case 5:
+		    //Testcase 5: Print student list by lecture, tutorial or lab
                     System.out.println("Please key in Course Code");
-                    Scanner scanner5a = new Scanner(System.in);
-                    String courseName = scanner5a.nextLine();
-                    System.out.println("Key in 'Lecture' to print by lecture || Key in 'Lab' to print by lab || Key in 'T' to print by tutorial");
-                    String lt = scanner5a.nextLine().toUpperCase();
-
-                    ArrayList<String> nameList = new ArrayList<>();
-
-                    if(lt.equals("LAB")) {
-                        System.out.println("Please key in lab name");
-                        String labName = scanner5a.nextLine();
-                        try {
-                            nameList = CourseManager.printStudentListByLab(courseName, labName);
-                        } catch (IOException io){
-                            //
-                        }
-                        System.out.println(nameList);
-                    } else if(lt.equals("T")){
-                        System.out.println("Please key in tutorial name");
-                        String tutorialName = scanner5a.nextLine();
-                        try {
-                            nameList = CourseManager.printStudentListByTutorial(courseName, tutorialName);
-                        } catch (IOException io){
-                            //
-                        }
-                        System.out.println(nameList);
-                    } else if(lt.equals("LECTURE")){
-                        HashMap<String, ArrayList<String>> lectureMap = null;
-                        try {
-                            lectureMap = CourseManager.printStudentListByLecture(courseName);
-                            Set<String> tuts = lectureMap.keySet();
-                            for (String tutTitle: tuts
-                                 ) {
-                                nameList = lectureMap.get(tutTitle);
-                                System.out.println("Tutorial: " + tutTitle + " " + "names: " + nameList);
-                                
-                            }
-
-                        } catch (IOException io){
-                            //
-                        }
+                    Scanner sc = new Scanner(System.in);
+                    String courseName = sc.nextLine();
+                    try{
+                        if (!FileReadManager.CheckDuplicateCourses(title6))
+                       	    System.out.println("The course you entered does not exist. Please add this course first.\n");
+                        
+                    	else{   
+			    System.out.println("Key in 'Lec' to print by lecture || 'Tut' to print by tutorial || 'Lab' to print by lab");
+                       	    String printList = sc.nextLine().toUpperCase();
+                        
+                       	    if(printList.equals("LECTURE"))
+                       		 CourseManager.printStudentListByLecture(courseName);
+                            
+                            else if(printList.equals("TUTORIAL"))
+                           	 CourseManager.printStudentListByTutorial(courseName);
+                        
+                            else if(printList.equals("LAB"))
+                        	 CourseManager.printStudentListByLab(courseName);
+                            else
+                           	 System.out.println("Invalid option.");                       
+                    	 }                        
                     }
-                break;
-
+                    catch (IOException e)
+                    {
+                    	System.out.println(e.getMessage());
+                    }
+                    break;
 
                  case 6:
                     //Enter component weightage
