@@ -3,7 +3,8 @@ package com.group1;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Student {
+public class Student
+{
 	private String studentName;
 	private String marticNumber;
 	private HashMap<String, ArrayList<Session>> courseRegistered;
@@ -22,4 +23,4 @@ public class Student {
 
         }
 	
-}
+

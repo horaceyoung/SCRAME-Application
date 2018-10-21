@@ -107,16 +107,16 @@ public class Course {
 
     public void AssignComponentWeightage(ArrayList<AssessmentComponent> components, String assessmentType){
         Scanner in = new Scanner(System.in);
-        System.out.println("Assign Components and Weightages: Please input the weightage of the " + assessmentType + " : (a float number between 0-1)");
+        System.out.println("Assign Components and Weightages:\nPlease input the weightage of the " + assessmentType + " : (a float number between 0-1)");
         String rawExamWeightage = in.nextLine();
         try{
-            if(!InputManager.ValidateWeightageInput(rawExamWeightage)){
+            if(!InputManager.ValidateWeightageInput(rawExamWeightage) ||  Float.parseFloat(rawExamWeightage ) == 0){
                 throw new WeightageNotValidException();
             }
             float examWeightage = Float.parseFloat(rawExamWeightage);
             AssessmentComponent newComponent = new AssessmentComponent(examWeightage, assessmentType);
             components.add(newComponent);
-            System.out.println("Assign " + assessmentType + " Weightage Successful");
+            System.out.println("Assign " + assessmentType + " Weightage Successful\n");
         }
         catch (WeightageNotValidException e){
             System.out.println(e.getMessage());

@@ -34,7 +34,7 @@ public class CourseManager {
     public static void AddCourseComponent(String courtsetitle)
     {
 
-        int[] weightage = new int[2];
+
         String[] component = {"Exam", "Coursework"};
         Course newcourse6 = new Course(courtsetitle);
         while (true)
@@ -55,7 +55,7 @@ public class CourseManager {
             }
             else
             {
-                System.out.println("The weightage you have entered is not valid. It should sum up to 1\n");
+                System.out.println("The total weightage you have entered is not valid. It should sum up to 1\n");
             }
         }
 
@@ -65,7 +65,7 @@ public class CourseManager {
             String temp;
             while (true)
             {
-                System.out.println("Do we have sub-component for coursework? Yes: Enter 1  No: Enter 0\n");
+                System.out.println("Do we have sub-component for coursework? Yes: Enter 1  No: Enter 0");
                 Scanner ynscanner = new Scanner(System.in);
                 temp = ynscanner.nextLine();
                 if (InputManager.ValidateNumberInput(temp))
@@ -88,7 +88,7 @@ public class CourseManager {
 
             while (true)
             {
-                System.out.println("How many sub-components do u have?\n");
+                System.out.println("How many sub-components do u have?");
                 Scanner numscanner = new Scanner(System.in);
                 temp = numscanner.nextLine();
                 if (InputManager.ValidateNumberInput(temp) && Integer.parseInt(temp) > 1)
@@ -106,10 +106,10 @@ public class CourseManager {
 
             for (int x = 1; x <= subcomnum; x++)
             {
-                System.out.println("Please enter Sub-component "+ x +" name.\n");
+                System.out.println("Please enter sub-component "+ x +" name");
                 Scanner subcomponentscanner = new Scanner(System.in);
                 subcoponent[x-1] = subcomponentscanner.nextLine();
-                subcomponentscanner.nextLine();
+
 
 
 
@@ -133,15 +133,19 @@ public class CourseManager {
                 }
                 else
                 {
-                    System.out.println("The weightage you have entered is not valid. It should sum up to 1\n");
+                    System.out.println(subweightagesum);
+                    System.out.println("The total weightage you have entered is not valid. It should sum up to 1\n");
                 }
             }
+            break;
 
 
 
         }
 
         FileOutputManager.WriteComponents(newcourse6);
+
+
 
 
 

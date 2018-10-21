@@ -184,6 +184,8 @@ public class FileOutputManager
         {
             System.out.println(e.getMessage());
         }
+
+        System.out.println("Conponents Saved!");
     }
 
 

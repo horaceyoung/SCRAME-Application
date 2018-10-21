@@ -8,11 +8,11 @@ public class Main {
     public static void main(String[] args) {
 	// write your code here
         Scanner in = new Scanner(System.in);
-        String intro = "Welcome to the SCRAME application console: \n Press the corresponding number to use: \n"
+        String intro = "Welcome to the SCRAME application console: \nPress the corresponding number to use: \n"
                 + "1: Add a new Course:\n"
-                + "6. Enter course assessment components weightage and sub-component weightage "
+                + "6. Enter course assessment components weightage and sub-component weightage.\n"
                 + "7: Exit:";
-        System.out.println(intro);
+
         int choice = 0;
         while(choice!=7){
             System.out.println(intro);
@@ -45,14 +45,14 @@ public class Main {
                 case 6:
                     //Enter component weightage
                     System.out.println("Adding course assessment weightage...\n" +
-                                       "Please input the course title:\n");
+                                       "Please input the course title:");
                     Scanner scanner6 = new Scanner(System.in);
                     String title6 = scanner6.nextLine();
                     try
                     {
                         if (!FileReadManager.CheckDuplicateCourses(title6))
                         {
-                            System.out.println("The course you entered does not exist. Please add this course first");
+                            System.out.println("The course you entered does not exist. Please add this course first.\n");
 
                         }
                         else
