@@ -3,6 +3,7 @@ package com.group1;
 import java.io.*;
 import java.lang.*;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 
 public class FileOutputManager
@@ -167,15 +168,15 @@ public class FileOutputManager
             for (AssessmentComponent maincomp: course.GetComponents())
             {
 
-                writer.write(maincomp.getWeightage() maincomp.getWeightage()+"\t");
+                writer.write(maincomp.getAssessmentType() + ": " + maincomp.getWeightage() + "\t");
             }
-            for (AssessmentComponent subcomp: course.GetSubComponents())
+            if (!course.GetSubComponents().isEmpty())
             {
-                writer.write(subcomp.getWeightage()+" ");
+                for (AssessmentComponent subcomp: course.GetSubComponents())
+                {
+                    writer.write(subcomp.getAssessmentType() + ": " + subcomp.getWeightage() + "\t");
+                }
             }
-
-
-            writer.write(line);
             writer.newLine();
             writer.close();
         }

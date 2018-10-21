@@ -141,6 +141,8 @@ public class CourseManager {
 
         }
 
+        FileOutputManager.WriteComponents(newcourse6);
+
 
 
 
