@@ -1,10 +1,7 @@
 package com.group1;
 
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.io.File;
-import java.util.Scanner;
 
 public class Student
 {
@@ -24,16 +21,10 @@ public class Student
         return marticNumber;
         }
 	
-	public static String getNameFromMatric (String marticNumber){
+	public static String getNameFromMatric (String marticNumber) throws IOException {
 
 			File courseFile = new File("data/Students.txt");
-			try{
-				Scanner studentScanner = new Scanner(courseFile);
-			}
-			catch (FileNotFoundException e){
-				System.out.println(e.getMessage());
-			}
-
+			Scanner studentScanner = new Scanner(courseFile);
 			String name = "";
 
 			while(studentScanner.hasNext()) {
