@@ -38,13 +38,13 @@ public class CourseManager {
         String[] component = {"Exam", "Coursework"};
         Course newcourse6 = new Course(courtsetitle);
         while (true) {
-
             for (String compname : component) {
                 newcourse6.AssignComponentWeightage(newcourse6.GetComponents(), compname);
             }
             float weightagesum = 0;
             for (AssessmentComponent componentnew : newcourse6.GetComponents()) {
                 weightagesum += componentnew.getWeightage();
+                System.out.println(weightagesum);
             }
             if (InputManager.ValidateWeightageSum(weightagesum)) {
                 break;
