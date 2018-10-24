@@ -1,7 +1,10 @@
 package com.group1;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.io.File;
+import java.util.Scanner;
 
 public class Student
 {
@@ -21,23 +24,27 @@ public class Student
         return marticNumber;
         }
 	
-	public static String getNameFromMatric (String marticNumber) throws IOException {
+	public static String getNameFromMatric (String marticNumber) {
 
 			File courseFile = new File("data/Students.txt");
-			Scanner studentScanner = new Scanner(courseFile);
-			String name = "";
+			String name = "default";
+			try{
 
-			while(studentScanner.hasNext()) {
-				String[] studentInfo = studentScanner.nextLine().split("\t");
-				if(marticNumber.equals(studentInfo[1])) {
-					name = studentInfo[0];
-					return name;
+				Scanner studentScanner = new Scanner(courseFile);
+				while(studentScanner.hasNext()) {
+					String[] studentInfo = studentScanner.nextLine().split("\t");
+					if(marticNumber.equals(studentInfo[1])) {
+						name = studentInfo[0];
+						return name;
+					}
 				}
 			}
+			catch (Exception e){
+				System.out.println(e.getMessage());
+			}
+
 			return name;
 		}
-
-
-        }
+	}
 	
 

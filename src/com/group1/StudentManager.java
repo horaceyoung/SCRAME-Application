@@ -2,6 +2,7 @@ package com.group1;
 
 import Exceptions.NameNotValidException;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 public class StudentManager {
@@ -9,7 +10,7 @@ public class StudentManager {
         Scanner sc = new Scanner(System.in);
         System.out.println("Add Student: Please input the Student Name.");        
         String studentName = "Default";
-        String matric;
+        String matric = "Default";
         boolean nameValid = false;
         while(!nameValid) {
             studentName = sc.nextLine();
@@ -17,7 +18,7 @@ public class StudentManager {
                 if (!InputManager. ValidateNameInput(studentName)) 
                       throw new NameNotValidException ();
                 
-                if(FileReadManager.CheckDuplicateStudent(studentName)){
+                if(FileReadManager.CheckStudentExists(studentName)){
                             System.out.println("Add Student Failed: Student has been added.");
                         }
                 else{
@@ -32,7 +33,7 @@ public class StudentManager {
             }
             catch (IOException e){
                         System.out.println(e.getMessage());
-                    }
+            }
         }
         return new Student(studentName,matric);
     }
