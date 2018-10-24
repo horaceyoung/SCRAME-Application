@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class FileReadManager {
-    public static boolean CheckDuplicateCourses(String courseTitle) throws IOException {
+    public static boolean CheckCourseExists(String courseTitle) throws IOException {
         File courseFile = new File("data/Courses.txt");
         Scanner coursesScanner = new Scanner(courseFile);
         while(coursesScanner.hasNext()){
@@ -17,7 +17,8 @@ public class FileReadManager {
         }
         return false;
     }
-    public static boolean CheckDuplicateStudent(String studentName) throws IOException {
+
+    public static boolean CheckStudentExists(String studentName) throws IOException {
         File studentFile = new File("data/Students.txt");
         Scanner studentSC= new Scanner(studentFile);
         while(studentSC.hasNext()){
@@ -26,7 +27,8 @@ public class FileReadManager {
                 return true;     
         }
         return false;
-}
+    }
+
 
 
 
