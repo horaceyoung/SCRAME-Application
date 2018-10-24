@@ -60,6 +60,15 @@ public class Main {
 
                 case 3:
                 // Testcase 3: Register student for a course
+                    System.out.println("Register course: Please input the matric number of the student to register: ");
+                    String studentMatric;
+                    studentMatric = in.nextLine();
+                    try{
+                        if(FileReadManager.CheckStudentExists(studentMatric))
+                    }
+                    catch (IOException e){
+                        System.out.println(e.getMessage());
+                    }
                 break;
 
 

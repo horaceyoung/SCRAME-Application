@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class FileReadManager {
-    public static boolean CheckCourseExists(String courseTitle) throws IOException {
+    public static boolean CheckCourseExists(String courseTitle) throws IOException{
         File courseFile = new File("data/Courses.txt");
         Scanner coursesScanner = new Scanner(courseFile);
         while(coursesScanner.hasNext()){
