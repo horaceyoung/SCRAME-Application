@@ -124,6 +124,7 @@ public class Course {
         }
 
     }
+    public void ClearComponentWeightage(ArrayList<AssessmentComponent> components) { components.clear();}
 
     public String GetCourseTitle(){
         return courseTitle;
