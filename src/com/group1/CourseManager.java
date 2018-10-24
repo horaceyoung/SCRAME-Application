@@ -37,10 +37,10 @@ public class CourseManager {
 
 
         String[] component = {"Exam", "Coursework"};
-        Course newcourse6 = new Course(courtsetitle);
+        Course newcourse6;
         while (true)
         {
-
+            newcourse6 = new Course(courtsetitle);
             for (String compname: component)
             {
                 newcourse6.AssignComponentWeightage(newcourse6.GetComponents(), compname);
@@ -49,6 +49,7 @@ public class CourseManager {
             for(AssessmentComponent componentnew : newcourse6.GetComponents())
             {
                  weightagesum += componentnew.getWeightage();
+
             }
             if (InputManager.ValidateWeightageSum(weightagesum))
             {
@@ -57,6 +58,7 @@ public class CourseManager {
             else
             {
                 System.out.println("The total weightage you have entered is not valid. It should sum up to 1\n");
+
             }
         }
 
