@@ -1,19 +1,11 @@
 package com.group1;
 
-<<<<<<< HEAD
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.io.File;
 import java.util.Scanner;
 
-=======
-import java.io.File;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Scanner;
-import java.io.IOException;
->>>>>>> 558b5edbfc155facecd0c3ac3292eb255bbdd183
 public class Student
 {
 	private String studentName;
@@ -35,22 +27,25 @@ public class Student
 	public static String getNameFromMatric (String marticNumber){
 
 			File courseFile = new File("data/Students.txt");
+			Scanner studentScanner;
+            String name = "";
 			try{
-				Scanner studentScanner = new Scanner(courseFile);
+				studentScanner = new Scanner(courseFile);
+
+
+                while(studentScanner.hasNext()) {
+                    String[] studentInfo = studentScanner.nextLine().split("\t");
+                    if(marticNumber.equals(studentInfo[1])) {
+                        name = studentInfo[0];
+                        return name;
+                    }
+                }
 			}
 			catch (FileNotFoundException e){
 				System.out.println(e.getMessage());
 			}
 
-			String name = "";
 
-			while(studentScanner.hasNext()) {
-				String[] studentInfo = studentScanner.nextLine().split("\t");
-				if(marticNumber.equals(studentInfo[1])) {
-					name = studentInfo[0];
-					return name;
-				}
-			}
 			return name;
 		}
 
