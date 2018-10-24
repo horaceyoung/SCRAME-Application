@@ -50,6 +50,8 @@ public class CourseManager {
                 break;
             } else {
                 System.out.println("The total weightage you have entered is not valid. It should sum up to 1\n");
+                newcourse6.ClearComponentWeightage(newcourse6.GetComponents());
+
             }
         }
 
@@ -108,6 +110,7 @@ public class CourseManager {
                 } else {
                     System.out.println(subweightagesum);
                     System.out.println("The total weightage you have entered is not valid. It should sum up to 1\n");
+                    newcourse6.ClearComponentWeightage(newcourse6.GetSubComponents());
                 }
             }
             break;
