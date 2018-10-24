@@ -25,12 +25,11 @@ public class Main {
             switch (choice){
                 case 1:
 		     //Testcase 1: Add in student 
-			Student newStudent = StudentManager.AddStudent();
-			FileOutputManager.WriteStudent(newStudent.GetStudentName(),newStudent.GetMarticNumber());
-			break;
-                   
-			    
-		 case 2:
+			        Student newStudent = StudentManager.AddStudent();
+			        FileOutputManager.WriteStudent(newStudent.GetStudentName(),newStudent.GetMarticNumber());
+			        break;
+
+		        case 2:
 		    // Testcase 2: Create the course
                     Course newCourse1 = CourseManager.AddCourse();
                     // Assign the coordinator
@@ -52,50 +51,50 @@ public class Main {
                     }
 
                     break;
-			    
-			    
-		 case 3:
+
+                    case 3:
+
 			// Testcase 3: Register student for a course
-			break;
+			            break;
 			    
 			    
-		 case 4:
+		        case 4:
 			// Testcase 4: Check available slot in a class
-			break;   
+			        break;
 			    
 			    
 		case 5:
 		    //Testcase 5: Print student list by lecture, tutorial or lab
-                    System.out.println("Please key in Course Code");
-                    Scanner sc = new Scanner(System.in);
-                    String courseName = sc.nextLine();
-                    try{
-                        if (!FileReadManager.CheckDuplicateCourses(title6))
-                       	    System.out.println("The course you entered does not exist. Please add this course first.\n");
+            System.out.println("Please key in Course Code");
+            Scanner sc = new Scanner(System.in);
+            String courseName = sc.nextLine();
+            try{
+                if (!FileReadManager.CheckDuplicateCourses(title6))
+                    System.out.println("The course you entered does not exist. Please add this course first.\n");
                         
-                    	else{   
-			    System.out.println("Key in 'Lec' to print by lecture || 'Tut' to print by tutorial || 'Lab' to print by lab");
-                       	    String printList = sc.nextLine().toUpperCase();
+                else{
+			        System.out.println("Key in 'Lec' to print by lecture || 'Tut' to print by tutorial || 'Lab' to print by lab");
+			        String printList = sc.nextLine().toUpperCase();
                         
-                       	    if(printList.equals("LECTURE"))
-                       		 CourseManager.printStudentListByLecture(courseName);
+			        if(printList.equals("LECTURE"))
+			            CourseManager.printStudentListByLecture(courseName);
                             
-                            else if(printList.equals("TUTORIAL"))
-                           	 CourseManager.printStudentListByTutorial(courseName);
+			        else if(printList.equals("TUTORIAL"))
+			            CourseManager.printStudentListByTutorial(courseName);
                         
-                            else if(printList.equals("LAB"))
-                        	 CourseManager.printStudentListByLab(courseName);
-                            else
-                           	 System.out.println("Invalid option.");                       
-                    	 }                        
-                    }
-                    catch (IOException e)
-                    {
-                    	System.out.println(e.getMessage());
-                    }
-                    break;
+			        else if(printList.equals("LAB"))
+			            CourseManager.printStudentListByLab(courseName);
+			        else
+			            System.out.println("Invalid option.");
+			        }
+            }
+            catch (IOException e)
+            {
+                System.out.println(e.getMessage());
+            }
+            break;
 
-                 case 6:
+            case 6:
                     //Enter component weightage
                     System.out.println("Adding course assessment weightage...\n" +
                                        "Please input the course title:");
@@ -120,8 +119,7 @@ public class Main {
                     break;
 			    
 			    
-			    
-		 case 7:
+                    case 7:
 			// Testcase 7: Enter coursework mark
 			break;
 

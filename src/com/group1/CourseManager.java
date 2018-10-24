@@ -5,6 +5,7 @@ import Exceptions.WeightageNotValidException;
 import Exceptions.WeightageSumNotValidException;
 
 import java.io.IOException;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -158,7 +159,7 @@ public class CourseManager {
                             String[] tutorialGroup = tutScanner.nextLine().split("\t");
                             if(tutorialGroup[0].toUpperCase().equals(courseName.toUpperCase())){
                                 for (int i = 3; i <tutorialGroup.length; i++){
-                                    studentName = Student.getNameFromMatric(tutorialGroup[i]);
+                                    String studentName = Student.getNameFromMatric(tutorialGroup[i]);
                                     System.out.println(studentName + ", ");
                                     hasStudent=true;
                                 }
@@ -186,7 +187,7 @@ public class CourseManager {
                                 
                                 for (int i = 3; i <tutorialGroup.length; i++){
                                     
-                                    studentName = Student.getNameFromMatic(tutorialGroup[i]);
+                                    String studentName = Student.getNameFromMatic(tutorialGroup[i]);
                                     System.out.println(studentName + "   ");
                                     hasStudent=true;
                                     

@@ -1,8 +1,10 @@
 package com.group1;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
-
+import java.util.Scanner;
+import java.io.IOException;
 public class Student
 {
 	private String studentName;
