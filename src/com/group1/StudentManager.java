@@ -2,7 +2,6 @@ package com.group1;
 
 import Exceptions.NameNotValidException;
 
-import java.io.IOException;
 import java.util.Scanner;
 
 public class StudentManager {
@@ -10,7 +9,7 @@ public class StudentManager {
         Scanner sc = new Scanner(System.in);
         System.out.println("Add Student: Please input the Student Name.");        
         String studentName = "Default";
-        String matric = "U0000001";
+        String matric;
         boolean nameValid = false;
         while(!nameValid) {
             studentName = sc.nextLine();

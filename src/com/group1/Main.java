@@ -62,7 +62,8 @@ public class Main {
 			// Testcase 4: Check available slot in a class
 			        break;
 			    
-
+			    
+<<<<<<< HEAD
 //		case 5:
 //		    //Testcase 5: Print student list by lecture, tutorial or lab
 //                    System.out.println("Please key in Course Code");
@@ -93,7 +94,38 @@ public class Main {
 //                    	System.out.println(e.getMessage());
 //                    }
 //                    break;
-
+=======
+		case 5:
+		    //Testcase 5: Print student list by lecture, tutorial or lab
+            System.out.println("Please key in Course Code");
+            Scanner sc = new Scanner(System.in);
+            String courseName = sc.nextLine();
+            try{
+                if (!FileReadManager.CheckDuplicateCourses(title6))
+                    System.out.println("The course you entered does not exist. Please add this course first.\n");
+                        
+                else{
+			        System.out.println("Key in 'Lec' to print by lecture || 'Tut' to print by tutorial || 'Lab' to print by lab");
+			        String printList = sc.nextLine().toUpperCase();
+                        
+			        if(printList.equals("LECTURE"))
+			            CourseManager.printStudentListByLecture(courseName);
+                            
+			        else if(printList.equals("TUTORIAL"))
+			            CourseManager.printStudentListByTutorial(courseName);
+                        
+			        else if(printList.equals("LAB"))
+			            CourseManager.printStudentListByLab(courseName);
+			        else
+			            System.out.println("Invalid option.");
+			        }
+            }
+            catch (IOException e)
+            {
+                System.out.println(e.getMessage());
+            }
+            break;
+>>>>>>> 558b5edbfc155facecd0c3ac3292eb255bbdd183
 
             case 6:
                     //Enter component weightage

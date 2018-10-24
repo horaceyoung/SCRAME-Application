@@ -17,7 +17,6 @@ public class FileReadManager {
         }
         return false;
     }
-
     public static boolean CheckDuplicateStudent(String studentName) throws IOException {
         File studentFile = new File("data/Students.txt");
         Scanner studentSC= new Scanner(studentFile);
