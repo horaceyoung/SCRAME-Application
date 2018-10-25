@@ -144,7 +144,4 @@ public class Course {
     public ArrayList<AssessmentComponent> GetSubComponents(){return subcomponents;}
 
 
-    public void CheckTutorialVacancy(){
-         String tutGrpName;
-    }
 }

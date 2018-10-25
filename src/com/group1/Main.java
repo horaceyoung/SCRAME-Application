@@ -10,6 +10,11 @@ public class Main {
 
     public static void main(String[] args) {
 	// write your code here
+        String studentMatric;
+        String courseTitle;
+        String TutorialName;
+        String LabName;
+        Course newCourse;
         Scanner in = new Scanner(System.in);
         String intro = "Welcome to the SCRAME application console: \nPress the corresponding number to use: \n"
                 + "1: Add a new student:\n"
@@ -64,11 +69,7 @@ public class Main {
                 case 3:
                 // Testcase 3: Register student for a course
                     System.out.println("Register course: Please input the matric number of the student to register: ");
-                    String studentMatric;
-                    String courseTitle;
-                    String TutorialName;
-                    String LabName;
-                    Course newCourse;
+
                     studentMatric = in.nextLine();
                     try{
                         if(FileReadManager.CheckStudentExists(studentMatric)){
@@ -129,11 +130,35 @@ public class Main {
                     catch (Exception e){
                         System.out.println(e.getMessage());
                     }
-
+                    break;
 
 
             case 4:
             // Testcase 4: Check available slot in a class
+                System.out.println("Check Session Vacancy: Please input the course title you want to check: ");
+                courseTitle = in.nextLine();
+                try{
+                    if(FileReadManager.CheckCourseExists(courseTitle)){
+                        int sessionChoice;
+                        System.out.println("Check Session Vacancy: Please select the type of session you wish to check by inputting corresponding integer value: \n 1. Tutorial \n2.Lab \n");
+                        sessionChoice=in.nextInt();
+                        switch (sessionChoice){
+                            case 1:
+                                FileReadManager.PrintTutorialVacancy(courseTitle);
+                                break;
+                            case 2:
+                                FileReadManager.PrintLabVacancy(courseTitle);
+                                break;
+                        }
+                    }
+                    else {
+                        throw new CourseNotFoundException();
+                    }
+
+                    }
+                catch (Exception e){
+                    System.out.println(e.getMessage());
+            }
             break;
 			    
 			    
