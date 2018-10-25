@@ -1,5 +1,8 @@
 package com.group1;
 
+import Exceptions.CourseNotFoundException;
+import Exceptions.StudentNotExistException;
+
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -62,19 +65,76 @@ public class Main {
                 // Testcase 3: Register student for a course
                     System.out.println("Register course: Please input the matric number of the student to register: ");
                     String studentMatric;
+                    String courseTitle;
+                    String TutorialName;
+                    String LabName;
+                    Course newCourse;
                     studentMatric = in.nextLine();
                     try{
-                        if(FileReadManager.CheckStudentExists(studentMatric))
+                        if(FileReadManager.CheckStudentExists(studentMatric)){
+                            System.out.println("Student Info: " + FileReadManager.GetStudentInfo(studentMatric) +"  " + studentMatric);
+                        }
+                        else {
+                            throw new StudentNotExistException();
+                        }
+
+                        System.out.println("Register course: Please input the course title you want to register with: ");
+                        courseTitle = in.nextLine();
+
+                        if(FileReadManager.CheckCourseExists(courseTitle)){
+                            newCourse = new Course(courseTitle);
+                            FileReadManager.GetCourseSessions(courseTitle, newCourse);
+                        }
+                        else {
+                            throw new CourseNotFoundException();
+                        }
+
+                        while (true){
+                            System.out.println("Please select a tutorial to be enrolled in:");
+                            TutorialName = in.nextLine();
+                            boolean tutorialFound = false;
+                            boolean labFound = false;
+                            for(int i = 0 ; i < newCourse.GetTutorialList().size();i++){
+                                if(newCourse.GetTutorialList().get(i).GetName().equals(TutorialName)){
+                                    System.out.println("Registered successfully with Tutorial " + TutorialName);
+                                    tutorialFound = true;
+                                }
+                            }
+
+                        if (!tutorialFound) {
+                            System.out.println("TutorialNotExistException: The tutorial name entered is not in the course.");
+                            continue;
+                        }
+
+
+                        System.out.println("Please select a lab to be enrolled in:");
+                        LabName = in.nextLine();
+                            for(int i = 0 ; i < newCourse.GetLabList().size();i++){
+                                if(newCourse.GetLabList().get(i).GetName().equals(LabName)){
+                                    System.out.println("Registered successfully with Lab " + LabName);
+                                    labFound = true;
+                                }
+                            }
+
+                            if (!labFound) {
+                                System.out.println("TutorialNotExistException: The tutorial name entered is not in the course.");
+                                continue;
+                            }
+
+                        FileOutputManager.RegisterCourse(studentMatric, courseTitle, TutorialName, LabName);
+                            break;
+                        }
+
                     }
-                    catch (IOException e){
+                    catch (Exception e){
                         System.out.println(e.getMessage());
                     }
-                break;
 
 
-                case 4:
-                // Testcase 4: Check available slot in a class
-                break;
+
+            case 4:
+            // Testcase 4: Check available slot in a class
+            break;
 			    
 			    
             case 5:
@@ -108,41 +168,46 @@ public class Main {
                         }
                         break;
 
-                     case 6:
-                        //Enter component weightage
-                        System.out.println("Adding course assessment weightage...\n" +
-                                           "Please input the course title:");
-                        Scanner scanner6 = new Scanner(System.in);
-                        String title6 = scanner6.nextLine();
-                        try
-                        {
-                            if (!FileReadManager.CheckCourseExists(title6))
-                            {
-                                System.out.println("The course you entered does not exist. Please add this course first.\n");
+            case 6:
+            //Enter component weightage
+            System.out.println("Adding course assessment weightage...\n" +
+                       "Please input the course title:");
+            Scanner scanner6 = new Scanner(System.in);
+            String title6 = scanner6.nextLine();
+            try
+            {
+            if (!FileReadManager.CheckCourseExists(title6))
+            {
+            System.out.println("The course you entered does not exist. Please add this course first.\n");
 
-                            }
-                            else
-                            {
-                                CourseManager.AddCourseComponent(title6);
-                            }
-                        }
-                        catch (IOException e)
-                        {
-                            System.out.println(e.getMessage());
-                        }
-                        break;
+            }
+            else
+            {
+            CourseManager.AddCourseComponent(title6);
+            }
+            }
+            catch (IOException e)
+            {
+            System.out.println(e.getMessage());
+            }
+            break;
 			    
 			    
 			    
-		 case 7:
-			// Testcase 7: Enter coursework mark
-			break;
+            case 7:
+            // Testcase 7: Enter coursework mark
+            break;
+            case 8:
+                break;
+            case 9:
+                break;
+            case 10:
+                break;
 
 
 
 
             }
         }
-
     }
 }

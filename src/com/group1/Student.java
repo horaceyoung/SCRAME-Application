@@ -14,9 +14,9 @@ public class Student
 	private HashMap<String, ArrayList<AssessmentComponent>> courseResult;
 	
 	public Student(String studentName,String marticNumber){
-           this.studentName = studentName;
-	   this.marticNumber = marticNumber;
-        }
+	    this.studentName = studentName;
+	    this.marticNumber = marticNumber;
+	}
 	public String GetStudentName(){
         return studentName;
         }

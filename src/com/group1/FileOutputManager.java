@@ -5,6 +5,7 @@ import java.lang.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
+import java.util.Scanner;
 
 public class FileOutputManager
 {
@@ -187,6 +188,69 @@ public class FileOutputManager
 
         System.out.println("Conponents Saved!");
     }
+
+    public static void RegisterCourse(String matric, String courseTitle, String tutorialName, String labName)throws FileNotFoundException {
+        try{
+            UpdateCourse(matric, courseTitle);
+            UpdateSession(matric, courseTitle, tutorialName, "Tutorial");
+            UpdateSession(matric, courseTitle, labName, "Lab");
+
+        }
+        catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+
+    }
+
+    public static void UpdateCourse(String matric, String courseTitle)throws FileNotFoundException, IOException{
+        File courseFile = new File("data/Courses.txt");
+        BufferedReader courseReader = new BufferedReader(new FileReader(courseFile));
+        String buffer = "", line, course = "";
+        while((line = courseReader.readLine())!=null){
+            String[] currentCourse = line.split("\t");
+            if (currentCourse[0].equals(courseTitle)){
+                line += "\t" + matric;
+            }
+            buffer += line + "\r\n";
+        }
+        courseReader.close();
+
+        FileWriter courseWriter = new FileWriter("data/Courses.txt");
+        courseWriter.write(buffer);
+        courseWriter.close();
+    }
+
+    public static void UpdateSession(String matric, String courseTitle, String sessionName, String sessionType)throws FileNotFoundException, IOException{
+        File sessionFile = new File("default");
+        String filePath = "default";
+        if(sessionType.equals("Tutorial")){
+            sessionFile = new File("data/Tutorials.txt");
+            filePath = "data/Tutorials.txt";
+        }
+        else if (sessionType.equals("Lab")){
+            sessionFile = new File("data/Labs.txt");
+            filePath = "data/Labs.txt";
+        }
+
+        BufferedReader courseReader = new BufferedReader(new FileReader(sessionFile));
+        String buffer = "", line, course = "";
+        while((line = courseReader.readLine())!=null){
+            String[] currentCourse = line.split("\t");
+            if (currentCourse[0].equals(courseTitle) && currentCourse[1].equals(sessionName)){
+                line= currentCourse[0] + "\t" + currentCourse[1] + "\t" + currentCourse[2] + "\t" + String.valueOf(Integer.valueOf(currentCourse[3])-1);
+                line += "\t" + matric;
+            }
+            buffer += line + "\r\n";
+        }
+        courseReader.close();
+
+        FileWriter courseWriter = new FileWriter(filePath);
+        courseWriter.write(buffer);
+        courseWriter.close();
+    }
+
+
+
 
 
 
