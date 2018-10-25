@@ -134,4 +134,9 @@ public class Course {
     public ArrayList<Lab> GetLabList(){return labGroups;}
     public ArrayList<AssessmentComponent> GetComponents(){return components;}
     public ArrayList<AssessmentComponent> GetSubComponents(){return subcomponents;}
+
+
+    public void CheckTutorialVacancy(){
+         String tutGrpName;
+    }
 }
