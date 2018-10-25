@@ -43,11 +43,10 @@ public class FileReadManager {
         return "default";
     }
 
-    public static void GetCourseSessions(String courseTitle, Course course) throws IOException, TutorialLabNotAvailableException{
+    public static boolean GetCourseSessions(String courseTitle, Course course) throws IOException, TutorialLabNotAvailableException{
         File courseFile = new File("data/Tutorials.txt");
         Scanner coursesScanner = new Scanner(courseFile);
         boolean available = false;
-        System.out.println("The Tutorials and Labs of " + courseTitle + " is as following: ");
         while(coursesScanner.hasNext()){
             String[] currentCourse = coursesScanner.nextLine().split("\t");
             if (currentCourse[0].equals(courseTitle)&&Integer.valueOf(currentCourse[3])>0){
@@ -69,8 +68,7 @@ public class FileReadManager {
             }
         }
 
-        if(!available)
-            throw new TutorialLabNotAvailableException();
+        return available;
 
     }
 

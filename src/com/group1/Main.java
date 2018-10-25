@@ -69,7 +69,7 @@ public class Main {
                 case 3:
                 // Testcase 3: Register student for a course
                     System.out.println("Register course: Please input the matric number of the student to register: ");
-
+                    boolean hasSessions;
                     studentMatric = in.nextLine();
                     try{
                         if(FileReadManager.CheckStudentExists(studentMatric)){
@@ -84,13 +84,13 @@ public class Main {
 
                         if(FileReadManager.CheckCourseExists(courseTitle)){
                             newCourse = new Course(courseTitle);
-                            FileReadManager.GetCourseSessions(courseTitle, newCourse);
+                            hasSessions = FileReadManager.GetCourseSessions(courseTitle, newCourse);
                         }
                         else {
                             throw new CourseNotFoundException();
                         }
 
-                        while (true){
+                        while (hasSessions){
                             System.out.println("Please select a tutorial to be enrolled in:");
                             TutorialName = in.nextLine();
                             boolean tutorialFound = false;
@@ -125,6 +125,10 @@ public class Main {
                         FileOutputManager.RegisterCourse(studentMatric, courseTitle, TutorialName, LabName);
                             break;
                         }
+
+                        FileOutputManager.RegisterCourseWithoutTutorialLab(studentMatric, courseTitle);
+                        System.out.println("Course Registration Successful: The student with matric number " + studentMatric + " has been succesffully regiestered with course "
+                         + courseTitle + "\n");
 
                     }
                     catch (Exception e){
