@@ -27,7 +27,7 @@ public class FileReadManager {
         while(studentSC.hasNext()){
             String[] currStudent= studentSC.nextLine().split("\t");
             if (currStudent[1].equals(matric))
-                return true;     
+                return true;
         }
         return false;
     }
@@ -51,9 +51,9 @@ public class FileReadManager {
         while(coursesScanner.hasNext()){
             String[] currentCourse = coursesScanner.nextLine().split("\t");
             if (currentCourse[0].equals(courseTitle)&&Integer.valueOf(currentCourse[3])>0){
-                    available = true;
-                    course.AddTutorial(new Tutorial(currentCourse[1]));
-                    System.out.println("Tutorials: " + currentCourse[1]+ " total slots: " + currentCourse[2] + " / available slots: " + currentCourse[3] + "\n");
+                available = true;
+                course.AddTutorial(new Tutorial(currentCourse[1]));
+                System.out.println("Tutorials: " + currentCourse[1]+ " total slots: " + currentCourse[2] + " / available slots: " + currentCourse[3] + "\n");
 
             }
         }
@@ -74,7 +74,43 @@ public class FileReadManager {
 
     }
 
+    public static void PrintTutorialVacancy(String courseTitle) throws IOException, TutorialLabNotAvailableException{
+        File courseFile = new File("data/Tutorials.txt");
+        Scanner coursesScanner = new Scanner(courseFile);
+        boolean available = false;
+        int occupied;
+        System.out.println("The Vacancy of Tutorial Groups of " + courseTitle + " is as following: ");
+        while(coursesScanner.hasNext()){
+            String[] currentCourse = coursesScanner.nextLine().split("\t");
+            if (currentCourse[0].equals(courseTitle)){
+                available=true;
+                occupied = Integer.parseInt(currentCourse[2])-Integer.parseInt(currentCourse[3]);
+                System.out.print("Tutorial Group "+currentCourse[1]+"\t");
+                System.out.println(occupied+ "/" + currentCourse[2] + "\n");
 
+            }
+        }
+        if(!available)
+            throw new TutorialLabNotAvailableException();
+    }
+    public static void PrintLabVacancy(String courseTitle) throws IOException, TutorialLabNotAvailableException{
+        File courseFile = new File("data/Labs.txt");
+        Scanner coursesScanner = new Scanner(courseFile);
+        boolean available = false;
+        int occupied;
+        System.out.println("The Vacancy of Lab Groups of " + courseTitle + " is as following: ");
+        while(coursesScanner.hasNext()){
+            String[] currentCourse = coursesScanner.nextLine().split("\t");
+            if (currentCourse[0].equals(courseTitle)){
+                available=true;
+                occupied = Integer.parseInt(currentCourse[2])-Integer.parseInt(currentCourse[3]);
+                System.out.print("Lab Group "+currentCourse[1]+"\t");
+                System.out.println(occupied+ "/" + currentCourse[2] + "\n");
 
+            }
+        }
+        if(!available)
+            throw new TutorialLabNotAvailableException();
+    }
 
 }
