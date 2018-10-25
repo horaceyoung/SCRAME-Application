@@ -17,23 +17,20 @@ public class StudentManager {
             try {
                 if (!InputManager. ValidateNameInput(studentName)) 
                       throw new NameNotValidException ();
-                
-                if(FileReadManager.CheckStudentExists(studentName)){
+                System.out.println("Please input the Student's Matric Number.");
+                matric = sc.nextLine();
+                if(FileReadManager.CheckStudentExists(matric)){
                             System.out.println("Add Student Failed: Student has been added.");
                         }
                 else{
                 nameValid = true;
-                System.out.println("Please input the Student's Matric Number.");   
-                matric = sc.nextLine();
                 System.out.println("Add student Success: student " + studentName + ": "+  matric+ " has been successfully added");
                 }
             } 
-            catch (NameNotValidException e) {
+            catch (Exception e) {
                 System.out.println(e.getMessage());
             }
-            catch (IOException e){
-                        System.out.println(e.getMessage());
-            }
+
         }
         return new Student(studentName,matric);
     }

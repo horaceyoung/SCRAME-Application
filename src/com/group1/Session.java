@@ -4,6 +4,10 @@ public class Session {
     String sessionName;
     int totalVacancy;
 
+    public Session(String sessionName){
+        this.sessionName = sessionName;
+    }
+
     public Session(String sessionName, int totalVacancy){
         this.sessionName = sessionName;
         this.totalVacancy = totalVacancy;

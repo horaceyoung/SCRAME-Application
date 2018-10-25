@@ -126,6 +126,14 @@ public class Course {
     }
     public void ClearComponentWeightage(ArrayList<AssessmentComponent> components) { components.clear();}
 
+    public void AddTutorial(Tutorial sessionName){
+        this.tutorialGroups.add(sessionName);
+    }
+
+    public void AddLab(Lab sessionName){
+        this.labGroups.add(sessionName);
+    }
+
     public String GetCourseTitle(){
         return courseTitle;
     }
