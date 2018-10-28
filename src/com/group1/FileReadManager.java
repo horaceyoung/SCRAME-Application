@@ -5,10 +5,13 @@ import Exceptions.TutorialLabNotAvailableException;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class FileReadManager {
+    private static ArrayList<AssessmentComponent> components = new ArrayList<>();
+
     public static boolean CheckCourseExists(String courseTitle) throws IOException{
         File courseFile = new File("data/Courses.txt");
         Scanner coursesScanner = new Scanner(courseFile);
@@ -111,6 +114,41 @@ public class FileReadManager {
         }
         if(!available)
             throw new TutorialLabNotAvailableException();
+    }
+
+    public static ArrayList<AssessmentComponent> GetCourseWorkComponentsList(String courseTitle) throws IOException{
+        File courseFile = new File("data/Component.txt");
+        Scanner courseScanner = new Scanner(courseFile);
+        while(courseScanner.hasNext()){
+            String[] currentCourse = courseScanner.nextLine().split("\t");
+            if(currentCourse[0].equals(courseTitle)){
+                int i =3;
+/*                if (currentCourse.length < 3){
+                    throw new CourseNoCourseWorkException();
+                }*/
+
+                while(currentCourse[i]!=null){
+                    String[] eachComponent = currentCourse[i].split(":");
+                    AssessmentComponent component = new AssessmentComponent(Float.parseFloat(eachComponent[1]),eachComponent[0]);
+                    components.add(component);
+                    i++;
+                }
+            }
+        }
+
+        return components;
+    }
+
+    public static Boolean CheckStudentResultsRecord(String studentMatric, String courseName) throws IOException{
+        File courseFile = new File("data/"+courseName+".txt");
+
+        Scanner courseScanner = new Scanner(courseFile);
+        while(courseScanner.hasNext()){
+            String registeredStudent = courseScanner.nextLine();
+            if(registeredStudent.equals(studentMatric))
+                return true;
+        }
+        return false;
     }
 
 }

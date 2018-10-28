@@ -2,8 +2,11 @@ package com.group1;
 
 import Exceptions.CourseNotFoundException;
 import Exceptions.StudentNotExistException;
+import Exceptions.StudentResultAlreadyExistsException;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -16,6 +19,10 @@ public class Main {
         String LabName;
         Course newCourse;
         Scanner in = new Scanner(System.in);
+
+
+
+
         String intro = "Welcome to the SCRAME application console: \nPress the corresponding number to use: \n"
                 + "1: Add a new student:\n"
 		+ "2: Add a new course:\n"
@@ -83,8 +90,11 @@ public class Main {
                         courseTitle = in.nextLine();
 
                         if(FileReadManager.CheckCourseExists(courseTitle)){
+                            FileOutputManager.WriteRegisteredStudentsforCourse(courseTitle,studentMatric);
+
                             newCourse = new Course(courseTitle);
                             FileReadManager.GetCourseSessions(courseTitle, newCourse);
+
                         }
                         else {
                             throw new CourseNotFoundException();
@@ -221,12 +231,57 @@ public class Main {
 			    
             case 7:
             // Testcase 7: Enter coursework mark
+                System.out.println("Enter results for : Please enter the course title:");
+                Scanner scanner = new Scanner(System.in);
+                List<String> ComponentResultList = new ArrayList<String>();
+                float courseExamGrade=0;
+                float courseWorkResult =0;
+                try {
+                    courseName = scanner.next();
+                    if (FileReadManager.CheckCourseExists(courseName)) {
+                        System.out.println("Enter coursework mark: Please enter the student's matriculation number:");
+                        studentMatric = scanner.next();
+
+                        if(FileReadManager.CheckStudentResultsRecord(studentMatric,courseName)){
+                            throw new StudentResultAlreadyExistsException();
+                        }
+
+                        System.out.println("Enter coursework mark: Please enter the student's result for exam:");
+                        courseExamGrade=scanner.nextFloat();
+
+                        ArrayList<AssessmentComponent> components = FileReadManager.GetCourseWorkComponentsList(courseName);
+                        for(AssessmentComponent component:components){
+                            System.out.println("Enter coursework mark: Please enter the student's mark for "+component.getAssessmentType()+" :");
+                            float studentMark = scanner.nextFloat();
+                            //TODO: Validate float input
+                            String result = component.getAssessmentType() + Float.toString(studentMark);
+                            ComponentResultList.add(result);
+                            courseWorkResult += studentMark * component.getWeightage();
+                        }
+                        String[] ComponentResults = ComponentResultList.toArray(new String[0]);
+
+
+                        if(!FileReadManager.CheckStudentResultsRecord(studentMatric,courseName)){
+                            FileOutputManager.WriteResults(studentMatric,courseName,Float.toString(courseExamGrade),Float.toString(courseWorkResult),ComponentResults);
+                        }
+                        else throw new StudentResultAlreadyExistsException();
+                    } else throw new CourseNotFoundException();
+                }
+                catch (CourseNotFoundException e){
+                    System.out.println(e.getMessage());
+                }
+                catch (StudentResultAlreadyExistsException e){
+                    System.out.println(e.getMessage());
+                }
+                catch (IOException e){
+                    System.out.println(e.getMessage());
+                }
             break;
-            case 8:
+
+
+            case 8://previous case 9, as case 7&8 has merged
                 break;
-            case 9:
-                break;
-            case 10:
+            case 9://previous case 10
                 break;
 
 

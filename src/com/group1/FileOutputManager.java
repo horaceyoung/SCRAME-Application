@@ -42,9 +42,7 @@ public class FileOutputManager
 
     }
 
-    public static void WriteResults(String matric, String coursecode, String[] resultsarray) //resultsarray[0]: exam;
-                                                                                                //            [1]; coursework;
-                                                                                                //            [2...]: different component
+    public static void WriteResults(String matric, String coursecode, String examResult, String courseWorkResult, String[] resultsarray)
     {
 
         //Results.txt
@@ -58,7 +56,7 @@ public class FileOutputManager
             File file = new File("data/Results.txt");
             file.createNewFile();   //create file if not exist
             BufferedWriter writer = new BufferedWriter(new FileWriter(file, true));
-            String line = matric+"\t"+coursecode+"\t"+resultsarray[0]+"\t"+resultsarray[1]+"\t";
+            String line = matric+"\t"+coursecode+"\t"+ examResult+"\t"+courseWorkResult+"\t";
 
             writer.write(line);
 
@@ -88,6 +86,26 @@ public class FileOutputManager
 
         }
     }
+
+    public static void WriteRegisteredStudentsforCourse(String courseTitle, String studentMatric){
+        //courseTitle.txt
+        //filed 0:student matric number
+        try
+        {
+            File file = new File("data/"+courseTitle+".txt");
+            file.createNewFile();   //create file if not exist
+            BufferedWriter writer = new BufferedWriter(new FileWriter(file, true));
+            String line = studentMatric;
+            writer.write(line);
+            writer.newLine();
+            writer.close();
+        }
+        catch (IOException e)
+        {
+            System.out.println(e.getMessage());
+        }
+    }
+
 
 
     public static void WriteCourse(Course course)
