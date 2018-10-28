@@ -220,6 +220,16 @@ public class FileOutputManager
 
     }
 
+    public static void RegisterCourseWithoutTutorialLab(String matric, String courseTitle)throws FileNotFoundException {
+        try{
+            UpdateCourse(matric, courseTitle);
+        }
+        catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+
+    }
+
     public static void UpdateCourse(String matric, String courseTitle)throws FileNotFoundException, IOException{
         File courseFile = new File("data/Courses.txt");
         BufferedReader courseReader = new BufferedReader(new FileReader(courseFile));
