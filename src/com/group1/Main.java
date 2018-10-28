@@ -2,6 +2,7 @@ package com.group1;
 
 import Exceptions.CourseNotFoundException;
 import Exceptions.StudentNotExistException;
+import Exceptions.StudentNotRegisteredForTheCourse;
 import Exceptions.StudentResultAlreadyExistsException;
 
 import java.io.IOException;
@@ -90,10 +91,10 @@ public class Main {
                         courseTitle = in.nextLine();
 
                         if(FileReadManager.CheckCourseExists(courseTitle)){
-                            FileOutputManager.WriteRegisteredStudentsforCourse(courseTitle,studentMatric);
 
                             newCourse = new Course(courseTitle);
                             FileReadManager.GetCourseSessions(courseTitle, newCourse);
+                            hasSessions = FileReadManager.GetCourseSessions(courseTitle, newCourse);
 
                         }
                         else {
@@ -245,7 +246,8 @@ public class Main {
                     if (FileReadManager.CheckCourseExists(courseName)) {
                         System.out.println("Enter coursework mark: Please enter the student's matriculation number:");
                         studentMatric = scanner.next();
-
+                        if(!FileReadManager.CheckWhetherStudentRegisteredForACourse(studentMatric,courseName))
+                            throw new StudentNotRegisteredForTheCourse();
                         if(FileReadManager.CheckStudentResultsRecord(studentMatric,courseName)){
                             throw new StudentResultAlreadyExistsException();
                         }
@@ -258,7 +260,7 @@ public class Main {
                             System.out.println("Enter coursework mark: Please enter the student's mark for "+component.getAssessmentType()+" :");
                             float studentMark = scanner.nextFloat();
                             //TODO: Validate float input
-                            String result = component.getAssessmentType() + Float.toString(studentMark);
+                            String result = component.getAssessmentType() + " "+Float.toString(studentMark);
                             ComponentResultList.add(result);
                             courseWorkResult += studentMark * component.getWeightage();
                         }
@@ -275,6 +277,9 @@ public class Main {
                     System.out.println(e.getMessage());
                 }
                 catch (StudentResultAlreadyExistsException e){
+                    System.out.println(e.getMessage());
+                }
+                catch (StudentNotRegisteredForTheCourse e){
                     System.out.println(e.getMessage());
                 }
                 catch (IOException e){

@@ -125,7 +125,7 @@ public class FileReadManager {
                     throw new CourseNoCourseWorkException();
                 }*/
 
-                while(currentCourse[i]!=null){
+                while(i<currentCourse.length){
                     String[] eachComponent = currentCourse[i].split(":");
                     AssessmentComponent component = new AssessmentComponent(Float.parseFloat(eachComponent[1]),eachComponent[0]);
                     components.add(component);
@@ -138,13 +138,29 @@ public class FileReadManager {
     }
 
     public static Boolean CheckStudentResultsRecord(String studentMatric, String courseName) throws IOException{
-        File courseFile = new File("data/"+courseName+".txt");
-
+        File courseFile = new File("data/Results.txt");
         Scanner courseScanner = new Scanner(courseFile);
         while(courseScanner.hasNext()){
-            String registeredStudent = courseScanner.nextLine();
-            if(registeredStudent.equals(studentMatric))
+            String[] currentStudent = courseScanner.nextLine().split("\t");
+            if(currentStudent[0].equals(studentMatric)&&currentStudent[1]==courseName)
                 return true;
+        }
+        return false;
+    }
+
+    public static Boolean CheckWhetherStudentRegisteredForACourse(String studentMatric, String courseName) throws IOException {
+        File courseFile = new File("data/Courses.txt");
+        Scanner courseScanner = new Scanner(courseFile);
+        while (courseScanner.hasNext()) {
+            String[] currentCourse = courseScanner.nextLine().split("\t");
+            if(currentCourse[0].equals(courseName)){
+                int i=3;
+                while(currentCourse[i]!=null){
+                    if(currentCourse[i].equals(studentMatric))
+                        return true;
+                    i++;
+                }
+            }
         }
         return false;
     }

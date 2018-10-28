@@ -57,23 +57,14 @@ public class FileOutputManager
             file.createNewFile();   //create file if not exist
             BufferedWriter writer = new BufferedWriter(new FileWriter(file, true));
             String line = matric+"\t"+coursecode+"\t"+ examResult+"\t"+courseWorkResult+"\t";
-
             writer.write(line);
-
-            while (true)
+            int count = 0;
+            while (count<resultsarray.length)
             {
-                int count = 2;
-                if(resultsarray[count] != null)
-                {
-                    writer.write(resultsarray[count]+" ");
-                }
-                else
-                {
-                    writer.write("\n");
-                    break;
-                }
+                writer.write(resultsarray[count]+" ");
                 count++;
             }
+            writer.write("\n");
             writer.newLine();
             writer.close();
 
@@ -87,7 +78,7 @@ public class FileOutputManager
         }
     }
 
-    public static void WriteRegisteredStudentsforCourse(String courseTitle, String studentMatric){
+/*    public static void WriteRegisteredStudentsforCourse(String courseTitle, String studentMatric){
         //courseTitle.txt
         //filed 0:student matric number
         try
@@ -104,7 +95,7 @@ public class FileOutputManager
         {
             System.out.println(e.getMessage());
         }
-    }
+    }*/
 
 
 
