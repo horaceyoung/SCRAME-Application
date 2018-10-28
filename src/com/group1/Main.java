@@ -288,9 +288,9 @@ public class Main {
             break;
 
 
-            case 8://previous case 9, as case 7&8 has merged
+            case 9:
                 break;
-            case 9://previous case 10
+            case 10://previous case 10
                 break;
 
 
