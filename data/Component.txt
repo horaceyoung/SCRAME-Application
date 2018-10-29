@@ -1,1 +1,2 @@
 CZ1006	Exam: 0.4	Coursework: 0.6	Assignment: 0.6	Oral: 0.4	
+testingAddingACourse	Exam: 0.7	Coursework: 0.3	sub1: 0.9	sub2: 0.1	

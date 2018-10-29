@@ -12,3 +12,7 @@ CZ1007	I	8
 CZ1007	J	9
 CZ1007	K	1
 CZ2006	LAB1	20	18	U1234567L
+testingAddingACourse	hahhalab1	7	7
+testingAddingACourse	ahhahahalab2	8	8
+testingAddingACourse	hahahahlab3	9	8	u123456789h
+testingAddingACourse	hahahalab4	10	10

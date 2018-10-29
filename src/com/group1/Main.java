@@ -26,14 +26,14 @@ public class Main {
 
         String intro = "Welcome to the SCRAME application console: \nPress the corresponding number to use: \n"
                 + "1: Add a new student:\n"
-		+ "2: Add a new course:\n"
-		+ "3: Register student for a course:\n"
-		+ "4: Check available slot in a class:\n"
-		+ "5: Print student list by lecture, tutorial or laboratory:\n"
+                + "2: Add a new course:\n"
+                + "3: Register student for a course:\n"
+                + "4: Check available slot in a class:\n"
+                + "5: Print student list by lecture, tutorial or laboratory:\n"
                 + "6. Enter course assessment components weightage\n\n"
-                + "7: Enter coursework mark â€“ inclusive of its components.\n"
+                + "7: Enter coursework mark - inclusive of its components.\n"
                 + "8: Enter exam mark.\n"
-                + "9. Print course statistics"
+                + "9. Print course statistics\n"
                 + "10. Print student transcript.\n";
 
 
@@ -288,11 +288,45 @@ public class Main {
             break;
 
 
-            case 9:
-                break;
-            case 10://previous case 10
-                break;
+         case 9:
+        	 //testcase 9: Print course statistics
+        	 //Show grade percentage for overall (exam + coursework)
+        	 //exam only and coursework only.
+            	System.out.println("Please enter Course Code to check for course statistics");
+                Scanner sc1 = new Scanner(System.in);
+                String courseCodeStatistics = sc1.nextLine();
+                try{
+                    if (!FileReadManager.CheckCourseExists(courseCodeStatistics))
+                        System.out.println("The course you entered does not exist. Please enter another course code.\n");
 
+                    else{
+                    	StudentManager.printCourseStatistics(courseCodeStatistics);
+                     }
+                }catch (IOException e)
+                {
+                    System.out.println(e.getMessage());
+                }
+                    break;
+
+            case 10:
+            	//Print student transcript.
+            	//individual overall course mark and grade for all the courses registered
+            	//individual component marks ¨C exam, coursework, subcomponents from Result.txt 
+            	//The configured weightages should be displayed as well
+            	System.out.println("Please enter the Student Matric Number to check for transcript");
+            	Scanner sc2 = new Scanner(System.in);
+            	String studentMatricTranscript = sc2.nextLine();
+            	try {
+            		if (!FileReadManager.CheckStudentExists(studentMatricTranscript)) {
+            			 System.out.println("The Matric Number does not exist.\n");
+            		}
+            		else {
+            			StudentManager.printTranscript(studentMatricTranscript);
+            		}
+            	}catch (IOException e) {
+            		System.out.println(e.getMessage());
+            	}
+                break;
 
 
 
