@@ -190,10 +190,10 @@ public class Main {
                     System.out.println("Key in 'Lec' to print by lecture || 'Tut' to print by tutorial || 'Lab' to print by lab");
                                 String printList = sc.nextLine().toUpperCase();
 
-                                if(printList.equals("LECTURE"))
+                                if(printList.equals("LEC"))
                                  CourseManager.printStudentListByLecture(courseName);
 
-                                else if(printList.equals("TUTORIAL"))
+                                else if(printList.equals("TUT"))
                                  CourseManager.printStudentListByTutorial(courseName);
 
                                 else if(printList.equals("LAB"))
@@ -311,7 +311,7 @@ public class Main {
             case 10:
             	//Print student transcript.
             	//individual overall course mark and grade for all the courses registered
-            	//individual component marks ¨C exam, coursework, subcomponents from Result.txt 
+            	//individual component marks Â¨C exam, coursework, subcomponents from Result.txt 
             	//The configured weightages should be displayed as well
             	System.out.println("Please enter the Student Matric Number to check for transcript");
             	Scanner sc2 = new Scanner(System.in);
