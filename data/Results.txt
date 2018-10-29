@@ -1,3 +1,0 @@
-u123456789h	testingAddingACourse	19.0	44.1	sub1 45.0 sub2 36.0 
-
-u123456789h	testingAddingACourse	98.0	20.1	sub1 15.0 sub2 66.0 
