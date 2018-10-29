@@ -1,1 +1,2 @@
 CZ1006	Exam: 0.4	Coursework: 0.6	Assignment: 0.6	Oral: 0.4		
+CZ4001	Exam: 0.5	Coursework: 0.5	CZ1004SUB1: 0.4	CZ4001SUB2: 0.5	CZ4001SUB3: 0.1	

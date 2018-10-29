@@ -89,22 +89,22 @@ public class StudentManager {
         File resultsCourseFile = new File("data/Results.txt");
         Scanner resultsScanner = new Scanner(resultsCourseFile);
         float examResult = 0;
+        int studentCount=0;
         float courseWorkResult = 0;
         //read Results file to get results
         while (resultsScanner.hasNext()) {
             String[] courseCode = resultsScanner.nextLine().split("\t");
-/*            if (courseCode[1].toUpperCase().equals(courseCodeStatistics.toUpperCase())){
-            	examResult += Float.parseFloat(courseCode[2]);
-            	courseWorkResult += Float.parseFloat(courseCode[3]);
-            }
-            else {
-            	continue;
-            }*/
-            System.out.println(courseCode.length);
+            if(courseCode.length>1) {
+            	if (courseCode[1].toUpperCase().equals(courseCodeStatistics.toUpperCase())){
+                	examResult += Float.parseFloat(courseCode[2]);
+                	courseWorkResult += Float.parseFloat(courseCode[3]);
+                	studentCount++;
+                	}
+            	}
         }
-            System.out.println(
-    				"\n\tExam Result: " + examResult + "%" + 
-    				"\n\tcoursework Result: " + courseWorkResult + "%" +
-    				"\n\tOverall(exam + coursework): " + (examResult + courseWorkResult)/2 + "%");
+        System.out.println(
+    			"\n\tExam Result: " + examResult/studentCount + "%" + 
+    			"\n\tcoursework Result: " + courseWorkResult/studentCount + "%" +
+    			"\n\tOverall(exam + coursework): " + (examResult + courseWorkResult)/studentCount + "%");
     }    
 }
