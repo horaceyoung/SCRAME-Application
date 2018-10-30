@@ -20,7 +20,7 @@ public class StudentManager {
         try {
                 if (!InputManager. ValidateNameInput(studentName)) 
                       throw new NameNotValidException ();
-                if(FileReadManager.CheckStudentExists(studentName)){
+                if(FileReadManager.CheckStudentExistsByName(studentName)){
                 System.out.println("Add Student Failed: Student has already been added.");
                 }
                 else{
