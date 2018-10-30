@@ -183,7 +183,7 @@ public class Main {
                         Scanner sc = new Scanner(System.in);
                         String courseName = sc.nextLine();
                         try{
-                            if (!FileReadManager.CheckCourseExists(courseName))
+                            if (!FileReadManager.CheckCourseExists(courseName.toUpperCase()))
                                 System.out.println("The course you entered does not exist. Please add this course first.\n");
 
                             else{
