@@ -131,13 +131,13 @@ public class CourseManager {
         while (tutScanner.hasNext()) {
             String[] tutorialGroup = tutScanner.nextLine().split("\t");
             if (tutorialGroup[0].toUpperCase().equals(courseName.toUpperCase())) {
-                for (int i = 3; i < tutorialGroup.length; i++) {
+                for (int i = 4; i < tutorialGroup.length; i++) {
                     studentName = Student.getNameFromMatric(tutorialGroup[i]);
                     System.out.println("   "+studentName + "  ");
 
                 }
             } else {
-                if (tutorialGroup.length<=3)
+                if (tutorialGroup.length<=4)
                     System.out.println("Currently There's no student registered in " + courseName);
 
             }
@@ -155,13 +155,13 @@ public class CourseManager {
 
                 System.out.println(tutorialGroup[1] + "  Students List: ");
 
-                for (int i = 3; i < tutorialGroup.length; i++) {
+                for (int i = 4; i < tutorialGroup.length; i++) {
 
                     studentName = Student.getNameFromMatric(tutorialGroup[i]);
                     System.out.println("   "+studentName + "   ");
 
                 }
-            if (tutorialGroup.length<=3)
+            if (tutorialGroup.length<=4)
                 System.out.println("    Currently There's no student registered in  " + tutorialGroup[1]);
             }
         }
@@ -178,13 +178,13 @@ public class CourseManager {
 
                 System.out.println(labGroup[1] + "  Students List: ");
 
-                for (int i = 3; i < labGroup.length; i++) {
+                for (int i = 4; i < labGroup.length; i++) {
 
                     studentName = Student.getNameFromMatric(labGroup[i]);
                     System.out.println("   "+studentName + "   ");
 
                 }
-                if (labGroup.length<=3)
+                if (labGroup.length<=4)
                     System.out.println("    Currently there's no student registered in " + labGroup[1]);
             }
         }
