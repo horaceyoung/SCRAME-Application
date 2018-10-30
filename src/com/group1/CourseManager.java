@@ -45,8 +45,8 @@ public class CourseManager {
             float weightagesum = 0;
             for (AssessmentComponent componentnew : newcourse6.GetComponents()) {
                 weightagesum += componentnew.getWeightage();
-                System.out.println(weightagesum);
             }
+            System.out.println(weightagesum);
             if (InputManager.ValidateWeightageSum(weightagesum)) {
                 break;
             } else {
