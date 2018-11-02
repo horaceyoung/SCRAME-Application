@@ -5,7 +5,9 @@ import Exceptions.StudentNotExistException;
 import Exceptions.StudentNotRegisteredForTheCourse;
 import Exceptions.StudentResultAlreadyExistsException;
 
-import java.io.IOException;
+import javax.imageio.stream.FileImageOutputStream;
+import javax.xml.crypto.Data;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -20,10 +22,25 @@ public class Main {
         String LabName;
         Course newCourse;
         Scanner in = new Scanner(System.in);
+        DataContainer dataContainer = new DataContainer();
+
+        // Initialization and deserialize the data container file
+
+        try{
+            FileInputStream fileIn = new FileInputStream("data/SerializableDataContainer.ser");
+            ObjectInputStream objectIn = new ObjectInputStream(fileIn);
+            dataContainer = (DataContainer) objectIn.readObject();
+        }
+        catch (Exception e){
+            System.out.println(e.getMessage());
+        }
 
 
 
 
+
+
+        System.out.println("Initializing...");
         String intro = "Welcome to the SCRAME application console: \nPress the corresponding number to use: \n"
                 + "1: Add a new student:\n"
                 + "2: Add a new course:\n"
@@ -34,7 +51,8 @@ public class Main {
                 + "7: Enter coursework mark - inclusive of its components.\n"
                 + "8: Enter exam mark.\n"
                 + "9. Print course statistics\n"
-                + "10. Print student transcript.\n";
+                + "10. Print student transcript.\n"
+                + "0. Save\n";
 
 
         int choice = 0;
@@ -42,11 +60,15 @@ public class Main {
             System.out.println(intro);
             choice = in.nextInt();
             in.nextLine();
+
+
+
+
             switch (choice){
                 case 1:
 		            //Testcase 1: Add in student
                     Student newStudent = StudentManager.AddStudent();
-                    FileOutputManager.WriteStudent(newStudent.GetStudentName(),newStudent.GetMarticNumber());
+                    dataContainer.studentsList.add(newStudent);
                     break;
                    
 			    
@@ -64,7 +86,7 @@ public class Main {
                             // Add Labs and Tutorialss
                             newCourse1.AddTutorialLabGroups("Tutorial");
                             newCourse1.AddTutorialLabGroups("Lab");
-                            FileOutputManager.WriteSessions(newCourse1);
+                            dataContainer.courseList.add(newCourse1);
                         }
                     }
                     catch (IOException e){
@@ -327,6 +349,19 @@ public class Main {
             		System.out.println(e.getMessage());
             	}
                 break;
+
+                case 0:
+                    try{
+                        FileOutputStream fileOut = new FileOutputStream("data/SerializableDataContainer.ser");
+                        ObjectOutputStream out = new ObjectOutputStream(fileOut);
+                        out.writeObject(dataContainer);
+                        out.close();
+                        fileOut.close();
+                        System.out.println("The data has been successfully saved");
+                    }
+                    catch (Exception e){
+                        System.out.println(e.getMessage());
+                    }
 
 
 

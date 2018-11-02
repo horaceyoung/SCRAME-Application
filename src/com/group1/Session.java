@@ -1,6 +1,6 @@
 package com.group1;
 
-public class Session {
+public class Session implements java.io.Serializable{
     String sessionName;
     int totalVacancy;
 

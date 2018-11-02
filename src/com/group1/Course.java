@@ -9,7 +9,7 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Course {
+public class Course implements java.io.Serializable{
     private String courseTitle;
     private Coordinator coordinator;
     private ArrayList<AssessmentComponent> components = new ArrayList<>();

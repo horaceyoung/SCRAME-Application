@@ -15,33 +15,6 @@ public class FileOutputManager
     //The format for the txt file is that for each line, different field is separated by tab and different sub-field is separated by space
 
 
-    public static void WriteStudent(String name, String matric)
-    {
-        //Students.txt
-        //filed 0: name
-        //field 1: matric number
-
-        try
-        {
-            File file = new File("data/Students.txt");
-            file.createNewFile();   //create file if not exist
-            BufferedWriter writer = new BufferedWriter(new FileWriter(file, true));
-            String line = name+"\t"+matric+"\n";
-            writer.write(line);
-            writer.close();
-
-
-
-        }
-        catch (IOException e2)
-        {
-            System.out.println(e2.getMessage());
-
-        }
-
-
-    }
-
     public static void WriteResults(String matric, String coursecode, String examResult, String courseWorkResult, String[] resultsarray)
     {
 
