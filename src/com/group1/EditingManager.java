@@ -26,13 +26,11 @@ public class EditingManager
             }
         }
 
-        ArrayList<HashMap<String,ArrayList<AssessmentComponent>>> studentCourseList = thisStudent.GetCourseAndResult();
-        HashMap<String, ArrayList<AssessmentComponent>> newCourseAdded = new HashMap();
-        newCourseAdded.put(courseTitle,null);
-        studentCourseList.add(newCourseAdded);
+        HashMap<String,ArrayList<AssessmentComponent>> studentCourseList = thisStudent.GetCourseAndResult();
+        studentCourseList.put(courseTitle,null);
 
 
-        System.out.println("Student "+thisStudent.GetMarticNumber()+" "+thisStudent.GetStudentName()+" has been registered to Course "+courseTitle);
+        System.out.println("Student "+thisStudent.getMatricNumber()+" "+thisStudent.GetStudentName()+" has been registered to Course "+courseTitle);
     }
 
     public void RegisterStudentToTutorial(Student student, String courseTitle, String tutorialName, DataContainer dataContainer){
@@ -56,7 +54,7 @@ public class EditingManager
 
         thisTutorial.GetRegisteredStudent().add(student);
 
-         System.out.println("Student "+student.GetMarticNumber()+" "+student.GetStudentName()+" has been registered to "+ tutorialName+ "of course "+courseTitle);
+         System.out.println("Student "+student.getMatricNumber()+" "+student.GetStudentName()+" has been registered to "+ tutorialName+ "of course "+courseTitle);
 
         }
         catch (TutorialGroupNonExistentException e){
@@ -85,7 +83,7 @@ public class EditingManager
 
             thisLab.GetRegisteredStudent().add(student);
 
-            System.out.println("Student "+student.GetMarticNumber()+" "+student.GetStudentName()+" has been registered to "+ labName+ "of course "+courseTitle);
+            System.out.println("Student "+student.getMatricNumber()+" "+student.GetStudentName()+" has been registered to "+ labName+ "of course "+courseTitle);
 
         }
         catch (LabGroupNonExistentException e){
@@ -202,7 +200,7 @@ public class EditingManager
         HashMap<String, ArrayList<AssessmentComponent>> currentCourse;
         //read Results file to get results
         for(Student student : dataContainer.getStudentsList()) {
-            if (student.GetMarticNumber().equals(studentMatricTranscript)){
+            if (student.getMatricNumber().equals(studentMatricTranscript)){
                 transcriptOutcome += "Student Name: " + student.GetStudentName() + "\n";
             }
 

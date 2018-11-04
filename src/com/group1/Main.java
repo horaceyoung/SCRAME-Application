@@ -86,7 +86,6 @@ public class Main {
                 case 3:
                 // Testcase 3: Register student for a course
                     System.out.println("Register course: Please input the matric number of the student to register: ");
-                    ReadingManager RM = new ReadingManager();
                     EditingManager EM = new EditingManager();
                     studentMatric = in.nextLine();
                     try{

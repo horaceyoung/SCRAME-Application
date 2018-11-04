@@ -12,44 +12,8 @@ import java.util.Scanner;
 public class ReadingManager
 {
 
-/*
-    public ArrayList<Tutorial> GetCourseTutorials(String courseTitle, DataContainer dataContainer){
-        ArrayList<Tutorial> tutorialList = new ArrayList<>();
-        for(Course course:dataContainer.getCourseList()){
-            if(courseTitle.equals(course.GetCourseTitle()))
-                tutorialList = course.GetTutorialList();
 
-        }
-        return tutorialList;
-    }
-
-    public ArrayList<Lab> GetCourseLabs(String courseTitle, DataContainer dataContainer){
-        ArrayList<Lab> labList = new ArrayList<>();
-        for(Course course:dataContainer.getCourseList()){
-            if(courseTitle.equals(course.GetCourseTitle()))
-                labList = course.GetLabList();
-
-        }
-        return labList;
-    }
-*/
-
-
-    public static void printStudentListByTutorial(String courseName, String tutGroupName, DataContainer dataContainer) throws IOException {
-        for(Course currCourse:dataContainer.getCourseList()) {
-            if (currCourse.GetCourseTitle().equals(courseName.toUpperCase())) {
-                for (Tutorial currTut : currCourse.GetTutorialList()) {
-                    System.out.println("Students registered in " + tutGroupName + ": ");
-                    {
-                        for (currTut:
-                             currCourse.GetTutorialList()) {
-                        }
-                    }
-                    return;
-                }
-            }
-        }
-    }
+    public
 
     public static void printStudentListByLecture(String courseName, DataContainer dataContainer) throws IOException {
         for (Course currCourse : dataContainer.getCourseList()) {
@@ -58,7 +22,7 @@ public class ReadingManager
                 for (Tutorial currTut : currCourse.GetTutorialList()) {
                     {
                         for (Student currStudent : currTut.getStudentList()) {
-                            System.out.println(currStudent.GetStudentName() + ": " + currStudent.getMatricNumber());
+                            System.out.println(currStudent.GetStudentName() + " : " + currStudent.getMatricNumber());
                         }
                     }
                 }
@@ -74,11 +38,12 @@ public class ReadingManager
                     System.out.println("Students registered in " + tutGroupName + " : ");
                     {
                         for (Student currStudent : currTut.getStudentList()) {
-                            System.out.println(currStudent.GetStudentName() + ": " + currStudent.getMatricNumber());
+                            System.out.println(currStudent.GetStudentName() + " : " + currStudent.getMatricNumber());
                         }
+                        return;
                     }
                 }
-                return;
+
             }
         }
     }
@@ -90,9 +55,14 @@ public class ReadingManager
                     System.out.println("Students registered in " + labGroupName + " : ");
                     {
                         for (Student currStudent : currLab.getStudentList()) {
-                            System.out.println(currStudent.GetStudentName() + ": " + currStudent.getMatricNumber());
+                            System.out.println(currStudent.GetStudentName() + " : " + currStudent.getMatricNumber());
                         }
+                        return;
                     }
+                }
+            }
+        }
+    }
     public static void PrintTutorialVacancy(String courseTitle, DataContainer dataContainer) throws IOException, TutorialLabNotAvailableException {
         ArrayList<Tutorial> tutorialList = new ArrayList<>();
         ArrayList<Course> courseList = dataContainer.getCourseList();
@@ -105,8 +75,8 @@ public class ReadingManager
 
                 }
             }
-        }
-    }
+
+
 
             System.out.println("The Vacancy of Tutorial Groups of " + courseTitle + " is as following: ");
 
