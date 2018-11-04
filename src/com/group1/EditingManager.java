@@ -39,7 +39,7 @@ public class EditingManager
         ArrayList<Course> courseList = dataContainer.getCourseList();
         ArrayList<Tutorial> tutorialList = new ArrayList<>();
         Tutorial thisTutorial=null;
-
+        boolean found=false;
         for (Course course : courseList) {
             if (courseTitle.equals(course.GetCourseTitle())) {
                 tutorialList = course.GetTutorialList();
@@ -49,9 +49,10 @@ public class EditingManager
         for(Tutorial tutorial:tutorialList){
             if(tutorialName.equals(tutorial.sessionName)){
                 thisTutorial = tutorial;
+                found=true;
             }
-            else throw new TutorialGroupNonExistentException();
         }
+        if (found==false) throw new TutorialGroupNonExistentException();
 
         if (!thisTutorial.HaveVacancy())
             throw new TutorialOrLabNoVacancyException();
@@ -73,7 +74,7 @@ public class EditingManager
         ArrayList<Course> courseList = dataContainer.getCourseList();
         ArrayList<Lab> labList = new ArrayList<>();
         Lab thisLab=null;
-
+        boolean found = false;
         for (Course course : courseList) {
             if (courseTitle.equals(course.GetCourseTitle())) {
                 labList = course.GetLabList();
@@ -83,9 +84,12 @@ public class EditingManager
             for(Lab lab:labList){
                 if(labName.equals(lab.sessionName)){
                     thisLab = lab;
+                    found = true;
                 }
-                else throw new LabGroupNonExistentException();
             }
+
+            if(found ==false)
+                throw new LabGroupNonExistentException();
 
             if(!thisLab.HaveVacancy())
                 throw new TutorialOrLabNoVacancyException();

@@ -115,6 +115,7 @@ public class ReadingManager
     }
 
     public static boolean CourseHaveVacancy(String courseTitle, DataContainer dataContainer){
+        boolean haveVacancy = false;
         ArrayList<Course> courseList = dataContainer.getCourseList();
         Course thisCourse=null;
         for (Course course : courseList) {
@@ -127,11 +128,11 @@ public class ReadingManager
 
         ArrayList<Tutorial> tutorialList = thisCourse.GetTutorialList();
         for(Tutorial tutorial:tutorialList){
-            if(!tutorial.HaveVacancy())
-                return false;
+            if(tutorial.HaveVacancy())
+                haveVacancy = true;
         }
 
-        return true;
+        return haveVacancy;
 
     }
 
