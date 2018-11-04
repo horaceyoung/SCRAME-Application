@@ -51,40 +51,39 @@ public class Course implements java.io.Serializable{
         }
     }
 
-    public void AddTutorialLabGroups(String Type){
+    public void AddTutorialLabGroups(String type){
         Scanner in = new Scanner(System.in);
-        String addType = Type; // addType can be either "Tutorial" or "Lab"
         try{
-            System.out.println("Add "+ addType + ": Please input the total number of " + addType + " to add.");
+            System.out.println("Add "+ type + ": Please input the total number of " + type + " to add.");
             String rawNumTutorialGroups = in.nextLine();
             int numTutorialGroups;
 
-            if(InputManager.ValidateNumberInput(rawNumTutorialGroups)){ // If the parse result returns true, AKA the input is a valid integer, otherwise throw exception in else block
+            if(Validation.ValidateNumberInput(rawNumTutorialGroups)){ // If the parse result returns true, AKA the input is a valid integer, otherwise throw exception in else block
                 numTutorialGroups = Integer.parseInt(rawNumTutorialGroups);
                 for(int i = 0 ; i < numTutorialGroups ; i++){
-                    System.out.println("Add " + Type + " NO." + String.valueOf(i+1) + ". Please input the name of the "+ Type + "Group: ");
+                    System.out.println("Add " + type + " NO." + String.valueOf(i+1) + ". Please input the name of the "+ type + "Group: ");
                     String GroupName = in.nextLine();
 
                     if (!InputManager.ValidateGroupNameInput(GroupName))
                         throw new TutorialLabNameInvalidException();
 
-                    System.out.println("Add " + Type + " NO." + String.valueOf(i+1) + ". Please input the vacancy of the "+ Type + " Group: ");
+                    System.out.println("Add " + type + " NO." + String.valueOf(i+1) + ". Please input the vacancy of the "+ type + " Group: ");
                     String rawTutorialVacancy = in.nextLine();
 
                     int vacancy;
-                    if(InputManager.ValidateNumberInput(rawTutorialVacancy)){
+                    if(Validation.ValidateNumberInput(rawTutorialVacancy)){
                         vacancy = Integer.parseInt(rawTutorialVacancy);
                         // The following block works differently for Tutorial and Lab
-                        if(addType.equals("Tutorial")) {
+                        if(type.equals("Tutorial")) {
                             Tutorial newSession = new Tutorial(GroupName, vacancy);
                             tutorialGroups.add(newSession);
-                            System.out.println("Add " + Type + " No." + String.valueOf(i+1)+ " Success: " + "The tutorial group name is "+
+                            System.out.println("Add " + type + " No." + String.valueOf(i+1)+ " Success: " + "The tutorial group name is "+
                                     newSession.GetName() + " and the vacancy is " + String.valueOf(newSession.GetTotalVacancy())+". ");
                         }
-                        else if(addType.equals("Lab")){
+                        else if(type.equals("Lab")){
                             Lab newSession = new Lab(GroupName, vacancy);
                             labGroups.add((newSession));
-                            System.out.println("Add " + Type + " No." + String.valueOf(i+1)+ " Success: " + "The lab group name is "+
+                            System.out.println("Add " + type + " No." + String.valueOf(i+1)+ " Success: " + "The lab group name is "+
                                     newSession.GetName() + " and the vacancy is " + String.valueOf(newSession.GetTotalVacancy())+". ");
                         }
                     }
@@ -100,30 +99,30 @@ public class Course implements java.io.Serializable{
         // Handles the exception and call the function again
         catch (TutorialLabNumberInvalidException e){
             System.out.println(e.getMessage());
-            AddTutorialLabGroups(Type);
+            AddTutorialLabGroups(type);
         }
         catch (TutorialLabNameInvalidException e){
             System.out.println(e.getMessage());
-            AddTutorialLabGroups(Type);
+            AddTutorialLabGroups(type);
         }
     }
 
-    public void AssignComponentWeightage(ArrayList<AssessmentComponent> components, String assessmentType){
+    public void AssignComponentWeightage(ArrayList<AssessmentComponent> components, String assessmenttype){
         Scanner in = new Scanner(System.in);
-        System.out.println("Assign Components and Weightages:\nPlease input the weightage of the " + assessmentType + " : (a float number between 0-1)");
+        System.out.println("Assign Components and Weightages:\nPlease input the weightage of the " + assessmenttype + " : (a float number between 0-1)");
         String rawExamWeightage = in.nextLine();
         try{
-            if(!InputManager.ValidateWeightageInput(rawExamWeightage) ||  Float.parseFloat(rawExamWeightage ) == 0){
+            if(!Validation.ValidateWeightageInput(rawExamWeightage) ||  Float.parseFloat(rawExamWeightage ) <= 0){
                 throw new WeightageNotValidException();
             }
             float examWeightage = Float.parseFloat(rawExamWeightage);
-            AssessmentComponent newComponent = new AssessmentComponent(examWeightage, assessmentType);
+            AssessmentComponent newComponent = new AssessmentComponent(examWeightage, assessmenttype);
             components.add(newComponent);
-            System.out.println("Assign " + assessmentType + " Weightage Successful\n");
+            System.out.println("Assign " + assessmenttype + " Weightage Successful\n");
         }
         catch (WeightageNotValidException e){
             System.out.println(e.getMessage());
-            AssignComponentWeightage(components, assessmentType);
+            AssignComponentWeightage(components, assessmenttype);
         }
 
     }
