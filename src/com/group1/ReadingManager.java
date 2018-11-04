@@ -99,7 +99,7 @@ public class ReadingManager
                     if (course.HaveLab() == false)
                         throw new TutorialLabNotAvailableException();
                     else labList= course.GetLabList();
-
+                break;
                 }
             }
 
@@ -114,19 +114,25 @@ public class ReadingManager
         catch (TutorialLabNotAvailableException e){System.out.println(e.getMessage());}
     }
 
-    public boolean CourseHaveVacancy(String courseTitle, DataContainer dataContainer){
+    public static boolean CourseHaveVacancy(String courseTitle, DataContainer dataContainer){
         ArrayList<Course> courseList = dataContainer.getCourseList();
         Course thisCourse=null;
-        try {
-            for (Course course : courseList) {
-                if (courseTitle.equals(course.GetCourseTitle())) {
-                    thisCourse=course;
-                }
+        for (Course course : courseList) {
+            if (courseTitle.equals(course.GetCourseTitle())) {
+                thisCourse=course;
+                break;
             }
-
-            return true;
         }
-        catch (CourseNotFoundException e){System.out.println(e.getMessage());}
+        if(!thisCourse.HaveTutorial()) return true;
+
+        ArrayList<Tutorial> tutorialList = thisCourse.GetTutorialList();
+        for(Tutorial tutorial:tutorialList){
+            if(!tutorial.HaveVacancy())
+                return false;
+        }
+
+        return true;
+
     }
 
 
