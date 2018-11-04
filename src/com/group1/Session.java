@@ -1,8 +1,11 @@
 package com.group1;
 
+import java.util.ArrayList;
+
 public class Session implements java.io.Serializable{
-    String sessionName;
-    int totalVacancy;
+    private String sessionName;
+    private int totalVacancy;
+    private ArrayList<Student> resgisteredstudent = new ArrayList<>();
 
     public Session(String sessionName){
         this.sessionName = sessionName;
@@ -17,5 +20,11 @@ public class Session implements java.io.Serializable{
         return sessionName;
     }
 
+
     public int GetTotalVacancy(){ return totalVacancy; }
+
+    public ArrayList<Student> getResgisteredstudent()
+    {
+        return resgisteredstudent;
+    }
 }
