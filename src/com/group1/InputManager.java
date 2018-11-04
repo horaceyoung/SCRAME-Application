@@ -3,19 +3,7 @@ package com.group1;
 import Exceptions.TutorialLabNumberInvalidException;
 
 public class InputManager {
-    public static boolean ValidateNameInput(String str){
-        if (str.matches("[a-zA-Z\\s]*")) {
-            return true;
-        }
-        else return false;
-    }
 
-    public static boolean ValidateGroupNameInput(String str){
-        if (str.matches("[a-zA-Z0-9]*")) {
-            return true;
-        }
-        else return false;
-    }
 
 
 
