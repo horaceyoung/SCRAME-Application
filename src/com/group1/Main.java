@@ -186,7 +186,7 @@ public class Main {
                         Scanner sc = new Scanner(System.in);
                         String courseName = sc.nextLine();
                         try{
-                            if (!dataContainer.CheckCourseExisted(courseName.toUpperCase()))
+                            if (!Validation.CheckCourseExisted(courseName.toUpperCase(),dataContainer))
                                 System.out.println("The course you entered does not exist. Please add this course first.\n");
 
                             else{
@@ -196,9 +196,12 @@ public class Main {
                                 if(printList.equals("LEC"))
                                  CourseManager.printStudentListByLecture(courseName);
 
-                                else if(printList.equals("TUT"))
-                                 CourseManager.printStudentListByTutorial(courseName);
-
+                                else if(printList.equals("TUT")) {
+                                    String tutGroupName = sc.nextLine();
+                                    if(!Validation.CheckTutExisted(courseName,tutGroupName,dataContainer))
+                                        System.out.println("There is no " + tutGroupName + " in "+courseName);
+                                    ReadingManager.printStudentListByTutorial(courseName,tutGroupName,dataContainer);
+                                }
                                 else if(printList.equals("LAB"))
                                  CourseManager.printStudentListByLab(courseName);
                                 else
@@ -219,15 +222,14 @@ public class Main {
             String title6 = scanner6.nextLine();
             try
             {
-            if (!dataContainer.CheckCourseExisted(title6))
-            {
-            System.out.println("The course you entered does not exist. Please add this course first.\n");
-
-            }
-            else
-            {
-            CourseManager.AddCourseComponent(title6);
-            }
+                if (!Validation.CheckCourseExisted(title6, dataContainer))
+                {
+                    System.out.println("The course you entered does not exist. Please add this course first.\n");
+                }
+                else
+                {
+                    EditingManager.AddCourseComponent(title6, dataContainer);
+                }
             }
             catch (Exception e)
             {

@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.awt.*;
 import java.util.Scanner;
 
 public class EditingManager
@@ -47,8 +48,13 @@ public class EditingManager
 
 
     // editing methods all goes in to this (adding, updating), combine unnecessary method
-    public static Course AddCourseComponent(String courtsetitle, Course newcourse6) {
+    public static void AddCourseComponent(String courtsetitle, DataContainer container) {
 
+        Course newcourse6;
+        for ( Course course:container.getCourseList()){
+            if (course.GetCourseTitle().equals(courtsetitle))
+                newcourse6 = course;
+        }
 
         String[] component = {"Exam", "Coursework"};
 
@@ -95,7 +101,7 @@ public class EditingManager
                 System.out.println("How many sub-components do u have?");
                 Scanner numscanner = new Scanner(System.in);
                 temp = numscanner.nextLine();
-                if (InputManager.ValidateNumberInput(temp) && Integer.parseInt(temp) > 1) {
+                if (Validation.ValidateNumberInput(temp) && Integer.parseInt(temp) > 1) {
                     break;
 
                 } else {
@@ -120,7 +126,7 @@ public class EditingManager
                 for (AssessmentComponent componentnew : newcourse6.GetSubComponents()) {
                     subweightagesum += componentnew.getWeightage();
                 }
-                if (InputManager.ValidateWeightageSum(subweightagesum)) {
+                if (Validation.ValidateWeightageSum(subweightagesum)) {
                     break;
                 } else {
                     System.out.println(subweightagesum);
@@ -133,7 +139,7 @@ public class EditingManager
 
         }
 
-        return newcourse6;
+
 
     }
 }
