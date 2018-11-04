@@ -4,6 +4,7 @@ import Exceptions.LabGroupNonExistentException;
 import Exceptions.TutorialGroupNonExistentException;
 
 import javax.xml.crypto.Data;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -95,7 +96,7 @@ public class EditingManager
 
     public static void AddCourseComponent(String courtsetitle, DataContainer container) {
 
-        Course newcourse6;
+        Course newcourse6 = null;
         for ( Course course:container.getCourseList()){
             if (course.GetCourseTitle().equals(courtsetitle))
                 newcourse6 = course;
@@ -192,5 +193,33 @@ public class EditingManager
 
 
 
+    }
+
+    public static void printTranscript(String studentMatricTranscript, DataContainer dataContainer) throws FileNotFoundException{
+
+        String transcriptOutcome = "Matric No: " + studentMatricTranscript + "\n";
+        ArrayList<HashMap<String, ArrayList<AssessmentComponent>>> courseAndResult;
+        HashMap<String, ArrayList<AssessmentComponent>> currentCourse;
+        //read Results file to get results
+        for(Student student : dataContainer.getStudentsList()) {
+            if (student.GetMarticNumber().equals(studentMatricTranscript)){
+                transcriptOutcome += "Student Name: " + student.GetStudentName() + "\n";
+            }
+
+            courseAndResult = student.GetCourseAndResult();
+            for (HashMap<String, ArrayList<AssessmentComponent>> course: courseAndResult){
+                for (String key : course.keySet()){
+                    transcriptOutcome += key + "\n" + "Overall Mark: " + "\n";
+                    ArrayList<AssessmentComponent> components = course.get(key);
+                    for (AssessmentComponent component : components){
+                        transcriptOutcome += "\t" + component.getAssessmentType() + " " + component.getWeightage() + " " + component.getResult() + "\n";
+                    }
+                }
+            }
+
+
+
+        }
+        System.out.println(transcriptOutcome);
     }
 }

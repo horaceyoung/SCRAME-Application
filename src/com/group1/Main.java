@@ -319,11 +319,11 @@ public class Main {
             	Scanner sc2 = new Scanner(System.in);
             	String studentMatricTranscript = sc2.nextLine();
             	try {
-            		if (!FileReadManager.CheckStudentExists(studentMatricTranscript)) {
+            		if (!Validation.studentExists(studentMatricTranscript, dataContainer)) {
             			 System.out.println("The Matric Number does not exist.\n");
             		}
             		else {
-            			StudentManager.printTranscript(studentMatricTranscript);
+            			EditingManager.printTranscript(studentMatricTranscript, dataContainer);
             		}
             	}catch (IOException e) {
             		System.out.println(e.getMessage());
