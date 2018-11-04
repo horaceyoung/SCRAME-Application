@@ -1,10 +1,52 @@
 package com.group1;
 
+import javax.xml.crypto.Data;
+import java.io.FileNotFoundException;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.awt.*;
 import java.util.Scanner;
 
 public class EditingManager
 {
+    public void RegisterStudentToCourseLecture(String matric, String courseTitle, DataContainer dataContainer) {
+        ArrayList<Course> courseList = dataContainer.getCourseList();
+        ArrayList<Student> courseStudentList = new ArrayList<>();
+        ArrayList<Student> studentList = dataContainer.getStudentsList();
+        Student thisStudent = null;
+        Course thisCourse = null;
+        for(Student student:studentList){
+            if(matric.equals(student.getMatricNumber()))
+                thisStudent = student;
+        }
+        for (Course course : courseList) {
+            if (courseTitle.equals(course.GetCourseTitle())) {
+                thisCourse = course;
+                studentList=course.GetStudentList();
+                studentList.add(thisStudent);
+            }
+        }
+
+        ArrayList<HashMap<String,ArrayList<AssessmentComponent>>> studentCourseList = thisStudent.GetCourseAndResult();
+        studentCourseList
+
+
+
+
+
+
+
+        System.out.println("Student "+thisStudent.GetMarticNumber()+" "+thisStudent.GetStudentName()+" has been registered to Course "+courseTitle);
+
+
+    }
+
+    public void Register()
+
+
+
+
     // editing methods all goes in to this (adding, updating), combine unnecessary method
     public static void AddCourseComponent(String courtsetitle, DataContainer container) {
 

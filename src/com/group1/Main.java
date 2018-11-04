@@ -24,7 +24,8 @@ public class Main {
         Student newStudent = null;
         Scanner in = new Scanner(System.in);
         DataContainer dataContainer = new DataContainer();
-
+        ArrayList<Tutorial> tutorialList = new ArrayList<>();
+        ArrayList<Lab> labList = new ArrayList<>();
 
 
         // Initialization and deserialize the data container file
@@ -81,7 +82,8 @@ public class Main {
                 // Testcase 3: Register student for a course
                     System.out.println("Register course: Please input the matric number of the student to register: ");
                     boolean hasSessions;
-
+                    ReadingManager RM = new ReadingManager();
+                    EditingManager EM = new EditingManager();
                     studentMatric = in.nextLine();
                     try{
                         if(!Validation.studentExists(studentMatric,dataContainer))
@@ -90,14 +92,17 @@ public class Main {
                         System.out.println("Register course: Please input the course title you want to register with: ");
                         courseTitle = in.nextLine();
 
-                        if(Validation.CheckCourseExisted(courseTitle,dataContainer)){
-                            newCourse = new Course(courseTitle);
-                            FileReadManager.GetCourseSessions(courseTitle, newCourse);
-                            hasSessions = FileReadManager.GetCourseSessions(courseTitle, newCourse);
-                        }
-                        else {
+                        if(!Validation.CheckCourseExisted(courseTitle,dataContainer))
                             throw new CourseNotFoundException();
-                        }
+
+                        EM.RegisterStudentToCourseLecture(studentMatric,courseTitle,dataContainer);
+
+
+
+                            newCourse = new Course(courseTitle);
+                            tutorialList = RM.GetCourseTutorials(courseTitle,dataContainer);
+                            //hasSessions = FileReadManager.GetCourseSessions(courseTitle, newCourse);
+
 
                         while (hasSessions){
                             System.out.println("Please select a tutorial to be enrolled in:");
@@ -181,7 +186,7 @@ public class Main {
                         Scanner sc = new Scanner(System.in);
                         String courseName = sc.nextLine();
                         try{
-                            if (!dataContainer.CheckCourseExisted(courseName.toUpperCase()))
+                            if (!Validation.CheckCourseExisted(courseName.toUpperCase(),dataContainer))
                                 System.out.println("The course you entered does not exist. Please add this course first.\n");
 
                             else{
@@ -191,9 +196,12 @@ public class Main {
                                 if(printList.equals("LEC"))
                                  CourseManager.printStudentListByLecture(courseName);
 
-                                else if(printList.equals("TUT"))
-                                 CourseManager.printStudentListByTutorial(courseName);
-
+                                else if(printList.equals("TUT")) {
+                                    String tutGroupName = sc.nextLine();
+                                    if(!Validation.CheckTutExisted(courseName,tutGroupName,dataContainer))
+                                        System.out.println("There is no " + tutGroupName + " in "+courseName);
+                                    ReadingManager.printStudentListByTutorial(courseName,tutGroupName,dataContainer);
+                                }
                                 else if(printList.equals("LAB"))
                                  CourseManager.printStudentListByLab(courseName);
                                 else
