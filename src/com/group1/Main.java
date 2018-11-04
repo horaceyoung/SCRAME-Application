@@ -214,15 +214,14 @@ public class Main {
             String title6 = scanner6.nextLine();
             try
             {
-            if (!dataContainer.CheckCourseExisted(title6))
-            {
-            System.out.println("The course you entered does not exist. Please add this course first.\n");
-
-            }
-            else
-            {
-            CourseManager.AddCourseComponent(title6);
-            }
+                if (!Validation.CheckCourseExisted(title6, dataContainer))
+                {
+                    System.out.println("The course you entered does not exist. Please add this course first.\n");
+                }
+                else
+                {
+                    EditingManager.AddCourseComponent(title6, dataContainer);
+                }
             }
             catch (Exception e)
             {

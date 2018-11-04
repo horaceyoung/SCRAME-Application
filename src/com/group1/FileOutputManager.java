@@ -134,37 +134,6 @@ public class FileOutputManager
         }
     }
 
-    public static void WriteComponents(Course course)
-    {
-
-        try
-        {
-            File file = new File("data/Component.txt");
-            file.createNewFile();   //create file if not exist
-            BufferedWriter writer = new BufferedWriter(new FileWriter(file, true));
-            writer.write(course.GetCourseTitle()+"\t");
-            for (AssessmentComponent maincomp: course.GetComponents())
-            {
-
-                writer.write(maincomp.getAssessmentType() + ": " + maincomp.getWeightage() + "\t");
-            }
-            if (!course.GetSubComponents().isEmpty())
-            {
-                for (AssessmentComponent subcomp: course.GetSubComponents())
-                {
-                    writer.write(subcomp.getAssessmentType() + ": " + subcomp.getWeightage() + "\t");
-                }
-            }
-            writer.newLine();
-            writer.close();
-        }
-        catch (IOException e)
-        {
-            System.out.println(e.getMessage());
-        }
-
-        System.out.println("Conponents Saved!");
-    }
 
     public static void RegisterCourse(String matric, String courseTitle, String tutorialName, String labName)throws FileNotFoundException {
         try{
