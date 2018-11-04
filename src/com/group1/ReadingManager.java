@@ -1,5 +1,6 @@
 package com.group1;
 
+import Exceptions.CourseNotFoundException;
 import Exceptions.TutorialLabNotAvailableException;
 
 import javax.xml.crypto.Data;
@@ -112,4 +113,22 @@ public class ReadingManager
         }
         catch (TutorialLabNotAvailableException e){System.out.println(e.getMessage());}
     }
+
+    public boolean CourseHaveVacancy(String courseTitle, DataContainer dataContainer){
+        ArrayList<Course> courseList = dataContainer.getCourseList();
+        Course thisCourse=null;
+        try {
+            for (Course course : courseList) {
+                if (courseTitle.equals(course.GetCourseTitle())) {
+                    thisCourse=course;
+                }
+            }
+
+            return true;
+        }
+        catch (CourseNotFoundException e){System.out.println(e.getMessage());}
+    }
+
+
+
 }
