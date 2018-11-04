@@ -63,7 +63,6 @@ public class DataContainer implements java.io.Serializable{
         catch (Exception e){
             System.out.println(e.getMessage());
         }
-        return new Course(courseTitle);
     }
 
     public void AddStudent (){
