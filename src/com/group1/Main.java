@@ -81,28 +81,32 @@ public class Main {
                 case 3:
                 // Testcase 3: Register student for a course
                     System.out.println("Register course: Please input the matric number of the student to register: ");
-                    boolean hasSessions;
                     ReadingManager RM = new ReadingManager();
                     EditingManager EM = new EditingManager();
                     studentMatric = in.nextLine();
                     try{
                         if(!Validation.studentExists(studentMatric,dataContainer))
                             throw new StudentNotExistException();
+                        else{
+                            ArrayList<Student> studentList = dataContainer.getStudentsList();
+                            for(Student student:studentList){
+                                if(studentMatric.equals(student.getMatricNumber()))
+                                    newStudent = student;
+                            }
 
+                        }
                         System.out.println("Register course: Please input the course title you want to register with: ");
                         courseTitle = in.nextLine();
 
                         if(!Validation.CheckCourseExisted(courseTitle,dataContainer))
                             throw new CourseNotFoundException();
 
-                        EM.RegisterStudentToCourseLecture(studentMatric,courseTitle,dataContainer);
+                        EM.RegisterStudentToCourseLecture(newStudent,courseTitle,dataContainer);
 
 
 
                             newCourse = new Course(courseTitle);
                             tutorialList = RM.GetCourseTutorials(courseTitle,dataContainer);
-                            //hasSessions = FileReadManager.GetCourseSessions(courseTitle, newCourse);
-
 
                         while (hasSessions){
                             System.out.println("Please select a tutorial to be enrolled in:");
