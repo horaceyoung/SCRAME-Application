@@ -63,6 +63,7 @@ public class Main {
 
         int choice = 0;
         while(choice!=11){
+
             System.out.println(intro);
             choice = in.nextInt();
             in.nextLine();
@@ -86,6 +87,7 @@ public class Main {
                 case 3:
                 // Testcase 3: Register student for a course
                     System.out.println("Register course: Please input the matric number of the student to register: ");
+                    ReadingManager RM = new ReadingManager();
                     EditingManager EM = new EditingManager();
                     studentMatric = in.nextLine();
                     try{
@@ -187,7 +189,7 @@ public class Main {
                                 String printList = sc.nextLine().toUpperCase();
 
                                 if(printList.equals("LEC"))
-                                    ReadingManager.printStudentListByLecture(courseName,dataContainer);
+                                 CourseManager.printStudentListByLecture(courseName);
 
                                 else if(printList.equals("TUT")) {
                                     String tutGroupName = sc.nextLine();
@@ -195,12 +197,8 @@ public class Main {
                                         System.out.println("There is no " + tutGroupName + " in "+courseName);
                                     ReadingManager.printStudentListByTutorial(courseName,tutGroupName,dataContainer);
                                 }
-                                else if(printList.equals("LAB")) {
-                                    String labGroupName = sc.nextLine();
-                                    if(!Validation.CheckLabExisted(courseName,labGroupName,dataContainer))
-                                        System.out.println("There is no " + labGroupName + " in "+courseName);
-                                    ReadingManager.printStudentListByLab(courseName, labGroupName, dataContainer);
-                                }
+                                else if(printList.equals("LAB"))
+                                 CourseManager.printStudentListByLab(courseName);
                                 else
                                  System.out.println("Invalid option.");
                              }
@@ -246,12 +244,12 @@ public class Main {
                 float courseWorkResult =0;
                 try {
                     courseName = scanner.next();
-                    if (Validation.CheckCourseExisted(courseName,dataContainer)) {
+                    if (Validation.CheckCourseExisted(courseName, dataContainer)) {
                         System.out.println("Enter coursework mark: Please enter the student's matriculation number:");
                         studentMatric = scanner.next();
                         if (!FileReadManager.CheckWhetherStudentRegisteredForACourse(studentMatric, courseName))
                             throw new StudentNotRegisteredForTheCourse();
-                        if (FileReadManager.CheckStudentResultsRecord(studentMatric, courseName))
+                        if (FileReadManager.CheckStudentResultsRecord(studentMatric, courseName)) {
                             throw new StudentResultAlreadyExistsException();
 
                             System.out.println("Enter coursework mark: Please enter the student's result for exam:");
@@ -274,6 +272,7 @@ public class Main {
                             } else throw new StudentResultAlreadyExistsException();
                         } else throw new CourseNotFoundException();
                     }
+                }
                 catch (CourseNotFoundException e){
                     System.out.println(e.getMessage());
                 }
@@ -297,7 +296,7 @@ public class Main {
                 Scanner sc1 = new Scanner(System.in);
                 String courseCodeStatistics = sc1.nextLine();
                 try{
-                    if (!Validation.CheckCourseExisted(courseCodeStatistics,dataContainer))
+                    if (!dataContainer.CheckCourseExisted(courseCodeStatistics))
                         System.out.println("The course you entered does not exist. Please enter another course code.\n");
                     else{
                     	StudentManager.printCourseStatistics(courseCodeStatistics);
@@ -317,11 +316,11 @@ public class Main {
             	Scanner sc2 = new Scanner(System.in);
             	String studentMatricTranscript = sc2.nextLine();
             	try {
-            		if (!Validation.studentExists(studentMatricTranscript, dataContainer)) {
+            		if (!FileReadManager.CheckStudentExists(studentMatricTranscript)) {
             			 System.out.println("The Matric Number does not exist.\n");
             		}
             		else {
-            			EditingManager.printTranscript(studentMatricTranscript, dataContainer);
+            			StudentManager.printTranscript(studentMatricTranscript);
             		}
             	}catch (IOException e) {
             		System.out.println(e.getMessage());
