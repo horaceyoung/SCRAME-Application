@@ -205,14 +205,12 @@ public class EditingManager
             }
 
             courseAndResult = student.GetCourseAndResult();
-            for (HashMap<String, ArrayList<AssessmentComponent>> course: courseAndResult){
-                for (String key : course.keySet()){
+            for (String key : courseAndResult.keySet()){
                     transcriptOutcome += key + "\n" + "Overall Mark: " + "\n";
-                    ArrayList<AssessmentComponent> components = course.get(key);
+                    ArrayList<AssessmentComponent> components = courseAndResult.get(key);
                     for (AssessmentComponent component : components){
                         transcriptOutcome += "\t" + component.getAssessmentType() + " " + component.getWeightage() + " " + component.getResult() + "\n";
                     }
-                }
             }
 
 
