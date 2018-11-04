@@ -95,8 +95,8 @@ public class ReadingManager
 
                 }
             }
-        }
-    }
+
+
 
             System.out.println("The Vacancy of Tutorial Groups of " + courseTitle + " is as following: ");
 
