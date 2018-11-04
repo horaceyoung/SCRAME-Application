@@ -18,7 +18,7 @@ public class Course implements java.io.Serializable{
     private ArrayList<Lab> labGroups = new ArrayList<>();
     private int maxTutorialsNumber = 20;
     private int maxLabsNumber = 20;
-    private String[] studentList = new String[0];
+    private ArrayList<Student> studentList = new ArrayList<>();
 
 
 
@@ -144,6 +144,7 @@ public class Course implements java.io.Serializable{
     public ArrayList<Lab> GetLabList(){return labGroups;}
     public ArrayList<AssessmentComponent> GetComponents(){return components;}
     public ArrayList<AssessmentComponent> GetSubComponents(){return subcomponents;}
+    public ArrayList<Student> GetStudentList(){ return studentList;}
 
     public boolean HaveTutorial(){
         if(this.tutorialGroups.isEmpty())

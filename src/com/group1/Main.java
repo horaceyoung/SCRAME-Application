@@ -83,6 +83,7 @@ public class Main {
                     System.out.println("Register course: Please input the matric number of the student to register: ");
                     boolean hasSessions;
                     ReadingManager RM = new ReadingManager();
+                    EditingManager EM = new EditingManager();
                     studentMatric = in.nextLine();
                     try{
                         if(!Validation.studentExists(studentMatric,dataContainer))
@@ -94,7 +95,7 @@ public class Main {
                         if(!Validation.CheckCourseExisted(courseTitle,dataContainer))
                             throw new CourseNotFoundException();
 
-
+                        EM.RegisterStudentToCourseLecture(studentMatric,courseTitle,dataContainer);
 
 
 
