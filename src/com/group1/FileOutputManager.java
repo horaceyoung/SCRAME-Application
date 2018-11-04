@@ -72,27 +72,7 @@ public class FileOutputManager
 
 
 
-    public static void WriteCourse(Course course)
-    {
-        //Courses.text
-        //filed 0: course title
-        //field 1: coordinater
-        //field 2: coordinator school
-        try
-        {
-            File file = new File("data/Courses.txt");
-            file.createNewFile();   //create file if not exist
-            BufferedWriter writer = new BufferedWriter(new FileWriter(file, true));
-            String line = course.GetCourseTitle()+"\t"+course.GetCoordinator().getCoordinatorName()+"\t"+course.GetCoordinator().getCoordinatorSchool();
-            writer.write(line);
-            writer.newLine();
-            writer.close();
-        }
-        catch (IOException e)
-        {
-            System.out.println(e.getMessage());
-        }
-    }
+
 
     public static void WriteSessions(Course course){
 

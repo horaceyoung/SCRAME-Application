@@ -18,8 +18,8 @@ public class Main {
 	// write your code here
         String studentMatric;
         String courseTitle;
-        String TutorialName;
-        String LabName;
+        String tutorialName;
+        String labName;
         Course newCourse = null;
         Student newStudent = null;
         Scanner in = new Scanner(System.in);
@@ -42,18 +42,23 @@ public class Main {
 
 
 
-        String intro = "Welcome to the SCRAME application console: \nPress the corresponding number to use: \n"
-                + "1: Add a new student:\n"
-                + "2: Add a new course:\n"
-                + "3: Register student for a course:\n"
-                + "4: Check available slot in a class:\n"
-                + "5: Print student list by lecture, tutorial or laboratory:\n"
-                + "6. Enter course assessment components weightage\n\n"
-                + "7: Enter coursework mark - inclusive of its components.\n"
-                + "8: Enter exam mark.\n"
-                + "9. Print course statistics\n"
-                + "10. Print student transcript.\n"
-                + "0. Save\n";
+        String intro =    "|===================================================|" + "\n"
+                        + "|      Welcome to the SCRAME application console:   |" + "\n"
+                        + "|        Press the corresponding number to use:     |" + "\n"
+                        + "|===================================================|" + "\n"
+                        + "| 1: Add a new student                              |" + "\n"
+                        + "| 2: Add a new course                               |" + "\n"
+                        + "| 3: Register student for a course                  |" + "\n"
+                        + "| 4: Check available slot in a class                |" + "\n"
+                        + "| 5: Print student list by lecture, tutorial or lab |" + "\n"
+                        + "| 6. Enter course assessment components weightage   |" + "\n"
+                        + "| 7: Enter course marks for students                |" + "\n"
+                        + "| 8. Print course statistics                        |" + "\n"
+                        + "| 9. Print student transcript                       |" + "\n"
+                        + "|===================================================|" + "\n"
+                        + "| 0. Save and quit                                  |" + "\n"
+                        + "|===================================================|" + "\n";
+
 
 
         int choice = 0;
@@ -81,69 +86,58 @@ public class Main {
                 case 3:
                 // Testcase 3: Register student for a course
                     System.out.println("Register course: Please input the matric number of the student to register: ");
-                    boolean hasSessions;
                     ReadingManager RM = new ReadingManager();
                     EditingManager EM = new EditingManager();
                     studentMatric = in.nextLine();
                     try{
                         if(!Validation.studentExists(studentMatric,dataContainer))
                             throw new StudentNotExistException();
+                        else{
+                            ArrayList<Student> studentList = dataContainer.getStudentsList();
+                            for(Student student:studentList){
+                                if(studentMatric.equals(student.getMatricNumber()))
+                                    newStudent = student;
+                            }
 
+                        }
                         System.out.println("Register course: Please input the course title you want to register with: ");
                         courseTitle = in.nextLine();
 
                         if(!Validation.CheckCourseExisted(courseTitle,dataContainer))
                             throw new CourseNotFoundException();
-
-                        EM.RegisterStudentToCourseLecture(studentMatric,courseTitle,dataContainer);
-
-
-
-                            newCourse = new Course(courseTitle);
-                            tutorialList = RM.GetCourseTutorials(courseTitle,dataContainer);
-                            //hasSessions = FileReadManager.GetCourseSessions(courseTitle, newCourse);
-
-
-                        while (hasSessions){
-                            System.out.println("Please select a tutorial to be enrolled in:");
-                            TutorialName = in.nextLine();
-                            boolean tutorialFound = false;
-                            boolean labFound = false;
-                            for(int i = 0 ; i < newCourse.GetTutorialList().size();i++){
-                                if(newCourse.GetTutorialList().get(i).GetName().equals(TutorialName)){
-                                    System.out.println("Registered successfully with Tutorial " + TutorialName);
-                                    tutorialFound = true;
+                        else {
+                            ArrayList<Course> courseList = dataContainer.getCourseList();
+                            for (Course course : courseList) {
+                                if (courseTitle.equals(course.GetCourseTitle())) {
+                                    newCourse = course;
                                 }
                             }
-
-                        if (!tutorialFound) {
-                            System.out.println("TutorialNotExistException: The tutorial name entered is not in the course.");
-                            continue;
                         }
+                        EM.RegisterStudentToCourseLecture(newStudent,courseTitle,dataContainer);
 
+
+                        if(newCourse.HaveTutorial()==false)
+                            break;
+                        System.out.println("Please select a tutorial to be enrolled in:");
+                        int i=1;
+                        while(i<=newCourse.GetTutorialList().size()){
+                            System.out.println(i+". "+newCourse.GetTutorialList().get(i-1).sessionName+"\t");
+                            i++;
+                        }
+                        tutorialName = in.nextLine();
+                        EM.RegisterStudentToTutorial(newStudent,courseTitle,tutorialName,dataContainer);
+
+                        if(newCourse.HaveLab()==false)
+                            break;
 
                         System.out.println("Please select a lab to be enrolled in:");
-                        LabName = in.nextLine();
-                            for(int i = 0 ; i < newCourse.GetLabList().size();i++){
-                                if(newCourse.GetLabList().get(i).GetName().equals(LabName)){
-                                    System.out.println("Registered successfully with Lab " + LabName);
-                                    labFound = true;
-                                }
-                            }
-
-                            if (!labFound) {
-                                System.out.println("TutorialNotExistException: The tutorial name entered is not in the course.");
-                                continue;
-                            }
-
-                        FileOutputManager.RegisterCourse(studentMatric, courseTitle, TutorialName, LabName);
-                            break;
+                        i=1;
+                        while(i<=newCourse.GetLabList().size()){
+                            System.out.println(i+". "+newCourse.GetLabList().get(i-1).sessionName+"\t");
+                            i++;
                         }
-
-                        FileOutputManager.RegisterCourseWithoutTutorialLab(studentMatric, courseTitle);
-                        System.out.println("Course Registration Successful: The student with matric number " + studentMatric + " has been succesffully regiestered with course "
-                         + courseTitle + "\n");
-
+                        labName = in.nextLine();
+                        EM.RegisterStudentToLab(newStudent,courseTitle,labName,dataContainer);
                     }
                     catch (Exception e){
                         System.out.println(e.getMessage());

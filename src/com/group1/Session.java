@@ -21,6 +21,7 @@ public class Session implements java.io.Serializable{
         this.sessionName = sessionName;
         this.totalVacancy = totalVacancy;
     }
+    public ArrayList<Student> GetRegisteredStudent(){return registeredStudent;}
 
     public String GetName(){
         return sessionName;

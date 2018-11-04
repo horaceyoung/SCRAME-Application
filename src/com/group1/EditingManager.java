@@ -1,53 +1,98 @@
 package com.group1;
 
+import Exceptions.LabGroupNonExistentException;
+import Exceptions.TutorialGroupNonExistentException;
+
 import javax.xml.crypto.Data;
 import java.io.FileNotFoundException;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.awt.*;
+import java.util.Map;
 import java.util.Scanner;
 
 public class EditingManager
 {
-    public void RegisterStudentToCourseLecture(String matric, String courseTitle, DataContainer dataContainer) {
+    public void RegisterStudentToCourseLecture(Student thisStudent, String courseTitle, DataContainer dataContainer) {
         ArrayList<Course> courseList = dataContainer.getCourseList();
         ArrayList<Student> courseStudentList = new ArrayList<>();
-        ArrayList<Student> studentList = dataContainer.getStudentsList();
-        Student thisStudent = null;
-        Course thisCourse = null;
-        for(Student student:studentList){
-            if(matric.equals(student.getMatricNumber()))
-                thisStudent = student;
-        }
+
         for (Course course : courseList) {
             if (courseTitle.equals(course.GetCourseTitle())) {
-                thisCourse = course;
-                studentList=course.GetStudentList();
-                studentList.add(thisStudent);
+                courseStudentList=course.GetStudentList();
+                courseStudentList.add(thisStudent);
             }
         }
 
         ArrayList<HashMap<String,ArrayList<AssessmentComponent>>> studentCourseList = thisStudent.GetCourseAndResult();
-        studentCourseList
-
-
-
-
-
+        HashMap<String, ArrayList<AssessmentComponent>> newCourseAdded = new HashMap();
+        newCourseAdded.put(courseTitle,null);
+        studentCourseList.add(newCourseAdded);
 
 
         System.out.println("Student "+thisStudent.GetMarticNumber()+" "+thisStudent.GetStudentName()+" has been registered to Course "+courseTitle);
-
-
     }
 
-    public void Register()
+    public void RegisterStudentToTutorial(Student student, String courseTitle, String tutorialName, DataContainer dataContainer){
+
+        ArrayList<Course> courseList = dataContainer.getCourseList();
+        ArrayList<Tutorial> tutorialList = new ArrayList<>();
+        Tutorial thisTutorial=null;
+
+        for (Course course : courseList) {
+            if (courseTitle.equals(course.GetCourseTitle())) {
+                tutorialList = course.GetTutorialList();
+            }
+        }
+        try{
+        for(Tutorial tutorial:tutorialList){
+            if(tutorialName.equals(tutorial.sessionName)){
+                thisTutorial = tutorial;
+            }
+            else throw new TutorialGroupNonExistentException();
+        }
+
+        thisTutorial.GetRegisteredStudent().add(student);
+
+         System.out.println("Student "+student.GetMarticNumber()+" "+student.GetStudentName()+" has been registered to "+ tutorialName+ "of course "+courseTitle);
+
+        }
+        catch (TutorialGroupNonExistentException e){
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void RegisterStudentToLab(Student student, String courseTitle, String labName, DataContainer dataContainer){
+
+        ArrayList<Course> courseList = dataContainer.getCourseList();
+        ArrayList<Lab> labList = new ArrayList<>();
+        Lab thisLab=null;
+
+        for (Course course : courseList) {
+            if (courseTitle.equals(course.GetCourseTitle())) {
+                labList = course.GetLabList();
+            }
+        }
+        try{
+            for(Lab lab:labList){
+                if(labName.equals(lab.sessionName)){
+                    thisLab = lab;
+                }
+                else throw new LabGroupNonExistentException();
+            }
+
+            thisLab.GetRegisteredStudent().add(student);
+
+            System.out.println("Student "+student.GetMarticNumber()+" "+student.GetStudentName()+" has been registered to "+ labName+ "of course "+courseTitle);
+
+        }
+        catch (LabGroupNonExistentException e){
+            System.out.println(e.getMessage());
+        }
+    }
 
 
-
-
-    // editing methods all goes in to this (adding, updating), combine unnecessary method
     public static void AddCourseComponent(String courtsetitle, DataContainer container) {
 
         Course newcourse6;
