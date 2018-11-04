@@ -24,21 +24,14 @@ public class DataContainer implements java.io.Serializable{
         return studentsList;
     }
 
-    public void AddStudent(Student student){
-        studentsList.add(student);
-    }
 
-    public void AddCourse(Course course){
-        courseList.add(course);
-    }
-
-
-
-    public static Course AddCourse() {
+    public void AddCourse() {
         System.out.println("Add Course: Please input the course title of the course. The course title shall only contain alphabets and numbers, not spaces.");
         Scanner in = new Scanner(System.in);
         String courseTitle = "Default";
         boolean titleValid = false;
+        Course newCourse;
+
         while (!titleValid) {
             courseTitle = in.nextLine();
             try {
@@ -52,10 +45,29 @@ public class DataContainer implements java.io.Serializable{
                 System.out.println(e.getMessage());
             }
         }
-        return new Course(courseTitle);
+
+
+        try{
+            if(Validation.CheckCourseExisted(courseTitle, this)){
+                System.out.println("Add Course Failed: a course with the same course title has already been added");
+            }
+            else{
+                newCourse = new Course(courseTitle);
+                newCourse.AssignCoordinator();
+                // Add Labs and Tutorialss
+                newCourse.AddTutorialLabGroups("Tutorial");
+                newCourse.AddTutorialLabGroups("Lab");
+                courseList.add(newCourse);
+            }
+        }
+        catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+
+        courseList.add(new Course(courseTitle));
     }
 
-    public static Student AddStudent (){
+    public void AddStudent (){
         Scanner sc = new Scanner(System.in);
         System.out.println("Add Student: Please input the Student Name.");
         String studentName = "Default";
@@ -78,7 +90,7 @@ public class DataContainer implements java.io.Serializable{
 
 
         }
-        return new Student(studentName,matric);
+        studentsList.add(new Student(studentName, matric));
     }
 
 
