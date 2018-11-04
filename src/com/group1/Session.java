@@ -27,5 +27,9 @@ public class Session implements java.io.Serializable{
         return sessionName;
     }
 
+    public ArrayList<Student> getStudentList(){
+        return registeredStudent;
+    }
+
     public int GetTotalVacancy(){ return totalVacancy; }
 }

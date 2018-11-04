@@ -22,9 +22,7 @@ public class Student implements java.io.Serializable
 	public String GetStudentName(){
         return studentName;
         }
-	public String GetMarticNumber(){
-        return marticNumber;
-        }
+
 	
 	public static String getNameFromMatric (String marticNumber) {
 
