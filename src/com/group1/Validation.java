@@ -7,23 +7,23 @@ public class Validation
     public static boolean studentExists(String matricNumber, DataContainer container){
 
         for(Student student:container.getStudentsList()){
-            if(matricNumber.equals(student.getMatricNumber()))
+            if(matricNumber.toUpperCase().equals(student.getMatricNumber()))
                 return true;
         }
         return false;
     }
     public static boolean CheckCourseExisted(String courseCode, DataContainer container){
         for ( Course course:container.getCourseList()){
-            if (course.GetCourseTitle().equals(courseCode))
+            if (course.GetCourseTitle().equals(courseCode.toUpperCase()))
                 return true;
         }
         return false;
     }
     public static boolean CheckTutExisted(String courseName, String tutGroupName, DataContainer container){
         for ( Course currCourse:container.getCourseList()){
-            if (currCourse.GetCourseTitle().equals(courseName)) {
+            if (currCourse.GetCourseTitle().equals(courseName.toUpperCase())) {
                 for (Tutorial currTut: currCourse.GetTutorialList()){
-                    if(currTut.GetName().equals(tutGroupName))
+                    if(currTut.GetName().equals(tutGroupName.toUpperCase()))
                         return true;
                 }
             }
@@ -33,9 +33,9 @@ public class Validation
 
     public static boolean CheckLabExisted(String courseName, String labGroupName, DataContainer container){
         for ( Course currCourse:container.getCourseList()){
-            if (currCourse.GetCourseTitle().equals(courseName)) {
+            if (currCourse.GetCourseTitle().equals(courseName.toUpperCase())) {
                 for (Lab currLab: currCourse.GetLabList()){
-                    if(currLab.GetName().equals(labGroupName))
+                    if(currLab.GetName().equals(labGroupName.toUpperCase()))
                         return true;
                 }
             }
