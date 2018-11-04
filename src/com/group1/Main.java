@@ -100,9 +100,10 @@ public class Main {
                 // Testcase 3: Register student for a course
                     System.out.println("Register course: Please input the matric number of the student to register: ");
                     boolean hasSessions;
+
                     studentMatric = in.nextLine();
                     try{
-                        if(FileReadManager.CheckStudentExists(studentMatric)){
+                        if(){
                             System.out.println("Student Info: " + FileReadManager.GetStudentInfo(studentMatric) +"  " + studentMatric);
                         }
                         else {
