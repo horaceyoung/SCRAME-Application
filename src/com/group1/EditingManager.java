@@ -218,7 +218,7 @@ public class EditingManager
         for(Course mycourse: container.getCourseList())
         {
             if (mycourse.GetCourseTitle()==coursetitle)
-                course = mycourse
+                course = mycourse;
         }
         for(Student mystudent: container.getStudentsList())
         {
