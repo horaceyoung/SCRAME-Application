@@ -67,31 +67,13 @@ public class Main {
             switch (choice){
                 case 1:
 		            //Testcase 1: Add in student
-                    newStudent = StudentManager.AddStudent();
-                    dataContainer.AddStudent(newStudent);
+                    dataContainer.AddStudent();
                     break;
                    
 			    
                 case 2:
                     // Testcase 2: Create the course
-                    newCourse = CourseManager.AddCourse();
-                    // Assign the coordinator
-                    try{
-                        if(dataContainer.CheckCourseExisted(newCourse.GetCourseTitle())){
-                            System.out.println("Add Course Failed: a course with the same course title has already been added");
-                        }
-                        else{
-                            newCourse.AssignCoordinator();
-                            FileOutputManager.WriteCourse(newCourse);
-                            // Add Labs and Tutorialss
-                            newCourse.AddTutorialLabGroups("Tutorial");
-                            newCourse.AddTutorialLabGroups("Lab");
-                            dataContainer.AddCourse(newCourse);
-                        }
-                    }
-                    catch (Exception e){
-                        System.out.println(e.getMessage());
-                    }
+                    dataContainer.AddCourse();
                     break;
 
 
