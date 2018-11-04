@@ -93,7 +93,6 @@ public class EditingManager
     }
 
 
-    // editing methods all goes in to this (adding, updating), combine unnecessary method
     public static void AddCourseComponent(String courtsetitle, DataContainer container) {
 
         Course newcourse6;
