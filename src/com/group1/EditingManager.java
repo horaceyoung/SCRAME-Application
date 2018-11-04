@@ -198,7 +198,7 @@ public class EditingManager
     public static void printTranscript(String studentMatricTranscript, DataContainer dataContainer) throws FileNotFoundException{
 
         String transcriptOutcome = "Matric No: " + studentMatricTranscript + "\n";
-        ArrayList<HashMap<String, ArrayList<AssessmentComponent>>> courseAndResult;
+        HashMap<String, ArrayList<AssessmentComponent>> courseAndResult;
         HashMap<String, ArrayList<AssessmentComponent>> currentCourse;
         //read Results file to get results
         for(Student student : dataContainer.getStudentsList()) {
@@ -207,14 +207,12 @@ public class EditingManager
             }
 
             courseAndResult = student.GetCourseAndResult();
-            for (HashMap<String, ArrayList<AssessmentComponent>> course: courseAndResult){
-                for (String key : course.keySet()){
+            for (String key : courseAndResult.keySet()){
                     transcriptOutcome += key + "\n" + "Overall Mark: " + "\n";
-                    ArrayList<AssessmentComponent> components = course.get(key);
+                    ArrayList<AssessmentComponent> components = courseAndResult.get(key);
                     for (AssessmentComponent component : components){
                         transcriptOutcome += "\t" + component.getAssessmentType() + " " + component.getWeightage() + " " + component.getResult() + "\n";
                     }
-                }
             }
 
 
