@@ -4,6 +4,7 @@
 *.xml
 *.xml
 *.xml
+<<<<<<< HEAD
 *.xml
 *.xml
 *.xml
@@ -11,3 +12,5 @@
 *.xml
 *.xml
 *.xml
+=======
+>>>>>>> ecb37344a057f03f27b193cdb1c57bc921fdb874
