@@ -22,6 +22,7 @@ public class Validation
 
 
 
+<<<<<<< HEAD
 
 
 
@@ -44,4 +45,6 @@ public class Validation
         else
             return false;
     }
+=======
+>>>>>>> caa112ab1954b1734e6870914e3f1c1cfd8ce89f
 }
