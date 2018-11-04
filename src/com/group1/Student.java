@@ -17,19 +17,14 @@ public class Student implements java.io.Serializable
 	    this.studentName = studentName;
 	    this.marticNumber = marticNumber;
 	}
+
 	public String GetStudentName(){
         return studentName;
         }
 	public String GetMarticNumber(){
         return marticNumber;
         }
-
-
-
-    public String getMatricNumber(){
-	    return this.marticNumber;
-    }
-
+	
 	public static String getNameFromMatric (String marticNumber) {
 
 			File courseFile = new File("data/Students.txt");
