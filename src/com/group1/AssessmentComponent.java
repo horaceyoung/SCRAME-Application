@@ -13,5 +13,6 @@ public class AssessmentComponent implements java.io.Serializable{
     }
 
     public float getWeightage(){return weightage;}
+    public float getResult() {return result;}
     public String getAssessmentType(){return assessmentType;}
 }

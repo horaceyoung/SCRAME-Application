@@ -13,67 +13,7 @@ import java.io.BufferedReader;
 public class StudentManager {
 
 
-    public static void printTranscript(String studentMatricTranscript) throws FileNotFoundException{
-    	
-    	File resultsFile = new File("data/Results.txt");
-        Scanner resultsScanner = new Scanner(resultsFile);
-        String studentName;
-       
-        File componentFile = new File("data/Component.txt");
-        Scanner ComponentScanner = new Scanner (componentFile);
-        
-        //read Results file to get results
-        while (resultsScanner.hasNext()) {
-            String[] matricNumber = resultsScanner.nextLine().split("\t");
-            if (matricNumber[0].toUpperCase().equals(studentMatricTranscript.toUpperCase())) {
-            	studentName = Student.getNameFromMatric(studentMatricTranscript);
-            	
-            	//get weight of exam and coursework
-            	File openComponentFile = new File("data/Component.txt");
-                Scanner openComponentScanner = new Scanner (openComponentFile);
-                float examWeightage=0;
-                float courseworkWeightage=0;
-                while(openComponentScanner.hasNext()) {
-            		String[] courseName = openComponentScanner.nextLine().split("\t");
-            		if (courseName[0].toUpperCase().equals(matricNumber[1].toUpperCase())) {
-            			String[] tempExam = courseName[1].split(": ");
-            			String[] tempcoursework = courseName[2].split(": ");
-            			examWeightage = Float.parseFloat(tempExam[1]);
-            			courseworkWeightage = Float.parseFloat(tempcoursework[1]);
-            			}
-            		}
-            	
-            	//get overall score for the course
-        		String number2 = matricNumber[2];
-				float result2 = Float.parseFloat(number2.trim());
-    			String number3 = matricNumber[3];
-  				float result3 = Float.parseFloat(number3.trim());	
-  				float result = result2 * examWeightage + result3 * courseworkWeightage;
-				
-            	System.out.println(studentName);
-            	for (int i = 4; i< matricNumber.length; i++) {
-            		
-            		System.out.println(
-            				"Course Name: " + matricNumber[1] + 
-            				"\n\tExam Result: " + matricNumber[2] + 
-            				"\n\tcoursework Result: " + matricNumber[3] + 
-            				"\n\tOverall(exam + coursework): " + result +
-            				"\n\tCoursework Component: " + matricNumber[i]
-            				);
-            	}
-            	 //read Component file to get individual components weight
-            	while(ComponentScanner.hasNext()) {
-            		String[] courseName = ComponentScanner.nextLine().split("\t");
-            		if (courseName[0].toUpperCase().equals(matricNumber[1].toUpperCase())) {
-            			System.out.println("Component Weightage:");
-            			for (int j = 1; j< courseName.length; j++) {
-                			System.out.print("\t" + courseName[j] + "\n");
-            			}
-            		}
-            	}
-            }
-        }
-    }
+
     
     public static void printCourseStatistics(String courseCodeStatistics) throws FileNotFoundException{
         

@@ -62,6 +62,21 @@ public class FileReadManager {
         return false;
     }
 
-
+    public static Boolean CheckWhetherStudentRegisteredForACourse(String studentMatric, String courseName) throws IOException {
+        File courseFile = new File("data/Courses.txt");
+        Scanner courseScanner = new Scanner(courseFile);
+        while (courseScanner.hasNext()) {
+            String[] currentCourse = courseScanner.nextLine().split("\t");
+            if(currentCourse[0].equals(courseName)){
+                int i=3;
+                while(currentCourse[i]!=null){
+                    if(currentCourse[i].equals(studentMatric))
+                        return true;
+                    i++;
+                }
+            }
+        }
+        return false;
+    }
 
 }

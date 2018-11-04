@@ -4,6 +4,7 @@ import Exceptions.LabGroupNonExistentException;
 import Exceptions.TutorialGroupNonExistentException;
 
 import javax.xml.crypto.Data;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -25,13 +26,11 @@ public class EditingManager
             }
         }
 
-        ArrayList<HashMap<String,ArrayList<AssessmentComponent>>> studentCourseList = thisStudent.GetCourseAndResult();
-        HashMap<String, ArrayList<AssessmentComponent>> newCourseAdded = new HashMap();
-        newCourseAdded.put(courseTitle,null);
-        studentCourseList.add(newCourseAdded);
+        HashMap<String,ArrayList<AssessmentComponent>> studentCourseList = thisStudent.GetCourseAndResult();
+        studentCourseList.put(courseTitle,null);
 
 
-        System.out.println("Student "+thisStudent.GetMarticNumber()+" "+thisStudent.GetStudentName()+" has been registered to Course "+courseTitle);
+        System.out.println("Student "+thisStudent.getMatricNumber()+" "+thisStudent.GetStudentName()+" has been registered to Course "+courseTitle);
     }
 
     public void RegisterStudentToTutorial(Student student, String courseTitle, String tutorialName, DataContainer dataContainer){
@@ -55,7 +54,7 @@ public class EditingManager
 
         thisTutorial.GetRegisteredStudent().add(student);
 
-         System.out.println("Student "+student.GetMarticNumber()+" "+student.GetStudentName()+" has been registered to "+ tutorialName+ "of course "+courseTitle);
+         System.out.println("Student "+student.getMatricNumber()+" "+student.GetStudentName()+" has been registered to "+ tutorialName+ "of course "+courseTitle);
 
         }
         catch (TutorialGroupNonExistentException e){
@@ -84,7 +83,7 @@ public class EditingManager
 
             thisLab.GetRegisteredStudent().add(student);
 
-            System.out.println("Student "+student.GetMarticNumber()+" "+student.GetStudentName()+" has been registered to "+ labName+ "of course "+courseTitle);
+            System.out.println("Student "+student.getMatricNumber()+" "+student.GetStudentName()+" has been registered to "+ labName+ "of course "+courseTitle);
 
         }
         catch (LabGroupNonExistentException e){
@@ -95,7 +94,7 @@ public class EditingManager
 
     public static void AddCourseComponent(String courtsetitle, DataContainer container) {
 
-        Course newcourse6 = new Course("default");
+        Course newcourse6 = null;
         for ( Course course:container.getCourseList()){
             if (course.GetCourseTitle().equals(courtsetitle))
                 newcourse6 = course;
@@ -192,5 +191,31 @@ public class EditingManager
 
 
 
+    }
+
+    public static void printTranscript(String studentMatricTranscript, DataContainer dataContainer) throws FileNotFoundException{
+
+        String transcriptOutcome = "Matric No: " + studentMatricTranscript + "\n";
+        HashMap<String, ArrayList<AssessmentComponent>> courseAndResult;
+        HashMap<String, ArrayList<AssessmentComponent>> currentCourse;
+        //read Results file to get results
+        for(Student student : dataContainer.getStudentsList()) {
+            if (student.getMatricNumber().equals(studentMatricTranscript)){
+                transcriptOutcome += "Student Name: " + student.GetStudentName() + "\n";
+            }
+
+            courseAndResult = student.GetCourseAndResult();
+            for (String key : courseAndResult.keySet()){
+                    transcriptOutcome += key + "\n" + "Overall Mark: " + "\n";
+                    ArrayList<AssessmentComponent> components = courseAndResult.get(key);
+                    for (AssessmentComponent component : components){
+                        transcriptOutcome += "\t" + component.getAssessmentType() + " " + component.getWeightage() + " " + component.getResult() + "\n";
+                    }
+            }
+
+
+
+        }
+        System.out.println(transcriptOutcome);
     }
 }
