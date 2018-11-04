@@ -33,12 +33,12 @@ public class Course implements java.io.Serializable{
             System.out.println("Assign the coordinator of the course: " + courseTitle + ". Please Input the name of the coordinator: ");
             String coordinatorName = in.nextLine();
 
-            if(!InputManager.ValidateNameInput(coordinatorName)) // If the input is not valid, throws exception
+            if(!Validation.ValidateNameInput(coordinatorName)) // If the input is not valid, throws exception
                 throw new NameNotValidException();
             System.out.println("Assign the coordinator of the course: " + courseTitle + ". Please Input the School of the coordinator: ");
 
             String coordinatorSchool = in.nextLine();
-            if(!InputManager.ValidateNameInput(coordinatorSchool)) // If the input is not valid, throws exception
+            if(!Validation.ValidateNameInput(coordinatorSchool)) // If the input is not valid, throws exception
                 throw new NameNotValidException();
 
             this.coordinator = new Coordinator(coordinatorName, coordinatorSchool);
@@ -64,7 +64,7 @@ public class Course implements java.io.Serializable{
                     System.out.println("Add " + type + " NO." + String.valueOf(i+1) + ". Please input the name of the "+ type + "Group: ");
                     String GroupName = in.nextLine();
 
-                    if (!InputManager.ValidateGroupNameInput(GroupName))
+                    if (!Validation.ValidateGroupNameInput(GroupName))
                         throw new TutorialLabNameInvalidException();
 
                     System.out.println("Add " + type + " NO." + String.valueOf(i+1) + ". Please input the vacancy of the "+ type + " Group: ");
