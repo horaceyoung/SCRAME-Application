@@ -12,4 +12,17 @@ public class ReadingManager
 
         return tutorialList;
     }
+
+    public static String getNameFromMatric (String marticNumber,DataContainer dataContainer) {
+        try{
+            for(Student currStudent:dataContainer.getStudentsList()) {
+                if(currStudent.getMatricNumber().equals(marticNumber))
+                    return currStudent.GetStudentName();
+            }
+        }
+        catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+        return "Default";
+    }
 }
