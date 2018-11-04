@@ -13,6 +13,7 @@ public class DataContainer implements java.io.Serializable{
 
     private ArrayList<Student> studentsList = new ArrayList<>();
     private ArrayList<Course> courseList = new ArrayList<>();
+    public ArrayList<Professor> professors = new ArrayList<>();
 
     public ArrayList<Course> getCourseList()
     {
@@ -24,6 +25,7 @@ public class DataContainer implements java.io.Serializable{
         return studentsList;
     }
 
+    public ArrayList<Professor> getProfessors(){return professors;}
 
 
 
@@ -52,8 +54,8 @@ public class DataContainer implements java.io.Serializable{
                 System.out.println("Add Course Failed: a course with the same course title has already been added");
             }
             else{
-                newCourse = new Course(courseTitle);
-                newCourse.AssignCoordinator();
+                newCourse = new Course(courseTitle.toUpperCase());
+                newCourse.AssignCoordinator(this);
                 // Add Labs and Tutorialss
                 newCourse.AddTutorialLabGroups("Tutorial");
                 newCourse.AddTutorialLabGroups("Lab");
@@ -88,7 +90,7 @@ public class DataContainer implements java.io.Serializable{
 
 
         }
-        studentsList.add(new Student(studentName, matric));
+        studentsList.add(new Student(studentName.toUpperCase(), matric.toUpperCase()));
     }
 
 

@@ -1,9 +1,6 @@
 package com.group1;
 
-import Exceptions.CourseNotFoundException;
-import Exceptions.StudentNotExistException;
-import Exceptions.StudentNotRegisteredForTheCourse;
-import Exceptions.StudentResultAlreadyExistsException;
+import Exceptions.*;
 
 import javax.imageio.stream.FileImageOutputStream;
 import javax.xml.crypto.Data;
@@ -34,9 +31,15 @@ public class Main {
             FileInputStream fileIn = new FileInputStream("data/SerializableDataContainer.ser");
             ObjectInputStream objectIn = new ObjectInputStream(fileIn);
             dataContainer = (DataContainer) objectIn.readObject();
+            dataContainer.professors.add(new Professor("Li Fang", "SCSE"));
+            dataContainer.professors.add(new Professor("Jack", "SCSE"));
+            dataContainer.professors.add(new Professor("John", "SCSE"));
+            dataContainer.professors.add(new Professor("Peter", "SCSE"));
+
         }
         catch (Exception e){
             System.out.println(e.getMessage());
+            e.printStackTrace();
         }
 
 
@@ -58,7 +61,6 @@ public class Main {
                         + "|===================================================|" + "\n"
                         + "| 0. Save and quit                                  |" + "\n"
                         + "|===================================================|" + "\n";
-
 
 
         int choice = 0;
@@ -104,12 +106,14 @@ public class Main {
 
                         if(!Validation.CheckCourseExisted(courseTitle,dataContainer))
                             throw new CourseNotFoundException();
-                        else {
-                            ArrayList<Course> courseList = dataContainer.getCourseList();
-                            for (Course course : courseList) {
-                                if (courseTitle.equals(course.GetCourseTitle())) {
-                                    newCourse = course;
-                                }
+                        if(!ReadingManager.CourseHaveVacancy(courseTitle,dataContainer))
+                            throw new CourseNoVacancyException();
+
+
+                        ArrayList<Course> courseList = dataContainer.getCourseList();
+                        for (Course course : courseList) {
+                            if (courseTitle.equals(course.GetCourseTitle())) {
+                                newCourse = course;
                             }
                         }
                         EM.RegisterStudentToCourseLecture(newStudent,courseTitle,dataContainer);
@@ -138,9 +142,11 @@ public class Main {
                         labName = in.nextLine();
                         EM.RegisterStudentToLab(newStudent,courseTitle,labName,dataContainer);
                     }
+                    catch (CourseNoVacancyException e){System.out.println(e.getMessage());}
                     catch (Exception e){
                         System.out.println(e.getMessage());
                     }
+
                     break;
 
 

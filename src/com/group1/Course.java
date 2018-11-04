@@ -26,8 +26,9 @@ public class Course implements java.io.Serializable{
         this.courseTitle = courseTitle;
     }
 
-    public void AssignCoordinator(){
+    public void AssignCoordinator(DataContainer dataContainer){
         Scanner in = new Scanner(System.in);
+        boolean profFound = false;
         try {
             // Get Coordinator Information From user
             System.out.println("Assign the coordinator of the course: " + courseTitle + ". Please Input the name of the coordinator: ");
@@ -35,19 +36,24 @@ public class Course implements java.io.Serializable{
 
             if(!Validation.ValidateNameInput(coordinatorName)) // If the input is not valid, throws exception
                 throw new NameNotValidException();
-            System.out.println("Assign the coordinator of the course: " + courseTitle + ". Please Input the School of the coordinator: ");
 
-            String coordinatorSchool = in.nextLine();
-            if(!Validation.ValidateNameInput(coordinatorSchool)) // If the input is not valid, throws exception
-                throw new NameNotValidException();
+            for (Professor prof : dataContainer.getProfessors()){
+                if (prof.name.equals(coordinatorName)){
+                    profFound = true;
+                    coordinator = new Coordinator(prof.name, prof.school);
+                }
+            }
 
-            this.coordinator = new Coordinator(coordinatorName, coordinatorSchool);
+            if(!profFound){
+                throw new Exception("Creating Course: The professor is not found!");
+            }
+
             System.out.println("Assign Coordinator Success: Coordinator " + coordinator.getCoordinatorName() + " of school " + coordinator.getCoordinatorSchool()
                     +" has been assigned to course: " + courseTitle +".");
         }
-        catch (NameNotValidException e){
+        catch (Exception e){
             System.out.println(e.getMessage());
-            AssignCoordinator(); // Call the function again to perform the task
+            AssignCoordinator(dataContainer); // Call the function again to perform the task
         }
     }
 
