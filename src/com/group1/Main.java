@@ -31,6 +31,10 @@ public class Main {
             FileInputStream fileIn = new FileInputStream("data/SerializableDataContainer.ser");
             ObjectInputStream objectIn = new ObjectInputStream(fileIn);
             dataContainer = (DataContainer) objectIn.readObject();
+            dataContainer.professors.add(new Professor("Li Fang", "SCSE"));
+            dataContainer.professors.add(new Professor("Jack", "SCSE"));
+            dataContainer.professors.add(new Professor("John", "SCSE"));
+            dataContainer.professors.add(new Professor("Peter", "SCSE"));
 
         }
         catch (Exception e){
@@ -59,7 +63,6 @@ public class Main {
                         + "|===================================================|" + "\n";
 
 
-        System.out.println(dataContainer.professors.size());
         int choice = 0;
         while(choice!=11){
             System.out.println(intro);
@@ -78,7 +81,7 @@ public class Main {
 			    
                 case 2:
                     // Testcase 2: Create the course
-                    dataContainer.AddCourse(dataContainer);
+                    dataContainer.AddCourse();
                     break;
 
 
