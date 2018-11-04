@@ -88,7 +88,7 @@ public class DataContainer implements java.io.Serializable{
 
 
         }
-        studentsList.add(new (studentName.toUpperCase(), matric.toUpperCase()));
+        studentsList.add(new Student(studentName.toUpperCase(), matric.toUpperCase()));
     }
 
 
