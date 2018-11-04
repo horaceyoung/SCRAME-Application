@@ -245,7 +245,7 @@ public class Main {
 
             case 7:
             // Testcase 7: Enter coursework mark
-                
+
                 System.out.println("Please enter the course title:");
                 Scanner scanner = new Scanner(System.in);
                 String title7 = scanner.next();
