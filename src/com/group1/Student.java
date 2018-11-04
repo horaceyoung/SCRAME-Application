@@ -23,7 +23,13 @@ public class Student implements java.io.Serializable
 	public String GetMarticNumber(){
         return marticNumber;
         }
-	
+
+
+
+    public String getMatricNumber(){
+	    return this.marticNumber;
+    }
+
 	public static String getNameFromMatric (String marticNumber) {
 
 			File courseFile = new File("data/Students.txt");
