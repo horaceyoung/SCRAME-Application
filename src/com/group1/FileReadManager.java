@@ -12,29 +12,6 @@ import java.util.Scanner;
 public class FileReadManager {
     private static ArrayList<AssessmentComponent> components = new ArrayList<>();
 
-    
-    public static boolean CheckStudentExistsByName(String name) throws IOException {
-        File studentFile = new File("data/Students.txt");
-        Scanner input= new Scanner(studentFile);
-        while(input.hasNextLine()){
-            String[] currStudent= input.nextLine().split("\t");
-            if (currStudent[0].equals(name))
-                return true;
-        }
-        return false;
-    }
-
-
-    public static boolean CheckStudentExists(String matric) throws IOException {
-        File studentFile = new File("data/Students.txt");
-        Scanner studentSC= new Scanner(studentFile);
-        while(studentSC.hasNext()){
-            String[] currStudent= studentSC.nextLine().split("\t");
-            if (currStudent[1].equals(matric))
-                return true;
-        }
-        return false;
-    }
 
     public static String GetStudentInfo(String matric) throws IOException{
         File studentFile = new File("data/Students.txt");
@@ -47,34 +24,7 @@ public class FileReadManager {
         return "default";
     }
 
-    public static boolean GetCourseSessions(String courseTitle, Course course) throws IOException, TutorialLabNotAvailableException{
-        File courseFile = new File("data/Tutorials.txt");
-        Scanner coursesScanner = new Scanner(courseFile);
-        boolean available = false;
-        while(coursesScanner.hasNext()){
-            String[] currentCourse = coursesScanner.nextLine().split("\t");
-            if (currentCourse[0].equals(courseTitle)&&Integer.valueOf(currentCourse[3])>0){
-                available = true;
-                course.AddTutorial(new Tutorial(currentCourse[1]));
-                System.out.println("Tutorials: " + currentCourse[1]+ " total slots: " + currentCourse[2] + " / available slots: " + currentCourse[3] + "\n");
 
-            }
-        }
-
-        courseFile = new File("data/Labs.txt");
-        coursesScanner = new Scanner(courseFile);
-        while(coursesScanner.hasNext()){
-            String[] currentCourse = coursesScanner.nextLine().split("\t");
-            if (currentCourse[0].equals(courseTitle)&& Integer.valueOf(currentCourse[3])>0){
-                available = true;
-                course.AddLab(new Lab(currentCourse[1]));
-                System.out.println("Labs: " + currentCourse[1]+ " total slots: " + currentCourse[2] + " / available slots: " + currentCourse[3] + "\n");
-            }
-        }
-
-        return available;
-
-    }
 
 
 

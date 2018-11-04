@@ -18,8 +18,8 @@ public class Main {
 	// write your code here
         String studentMatric;
         String courseTitle;
-        String TutorialName;
-        String LabName;
+        String tutorialName;
+        String labName;
         Course newCourse = null;
         Student newStudent = null;
         Scanner in = new Scanner(System.in);
@@ -105,54 +105,39 @@ public class Main {
 
                         if(!Validation.CheckCourseExisted(courseTitle,dataContainer))
                             throw new CourseNotFoundException();
-
+                        else {
+                            ArrayList<Course> courseList = dataContainer.getCourseList();
+                            for (Course course : courseList) {
+                                if (courseTitle.equals(course.GetCourseTitle())) {
+                                    newCourse = course;
+                                }
+                            }
+                        }
                         EM.RegisterStudentToCourseLecture(newStudent,courseTitle,dataContainer);
 
 
-
-                            newCourse = new Course(courseTitle);
-                            tutorialList = RM.GetCourseTutorials(courseTitle,dataContainer);
-
-                        while (hasSessions){
-                            System.out.println("Please select a tutorial to be enrolled in:");
-                            TutorialName = in.nextLine();
-                            boolean tutorialFound = false;
-                            boolean labFound = false;
-                            for(int i = 0 ; i < newCourse.GetTutorialList().size();i++){
-                                if(newCourse.GetTutorialList().get(i).GetName().equals(TutorialName)){
-                                    System.out.println("Registered successfully with Tutorial " + TutorialName);
-                                    tutorialFound = true;
-                                }
-                            }
-
-                        if (!tutorialFound) {
-                            System.out.println("TutorialNotExistException: The tutorial name entered is not in the course.");
-                            continue;
+                        if(newCourse.HaveTutorial()==false)
+                            break;
+                        System.out.println("Please select a tutorial to be enrolled in:");
+                        int i=1;
+                        while(i<=newCourse.GetTutorialList().size()){
+                            System.out.println(i+". "+newCourse.GetTutorialList().get(i-1).sessionName+"\t");
+                            i++;
                         }
+                        tutorialName = in.nextLine();
+                        EM.RegisterStudentToTutorial(newStudent,courseTitle,tutorialName,dataContainer);
 
+                        if(newCourse.HaveLab()==false)
+                            break;
 
                         System.out.println("Please select a lab to be enrolled in:");
-                        LabName = in.nextLine();
-                            for(int i = 0 ; i < newCourse.GetLabList().size();i++){
-                                if(newCourse.GetLabList().get(i).GetName().equals(LabName)){
-                                    System.out.println("Registered successfully with Lab " + LabName);
-                                    labFound = true;
-                                }
-                            }
-
-                            if (!labFound) {
-                                System.out.println("TutorialNotExistException: The tutorial name entered is not in the course.");
-                                continue;
-                            }
-
-                        FileOutputManager.RegisterCourse(studentMatric, courseTitle, TutorialName, LabName);
-                            break;
+                        i=1;
+                        while(i<=newCourse.GetLabList().size()){
+                            System.out.println(i+". "+newCourse.GetLabList().get(i-1).sessionName+"\t");
+                            i++;
                         }
-
-                        FileOutputManager.RegisterCourseWithoutTutorialLab(studentMatric, courseTitle);
-                        System.out.println("Course Registration Successful: The student with matric number " + studentMatric + " has been succesffully regiestered with course "
-                         + courseTitle + "\n");
-
+                        labName = in.nextLine();
+                        EM.RegisterStudentToLab(newStudent,courseTitle,labName,dataContainer);
                     }
                     catch (Exception e){
                         System.out.println(e.getMessage());
