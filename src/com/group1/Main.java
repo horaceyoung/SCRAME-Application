@@ -219,6 +219,7 @@ public class Main {
 			    
                 case 5:
                 //Testcase 5: Print student list by lecture, tutorial or lab
+<<<<<<< HEAD
                         System.out.println("Please key in Course Code");
                         Scanner sc = new Scanner(System.in);
                         String courseName = sc.nextLine();
@@ -243,6 +244,7 @@ public class Main {
                              }
                         }
                         catch (IOException e)
+=======
                     System.out.println("Please key in Course Code");
                     Scanner sc = new Scanner(System.in);
                     String courseName = sc.nextLine();
@@ -252,6 +254,7 @@ public class Main {
                             System.out.println("The course you entered does not exist. Please add this course first.\n");
 
                         else
+>>>>>>> 78fdf64b58474486d980edad8f3116e84b919952
                         {
                             System.out.println("Key in 'Lec' to print by lecture || 'Tut' to print by tutorial || 'Lab' to print by lab");
                             String printList = sc.nextLine().toUpperCase();
@@ -267,6 +270,7 @@ public class Main {
                             else
                                 System.out.println("Invalid option.");
                         }
+<<<<<<< HEAD
                         break;
 
             case 6:
