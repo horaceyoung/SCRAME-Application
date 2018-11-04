@@ -102,6 +102,12 @@ public class EditingManager
                 newcourse6 = course;
         }
 
+        if (!newcourse6.GetComponents().isEmpty())
+        {
+            System.out.println("This course's component weightage has already been assigned.");
+            return;
+        }
+
         String[] component = {"Exam", "Coursework"};
 
         while (true) {
