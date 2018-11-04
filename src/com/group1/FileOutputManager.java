@@ -171,18 +171,7 @@ public class FileOutputManager
         System.out.println("Conponents Saved!");
     }
 
-    public static void RegisterCourse(String matric, String courseTitle, String tutorialName, String labName)throws FileNotFoundException {
-        try{
-            UpdateCourse(matric, courseTitle);
-            UpdateSession(matric, courseTitle, tutorialName, "Tutorial");
-            UpdateSession(matric, courseTitle, labName, "Lab");
 
-        }
-        catch (Exception e){
-            System.out.println(e.getMessage());
-        }
-
-    }
 
     public static void RegisterCourseWithoutTutorialLab(String matric, String courseTitle)throws FileNotFoundException {
         try{

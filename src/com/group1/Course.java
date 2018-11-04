@@ -18,6 +18,9 @@ public class Course implements java.io.Serializable{
     private ArrayList<Lab> labGroups = new ArrayList<>();
     private int maxTutorialsNumber = 20;
     private int maxLabsNumber = 20;
+    private String[] studentList = new String[0];
+
+
 
     public Course(String courseTitle){
         this.courseTitle = courseTitle;

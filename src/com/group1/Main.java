@@ -24,7 +24,8 @@ public class Main {
         Student newStudent = null;
         Scanner in = new Scanner(System.in);
         DataContainer dataContainer = new DataContainer();
-
+        ArrayList<Tutorial> tutorialList = new ArrayList<>();
+        ArrayList<Lab> labList = new ArrayList<>();
 
 
         // Initialization and deserialize the data container file
@@ -99,7 +100,7 @@ public class Main {
                 // Testcase 3: Register student for a course
                     System.out.println("Register course: Please input the matric number of the student to register: ");
                     boolean hasSessions;
-
+                    ReadingManager RM = new ReadingManager();
                     studentMatric = in.nextLine();
                     try{
                         if(Validation.studentExists(studentMatric,dataContainer)==false)
@@ -108,14 +109,17 @@ public class Main {
                         System.out.println("Register course: Please input the course title you want to register with: ");
                         courseTitle = in.nextLine();
 
-                        if(Validation.CheckCourseExisted(courseTitle,dataContainer)){
-                            newCourse = new Course(courseTitle);
-                            FileReadManager.GetCourseSessions(courseTitle, newCourse);
-                            hasSessions = FileReadManager.GetCourseSessions(courseTitle, newCourse);
-                        }
-                        else {
+                        if(!Validation.CheckCourseExisted(courseTitle,dataContainer))
                             throw new CourseNotFoundException();
-                        }
+
+
+
+
+
+                            newCourse = new Course(courseTitle);
+                            tutorialList = RM.GetCourseTutorials(courseTitle,dataContainer);
+                            //hasSessions = FileReadManager.GetCourseSessions(courseTitle, newCourse);
+
 
                         while (hasSessions){
                             System.out.println("Please select a tutorial to be enrolled in:");
