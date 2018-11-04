@@ -243,7 +243,7 @@ public class Main {
                 float courseWorkResult =0;
                 try {
                     courseName = scanner.next();
-                    if (dataContainer.CheckCourseExisted(courseName)) {
+                    if (Validation.CheckCourseExisted(courseName, dataContainer)) {
                         System.out.println("Enter coursework mark: Please enter the student's matriculation number:");
                         studentMatric = scanner.next();
                         if (!FileReadManager.CheckWhetherStudentRegisteredForACourse(studentMatric, courseName))

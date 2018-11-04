@@ -1,5 +1,9 @@
 package com.group1;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.Scanner;
+
 public class Validation
 {
     //checking if exist, checking if input is legit, all checking method....
@@ -40,6 +44,12 @@ public class Validation
                 }
             }
         }
+        return false;
+    }
+
+    public static Boolean CheckWhetherStudentRegisteredForACourse(String studentMatric, String courseName, Student student) throws IOException
+    {
+        student.GetCourseAndResult()
         return false;
     }
 

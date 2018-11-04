@@ -95,7 +95,7 @@ public class EditingManager
 
     public static void AddCourseComponent(String courtsetitle, DataContainer container) {
 
-        Course newcourse6;
+        Course newcourse6 = new Course("default");
         for ( Course course:container.getCourseList()){
             if (course.GetCourseTitle().equals(courtsetitle))
                 newcourse6 = course;
