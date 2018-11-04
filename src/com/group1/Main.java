@@ -189,7 +189,7 @@ public class Main {
                                 String printList = sc.nextLine().toUpperCase();
 
                                 if(printList.equals("LEC"))
-                                 CourseManager.printStudentListByLecture(courseName);
+                                    ReadingManager.printStudentListByLecture(courseName,dataContainer);
 
                                 else if(printList.equals("TUT")) {
                                     String tutGroupName = sc.nextLine();
@@ -197,8 +197,12 @@ public class Main {
                                         System.out.println("There is no " + tutGroupName + " in "+courseName);
                                     ReadingManager.printStudentListByTutorial(courseName,tutGroupName,dataContainer);
                                 }
-                                else if(printList.equals("LAB"))
-                                 CourseManager.printStudentListByLab(courseName);
+                                else if(printList.equals("LAB")) {
+                                    String labGroupName = sc.nextLine();
+                                    if(!Validation.CheckLabExisted(courseName,labGroupName,dataContainer))
+                                        System.out.println("There is no " + labGroupName + " in "+courseName);
+                                    ReadingManager.printStudentListByLab(courseName, labGroupName, dataContainer);
+                                }
                                 else
                                  System.out.println("Invalid option.");
                              }

@@ -31,21 +31,53 @@ public class ReadingManager
         return "Default";
     }
 
-
-    public static void printStudentListByTutorial(String courseName, String tutGroupName, DataContainer dataContainer) throws IOException {
-        for(Course currCourse:dataContainer.getCourseList())
-        {
-            if(currCourse.GetCourseTitle().equals(courseName.toUpperCase()))
-            {
-                for (Tutorial currTut: currCourse.GetTutorialList()){
-                    System.out.println("Students registered in " + tutGroupName +": ")
+    public static void printStudentListByLecture(String courseName, DataContainer dataContainer) throws IOException {
+        for (Course currCourse : dataContainer.getCourseList()) {
+            if (currCourse.GetCourseTitle().equals(courseName.toUpperCase())) {
+                System.out.println("Students registered in " + courseName + " : ");
+                for (Tutorial currTut : currCourse.GetTutorialList()) {
                     {
-                        for ( currTut: currCourse.GetTutorialList()){
+                        for (Student currStudent : currTut.getStudentList()) {
+                            System.out.println(currStudent.GetStudentName() + ": " + currStudent.getMatricNumber());
+                        }
                     }
                 }
                 return;
             }
         }
+    }
+
+    public static void printStudentListByTutorial(String courseName, String tutGroupName, DataContainer dataContainer) throws IOException {
+        for (Course currCourse : dataContainer.getCourseList()) {
+            if (currCourse.GetCourseTitle().equals(courseName.toUpperCase())) {
+                for (Tutorial currTut : currCourse.GetTutorialList()) {
+                    System.out.println("Students registered in " + tutGroupName + " : ");
+                    {
+                        for (Student currStudent : currTut.getStudentList()) {
+                            System.out.println(currStudent.GetStudentName() + ": " + currStudent.getMatricNumber());
+                        }
+                    }
+                }
+                return;
+            }
+        }
+    }
+
+    public static void printStudentListByLab(String courseName, String labGroupName, DataContainer dataContainer) throws IOException {
+        for (Course currCourse : dataContainer.getCourseList()) {
+            if (currCourse.GetCourseTitle().equals(courseName.toUpperCase())) {
+                for (Lab currLab : currCourse.GetLabList()) {
+                    System.out.println("Students registered in " + labGroupName + " : ");
+                    {
+                        for (Student currStudent : currLab.getStudentList()) {
+                            System.out.println(currStudent.GetStudentName() + ": " + currStudent.getMatricNumber());
+                        }
+                    }
+                }
+                return;
+            }
+        }
+    }
 
 
     public static void PrintTutorialVacancy(String courseTitle, DataContainer dataContainer) throws IOException, TutorialLabNotAvailableException {
