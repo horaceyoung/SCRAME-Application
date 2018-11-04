@@ -102,22 +102,16 @@ public class Main {
 
                     studentMatric = in.nextLine();
                     try{
-                        if(){
-                            System.out.println("Student Info: " + FileReadManager.GetStudentInfo(studentMatric) +"  " + studentMatric);
-                        }
-                        else {
+                        if(Validation.studentExists(studentMatric,dataContainer)==false)
                             throw new StudentNotExistException();
-                        }
 
                         System.out.println("Register course: Please input the course title you want to register with: ");
                         courseTitle = in.nextLine();
 
-                        if(dataContainer.CheckCourseExisted(courseTitle)){
-
+                        if(Validation.CheckCourseExisted(courseTitle,dataContainer)){
                             newCourse = new Course(courseTitle);
                             FileReadManager.GetCourseSessions(courseTitle, newCourse);
                             hasSessions = FileReadManager.GetCourseSessions(courseTitle, newCourse);
-
                         }
                         else {
                             throw new CourseNotFoundException();

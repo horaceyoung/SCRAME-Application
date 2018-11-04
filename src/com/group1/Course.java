@@ -143,5 +143,16 @@ public class Course implements java.io.Serializable{
     public ArrayList<AssessmentComponent> GetComponents(){return components;}
     public ArrayList<AssessmentComponent> GetSubComponents(){return subcomponents;}
 
+    public boolean HaveTutorial(){
+        if(this.tutorialGroups.isEmpty())
+            return false;
+        else return true;
+    }
+
+    public boolean HaveLab(){
+        if(this.labGroups.isEmpty())
+            return false;
+        else return true;
+    }
 
 }
