@@ -14,6 +14,16 @@ public class DataContainer implements java.io.Serializable{
     private ArrayList<Student> studentsList = new ArrayList<>();
     private ArrayList<Course> courseList = new ArrayList<>();
 
+    public ArrayList<Course> getCourseList()
+    {
+        return courseList;
+    }
+
+    public ArrayList<Student> getStudentsList()
+    {
+        return studentsList;
+    }
+
     public void AddStudent(Student student){
         studentsList.add(student);
     }
@@ -21,20 +31,7 @@ public class DataContainer implements java.io.Serializable{
     public void AddCourse(Course course){
         courseList.add(course);
     }
-    public boolean studentExists(String matricNumber){
-        for(Student student:studentsList){
-            if(matricNumber.equals(student.getMatricNumber()))
-            return true;
-        }
-        return false;
-    }
-    public boolean CheckCourseExisted(String courseCode){
-        for ( Course course: courseList){
-            if (course.GetCourseTitle().equals(courseCode))
-                return true;
-        }
-        return false;
-    }
+
 
 
     public static Course AddCourse() {
