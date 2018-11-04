@@ -67,31 +67,15 @@ public class Main {
             switch (choice){
                 case 1:
 		            //Testcase 1: Add in student
-                    newStudent = StudentManager.AddStudent();
-                    dataContainer.AddStudent(newStudent);
+                    dataContainer.AddStudent();
                     break;
                    
 			    
                 case 2:
                     // Testcase 2: Create the course
-                    newCourse = CourseManager.AddCourse();
+                    dataContainer.AddCourse();
                     // Assign the coordinator
-                    try{
-                        if(dataContainer.CheckCourseExisted(newCourse.GetCourseTitle())){
-                            System.out.println("Add Course Failed: a course with the same course title has already been added");
-                        }
-                        else{
-                            newCourse.AssignCoordinator();
-                            FileOutputManager.WriteCourse(newCourse);
-                            // Add Labs and Tutorialss
-                            newCourse.AddTutorialLabGroups("Tutorial");
-                            newCourse.AddTutorialLabGroups("Lab");
-                            dataContainer.AddCourse(newCourse);
-                        }
-                    }
-                    catch (Exception e){
-                        System.out.println(e.getMessage());
-                    }
+
                     break;
 
 
@@ -108,7 +92,12 @@ public class Main {
                         System.out.println("Register course: Please input the course title you want to register with: ");
                         courseTitle = in.nextLine();
 
+<<<<<<< HEAD
                         if(Validation.CheckCourseExisted(courseTitle,dataContainer)){
+=======
+                        if(Validation.CheckCourseExisted(courseTitle, dataContainer)){
+
+>>>>>>> 4b2a9b7055b7f22dbd8d6c2ca96489f41949092a
                             newCourse = new Course(courseTitle);
                             FileReadManager.GetCourseSessions(courseTitle, newCourse);
                             hasSessions = FileReadManager.GetCourseSessions(courseTitle, newCourse);
@@ -169,7 +158,7 @@ public class Main {
                 System.out.println("Check Session Vacancy: Please input the course title you want to check: ");
                 courseTitle = in.nextLine();
                 try{
-                    if(dataContainer.CheckCourseExisted(courseTitle)){
+                    if(Validation.CheckCourseExisted(courseTitle, dataContainer)){
                         int sessionChoice;
                         System.out.println("Check Session Vacancy: Please select the type of session you wish to check by inputting corresponding integer value: \n 1. Tutorial \n2.Lab \n");
                         sessionChoice=in.nextInt();
@@ -195,14 +184,25 @@ public class Main {
 			    
             case 5:
                 //Testcase 5: Print student list by lecture, tutorial or lab
+<<<<<<< HEAD
                         System.out.println("Please key in Course Code");
                         Scanner sc = new Scanner(System.in);
                         String courseName = sc.nextLine();
                         try{
-                            if (!dataContainer.CheckCourseExisted(courseName.toUpperCase()))
+                            if (!Validation.CheckCourseExisted(courseName.toUpperCase(), dataContainer))
                                 System.out.println("The course you entered does not exist. Please add this course first.\n");
 
                             else{
+=======
+                System.out.println("Please key in Course Code");
+                Scanner sc = new Scanner(System.in);
+                String courseName = sc.nextLine();
+                try{
+                    if (!Validation.CheckCourseExisted(courseName.toUpperCase(), dataContainer))
+                        System.out.println("The course you entered does not exist. Please add this course first.\n");
+
+                    else{
+>>>>>>> c8e3bd556b5900a00dd32a33d4fd9ac70c89f489
                     System.out.println("Key in 'Lec' to print by lecture || 'Tut' to print by tutorial || 'Lab' to print by lab");
                                 String printList = sc.nextLine().toUpperCase();
 
@@ -232,7 +232,7 @@ public class Main {
             String title6 = scanner6.nextLine();
             try
             {
-            if (!dataContainer.CheckCourseExisted(title6))
+            if (!Validation.CheckCourseExisted(title6, dataContainer))
             {
             System.out.println("The course you entered does not exist. Please add this course first.\n");
 
@@ -248,9 +248,11 @@ public class Main {
             }
             break;
 			    
-			    
-			    
 <<<<<<< HEAD
+			    
+=======
+>>>>>>> c8e3bd556b5900a00dd32a33d4fd9ac70c89f489
+
                 case 7:
                 // Testcase 7: Enter coursework mark
                     System.out.println("Enter results for : Please enter the course title:");
@@ -306,6 +308,7 @@ public class Main {
                     break;
 
 
+<<<<<<< HEAD
 =======
             case 7:
             // Testcase 7: Enter coursework mark
@@ -316,7 +319,7 @@ public class Main {
                 float courseWorkResult =0;
                 try {
                     courseName = scanner.next();
-                    if (dataContainer.CheckCourseExisted(courseName)) {
+                    if (Validation.CheckCourseExisted(courseName)) {
                         System.out.println("Enter coursework mark: Please enter the student's matriculation number:");
                         studentMatric = scanner.next();
                         if(!FileReadManager.CheckWhetherStudentRegisteredForACourse(studentMatric,courseName))
@@ -360,6 +363,8 @@ public class Main {
                     System.out.println(e.getMessage());
                 }
             break;
+=======
+>>>>>>> c8e3bd556b5900a00dd32a33d4fd9ac70c89f489
 
 
          case 9:
@@ -370,7 +375,7 @@ public class Main {
                 Scanner sc1 = new Scanner(System.in);
                 String courseCodeStatistics = sc1.nextLine();
                 try{
-                    if (!dataContainer.CheckCourseExisted(courseCodeStatistics))
+                    if (!Validation.CheckCourseExisted(courseCodeStatistics))
                         System.out.println("The course you entered does not exist. Please enter another course code.\n");
                     else{
                     	StudentManager.printCourseStatistics(courseCodeStatistics);
