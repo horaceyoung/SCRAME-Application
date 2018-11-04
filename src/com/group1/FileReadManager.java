@@ -13,18 +13,6 @@ public class FileReadManager {
     private static ArrayList<AssessmentComponent> components = new ArrayList<>();
 
     
-    public static boolean CheckCourseExists(String courseTitle) throws IOException{
-        File courseFile = new File("data/Courses.txt");
-        Scanner coursesScanner = new Scanner(courseFile);
-        while(coursesScanner.hasNext()){
-            String[] currentCourse = coursesScanner.nextLine().split("\t");
-            if (currentCourse[0].equals(courseTitle)){
-            	return true;
-            }
-        }
-        return false;
-    }
-    
     public static boolean CheckStudentExistsByName(String name) throws IOException {
         File studentFile = new File("data/Students.txt");
         Scanner input= new Scanner(studentFile);
