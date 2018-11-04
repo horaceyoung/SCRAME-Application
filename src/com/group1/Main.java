@@ -246,12 +246,12 @@ public class Main {
                 float courseWorkResult =0;
                 try {
                     courseName = scanner.next();
-                    if (dataContainer.CheckCourseExisted(courseName)) {
+                    if (Validation.CheckCourseExisted(courseName,dataContainer)) {
                         System.out.println("Enter coursework mark: Please enter the student's matriculation number:");
                         studentMatric = scanner.next();
                         if (!FileReadManager.CheckWhetherStudentRegisteredForACourse(studentMatric, courseName))
                             throw new StudentNotRegisteredForTheCourse();
-                        if (FileReadManager.CheckStudentResultsRecord(studentMatric, courseName)) {
+                        if (FileReadManager.CheckStudentResultsRecord(studentMatric, courseName))
                             throw new StudentResultAlreadyExistsException();
 
                             System.out.println("Enter coursework mark: Please enter the student's result for exam:");
@@ -274,7 +274,6 @@ public class Main {
                             } else throw new StudentResultAlreadyExistsException();
                         } else throw new CourseNotFoundException();
                     }
-                }
                 catch (CourseNotFoundException e){
                     System.out.println(e.getMessage());
                 }
@@ -298,7 +297,7 @@ public class Main {
                 Scanner sc1 = new Scanner(System.in);
                 String courseCodeStatistics = sc1.nextLine();
                 try{
-                    if (!dataContainer.CheckCourseExisted(courseCodeStatistics))
+                    if (!Validation.CheckCourseExisted(courseCodeStatistics,dataContainer))
                         System.out.println("The course you entered does not exist. Please enter another course code.\n");
                     else{
                     	StudentManager.printCourseStatistics(courseCodeStatistics);

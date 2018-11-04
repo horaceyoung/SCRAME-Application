@@ -13,8 +13,6 @@ public class ReadingManager
 {
 
 
-    public
-
     public static void printStudentListByLecture(String courseName, DataContainer dataContainer) throws IOException {
         for (Course currCourse : dataContainer.getCourseList()) {
             if (currCourse.GetCourseTitle().equals(courseName.toUpperCase())) {

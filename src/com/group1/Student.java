@@ -10,7 +10,7 @@ public class Student implements java.io.Serializable
 {
 	private String studentName;
 	private String marticNumber;
-	private HashMap<String, ArrayList<AssessmentComponent>> courseAndResult = new ArrayList<>();
+	private HashMap<String, ArrayList<AssessmentComponent>> courseAndResult = new HashMap<>();
 	
 	public Student(String studentName,String marticNumber){
 	    this.studentName = studentName;

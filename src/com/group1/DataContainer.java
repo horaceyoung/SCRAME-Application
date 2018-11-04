@@ -74,7 +74,7 @@ public class DataContainer implements java.io.Serializable{
         try {
             if (!Validation. ValidateNameInput(studentName))
                 throw new NameNotValidException();
-            if(FileReadManager.CheckStudentExistsByName(studentName)){
+            if(Validation.studentExists(matric,this)){
                 System.out.println("Add Student Failed: Student has already been added.");
             }
             else{
