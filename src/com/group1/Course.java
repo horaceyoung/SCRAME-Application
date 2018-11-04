@@ -112,7 +112,7 @@ public class Course implements java.io.Serializable{
         System.out.println("Assign Components and Weightages:\nPlease input the weightage of the " + assessmenttype + " : (a float number between 0-1)");
         String rawExamWeightage = in.nextLine();
         try{
-            if(!Validation.ValidateWeightageInput(rawExamWeightage) ||  Float.parseFloat(rawExamWeightage ) <= 0){
+            if(!Validation.ValidateFloatInput(rawExamWeightage) ||  Float.parseFloat(rawExamWeightage ) <= 0){
                 throw new WeightageNotValidException();
             }
             float examWeightage = Float.parseFloat(rawExamWeightage);
@@ -126,7 +126,8 @@ public class Course implements java.io.Serializable{
         }
 
     }
-    public void ClearComponentWeightage(ArrayList<AssessmentComponent> components) { components.clear();}
+    public void ClearComponentWeightage() { components.clear();}
+    public void ClearSubComponentWeightage() { components.clear();}
 
     public void AddTutorial(Tutorial sessionName){
         this.tutorialGroups.add(sessionName);

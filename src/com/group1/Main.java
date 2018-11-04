@@ -239,19 +239,59 @@ public class Main {
 
             case 7:
             // Testcase 7: Enter coursework mark
-                System.out.println("Enter results for : Please enter the course title:");
-                Scanner scanner = new Scanner(System.in);
-                List<String> ComponentResultList = new ArrayList<String>();
+                ArrayList<AssessmentComponent> ComponentResultList = new ArrayList<AssessmentComponent>();
                 float courseExamGrade=0;
                 float courseWorkResult =0;
+                System.out.println("Please enter the course title:");
+                Scanner scanner = new Scanner(System.in);
+                String title7 = scanner.next();
+
+
+                try
+                {
+                    if (Validation.CheckCourseExisted(title7, dataContainer))
+                    {
+                        System.out.println("Please enter the student's matriculation number:");
+                        String matric = scanner.next();
+                        if(Validation.studentExists(matric, dataContainer))
+                        {
+                            EditingManager.AssignComponentResults(matric, title7, dataContainer);
+                        }
+                        else
+                        {
+                            throw new StudentNotExistException();
+                        }
+                    }
+                    else
+                    {
+
+                        throw new CourseNotFoundException();
+                    }
+                }
+                catch (Exception e)
+                {
+                    System.out.println(e.getMessage());
+                    scanner.nextLine();
+                }
+
+                break;
+
+
+
+
+
+
+
+
+
                 try {
                     courseName = scanner.next();
                     if (Validation.CheckCourseExisted(courseName,dataContainer)) {
                         System.out.println("Enter coursework mark: Please enter the student's matriculation number:");
                         studentMatric = scanner.next();
-                        if (!FileReadManager.CheckWhetherStudentRegisteredForACourse(studentMatric, courseName))
+                        if (!Validation.CheckWhetherStudentRegisteredForACourse(studentMatric, courseName, dataContainer))
                             throw new StudentNotRegisteredForTheCourse();
-                        if (FileReadManager.CheckStudentResultsRecord(studentMatric, courseName))
+                        if (Validation.CheckStudentResultsRecord(studentMatric, courseName))
                             throw new StudentResultAlreadyExistsException();
 
                             System.out.println("Enter coursework mark: Please enter the student's result for exam:");

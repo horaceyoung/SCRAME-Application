@@ -51,32 +51,6 @@ public class FileReadManager {
         return components;
     }
 
-    public static Boolean CheckStudentResultsRecord(String studentMatric, String courseName) throws IOException{
-        File courseFile = new File("data/Results.txt");
-        Scanner courseScanner = new Scanner(courseFile);
-        while(courseScanner.hasNext()){
-            String[] currentStudent = courseScanner.nextLine().split("\t");
-            if(currentStudent[0].equals(studentMatric)&&currentStudent[1]==courseName)
-                return true;
-        }
-        return false;
-    }
 
-    public static Boolean CheckWhetherStudentRegisteredForACourse(String studentMatric, String courseName) throws IOException {
-        File courseFile = new File("data/Courses.txt");
-        Scanner courseScanner = new Scanner(courseFile);
-        while (courseScanner.hasNext()) {
-            String[] currentCourse = courseScanner.nextLine().split("\t");
-            if(currentCourse[0].equals(courseName)){
-                int i=3;
-                while(currentCourse[i]!=null){
-                    if(currentCourse[i].equals(studentMatric))
-                        return true;
-                    i++;
-                }
-            }
-        }
-        return false;
-    }
 
 }

@@ -1,5 +1,10 @@
 package com.group1;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Scanner;
+
 public class Validation
 {
     //checking if exist, checking if input is legit, all checking method....
@@ -44,6 +49,38 @@ public class Validation
     }
 
 
+    public static Boolean CheckStudentResultsRecord(Student student, String coursetitle)
+    {
+        for(String key:student.GetCourseAndResult().keySet())
+        {
+            if (key == coursetitle)
+            {
+                ArrayList<AssessmentComponent> listtemp = student.GetCourseAndResult().get(key);
+                if (listtemp.isEmpty())
+                    return false;
+            }
+        }
+        return true;
+    }
+
+    public static Boolean CheckWhetherStudentRegisteredForACourse(Student student, String coursetitle)
+    {
+        for(String key:student.GetCourseAndResult().keySet())
+        {
+            if (key == coursetitle)
+                return true;
+        }
+        return false;
+    }
+
+    public static Boolean CheckWhetherHasAssessmentWeightage(Course course)
+    {
+        if (course.GetComponents().isEmpty())
+            return false;
+        else
+            return true;
+    }
+
 
 
 
@@ -59,7 +96,7 @@ public class Validation
     }
 
 
-    public static boolean ValidateWeightageInput(String str){
+    public static boolean ValidateFloatInput(String str){
         try{
             float x = Float.parseFloat(str);
             return true;
