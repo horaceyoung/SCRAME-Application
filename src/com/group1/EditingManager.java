@@ -35,7 +35,7 @@ public class EditingManager
                 System.out.println("Do we have sub-component for coursework? Yes: Enter 1  No: Enter 0");
                 Scanner ynscanner = new Scanner(System.in);
                 temp = ynscanner.nextLine();
-                if (InputManager.ValidateNumberInput(temp)) {
+                if (Validation.ValidateNumberInput(temp)) {
                     break;
 
                 } else {

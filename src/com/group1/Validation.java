@@ -26,7 +26,16 @@ public class Validation
 
 
 
+    public static boolean ValidateNumberInput(String str){
+        try{
+            int x = Integer.parseInt(str);
+            return true;
+        }
+        catch (NumberFormatException e){
+            return false;
+        }
 
+    }
 
 
     public static boolean ValidateWeightageInput(String str){

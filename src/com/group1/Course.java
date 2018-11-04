@@ -56,7 +56,7 @@ public class Course implements java.io.Serializable{
             String rawNumTutorialGroups = in.nextLine();
             int numTutorialGroups;
 
-            if(InputManager.ValidateNumberInput(rawNumTutorialGroups)){ // If the parse result returns true, AKA the input is a valid integer, otherwise throw exception in else block
+            if(Validation.ValidateNumberInput(rawNumTutorialGroups)){ // If the parse result returns true, AKA the input is a valid integer, otherwise throw exception in else block
                 numTutorialGroups = Integer.parseInt(rawNumTutorialGroups);
                 for(int i = 0 ; i < numTutorialGroups ; i++){
                     System.out.println("Add " + Type + " NO." + String.valueOf(i+1) + ". Please input the name of the "+ Type + "Group: ");
@@ -69,7 +69,7 @@ public class Course implements java.io.Serializable{
                     String rawTutorialVacancy = in.nextLine();
 
                     int vacancy;
-                    if(InputManager.ValidateNumberInput(rawTutorialVacancy)){
+                    if(Validation.ValidateNumberInput(rawTutorialVacancy)){
                         vacancy = Integer.parseInt(rawTutorialVacancy);
                         // The following block works differently for Tutorial and Lab
                         if(addType.equals("Tutorial")) {

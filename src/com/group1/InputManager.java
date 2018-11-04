@@ -17,16 +17,7 @@ public class InputManager {
         else return false;
     }
 
-    public static boolean ValidateNumberInput(String str){
-        try{
-            int x = Integer.parseInt(str);
-            return true;
-        }
-        catch (NumberFormatException e){
-            return false;
-        }
 
-    }
 
 
 }
