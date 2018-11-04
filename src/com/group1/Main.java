@@ -67,31 +67,13 @@ public class Main {
             switch (choice){
                 case 1:
 		            //Testcase 1: Add in student
-                    newStudent = StudentManager.AddStudent();
-                    dataContainer.AddStudent(newStudent);
+                    dataContainer.AddStudent();
                     break;
                    
 			    
                 case 2:
                     // Testcase 2: Create the course
-                    newCourse = CourseManager.AddCourse();
-                    // Assign the coordinator
-                    try{
-                        if(dataContainer.CheckCourseExisted(newCourse.GetCourseTitle())){
-                            System.out.println("Add Course Failed: a course with the same course title has already been added");
-                        }
-                        else{
-                            newCourse.AssignCoordinator();
-                            FileOutputManager.WriteCourse(newCourse);
-                            // Add Labs and Tutorialss
-                            newCourse.AddTutorialLabGroups("Tutorial");
-                            newCourse.AddTutorialLabGroups("Lab");
-                            dataContainer.AddCourse(newCourse);
-                        }
-                    }
-                    catch (Exception e){
-                        System.out.println(e.getMessage());
-                    }
+                    dataContainer.AddCourse();
                     break;
 
 
@@ -102,7 +84,7 @@ public class Main {
 
                     studentMatric = in.nextLine();
                     try{
-                        if(Validation.studentExists(studentMatric,dataContainer)==false)
+                        if(!Validation.studentExists(studentMatric,dataContainer))
                             throw new StudentNotExistException();
 
                         System.out.println("Register course: Please input the course title you want to register with: ");
@@ -169,16 +151,16 @@ public class Main {
                 System.out.println("Check Session Vacancy: Please input the course title you want to check: ");
                 courseTitle = in.nextLine();
                 try{
-                    if(dataContainer.CheckCourseExisted(courseTitle)){
+                    if(Validation.CheckCourseExisted(courseTitle, dataContainer)){
                         int sessionChoice;
                         System.out.println("Check Session Vacancy: Please select the type of session you wish to check by inputting corresponding integer value: \n 1. Tutorial \n2.Lab \n");
                         sessionChoice=in.nextInt();
                         switch (sessionChoice){
                             case 1:
-                                FileReadManager.PrintTutorialVacancy(courseTitle);
+                                ReadingManager.PrintTutorialVacancy(courseTitle, dataContainer);
                                 break;
                             case 2:
-                                FileReadManager.PrintLabVacancy(courseTitle);
+                                ReadingManager.PrintLabVacancy(courseTitle, dataContainer);
                                 break;
                         }
                     }
@@ -235,15 +217,14 @@ public class Main {
             String title6 = scanner6.nextLine();
             try
             {
-            if (!dataContainer.CheckCourseExisted(title6))
-            {
-            System.out.println("The course you entered does not exist. Please add this course first.\n");
-
-            }
-            else
-            {
-            CourseManager.AddCourseComponent(title6);
-            }
+                if (!Validation.CheckCourseExisted(title6, dataContainer))
+                {
+                    System.out.println("The course you entered does not exist. Please add this course first.\n");
+                }
+                else
+                {
+                    EditingManager.AddCourseComponent(title6, dataContainer);
+                }
             }
             catch (Exception e)
             {
@@ -251,65 +232,9 @@ public class Main {
             }
             break;
 			    
-			    
-			    
-<<<<<<< HEAD
-                case 7:
-                // Testcase 7: Enter coursework mark
-                    System.out.println("Enter results for : Please enter the course title:");
-                    Scanner scanner = new Scanner(System.in);
-
-                    List<String> ComponentResultList = new ArrayList<String>();
-                    float courseExamGrade=0;
-                    float courseWorkResult =0;
-                    try {
-                        courseName = scanner.next();
-                        if (FileReadManager.CheckCourseExists(courseName)) {
-                            System.out.println("Enter coursework mark: Please enter the student's matriculation number:");
-                            studentMatric = scanner.next();
-                            if(!FileReadManager.CheckWhetherStudentRegisteredForACourse(studentMatric,courseName))
-                                throw new StudentNotRegisteredForTheCourse();
-                            if(FileReadManager.CheckStudentResultsRecord(studentMatric,courseName)){
-                                throw new StudentResultAlreadyExistsException();
-                            }
-
-                            System.out.println("Enter coursework mark: Please enter the student's result for exam:");
-                            courseExamGrade=scanner.nextFloat();
-
-                            ArrayList<AssessmentComponent> components = FileReadManager.GetCourseWorkComponentsList(courseName);
-                            for(AssessmentComponent component:components){
-                                System.out.println("Enter coursework mark: Please enter the student's mark for "+component.getAssessmentType()+" :");
-                                float studentMark = scanner.nextFloat();
-                                //TODO: Validate float input
-                                String result = component.getAssessmentType() + " "+Float.toString(studentMark);
-                                ComponentResultList.add(result);
-                                courseWorkResult += studentMark * component.getWeightage();
-                            }
-                            String[] ComponentResults = ComponentResultList.toArray(new String[0]);
 
 
-                            if(!FileReadManager.CheckStudentResultsRecord(studentMatric,courseName)){
-                                FileOutputManager.WriteResults(studentMatric,courseName,Float.toString(courseExamGrade),Float.toString(courseWorkResult),ComponentResults);
-                            }
-                            else throw new StudentResultAlreadyExistsException();
-                        } else throw new CourseNotFoundException();
-                    }
-                    catch (CourseNotFoundException e){
-                        System.out.println(e.getMessage());
-                    }
-                    catch (StudentResultAlreadyExistsException e){
-                        System.out.println(e.getMessage());
-                    }
-                    catch (StudentNotRegisteredForTheCourse e){
-                        System.out.println(e.getMessage());
-                    }
-                    catch (IOException e){
-                        System.out.println(e.getMessage());
-                    }
-                    break;
 
-
-=======
             case 7:
             // Testcase 7: Enter coursework mark
                 System.out.println("Enter results for : Please enter the course title:");
@@ -322,33 +247,31 @@ public class Main {
                     if (dataContainer.CheckCourseExisted(courseName)) {
                         System.out.println("Enter coursework mark: Please enter the student's matriculation number:");
                         studentMatric = scanner.next();
-                        if(!FileReadManager.CheckWhetherStudentRegisteredForACourse(studentMatric,courseName))
+                        if (!FileReadManager.CheckWhetherStudentRegisteredForACourse(studentMatric, courseName))
                             throw new StudentNotRegisteredForTheCourse();
-                        if(FileReadManager.CheckStudentResultsRecord(studentMatric,courseName)){
+                        if (FileReadManager.CheckStudentResultsRecord(studentMatric, courseName)) {
                             throw new StudentResultAlreadyExistsException();
-                        }
->>>>>>> ecb37344a057f03f27b193cdb1c57bc921fdb874
 
-                        System.out.println("Enter coursework mark: Please enter the student's result for exam:");
-                        courseExamGrade=scanner.nextFloat();
+                            System.out.println("Enter coursework mark: Please enter the student's result for exam:");
+                            courseExamGrade = scanner.nextFloat();
 
-                        ArrayList<AssessmentComponent> components = FileReadManager.GetCourseWorkComponentsList(courseName);
-                        for(AssessmentComponent component:components){
-                            System.out.println("Enter coursework mark: Please enter the student's mark for "+component.getAssessmentType()+" :");
-                            float studentMark = scanner.nextFloat();
-                            //TODO: Validate float input
-                            String result = component.getAssessmentType() + " "+Float.toString(studentMark);
-                            ComponentResultList.add(result);
-                            courseWorkResult += studentMark * component.getWeightage();
-                        }
-                        String[] ComponentResults = ComponentResultList.toArray(new String[0]);
+                            ArrayList<AssessmentComponent> components = FileReadManager.GetCourseWorkComponentsList(courseName);
+                            for (AssessmentComponent component : components) {
+                                System.out.println("Enter coursework mark: Please enter the student's mark for " + component.getAssessmentType() + " :");
+                                float studentMark = scanner.nextFloat();
+                                //TODO: Validate float input
+                                String result = component.getAssessmentType() + " " + Float.toString(studentMark);
+                                ComponentResultList.add(result);
+                                courseWorkResult += studentMark * component.getWeightage();
+                            }
+                            String[] ComponentResults = ComponentResultList.toArray(new String[0]);
 
 
-                        if(!FileReadManager.CheckStudentResultsRecord(studentMatric,courseName)){
-                            FileOutputManager.WriteResults(studentMatric,courseName,Float.toString(courseExamGrade),Float.toString(courseWorkResult),ComponentResults);
-                        }
-                        else throw new StudentResultAlreadyExistsException();
-                    } else throw new CourseNotFoundException();
+                            if (!FileReadManager.CheckStudentResultsRecord(studentMatric, courseName)) {
+                                FileOutputManager.WriteResults(studentMatric, courseName, Float.toString(courseExamGrade), Float.toString(courseWorkResult), ComponentResults);
+                            } else throw new StudentResultAlreadyExistsException();
+                        } else throw new CourseNotFoundException();
+                    }
                 }
                 catch (CourseNotFoundException e){
                     System.out.println(e.getMessage());
