@@ -2,6 +2,7 @@ package com.group1;
 
 import Exceptions.LabGroupNonExistentException;
 import Exceptions.TutorialGroupNonExistentException;
+import Exceptions.TutorialOrLabNoVacancyException;
 
 import javax.xml.crypto.Data;
 import java.io.File;
@@ -52,12 +53,17 @@ public class EditingManager
             else throw new TutorialGroupNonExistentException();
         }
 
+        if (!thisTutorial.HaveVacancy())
+            throw new TutorialOrLabNoVacancyException();
         thisTutorial.GetRegisteredStudent().add(student);
 
          System.out.println("Student "+student.getMatricNumber()+" "+student.GetStudentName()+" has been registered to "+ tutorialName+ "of course "+courseTitle);
 
         }
         catch (TutorialGroupNonExistentException e){
+            System.out.println(e.getMessage());
+        }
+        catch (TutorialOrLabNoVacancyException e){
             System.out.println(e.getMessage());
         }
     }
@@ -81,12 +87,17 @@ public class EditingManager
                 else throw new LabGroupNonExistentException();
             }
 
+            if(!thisLab.HaveVacancy())
+                throw new TutorialOrLabNoVacancyException();
             thisLab.GetRegisteredStudent().add(student);
 
             System.out.println("Student "+student.getMatricNumber()+" "+student.GetStudentName()+" has been registered to "+ labName+ "of course "+courseTitle);
 
         }
         catch (LabGroupNonExistentException e){
+            System.out.println(e.getMessage());
+        }
+        catch (TutorialOrLabNoVacancyException e){
             System.out.println(e.getMessage());
         }
     }

@@ -1,5 +1,6 @@
 package com.group1;
 
+import Exceptions.CourseNotFoundException;
 import Exceptions.TutorialLabNotAvailableException;
 
 import javax.xml.crypto.Data;
@@ -98,7 +99,7 @@ public class ReadingManager
                     if (course.HaveLab() == false)
                         throw new TutorialLabNotAvailableException();
                     else labList= course.GetLabList();
-
+                break;
                 }
             }
 
@@ -112,4 +113,28 @@ public class ReadingManager
         }
         catch (TutorialLabNotAvailableException e){System.out.println(e.getMessage());}
     }
+
+    public static boolean CourseHaveVacancy(String courseTitle, DataContainer dataContainer){
+        ArrayList<Course> courseList = dataContainer.getCourseList();
+        Course thisCourse=null;
+        for (Course course : courseList) {
+            if (courseTitle.equals(course.GetCourseTitle())) {
+                thisCourse=course;
+                break;
+            }
+        }
+        if(!thisCourse.HaveTutorial()) return true;
+
+        ArrayList<Tutorial> tutorialList = thisCourse.GetTutorialList();
+        for(Tutorial tutorial:tutorialList){
+            if(!tutorial.HaveVacancy())
+                return false;
+        }
+
+        return true;
+
+    }
+
+
+
 }

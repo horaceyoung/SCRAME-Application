@@ -32,4 +32,10 @@ public class Session implements java.io.Serializable{
     }
 
     public int GetTotalVacancy(){ return totalVacancy; }
+
+    public boolean HaveVacancy(){
+        if(registeredStudent.size()<totalVacancy)
+            return true;
+        return false;
+    }
 }
