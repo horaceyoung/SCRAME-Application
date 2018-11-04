@@ -31,9 +31,11 @@ public class Main {
             FileInputStream fileIn = new FileInputStream("data/SerializableDataContainer.ser");
             ObjectInputStream objectIn = new ObjectInputStream(fileIn);
             dataContainer = (DataContainer) objectIn.readObject();
+
         }
         catch (Exception e){
             System.out.println(e.getMessage());
+            e.printStackTrace();
         }
 
 
@@ -57,7 +59,7 @@ public class Main {
                         + "|===================================================|" + "\n";
 
 
-
+        System.out.println(dataContainer.professors.size());
         int choice = 0;
         while(choice!=11){
             System.out.println(intro);
