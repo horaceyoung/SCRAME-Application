@@ -19,7 +19,28 @@ public class Validation
         }
         return false;
     }
+    public static boolean CheckTutExisted(String courseName, String tutGroupName, DataContainer container){
+        for ( Course currCourse:container.getCourseList()){
+            if (currCourse.GetCourseTitle().equals(courseName)) {
+                for (Tutorial currTut: currCourse.GetTutorialList()){
+                    if(currTut.GetName().equals(tutGroupName))
+                        return true;
+                }
+            }
+        }
+        return false;
+    }
 
-
+    public static boolean CheckLabExisted(String courseName, String labGroupName, DataContainer container){
+        for ( Course currCourse:container.getCourseList()){
+            if (currCourse.GetCourseTitle().equals(courseName)) {
+                for (Lab currLab: currCourse.GetLabList()){
+                    if(currLab.GetName().equals(labGroupName))
+                        return true;
+                }
+            }
+        }
+        return false;
+    }
 
 }
