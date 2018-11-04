@@ -55,7 +55,7 @@ public class DataContainer implements java.io.Serializable{
             }
             else{
                 newCourse = new Course(courseTitle.toUpperCase());
-                newCourse.AssignCoordinator();
+                newCourse.AssignCoordinator(this);
                 // Add Labs and Tutorialss
                 newCourse.AddTutorialLabGroups("Tutorial");
                 newCourse.AddTutorialLabGroups("Lab");

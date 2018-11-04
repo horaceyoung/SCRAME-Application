@@ -78,7 +78,7 @@ public class Main {
 			    
                 case 2:
                     // Testcase 2: Create the course
-                    dataContainer.AddCourse();
+                    dataContainer.AddCourse(dataContainer);
                     break;
 
 
