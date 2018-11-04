@@ -136,11 +136,6 @@ public class FileOutputManager
 
     public static void WriteComponents(Course course)
     {
-        //ResultComponent.txt
-        //field 0: course name
-        //field 1: Exam: 'Weightage'
-        //field 2: Coursework: 'weightage'
-        //field 3...: 'coursework sub-component name': 'Weightage'
 
         try
         {
