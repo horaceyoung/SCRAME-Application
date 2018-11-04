@@ -1,8 +1,13 @@
 package com.group1;
 
+import Exceptions.TutorialLabNotAvailableException;
+
 import javax.xml.crypto.Data;
+import java.io.File;
+import java.io.IOException;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class ReadingManager
 {
@@ -11,5 +16,42 @@ public class ReadingManager
         ArrayList<Tutorial> tutorialList = new ArrayList<Tutorial>();
 
         return tutorialList;
+    }
+
+    public static void PrintTutorialVacancy(String courseTitle, DataContainer dataContainer) throws IOException, TutorialLabNotAvailableException {
+        boolean available = false;
+        int occupied;
+        System.out.println("The Vacancy of Tutorial Groups of " + courseTitle + " is as following: ");
+        while(coursesScanner.hasNext()){
+            String[] currentCourse = coursesScanner.nextLine().split("\t");
+            if (currentCourse[0].equals(courseTitle)){
+                available=true;
+                occupied = Integer.parseInt(currentCourse[2])-Integer.parseInt(currentCourse[3]);
+                System.out.print("Tutorial Group "+currentCourse[1]+"\t");
+                System.out.println(occupied+ "/" + currentCourse[2] + "\n");
+
+            }
+        }
+        if(!available)
+            throw new TutorialLabNotAvailableException();
+    }
+    public static void PrintLabVacancy(String courseTitle, DataContainer dataContainer) throws IOException, TutorialLabNotAvailableException{
+        File courseFile = new File("data/Labs.txt");
+        Scanner coursesScanner = new Scanner(courseFile);
+        boolean available = false;
+        int occupied;
+        System.out.println("The Vacancy of Lab Groups of " + courseTitle + " is as following: ");
+        while(coursesScanner.hasNext()){
+            String[] currentCourse = coursesScanner.nextLine().split("\t");
+            if (currentCourse[0].equals(courseTitle)){
+                available=true;
+                occupied = Integer.parseInt(currentCourse[2])-Integer.parseInt(currentCourse[3]);
+                System.out.print("Lab Group "+currentCourse[1]+"\t");
+                System.out.println(occupied+ "/" + currentCourse[2] + "\n");
+
+            }
+        }
+        if(!available)
+            throw new TutorialLabNotAvailableException();
     }
 }
