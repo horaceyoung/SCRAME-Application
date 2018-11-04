@@ -11,7 +11,7 @@ import java.io.FileReader;
 import java.io.BufferedReader;
 
 public class StudentManager {
-    
+
 
     public static void printTranscript(String studentMatricTranscript) throws FileNotFoundException{
     	
