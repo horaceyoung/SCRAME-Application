@@ -1,6 +1,6 @@
 package com.group1;
 
-public class Coordinator {
+public class Coordinator implements java.io.Serializable{
     private String name;
     private String school;
     public Coordinator(String name, String school){

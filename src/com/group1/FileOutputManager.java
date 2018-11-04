@@ -15,36 +15,7 @@ public class FileOutputManager
     //The format for the txt file is that for each line, different field is separated by tab and different sub-field is separated by space
 
 
-    public static void WriteStudent(String name, String matric)
-    {
-        //Students.txt
-        //filed 0: name
-        //field 1: matric number
-
-        try
-        {
-            File file = new File("data/Students.txt");
-            file.createNewFile();   //create file if not exist
-            BufferedWriter writer = new BufferedWriter(new FileWriter(file, true));
-            String line = name+"\t"+matric+"\n";
-            writer.write(line);
-            writer.close();
-
-
-
-        }
-        catch (IOException e2)
-        {
-            System.out.println(e2.getMessage());
-
-        }
-
-
-    }
-
-    public static void WriteResults(String matric, String coursecode, String[] resultsarray) //resultsarray[0]: exam;
-                                                                                                //            [1]; coursework;
-                                                                                                //            [2...]: different component
+    public static void WriteResults(String matric, String coursecode, String examResult, String courseWorkResult, String[] resultsarray)
     {
 
         //Results.txt
@@ -58,24 +29,15 @@ public class FileOutputManager
             File file = new File("data/Results.txt");
             file.createNewFile();   //create file if not exist
             BufferedWriter writer = new BufferedWriter(new FileWriter(file, true));
-            String line = matric+"\t"+coursecode+"\t"+resultsarray[0]+"\t"+resultsarray[1]+"\t";
-
+            String line = matric+"\t"+coursecode+"\t"+ examResult+"\t"+courseWorkResult+"\t";
             writer.write(line);
-
-            while (true)
+            int count = 0;
+            while (count<resultsarray.length)
             {
-                int count = 2;
-                if(resultsarray[count] != null)
-                {
-                    writer.write(resultsarray[count]+" ");
-                }
-                else
-                {
-                    writer.write("\n");
-                    break;
-                }
+                writer.write(resultsarray[count]+" ");
                 count++;
             }
+            writer.write("\n");
             writer.newLine();
             writer.close();
 
@@ -88,6 +50,26 @@ public class FileOutputManager
 
         }
     }
+
+/*    public static void WriteRegisteredStudentsforCourse(String courseTitle, String studentMatric){
+        //courseTitle.txt
+        //filed 0:student matric number
+        try
+        {
+            File file = new File("data/"+courseTitle+".txt");
+            file.createNewFile();   //create file if not exist
+            BufferedWriter writer = new BufferedWriter(new FileWriter(file, true));
+            String line = studentMatric;
+            writer.write(line);
+            writer.newLine();
+            writer.close();
+        }
+        catch (IOException e)
+        {
+            System.out.println(e.getMessage());
+        }
+    }*/
+
 
 
     public static void WriteCourse(Course course)
@@ -195,6 +177,16 @@ public class FileOutputManager
             UpdateSession(matric, courseTitle, tutorialName, "Tutorial");
             UpdateSession(matric, courseTitle, labName, "Lab");
 
+        }
+        catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+
+    }
+
+    public static void RegisterCourseWithoutTutorialLab(String matric, String courseTitle)throws FileNotFoundException {
+        try{
+            UpdateCourse(matric, courseTitle);
         }
         catch (Exception e){
             System.out.println(e.getMessage());

@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.io.File;
 import java.util.Scanner;
 
-public class Student
+public class Student implements java.io.Serializable
 {
 	private String studentName;
 	private String marticNumber;

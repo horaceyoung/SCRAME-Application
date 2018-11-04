@@ -2,8 +2,14 @@ package com.group1;
 
 import Exceptions.CourseNotFoundException;
 import Exceptions.StudentNotExistException;
+import Exceptions.StudentNotRegisteredForTheCourse;
+import Exceptions.StudentResultAlreadyExistsException;
 
-import java.io.IOException;
+import javax.imageio.stream.FileImageOutputStream;
+import javax.xml.crypto.Data;
+import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -16,17 +22,37 @@ public class Main {
         String LabName;
         Course newCourse;
         Scanner in = new Scanner(System.in);
+        DataContainer dataContainer = new DataContainer();
+
+        // Initialization and deserialize the data container file
+
+        try{
+            FileInputStream fileIn = new FileInputStream("data/SerializableDataContainer.ser");
+            ObjectInputStream objectIn = new ObjectInputStream(fileIn);
+            dataContainer = (DataContainer) objectIn.readObject();
+        }
+        catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+
+
+
+
+
+
+        System.out.println("Initializing...");
         String intro = "Welcome to the SCRAME application console: \nPress the corresponding number to use: \n"
                 + "1: Add a new student:\n"
-		+ "2: Add a new course:\n"
-		+ "3: Register student for a course:\n"
-		+ "4: Check available slot in a class:\n"
-		+ "5: Print student list by lecture, tutorial or laboratory:\n"
+                + "2: Add a new course:\n"
+                + "3: Register student for a course:\n"
+                + "4: Check available slot in a class:\n"
+                + "5: Print student list by lecture, tutorial or laboratory:\n"
                 + "6. Enter course assessment components weightage\n\n"
-                + "7: Enter coursework mark – inclusive of its components.\n"
+                + "7: Enter coursework mark - inclusive of its components.\n"
                 + "8: Enter exam mark.\n"
-                + "9. Print course statistics"
-                + "10. Print student transcript.\n";
+                + "9. Print course statistics\n"
+                + "10. Print student transcript.\n"
+                + "0. Save\n";
 
 
         int choice = 0;
@@ -34,11 +60,15 @@ public class Main {
             System.out.println(intro);
             choice = in.nextInt();
             in.nextLine();
+
+
+
+
             switch (choice){
                 case 1:
 		            //Testcase 1: Add in student
                     Student newStudent = StudentManager.AddStudent();
-                    FileOutputManager.WriteStudent(newStudent.GetStudentName(),newStudent.GetMarticNumber());
+                    dataContainer.studentsList.add(newStudent);
                     break;
                    
 			    
@@ -56,7 +86,7 @@ public class Main {
                             // Add Labs and Tutorialss
                             newCourse1.AddTutorialLabGroups("Tutorial");
                             newCourse1.AddTutorialLabGroups("Lab");
-                            FileOutputManager.WriteSessions(newCourse1);
+                            dataContainer.courseList.add(newCourse1);
                         }
                     }
                     catch (IOException e){
@@ -69,7 +99,7 @@ public class Main {
                 case 3:
                 // Testcase 3: Register student for a course
                     System.out.println("Register course: Please input the matric number of the student to register: ");
-
+                    boolean hasSessions;
                     studentMatric = in.nextLine();
                     try{
                         if(FileReadManager.CheckStudentExists(studentMatric)){
@@ -83,14 +113,17 @@ public class Main {
                         courseTitle = in.nextLine();
 
                         if(FileReadManager.CheckCourseExists(courseTitle)){
+
                             newCourse = new Course(courseTitle);
                             FileReadManager.GetCourseSessions(courseTitle, newCourse);
+                            hasSessions = FileReadManager.GetCourseSessions(courseTitle, newCourse);
+
                         }
                         else {
                             throw new CourseNotFoundException();
                         }
 
-                        while (true){
+                        while (hasSessions){
                             System.out.println("Please select a tutorial to be enrolled in:");
                             TutorialName = in.nextLine();
                             boolean tutorialFound = false;
@@ -125,6 +158,10 @@ public class Main {
                         FileOutputManager.RegisterCourse(studentMatric, courseTitle, TutorialName, LabName);
                             break;
                         }
+
+                        FileOutputManager.RegisterCourseWithoutTutorialLab(studentMatric, courseTitle);
+                        System.out.println("Course Registration Successful: The student with matric number " + studentMatric + " has been succesffully regiestered with course "
+                         + courseTitle + "\n");
 
                     }
                     catch (Exception e){
@@ -168,17 +205,17 @@ public class Main {
                         Scanner sc = new Scanner(System.in);
                         String courseName = sc.nextLine();
                         try{
-                            if (!FileReadManager.CheckCourseExists(courseName))
+                            if (!FileReadManager.CheckCourseExists(courseName.toUpperCase()))
                                 System.out.println("The course you entered does not exist. Please add this course first.\n");
 
                             else{
                     System.out.println("Key in 'Lec' to print by lecture || 'Tut' to print by tutorial || 'Lab' to print by lab");
                                 String printList = sc.nextLine().toUpperCase();
 
-                                if(printList.equals("LECTURE"))
+                                if(printList.equals("LEC"))
                                  CourseManager.printStudentListByLecture(courseName);
 
-                                else if(printList.equals("TUTORIAL"))
+                                else if(printList.equals("TUT"))
                                  CourseManager.printStudentListByTutorial(courseName);
 
                                 else if(printList.equals("LAB"))
@@ -221,14 +258,110 @@ public class Main {
 			    
             case 7:
             // Testcase 7: Enter coursework mark
+                System.out.println("Enter results for : Please enter the course title:");
+                Scanner scanner = new Scanner(System.in);
+                List<String> ComponentResultList = new ArrayList<String>();
+                float courseExamGrade=0;
+                float courseWorkResult =0;
+                try {
+                    courseName = scanner.next();
+                    if (FileReadManager.CheckCourseExists(courseName)) {
+                        System.out.println("Enter coursework mark: Please enter the student's matriculation number:");
+                        studentMatric = scanner.next();
+                        if(!FileReadManager.CheckWhetherStudentRegisteredForACourse(studentMatric,courseName))
+                            throw new StudentNotRegisteredForTheCourse();
+                        if(FileReadManager.CheckStudentResultsRecord(studentMatric,courseName)){
+                            throw new StudentResultAlreadyExistsException();
+                        }
+
+                        System.out.println("Enter coursework mark: Please enter the student's result for exam:");
+                        courseExamGrade=scanner.nextFloat();
+
+                        ArrayList<AssessmentComponent> components = FileReadManager.GetCourseWorkComponentsList(courseName);
+                        for(AssessmentComponent component:components){
+                            System.out.println("Enter coursework mark: Please enter the student's mark for "+component.getAssessmentType()+" :");
+                            float studentMark = scanner.nextFloat();
+                            //TODO: Validate float input
+                            String result = component.getAssessmentType() + " "+Float.toString(studentMark);
+                            ComponentResultList.add(result);
+                            courseWorkResult += studentMark * component.getWeightage();
+                        }
+                        String[] ComponentResults = ComponentResultList.toArray(new String[0]);
+
+
+                        if(!FileReadManager.CheckStudentResultsRecord(studentMatric,courseName)){
+                            FileOutputManager.WriteResults(studentMatric,courseName,Float.toString(courseExamGrade),Float.toString(courseWorkResult),ComponentResults);
+                        }
+                        else throw new StudentResultAlreadyExistsException();
+                    } else throw new CourseNotFoundException();
+                }
+                catch (CourseNotFoundException e){
+                    System.out.println(e.getMessage());
+                }
+                catch (StudentResultAlreadyExistsException e){
+                    System.out.println(e.getMessage());
+                }
+                catch (StudentNotRegisteredForTheCourse e){
+                    System.out.println(e.getMessage());
+                }
+                catch (IOException e){
+                    System.out.println(e.getMessage());
+                }
             break;
-            case 8:
-                break;
-            case 9:
-                break;
+
+
+         case 9:
+        	 //testcase 9: Print course statistics
+        	 //Show grade percentage for overall (exam + coursework)
+        	 //exam only and coursework only.
+            	System.out.println("Please enter Course Code to check for course statistics");
+                Scanner sc1 = new Scanner(System.in);
+                String courseCodeStatistics = sc1.nextLine();
+                try{
+                    if (!FileReadManager.CheckCourseExists(courseCodeStatistics))
+                        System.out.println("The course you entered does not exist. Please enter another course code.\n");
+
+                    else{
+                    	StudentManager.printCourseStatistics(courseCodeStatistics);
+                     }
+                }catch (IOException e)
+                {
+                    System.out.println(e.getMessage());
+                }
+                    break;
+
             case 10:
+            	//Print student transcript.
+            	//individual overall course mark and grade for all the courses registered
+            	//individual component marks ¨C exam, coursework, subcomponents from Result.txt 
+            	//The configured weightages should be displayed as well
+            	System.out.println("Please enter the Student Matric Number to check for transcript");
+            	Scanner sc2 = new Scanner(System.in);
+            	String studentMatricTranscript = sc2.nextLine();
+            	try {
+            		if (!FileReadManager.CheckStudentExists(studentMatricTranscript)) {
+            			 System.out.println("The Matric Number does not exist.\n");
+            		}
+            		else {
+            			StudentManager.printTranscript(studentMatricTranscript);
+            		}
+            	}catch (IOException e) {
+            		System.out.println(e.getMessage());
+            	}
                 break;
 
+                case 0:
+                    try{
+                        FileOutputStream fileOut = new FileOutputStream("data/SerializableDataContainer.ser");
+                        ObjectOutputStream out = new ObjectOutputStream(fileOut);
+                        out.writeObject(dataContainer);
+                        out.close();
+                        fileOut.close();
+                        System.out.println("The data has been successfully saved");
+                    }
+                    catch (Exception e){
+                        System.out.println(e.getMessage());
+                    }
 
 
 

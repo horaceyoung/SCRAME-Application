@@ -5,21 +5,37 @@ import Exceptions.TutorialLabNotAvailableException;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class FileReadManager {
+    private static ArrayList<AssessmentComponent> components = new ArrayList<>();
+
+    
     public static boolean CheckCourseExists(String courseTitle) throws IOException{
         File courseFile = new File("data/Courses.txt");
         Scanner coursesScanner = new Scanner(courseFile);
         while(coursesScanner.hasNext()){
             String[] currentCourse = coursesScanner.nextLine().split("\t");
             if (currentCourse[0].equals(courseTitle)){
-                return true;
+            	return true;
             }
         }
         return false;
     }
+    
+    public static boolean CheckStudentExistsByName(String name) throws IOException {
+        File studentFile = new File("data/Students.txt");
+        Scanner input= new Scanner(studentFile);
+        while(input.hasNextLine()){
+            String[] currStudent= input.nextLine().split("\t");
+            if (currStudent[0].equals(name))
+                return true;
+        }
+        return false;
+    }
+
 
     public static boolean CheckStudentExists(String matric) throws IOException {
         File studentFile = new File("data/Students.txt");
@@ -43,11 +59,10 @@ public class FileReadManager {
         return "default";
     }
 
-    public static void GetCourseSessions(String courseTitle, Course course) throws IOException, TutorialLabNotAvailableException{
+    public static boolean GetCourseSessions(String courseTitle, Course course) throws IOException, TutorialLabNotAvailableException{
         File courseFile = new File("data/Tutorials.txt");
         Scanner coursesScanner = new Scanner(courseFile);
         boolean available = false;
-        System.out.println("The Tutorials and Labs of " + courseTitle + " is as following: ");
         while(coursesScanner.hasNext()){
             String[] currentCourse = coursesScanner.nextLine().split("\t");
             if (currentCourse[0].equals(courseTitle)&&Integer.valueOf(currentCourse[3])>0){
@@ -69,8 +84,7 @@ public class FileReadManager {
             }
         }
 
-        if(!available)
-            throw new TutorialLabNotAvailableException();
+        return available;
 
     }
 
@@ -111,6 +125,57 @@ public class FileReadManager {
         }
         if(!available)
             throw new TutorialLabNotAvailableException();
+    }
+
+    public static ArrayList<AssessmentComponent> GetCourseWorkComponentsList(String courseTitle) throws IOException{
+        File courseFile = new File("data/Component.txt");
+        Scanner courseScanner = new Scanner(courseFile);
+        while(courseScanner.hasNext()){
+            String[] currentCourse = courseScanner.nextLine().split("\t");
+            if(currentCourse[0].equals(courseTitle)){
+                int i =3;
+/*                if (currentCourse.length < 3){
+                    throw new CourseNoCourseWorkException();
+                }*/
+
+                while(i<currentCourse.length){
+                    String[] eachComponent = currentCourse[i].split(":");
+                    AssessmentComponent component = new AssessmentComponent(Float.parseFloat(eachComponent[1]),eachComponent[0]);
+                    components.add(component);
+                    i++;
+                }
+            }
+        }
+
+        return components;
+    }
+
+    public static Boolean CheckStudentResultsRecord(String studentMatric, String courseName) throws IOException{
+        File courseFile = new File("data/Results.txt");
+        Scanner courseScanner = new Scanner(courseFile);
+        while(courseScanner.hasNext()){
+            String[] currentStudent = courseScanner.nextLine().split("\t");
+            if(currentStudent[0].equals(studentMatric)&&currentStudent[1]==courseName)
+                return true;
+        }
+        return false;
+    }
+
+    public static Boolean CheckWhetherStudentRegisteredForACourse(String studentMatric, String courseName) throws IOException {
+        File courseFile = new File("data/Courses.txt");
+        Scanner courseScanner = new Scanner(courseFile);
+        while (courseScanner.hasNext()) {
+            String[] currentCourse = courseScanner.nextLine().split("\t");
+            if(currentCourse[0].equals(courseName)){
+                int i=3;
+                while(currentCourse[i]!=null){
+                    if(currentCourse[i].equals(studentMatric))
+                        return true;
+                    i++;
+                }
+            }
+        }
+        return false;
     }
 
 }

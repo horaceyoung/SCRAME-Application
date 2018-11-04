@@ -45,8 +45,8 @@ public class CourseManager {
             float weightagesum = 0;
             for (AssessmentComponent componentnew : newcourse6.GetComponents()) {
                 weightagesum += componentnew.getWeightage();
-                System.out.println(weightagesum);
             }
+            System.out.println(weightagesum);
             if (InputManager.ValidateWeightageSum(weightagesum)) {
                 break;
             } else {
@@ -127,20 +127,19 @@ public class CourseManager {
     public static void printStudentListByLecture(String courseName) throws IOException {
         File tutFile = new File("data/Tutorials.txt");
         Scanner tutScanner = new Scanner(tutFile);
-        boolean hasStudent = false;
         String studentName;
         while (tutScanner.hasNext()) {
             String[] tutorialGroup = tutScanner.nextLine().split("\t");
             if (tutorialGroup[0].toUpperCase().equals(courseName.toUpperCase())) {
-                for (int i = 3; i < tutorialGroup.length; i++) {
+                for (int i = 4; i < tutorialGroup.length; i++) {
                     studentName = Student.getNameFromMatric(tutorialGroup[i]);
-                    System.out.println(studentName + ", ");
-                    hasStudent = true;
+                    System.out.println("   "+studentName + "  ");
+
                 }
             } else {
-                if (hasStudent == false)
+                if (tutorialGroup.length<=4)
                     System.out.println("Currently There's no student registered in " + courseName);
-                break;
+
             }
         }
     }
@@ -154,22 +153,17 @@ public class CourseManager {
 
             if (tutorialGroup[0].toUpperCase().equals(courseName.toUpperCase())) {
 
-                System.out.println(tutorialGroup[1] + "Students List: ");
-                boolean hasStudent = false;
+                System.out.println(tutorialGroup[1] + "  Students List: ");
 
-                for (int i = 3; i < tutorialGroup.length; i++) {
+                for (int i = 4; i < tutorialGroup.length; i++) {
 
                     studentName = Student.getNameFromMatric(tutorialGroup[i]);
-                    System.out.println(studentName + "   ");
-                    hasStudent = true;
+                    System.out.println("   "+studentName + "   ");
 
                 }
-                if (hasStudent == false)
-                    System.out.println("Currently There's no student registered in " + tutorialGroup[1]);
-            } else
-                break;
-
-
+            if (tutorialGroup.length<=4)
+                System.out.println("    Currently There's no student registered in  " + tutorialGroup[1]);
+            }
         }
     }
 
@@ -183,23 +177,19 @@ public class CourseManager {
             if (labGroup[0].toUpperCase().equals(courseName.toUpperCase())) {
 
                 System.out.println(labGroup[1] + "  Students List: ");
-                boolean hasStudent = false;
 
-                for (int i = 3; i < labGroup.length; i++) {
+                for (int i = 4; i < labGroup.length; i++) {
 
                     studentName = Student.getNameFromMatric(labGroup[i]);
-                    System.out.println(studentName + "   ");
-                    hasStudent = true;
+                    System.out.println("   "+studentName + "   ");
 
                 }
-                if (hasStudent == false)
-                    System.out.println("Currently There's no student registered in " + labGroup[1]);
-            } else
-                break;
-
-
+                if (labGroup.length<=4)
+                    System.out.println("    Currently there's no student registered in " + labGroup[1]);
+            }
         }
     }
+
 
 
 
