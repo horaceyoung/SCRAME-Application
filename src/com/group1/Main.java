@@ -208,26 +208,26 @@ public class Main {
 
             case 6:
             //Enter component weightage
-            System.out.println("Adding course assessment weightage...\n" +
-                       "Please input the course title:");
-            Scanner scanner6 = new Scanner(System.in);
-            String title6 = scanner6.nextLine();
-            try
-            {
-                if (!Validation.CheckCourseExisted(title6, dataContainer))
+                System.out.println("Adding course assessment weightage...\n" +
+                                   "Please input the course title:");
+                Scanner scanner6 = new Scanner(System.in);
+                String title6 = scanner6.nextLine();
+                try
                 {
-                    System.out.println("The course you entered does not exist. Please add this course first.\n");
+                    if (!Validation.CheckCourseExisted(title6, dataContainer))
+                    {
+                        System.out.println("The course you entered does not exist. Please add this course first.\n");
+                    }
+                    else
+                    {
+                        EditingManager.AddCourseComponent(title6, dataContainer);
+                    }
                 }
-                else
+                catch (Exception e)
                 {
-                    EditingManager.AddCourseComponent(title6, dataContainer);
+                System.out.println(e.getMessage());
                 }
-            }
-            catch (Exception e)
-            {
-            System.out.println(e.getMessage());
-            }
-            break;
+                break;
 			    
 
 
