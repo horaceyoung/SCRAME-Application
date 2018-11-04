@@ -185,6 +185,7 @@ public class Main {
 			    
             case 5:
                 //Testcase 5: Print student list by lecture, tutorial or lab
+<<<<<<< HEAD
                         System.out.println("Please key in Course Code");
                         Scanner sc = new Scanner(System.in);
                         String courseName = sc.nextLine();
@@ -193,6 +194,16 @@ public class Main {
                                 System.out.println("The course you entered does not exist. Please add this course first.\n");
 
                             else{
+=======
+                System.out.println("Please key in Course Code");
+                Scanner sc = new Scanner(System.in);
+                String courseName = sc.nextLine();
+                try{
+                    if (!Validation.CheckCourseExisted(courseName.toUpperCase(), dataContainer))
+                        System.out.println("The course you entered does not exist. Please add this course first.\n");
+
+                    else{
+>>>>>>> c8e3bd556b5900a00dd32a33d4fd9ac70c89f489
                     System.out.println("Key in 'Lec' to print by lecture || 'Tut' to print by tutorial || 'Lab' to print by lab");
                                 String printList = sc.nextLine().toUpperCase();
 
@@ -238,7 +249,10 @@ public class Main {
             }
             break;
 			    
+<<<<<<< HEAD
 			    
+=======
+>>>>>>> c8e3bd556b5900a00dd32a33d4fd9ac70c89f489
 
                 case 7:
                 // Testcase 7: Enter coursework mark
@@ -295,6 +309,7 @@ public class Main {
                     break;
 
 
+<<<<<<< HEAD
 =======
             case 7:
             // Testcase 7: Enter coursework mark
@@ -349,6 +364,8 @@ public class Main {
                     System.out.println(e.getMessage());
                 }
             break;
+=======
+>>>>>>> c8e3bd556b5900a00dd32a33d4fd9ac70c89f489
 
 
          case 9:
