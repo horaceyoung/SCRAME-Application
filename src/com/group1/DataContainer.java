@@ -17,7 +17,13 @@ public class DataContainer implements java.io.Serializable{
     public void AddCourse(Course course){
         courseList.add(course);
     }
-
+    public boolean studentExists(String matricNumber){
+        for(Student student:studentsList){
+            if(matricNumber.equals(student.getMatricNumber())
+            return true;
+        }
+        return false;
+    }
     public boolean CheckCourseExisted(String courseCode){
         for ( Course course: courseList){
             if (course.GetCourseTitle().equals(courseCode))
