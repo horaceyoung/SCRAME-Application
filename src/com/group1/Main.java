@@ -262,6 +262,7 @@ public class Main {
                 // Testcase 7: Enter coursework mark
                     System.out.println("Enter results for : Please enter the course title:");
                     Scanner scanner = new Scanner(System.in);
+
                     List<String> ComponentResultList = new ArrayList<String>();
                     float courseExamGrade=0;
                     float courseWorkResult =0;
@@ -361,6 +362,7 @@ public class Main {
                         out.close();
                         fileOut.close();
                         System.out.println("The data has been successfully saved");
+
                     }
                     catch (Exception e){
                         System.out.println(e.getMessage());
