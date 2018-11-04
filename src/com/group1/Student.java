@@ -17,6 +17,7 @@ public class Student implements java.io.Serializable
 	    this.studentName = studentName;
 	    this.marticNumber = marticNumber;
 	}
+
 	public String GetStudentName(){
         return studentName;
         }
