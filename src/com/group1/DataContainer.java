@@ -52,7 +52,7 @@ public class DataContainer implements java.io.Serializable{
                 System.out.println("Add Course Failed: a course with the same course title has already been added");
             }
             else{
-                newCourse = new Course(courseTitle);
+                newCourse = new Course(courseTitle.toUpperCase());
                 newCourse.AssignCoordinator();
                 // Add Labs and Tutorialss
                 newCourse.AddTutorialLabGroups("Tutorial");
@@ -88,7 +88,7 @@ public class DataContainer implements java.io.Serializable{
 
 
         }
-        studentsList.add(new Student(studentName, matric));
+        studentsList.add(new (studentName.toUpperCase(), matric.toUpperCase()));
     }
 
 
