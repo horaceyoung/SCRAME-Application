@@ -19,4 +19,29 @@ public class Validation
         }
         return false;
     }
+
+
+
+
+
+
+
+
+
+    public static boolean ValidateWeightageInput(String str){
+        try{
+            float x = Float.parseFloat(str);
+            return true;
+        }
+        catch (NumberFormatException e){
+            return false;
+        }
+    }
+    public static boolean ValidateWeightageSum(float f)
+    {
+        if (f == 1)
+            return true;
+        else
+            return false;
+    }
 }
