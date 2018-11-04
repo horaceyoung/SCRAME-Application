@@ -245,9 +245,7 @@ public class Main {
 
             case 7:
             // Testcase 7: Enter coursework mark
-                ArrayList<AssessmentComponent> ComponentResultList = new ArrayList<AssessmentComponent>();
-                float courseExamGrade=0;
-                float courseWorkResult =0;
+                
                 System.out.println("Please enter the course title:");
                 Scanner scanner = new Scanner(System.in);
                 String title7 = scanner.next();
@@ -283,56 +281,6 @@ public class Main {
                 break;
 
 
-
-
-
-
-
-
-
-                try {
-                    courseName = scanner.next();
-                    if (Validation.CheckCourseExisted(courseName,dataContainer)) {
-                        System.out.println("Enter coursework mark: Please enter the student's matriculation number:");
-                        studentMatric = scanner.next();
-                        if (!Validation.CheckWhetherStudentRegisteredForACourse(studentMatric, courseName, dataContainer))
-                            throw new StudentNotRegisteredForTheCourse();
-                        if (Validation.CheckStudentResultsRecord(studentMatric, courseName))
-                            throw new StudentResultAlreadyExistsException();
-
-                            System.out.println("Enter coursework mark: Please enter the student's result for exam:");
-                            courseExamGrade = scanner.nextFloat();
-
-                            ArrayList<AssessmentComponent> components = FileReadManager.GetCourseWorkComponentsList(courseName);
-                            for (AssessmentComponent component : components) {
-                                System.out.println("Enter coursework mark: Please enter the student's mark for " + component.getAssessmentType() + " :");
-                                float studentMark = scanner.nextFloat();
-                                //TODO: Validate float input
-                                String result = component.getAssessmentType() + " " + Float.toString(studentMark);
-                                ComponentResultList.add(result);
-                                courseWorkResult += studentMark * component.getWeightage();
-                            }
-                            String[] ComponentResults = ComponentResultList.toArray(new String[0]);
-
-
-                            if (!FileReadManager.CheckStudentResultsRecord(studentMatric, courseName)) {
-                                FileOutputManager.WriteResults(studentMatric, courseName, Float.toString(courseExamGrade), Float.toString(courseWorkResult), ComponentResults);
-                            } else throw new StudentResultAlreadyExistsException();
-                        } else throw new CourseNotFoundException();
-                    }
-                catch (CourseNotFoundException e){
-                    System.out.println(e.getMessage());
-                }
-                catch (StudentResultAlreadyExistsException e){
-                    System.out.println(e.getMessage());
-                }
-                catch (StudentNotRegisteredForTheCourse e){
-                    System.out.println(e.getMessage());
-                }
-                catch (IOException e){
-                    System.out.println(e.getMessage());
-                }
-            break;
 
 
          case 9:

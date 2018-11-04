@@ -1,7 +1,13 @@
 package com.group1;
 
+<<<<<<< HEAD
 import Exceptions.*;
 import org.graalvm.compiler.nodes.extended.ValueAnchorNode;
+=======
+import Exceptions.LabGroupNonExistentException;
+import Exceptions.TutorialGroupNonExistentException;
+import Exceptions.TutorialOrLabNoVacancyException;
+>>>>>>> 6beccbe17ba1503c39a6fefc617f05da85b055d7
 
 import javax.xml.crypto.Data;
 import java.io.File;
