@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="05c4cf2a-6f7b-444c-869a-cb46781331fc" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/src/com/group1/EditingManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/group1/EditingManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/group1/FileReadManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/group1/FileReadManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/group1/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/group1/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/group1/Validation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/group1/Validation.java" afterDir="false" />
     </list>
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -77,7 +74,7 @@
       <file leaf-file-name="DataContainer.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/group1/DataContainer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="82">
+            <state relative-caret-position="92">
               <caret line="76" column="30" selection-start-line="76" selection-start-column="15" selection-end-line="76" selection-end-column="30" />
             </state>
           </provider>
@@ -92,11 +89,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/group1/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="286">
-              <caret line="245" column="79" selection-start-line="245" selection-start-column="79" selection-end-line="245" selection-end-column="79" />
+            <state relative-caret-position="352">
+              <caret line="65" selection-start-line="65" selection-end-line="65" />
             </state>
           </provider>
         </entry>
@@ -119,10 +116,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Student.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Student.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/group1/Student.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-172">
+            <state relative-caret-position="-106">
               <caret line="12" column="27" selection-start-line="12" selection-start-column="27" selection-end-line="12" selection-end-column="27" />
             </state>
           </provider>
@@ -159,9 +156,9 @@
       <list>
         <option value="$PROJECT_DIR$/.idea/misc.xml" />
         <option value="$PROJECT_DIR$/src/com/group1/Course.java" />
-        <option value="$PROJECT_DIR$/src/com/group1/Main.java" />
         <option value="$PROJECT_DIR$/src/com/group1/FileReadManager.java" />
         <option value="$PROJECT_DIR$/src/com/group1/Validation.java" />
+        <option value="$PROJECT_DIR$/src/com/group1/Main.java" />
       </list>
     </option>
   </component>
@@ -319,7 +316,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="2930000" />
+    <option name="totallyTimeSpent" value="3009000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -658,16 +655,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/group1/ReadingManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1452">
-          <caret line="66" column="56" selection-start-line="66" selection-start-column="56" selection-end-line="66" selection-end-column="56" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/group1/Course.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1480">
@@ -682,13 +669,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/group1/DataContainer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="82">
-          <caret line="76" column="30" selection-start-line="76" selection-start-column="15" selection-end-line="76" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/group1/CourseManager.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="176">
@@ -700,13 +680,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1805">
           <caret line="13" selection-start-line="13" selection-end-line="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/group1/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="286">
-          <caret line="245" column="79" selection-start-line="245" selection-start-column="79" selection-end-line="245" selection-end-column="79" />
         </state>
       </provider>
     </entry>
@@ -729,8 +702,32 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/group1/Student.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-172">
+        <state relative-caret-position="-106">
           <caret line="12" column="27" selection-start-line="12" selection-start-column="27" selection-end-line="12" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/group1/DataContainer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="92">
+          <caret line="76" column="30" selection-start-line="76" selection-start-column="15" selection-end-line="76" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/group1/ReadingManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1452">
+          <caret line="66" column="56" selection-start-line="66" selection-start-column="56" selection-end-line="66" selection-end-column="56" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/group1/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="352">
+          <caret line="65" selection-start-line="65" selection-end-line="65" />
         </state>
       </provider>
     </entry>
