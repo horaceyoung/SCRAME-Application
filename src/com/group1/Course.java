@@ -55,7 +55,7 @@ public class Course implements java.io.Serializable{
             String rawNumTutorialGroups = in.nextLine();
             int numTutorialGroups;
 
-            if(InputManager.ValidateNumberInput(rawNumTutorialGroups)){ // If the parse result returns true, AKA the input is a valid integer, otherwise throw exception in else block
+            if(Validation.ValidateNumberInput(rawNumTutorialGroups)){ // If the parse result returns true, AKA the input is a valid integer, otherwise throw exception in else block
                 numTutorialGroups = Integer.parseInt(rawNumTutorialGroups);
                 for(int i = 0 ; i < numTutorialGroups ; i++){
                     System.out.println("Add " + type + " NO." + String.valueOf(i+1) + ". Please input the name of the "+ type + "Group: ");
@@ -68,7 +68,7 @@ public class Course implements java.io.Serializable{
                     String rawTutorialVacancy = in.nextLine();
 
                     int vacancy;
-                    if(InputManager.ValidateNumberInput(rawTutorialVacancy)){
+                    if(Validation.ValidateNumberInput(rawTutorialVacancy)){
                         vacancy = Integer.parseInt(rawTutorialVacancy);
                         // The following block works differently for Tutorial and Lab
                         if(type.equals("Tutorial")) {
@@ -109,7 +109,7 @@ public class Course implements java.io.Serializable{
         System.out.println("Assign Components and Weightages:\nPlease input the weightage of the " + assessmenttype + " : (a float number between 0-1)");
         String rawExamWeightage = in.nextLine();
         try{
-            if(!InputManager.ValidateWeightageInput(rawExamWeightage) ||  Float.parseFloat(rawExamWeightage ) == 0){
+            if(!Validation.ValidateWeightageInput(rawExamWeightage) ||  Float.parseFloat(rawExamWeightage ) <= 0){
                 throw new WeightageNotValidException();
             }
             float examWeightage = Float.parseFloat(rawExamWeightage);
