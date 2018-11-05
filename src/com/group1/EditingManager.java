@@ -353,7 +353,6 @@ public class EditingManager
         for(Course course: datacontainer.getCourseList()){
             if (course.GetCourseTitle().equals(coursetitle.toUpperCase())) {
             	thisCourse = course;
-            	courseStatistics += course.GetComponents();
             	break;
             	}
         }
