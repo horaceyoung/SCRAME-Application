@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import static com.group1.ReadingManager.CheckStudentRegisteredForCourse;
+
 public class Main {
 
     public static void main(String[] args) {
@@ -88,6 +90,7 @@ public class Main {
 
                 case 3:
                 // Testcase 3: Register student for a course
+
                     System.out.println("Register course: Please input the matric number of the student to register: ");
                     EditingManager EM = new EditingManager();
                     studentMatric = in.nextLine();
@@ -105,20 +108,24 @@ public class Main {
                         System.out.println("Register course: Please input the course title you want to register with: ");
                         courseTitle = in.nextLine();
 
-                        if(!Validation.CheckCourseExisted(courseTitle,dataContainer))
+                        if(!Validation.CheckCourseExisted(courseTitle,dataContainer)){
                             throw new CourseNotFoundException();
-                        if(!ReadingManager.CourseHaveVacancy(courseTitle,dataContainer))
-                            throw new CourseNoVacancyException();
-
+                        }
+                        if(!ReadingManager.CourseHaveVacancy(courseTitle,dataContainer)){
+                            throw new CourseNoVacancyException();}
+                        if(ReadingManager.CheckStudentRegisteredForCourse(newStudent,newCourse)){
+                            throw new StudentAlreadyRegisteredForThisCourseException(newStudent,newCourse);
+                        }
 
                         ArrayList<Course> courseList = dataContainer.getCourseList();
                         for (Course course : courseList) {
                             if (courseTitle.equals(course.GetCourseTitle())) {
                                 newCourse = course;
+                                break;
+
                             }
                         }
                         EM.RegisterStudentToCourseLecture(newStudent,courseTitle,dataContainer);
-
 
                         if(newCourse.HaveTutorial()==false)
                             break;
@@ -129,7 +136,9 @@ public class Main {
                             i++;
                         }
                         tutorialName = in.nextLine();
-                        EM.RegisterStudentToTutorial(newStudent,courseTitle,tutorialName,dataContainer);
+
+                        if(!EM.RegisterStudentToTutorial(newStudent,courseTitle,tutorialName,dataContainer))
+                            break;
 
                         if(newCourse.HaveLab()==false)
                             break;
@@ -144,6 +153,7 @@ public class Main {
                         EM.RegisterStudentToLab(newStudent,courseTitle,labName,dataContainer);
                     }
                     catch (CourseNoVacancyException e){System.out.println(e.getMessage());}
+                    catch (StudentAlreadyRegisteredForThisCourseException e){System.out.print( e.getMessage());}
                     catch (Exception e){
                         System.out.println(e.getMessage());
                     }

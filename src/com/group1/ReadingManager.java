@@ -30,6 +30,8 @@ public class ReadingManager
         }
     }
 
+
+
     public static void printStudentListByTutorial(String courseName, String tutGroupName, DataContainer dataContainer) throws IOException {
         for (Course currCourse : dataContainer.getCourseList()) {
             if (currCourse.GetCourseTitle().equals(courseName.toUpperCase())) {
@@ -62,6 +64,19 @@ public class ReadingManager
             }
         }
     }
+
+    public static boolean CheckStudentRegisteredForCourse(Student thisStudent,Course course){
+        ArrayList<Student> studentList = course.GetStudentList();
+
+        for(Student student:studentList){
+            if(thisStudent.getMatricNumber().equals(student.getMatricNumber()))
+                return true;
+
+        }
+        return false;
+    }
+
+
     public static void PrintTutorialVacancy(String courseTitle, DataContainer dataContainer) throws IOException, TutorialLabNotAvailableException {
         ArrayList<Tutorial> tutorialList = new ArrayList<>();
         ArrayList<Course> courseList = dataContainer.getCourseList();

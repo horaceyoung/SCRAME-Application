@@ -10,7 +10,8 @@ public class Validation
     //checking if exist, checking if input is legit, all checking method....
 
     public static boolean studentExists(String matricNumber, DataContainer container){
-
+        if(container.getStudentsList().isEmpty())
+            return false;
         for(Student student:container.getStudentsList()){
             if(matricNumber.toUpperCase().equals(student.getMatricNumber()))
                 return true;
@@ -18,6 +19,9 @@ public class Validation
         return false;
     }
     public static boolean CheckCourseExisted(String courseCode, DataContainer container){
+
+        if(container.getCourseList().isEmpty())
+            return false;
         for ( Course course:container.getCourseList()){
             if (course.GetCourseTitle().equals(courseCode.toUpperCase()))
                 return true;
