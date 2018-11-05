@@ -333,4 +333,17 @@ public class EditingManager
         }
         System.out.println(transcriptOutcome);
     }
-}
+    
+    
+    public static void printCourseStatistics(String coursetitle, DataContainer datacontainer){
+    	String courseStatistics = "Course Title: " + coursetitle + "\n";
+    	HashMap<String, ArrayList<AssessmentComponent>> courseResult;
+    	
+        for(Course course: datacontainer.getCourseList()){
+            if (course.GetCourseTitle().equals(coursetitle.toUpperCase())) {
+            	courseStatistics += course.GetComponents();
+            	}
+            }
+        System.out.println (courseStatistics);
+        }
+    }

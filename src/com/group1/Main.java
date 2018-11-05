@@ -289,12 +289,12 @@ public class Main {
         	 //exam only and coursework only.
             	System.out.println("Please enter Course Code to check for course statistics");
                 Scanner sc1 = new Scanner(System.in);
-                String courseCodeStatistics = sc1.nextLine();
+                String coursetitle = sc1.nextLine();
                 try{
-                    if (!Validation.CheckCourseExisted(courseCodeStatistics,dataContainer))
+                    if (!Validation.CheckCourseExisted(coursetitle, dataContainer))
                         System.out.println("The course you entered does not exist. Please enter another course code.\n");
                     else{
-                    	StudentManager.printCourseStatistics(courseCodeStatistics);
+                    	StudentManager.printCourseStatistics(coursetitle);
                      }
                 }catch (IOException e)
                 {
