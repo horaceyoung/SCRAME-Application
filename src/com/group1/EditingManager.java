@@ -383,11 +383,9 @@ public class EditingManager
         float courseWorkAve = courseWorkResult/studentSize;
         float overallAve = examAve * result.get(0).getWeightage()+courseWorkAve*result.get(1).getWeightage();
 
-<<<<<<< HEAD
+
         System.out.println("Course" + courseTitle+" Statistics: Overall Percentage - "+overallAve +" Exam Percentage - "+examAve+" Course Work Percentage - "+courseWorkAve);
-=======
-        System.out.println("Course" + courseTitle+" Statistics: Overall Percentage - "+overallAve +" Exam Percentage - "+examAve+" Course Work Percentage - "+ courseWorkAve);
->>>>>>> ad2f5e825d832fa78b089152340c354838a1a854
+
 
         }
 
