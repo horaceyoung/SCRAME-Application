@@ -347,13 +347,27 @@ public class EditingManager
     
     public static void printCourseStatistics(String coursetitle, DataContainer datacontainer){
     	String courseStatistics = "Course Title: " + coursetitle + "\n";
-    	HashMap<String, ArrayList<AssessmentComponent>> courseResult;
-    	
+    	Course thisCourse = null;
+    	//HashMap<String, ArrayList<AssessmentComponent>> courseResult;
+    	ArrayList<Student> studentList = new ArrayList<>();
         for(Course course: datacontainer.getCourseList()){
             if (course.GetCourseTitle().equals(coursetitle.toUpperCase())) {
+            	thisCourse = course;
             	courseStatistics += course.GetComponents();
+            	break;
             	}
-            }
+        }
+        studentList=thisCourse.GetStudentList();
+        
+        for(Student student:studentList) {
+        	
+        	
+        }
+        
+        
+        
+        
+        
         System.out.println (courseStatistics);
         }
     }
