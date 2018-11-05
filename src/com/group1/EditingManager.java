@@ -38,7 +38,7 @@ public class EditingManager
             throw new TutorialOrLabNoVacancyException();
         thisTutorial.GetRegisteredStudent().add(student);
 
-         System.out.println("Student "+student.getMatricNumber()+" "+student.GetStudentName()+" has been registered to "+ tutorialName+ "of course "+course.getCourseTitle());
+         System.out.println("Student "+student.getMatricNumber()+" "+student.GetStudentName()+" has been registered to "+ tutorialName+ "  bof course "+course.getCourseTitle());
 
          return true;
         }
@@ -52,7 +52,7 @@ public class EditingManager
         }
     }
 
-    public void RegisterStudentToLab(Student student, Course course, String labName){
+    public boolean RegisterStudentToLab(Student student, Course course, String labName){
 
         ArrayList<Lab> labList = course.GetLabList();
         Lab thisLab=null;
@@ -73,15 +73,18 @@ public class EditingManager
                 throw new TutorialOrLabNoVacancyException();
             thisLab.GetRegisteredStudent().add(student);
 
-            System.out.println("Student "+student.getMatricNumber()+" "+student.GetStudentName()+" has been registered to "+ labName+ "of course "+course.getCourseTitle());
-
+            System.out.println("Student "+student.getMatricNumber()+" "+student.GetStudentName()+" has been registered to "+ labName+ " of course "+course.getCourseTitle());
+            return true;
         }
         catch (LabGroupNonExistentException e){
             System.out.println(e.getMessage());
+            return false;
         }
         catch (TutorialOrLabNoVacancyException e){
             System.out.println(e.getMessage());
+            return false;
         }
+
     }
 
 

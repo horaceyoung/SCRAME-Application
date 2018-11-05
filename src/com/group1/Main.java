@@ -4,6 +4,7 @@ import Exceptions.*;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -75,8 +76,8 @@ public class Main {
 		            //Testcase 1: Add in student
                     dataContainer.AddStudent();
                     break;
-                   
-			    
+
+
                 case 2:
                     // Testcase 2: Create the course
                     dataContainer.AddCourse();
@@ -86,9 +87,11 @@ public class Main {
                 case 3:
                 // Testcase 3: Register student for a course
                     while(true){
-                        System.out.println("Register course: Please input the matric number of the student to register: ");
+                        System.out.println("Register course: Please input the matric number of the student to register: (Enter 0 to exit)");
                         EditingManager EM = new EditingManager();
                         studentMatric = in.nextLine();
+                        if(studentMatric.equals("0"))
+                            break;
                         try{
                             if(!Validation.studentExists(studentMatric,dataContainer))
                                 throw new StudentNotExistException();
@@ -101,9 +104,10 @@ public class Main {
 
                             }
 
-                            System.out.println("Register course: Please input the course title you want to register with: ");
+                            System.out.println("Register course: Please input the course title you want to register with: (Enter 0 to exit)");
                             courseTitle = in.nextLine();
-
+                            if(courseTitle.equals("0"))
+                                break;
 
                             ArrayList<Course> courseList = dataContainer.getCourseList();
                             for(Course course:courseList){
@@ -137,10 +141,10 @@ public class Main {
                             if(newCourse.HaveTutorial()==false)
                                 break;
                             while(true) {
-                                System.out.println("Please select a tutorial to be enrolled in:");
+                                System.out.println("Please type the name of a tutorial to be enrolled in: ");
                                 int i = 1;
                                 while (i <= newCourse.GetTutorialList().size()) {
-                                    System.out.println(i + ". " + newCourse.GetTutorialList().get(i - 1).sessionName + "\t");
+                                    System.out.println(i + ". " + newCourse.GetTutorialList().get(i - 1).sessionName + "\t Vacancy: "+(newCourse.GetTutorialList().get(i - 1).GetTotalVacancy()-newCourse.GetTutorialList().get(i - 1).GetRegisteredStudent().size()));
                                     i++;
                                 }
                                 tutorialName = in.nextLine();
@@ -157,12 +161,14 @@ public class Main {
                                 System.out.println("Please select a lab to be enrolled in:");
                                 int i=1;
                                 while(i<=newCourse.GetLabList().size()){
-                                    System.out.println(i+". "+newCourse.GetLabList().get(i-1).sessionName+"\t");
+                                    System.out.println(i+". "+newCourse.GetLabList().get(i-1).sessionName+"\t Vacancy: "+(newCourse.GetLabList().get(i - 1).GetTotalVacancy()-newCourse.GetLabList().get(i - 1).GetRegisteredStudent().size()));
                                     i++;
                                 }
                                 labName = in.nextLine();
-                                EM.RegisterStudentToLab(newStudent,newCourse,labName);
+                                if(EM.RegisterStudentToLab(newStudent,newCourse,labName))
+                                    break;
                             }
+                            break;
                         }
                         catch (CourseNoVacancyException e){System.out.println(e.getMessage());}
                         catch (StudentAlreadyRegisteredForThisCourseException e){System.out.print( e.getMessage());}
@@ -199,44 +205,100 @@ public class Main {
                     System.out.println(e.getMessage());
             }
             break;
-			    
-			    
+
+
             case 5:
                 //Testcase 5: Print student list by lecture, tutorial or lab
                         System.out.println("Please key in Course Code");
                         Scanner sc = new Scanner(System.in);
                         String courseName = sc.nextLine();
-                        try{
-                            if (!Validation.CheckCourseExisted(courseName.toUpperCase(),dataContainer))
-                                System.out.println("The course you entered does not exist. Please add this course first.\n");
+                        while (true) {
+                            try{
+                                if (!Validation.CheckCourseExisted(courseName.toUpperCase(),dataContainer))
+                                    System.out.println("The course you entered does not exist. Please add this course first.\n");
 
-                            else{
-                    System.out.println("Key in 'Lec' to print by lecture || 'Tut' to print by tutorial || 'Lab' to print by lab");
-                                String printList = sc.nextLine().toUpperCase();
+                                else{
+                                    ArrayList<Course> courseList = dataContainer.getCourseList();
+                                    for(Course course:courseList){
+                                        if(courseName.equals(course.getCourseTitle())){
+                                            newCourse=course;
+                                            break;
+                                        }
+                                    }
 
-                                if(printList.equals("LEC"))
-                                    ReadingManager.printStudentListByLecture(courseName,dataContainer);
 
-                                else if(printList.equals("TUT")) {
-                                    String tutGroupName = sc.nextLine();
-                                    if(!Validation.CheckTutExisted(courseName,tutGroupName,dataContainer))
-                                        System.out.println("There is no " + tutGroupName + " in "+courseName);
-                                    ReadingManager.printStudentListByTutorial(courseName,tutGroupName,dataContainer);
+                                    System.out.println("Key in 'Lec' to print by lecture || 'Tut' to print by tutorial || 'Lab' to print by lab || '0' to exit");
+                                    String printList = sc.nextLine().toUpperCase();
+
+                                    if(printList.equals("LEC")){
+                                        ReadingManager.printStudentList(newCourse);
+                                        break;
+                                    }
+                                    else if(printList.equals("TUT")) {
+                                        System.out.println("Please type the name of a tutorial to check students enrolled in: ");
+                                        int i = 1;
+                                        while (i <= newCourse.GetTutorialList().size()) {
+                                            System.out.println(i + ". " + newCourse.GetTutorialList().get(i - 1).sessionName);
+                                            i++;
+                                        }
+                                        tutorialName = in.nextLine();
+
+
+                                        tutorialList = newCourse.GetTutorialList();
+                                        Tutorial thisTutorial=null;
+                                        boolean found=false;
+
+                                        for(Tutorial tutorial:tutorialList){
+                                            if(tutorialName.equals(tutorial.sessionName)){
+                                                thisTutorial = tutorial;
+                                                found=true;
+                                                }
+                                                }if (found==false) throw new TutorialGroupNonExistentException();
+
+
+
+                                        ReadingManager.printStudentList(thisTutorial);
+                                        break;
+                                    }
+                                    else if(printList.equals("LAB")) {
+                                        System.out.println("Please type the name of a lab to check students enrolled in: ");
+                                        int i = 1;
+                                        while (i <= newCourse.GetLabList().size()) {
+                                            System.out.println(i + ". " + newCourse.GetLabList().get(i - 1).sessionName);
+                                            i++;
+                                        }
+                                        labName = in.nextLine();
+
+
+                                        labList = newCourse.GetLabList();
+                                        Lab thisLab = null;
+                                        boolean found=false;
+
+                                        for(Lab lab:labList){
+                                            if(labName.equals(lab.sessionName)){
+                                                thisLab = lab;
+                                                found=true;
+                                            }
+                                        }
+                                            if (found==false) throw new LabGroupNonExistentException();
+
+
+                                        ReadingManager.printStudentList(thisLab);
+                                        break;
+                                    }else if(printList.equals("0")) break;
+                                    else
+                                     System.out.println("Invalid option.");
+
                                 }
-                                else if(printList.equals("LAB")) {
-                                    String labGroupName = sc.nextLine();
-                                    if(!Validation.CheckLabExisted(courseName,labGroupName,dataContainer))
-                                        System.out.println("There is no " + labGroupName + " in "+courseName);
-                                    ReadingManager.printStudentListByLab(courseName, labGroupName, dataContainer);
-                                }
-                                else
-                                 System.out.println("Invalid option.");
-                             }
-                        }
-                        catch (IOException e)
-                        {
-                            System.out.println(e.getMessage());
-                        }
+                            }
+                            catch (TutorialGroupNonExistentException e){System.out.println(e.getMessage());}
+                            catch (LabGroupNonExistentException e){System.out.println((e.getMessage()));}
+                            catch (IOException e)
+                            {
+                                System.out.println(e.getMessage());
+                            }
+
+                            }
                         break;
 
             case 6:

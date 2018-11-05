@@ -9,54 +9,45 @@ public class ReadingManager
 {
 
 
-    public static void printStudentListByLecture(String courseName, DataContainer dataContainer) throws IOException {
-        for (Course currCourse : dataContainer.getCourseList()) {
-            if (currCourse.getCourseTitle().equals(courseName.toUpperCase())) {
-                System.out.println("Students registered in " + courseName + " : ");
-                for (Tutorial currTut : currCourse.GetTutorialList()) {
-                    {
-                        for (Student currStudent : currTut.getStudentList()) {
-                            System.out.println(currStudent.GetStudentName() + " : " + currStudent.getMatricNumber());
-                        }
-                    }
-                }
-                return;
-            }
+    public static void printStudentList(Course course) throws IOException {
+        if(course.GetStudentList().isEmpty()){
+            System.out.println(course.getCourseTitle() + " currently has no student enrolled in.");
+            return;
+        }
+
+
+        System.out.println("Students registered in " + course.getCourseTitle() + " : ");
+        ArrayList<Student> studentList = course.GetStudentList();
+        for(Student student : studentList){
+            System.out.println(student.getMatricNumber() + student.GetStudentName());
         }
     }
 
 
 
-    public static void printStudentListByTutorial(String courseName, String tutGroupName, DataContainer dataContainer) throws IOException {
-        for (Course currCourse : dataContainer.getCourseList()) {
-            if (currCourse.getCourseTitle().equals(courseName.toUpperCase())) {
-                for (Tutorial currTut : currCourse.GetTutorialList()) {
-                    System.out.println("Students registered in " + tutGroupName + " : ");
-                    {
-                        for (Student currStudent : currTut.getStudentList()) {
-                            System.out.println(currStudent.GetStudentName() + " : " + currStudent.getMatricNumber());
-                        }
-                        return;
-                    }
-                }
-
-            }
+    public static void printStudentList(Tutorial tutorial) throws IOException {
+        if(tutorial.GetRegisteredStudent().isEmpty()){
+            System.out.println(tutorial.sessionName+ " currently has no student enrolled in.");
+            return;
+        }
+        System.out.println("Students registered in tutorial group " + tutorial.sessionName + " : ");
+        ArrayList<Student> studentList = tutorial.getStudentList();
+        for(Student student : studentList){
+            System.out.println(student.getMatricNumber() + student.GetStudentName());
         }
     }
 
-    public static void printStudentListByLab(String courseName, String labGroupName, DataContainer dataContainer) throws IOException {
-        for (Course currCourse : dataContainer.getCourseList()) {
-            if (currCourse.getCourseTitle().equals(courseName.toUpperCase())) {
-                for (Lab currLab : currCourse.GetLabList()) {
-                    System.out.println("Students registered in " + labGroupName + " : ");
-                    {
-                        for (Student currStudent : currLab.getStudentList()) {
-                            System.out.println(currStudent.GetStudentName() + " : " + currStudent.getMatricNumber());
-                        }
-                        return;
-                    }
-                }
-            }
+    public static void printStudentList(Lab lab) throws IOException {
+        if(lab.GetRegisteredStudent().isEmpty()){
+            System.out.println(lab.sessionName+ " currently has no student enrolled in.");
+            return;
+        }
+
+
+        System.out.println("Students registered in lab group" + lab.sessionName + " : ");
+        ArrayList<Student> studentList = lab.getStudentList();
+        for(Student student : studentList){
+            System.out.println(student.getMatricNumber() + student.GetStudentName());
         }
     }
 
