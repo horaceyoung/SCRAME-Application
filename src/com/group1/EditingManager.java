@@ -355,8 +355,8 @@ public class EditingManager
     
     public static void printCourseStatistics(String courseTitle, DataContainer datacontainer){
     	Course thisCourse = null;
-    	//HashMap<String, ArrayList<AssessmentComponent>> courseResult;
     	ArrayList<Student> studentList = new ArrayList<>();
+    	
         for(Course course: datacontainer.getCourseList()){
             if (course.GetCourseTitle().equals(courseTitle.toUpperCase())) {
             	thisCourse = course;
