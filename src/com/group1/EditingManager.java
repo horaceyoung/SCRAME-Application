@@ -9,36 +9,22 @@ import java.util.Scanner;
 
 public class EditingManager
 {
-    public void RegisterStudentToCourseLecture(Student thisStudent, String courseTitle, DataContainer dataContainer) {
-        ArrayList<Course> courseList = dataContainer.getCourseList();
-        ArrayList<Student> courseStudentList;
-
-        for (Course course : courseList) {
-            if (courseTitle.equals(course.getCourseTitle())) {
-                courseStudentList=course.GetStudentList();
-                courseStudentList.add(thisStudent);
-            }
-        }
+    public void RegisterStudentToCourseLecture(Student thisStudent, Course course) {
+        course.GetStudentList().add(thisStudent);
 
         HashMap<String,ArrayList<AssessmentComponent>> studentCourseList = thisStudent.GetCourseAndResult();
         ArrayList<AssessmentComponent> result = new ArrayList<>();
-        studentCourseList.put(courseTitle,result);
+        studentCourseList.put(course.getCourseTitle(),result);
 
-
-        System.out.println("Student "+thisStudent.getMatricNumber()+" "+thisStudent.GetStudentName()+" has been registered to Course "+courseTitle);
+        System.out.println("Student "+thisStudent.getMatricNumber()+" "+thisStudent.GetStudentName()+" has been registered to Course "+course.getCourseTitle());
     }
 
-    public boolean RegisterStudentToTutorial(Student student, String courseTitle, String tutorialName, DataContainer dataContainer){
+    public boolean RegisterStudentToTutorial(Student student,Course course, String tutorialName){
 
-        ArrayList<Course> courseList = dataContainer.getCourseList();
-        ArrayList<Tutorial> tutorialList = new ArrayList<>();
+        ArrayList<Tutorial> tutorialList = course.GetTutorialList();
         Tutorial thisTutorial=null;
         boolean found=false;
-        for (Course course : courseList) {
-            if (courseTitle.equals(course.getCourseTitle())) {
-                tutorialList = course.GetTutorialList();
-            }
-        }
+
         try{
         for(Tutorial tutorial:tutorialList){
             if(tutorialName.equals(tutorial.sessionName)){
@@ -52,7 +38,7 @@ public class EditingManager
             throw new TutorialOrLabNoVacancyException();
         thisTutorial.GetRegisteredStudent().add(student);
 
-         System.out.println("Student "+student.getMatricNumber()+" "+student.GetStudentName()+" has been registered to "+ tutorialName+ "of course "+courseTitle);
+         System.out.println("Student "+student.getMatricNumber()+" "+student.GetStudentName()+" has been registered to "+ tutorialName+ "of course "+course.getCourseTitle());
 
          return true;
         }
@@ -66,17 +52,12 @@ public class EditingManager
         }
     }
 
-    public void RegisterStudentToLab(Student student, String courseTitle, String labName, DataContainer dataContainer){
+    public void RegisterStudentToLab(Student student, Course course, String labName){
 
-        ArrayList<Course> courseList = dataContainer.getCourseList();
-        ArrayList<Lab> labList = new ArrayList<>();
+        ArrayList<Lab> labList = course.GetLabList();
         Lab thisLab=null;
         boolean found = false;
-        for (Course course : courseList) {
-            if (courseTitle.equals(course.getCourseTitle())) {
-                labList = course.GetLabList();
-            }
-        }
+
         try{
             for(Lab lab:labList){
                 if(labName.equals(lab.sessionName)){
@@ -92,7 +73,7 @@ public class EditingManager
                 throw new TutorialOrLabNoVacancyException();
             thisLab.GetRegisteredStudent().add(student);
 
-            System.out.println("Student "+student.getMatricNumber()+" "+student.GetStudentName()+" has been registered to "+ labName+ "of course "+courseTitle);
+            System.out.println("Student "+student.getMatricNumber()+" "+student.GetStudentName()+" has been registered to "+ labName+ "of course "+course.getCourseTitle());
 
         }
         catch (LabGroupNonExistentException e){

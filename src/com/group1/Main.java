@@ -85,74 +85,90 @@ public class Main {
 
                 case 3:
                 // Testcase 3: Register student for a course
+                    while(true){
+                        System.out.println("Register course: Please input the matric number of the student to register: ");
+                        EditingManager EM = new EditingManager();
+                        studentMatric = in.nextLine();
+                        try{
+                            if(!Validation.studentExists(studentMatric,dataContainer))
+                                throw new StudentNotExistException();
+                            else{
+                                ArrayList<Student> studentList = dataContainer.getStudentsList();
+                                for(Student student:studentList){
+                                    if(studentMatric.equals(student.getMatricNumber()))
+                                        newStudent = student;
+                                }
 
-                    System.out.println("Register course: Please input the matric number of the student to register: ");
-                    EditingManager EM = new EditingManager();
-                    studentMatric = in.nextLine();
-                    try{
-                        if(!Validation.studentExists(studentMatric,dataContainer))
-                            throw new StudentNotExistException();
-                        else{
-                            ArrayList<Student> studentList = dataContainer.getStudentsList();
-                            for(Student student:studentList){
-                                if(studentMatric.equals(student.getMatricNumber()))
-                                    newStudent = student;
                             }
 
-                        }
-                        System.out.println("Register course: Please input the course title you want to register with: ");
-                        courseTitle = in.nextLine();
+                            System.out.println("Register course: Please input the course title you want to register with: ");
+                            courseTitle = in.nextLine();
 
-                        if(!Validation.CheckCourseExisted(courseTitle,dataContainer)){
-                            throw new CourseNotFoundException();
-                        }
-                        if(!ReadingManager.CourseHaveVacancy(courseTitle,dataContainer)){
-                            throw new CourseNoVacancyException();}
-                        if(ReadingManager.CheckStudentRegisteredForCourse(newStudent,newCourse)){
-                            throw new StudentAlreadyRegisteredForThisCourseException(newStudent,newCourse);
-                        }
 
-                        ArrayList<Course> courseList = dataContainer.getCourseList();
-                        for (Course course : courseList) {
-                            if (courseTitle.equals(course.getCourseTitle())) {
-                                newCourse = course;
+                            ArrayList<Course> courseList = dataContainer.getCourseList();
+                            for(Course course:courseList){
+                                if(courseTitle.equals(course.getCourseTitle())){
+                                    newCourse=course;
+                                    break;
+                                }
+                            }
+
+
+
+                            if(!Validation.CheckCourseExisted(courseTitle,dataContainer)){
+                                throw new CourseNotFoundException();
+                            }
+                            if(!ReadingManager.CourseHaveVacancy(courseTitle,dataContainer)){
+                                throw new CourseNoVacancyException();}
+                            if(ReadingManager.CheckStudentRegisteredForCourse(newStudent,newCourse)){
+                                throw new StudentAlreadyRegisteredForThisCourseException(newStudent,newCourse);
+                            }
+
+                            courseList = dataContainer.getCourseList();
+                            for (Course course : courseList) {
+                                if (courseTitle.equals(course.getCourseTitle())) {
+                                    newCourse = course;
+                                    break;
+
+                                }
+                            }
+                            EM.RegisterStudentToCourseLecture(newStudent,newCourse);
+
+                            if(newCourse.HaveTutorial()==false)
                                 break;
+                            while(true) {
+                                System.out.println("Please select a tutorial to be enrolled in:");
+                                int i = 1;
+                                while (i <= newCourse.GetTutorialList().size()) {
+                                    System.out.println(i + ". " + newCourse.GetTutorialList().get(i - 1).sessionName + "\t");
+                                    i++;
+                                }
+                                tutorialName = in.nextLine();
 
+                                if (EM.RegisterStudentToTutorial(newStudent, newCourse, tutorialName))
+                                    break;
+                            }
+
+
+                            while(true){
+                                if(newCourse.HaveLab()==false)
+                                    break;
+
+                                System.out.println("Please select a lab to be enrolled in:");
+                                int i=1;
+                                while(i<=newCourse.GetLabList().size()){
+                                    System.out.println(i+". "+newCourse.GetLabList().get(i-1).sessionName+"\t");
+                                    i++;
+                                }
+                                labName = in.nextLine();
+                                EM.RegisterStudentToLab(newStudent,newCourse,labName);
                             }
                         }
-                        EM.RegisterStudentToCourseLecture(newStudent,courseTitle,dataContainer);
-
-                        if(newCourse.HaveTutorial()==false)
-                            break;
-                        System.out.println("Please select a tutorial to be enrolled in:");
-                        int i=1;
-                        while(i<=newCourse.GetTutorialList().size()){
-                            System.out.println(i+". "+newCourse.GetTutorialList().get(i-1).sessionName+"\t");
-                            i++;
-                        }
-                        tutorialName = in.nextLine();
-
-                        if(!EM.RegisterStudentToTutorial(newStudent,courseTitle,tutorialName,dataContainer))
-                            break;
-
-                        if(newCourse.HaveLab()==false)
-                            break;
-
-                        System.out.println("Please select a lab to be enrolled in:");
-                        i=1;
-                        while(i<=newCourse.GetLabList().size()){
-                            System.out.println(i+". "+newCourse.GetLabList().get(i-1).sessionName+"\t");
-                            i++;
-                        }
-                        labName = in.nextLine();
-                        EM.RegisterStudentToLab(newStudent,courseTitle,labName,dataContainer);
+                        catch (CourseNoVacancyException e){System.out.println(e.getMessage());}
+                        catch (StudentAlreadyRegisteredForThisCourseException e){System.out.print( e.getMessage());}
+                        catch (CourseNotFoundException e){System.out.println(e.getMessage());}
+                        catch (StudentNotExistException e){System.out.println(e.getMessage());}
                     }
-                    catch (CourseNoVacancyException e){System.out.println(e.getMessage());}
-                    catch (StudentAlreadyRegisteredForThisCourseException e){System.out.print( e.getMessage());}
-                    catch (Exception e){
-                        System.out.println(e.getMessage());
-                    }
-
                     break;
 
 
@@ -300,7 +316,7 @@ public class Main {
                     if (!Validation.CheckCourseExisted(coursetitle, dataContainer))
                         System.out.println("The course you entered does not exist. Please enter another course code.\n");
                     else{
-                    	ReadingManager.printCourseStatistics(coursetitle, dataContainer);
+                    	EditingManager.printCourseStatistics(coursetitle, dataContainer);
                      }
                     break;
 
@@ -316,7 +332,7 @@ public class Main {
             			 System.out.println("The Matric Number does not exist.\n");
             	}
             	else {
-            			ReadingManager.printTranscript(studentMatricTranscript, dataContainer);
+            			EditingManager.printTranscript(studentMatricTranscript, dataContainer);
             	}
                 break;
 

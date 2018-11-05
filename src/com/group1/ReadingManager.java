@@ -61,6 +61,7 @@ public class ReadingManager
     }
 
     public static boolean CheckStudentRegisteredForCourse(Student thisStudent,Course course){
+
         ArrayList<Student> studentList = course.GetStudentList();
 
         for(Student student:studentList){
