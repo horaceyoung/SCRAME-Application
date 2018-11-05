@@ -27,6 +27,7 @@ public class Student implements java.io.Serializable
 	public HashMap<String,ArrayList<AssessmentComponent>> GetCourseAndResult(){
 			return courseAndResult;
 	}
+
 	public void ClearHashmapValue (String key)
 	{
 		courseAndResult.get(key).clear();

@@ -4,6 +4,7 @@ package com.group1;
 import Exceptions.*;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
@@ -345,28 +346,41 @@ public class EditingManager
     }
     
     
-    public static void printCourseStatistics(String coursetitle, DataContainer datacontainer){
-    	String courseStatistics = "Course Title: " + coursetitle + "\n";
+    public static void printCourseStatistics(String courseTitle, DataContainer datacontainer){
+    	String courseStatistics = "Course Title: " + courseTitle + "\n";
     	Course thisCourse = null;
     	//HashMap<String, ArrayList<AssessmentComponent>> courseResult;
     	ArrayList<Student> studentList = new ArrayList<>();
         for(Course course: datacontainer.getCourseList()){
-            if (course.GetCourseTitle().equals(coursetitle.toUpperCase())) {
+            if (course.GetCourseTitle().equals(courseTitle.toUpperCase())) {
             	thisCourse = course;
             	break;
             	}
         }
         studentList=thisCourse.GetStudentList();
-        
-        for(Student student:studentList) {
-        	
-        	
+        float examResult=0;
+        float courseWorkResult=0;
+        HashMap<String,ArrayList<AssessmentComponent>> resultList = new HashMap<>();
+        ArrayList<AssessmentComponent> result = new ArrayList<>();
+
+        try {
+            for (Student student : studentList) {
+                resultList = student.GetCourseAndResult();
+                result = resultList.get(courseTitle);
+                if (result.get(0) == null && result.get(1) ==null)
+                    throw new StudentResultNotExistentException(student, thisCourse);
+                examResult += result.get(0).getResult();
+                courseWorkResult += result.get(1).getResult();
+            }
+        }catch (StudentResultNotExistentException e){System.out.println(e.getMessage());}
+
+        int studentSize = studentList.size();
+        float examAve = examResult/studentSize;
+        float courseWorkeAve = courseWorkResult/studentSize;
+        float overallAve = examAve * result.get(0).getWeightage()+courseWorkeAve*result.get(1).getWeightage();
+
+        System.out.println("Course" + courseTitle+" Statistics: Overall Percentage - "+overallAve +" Exam Percentage - "+examAve+" Course Work Percentage - "+courseWorkeAve);
+
         }
-        
-        
-        
-        
-        
-        System.out.println (courseStatistics);
-        }
+
     }

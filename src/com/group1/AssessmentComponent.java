@@ -12,6 +12,7 @@ public class AssessmentComponent implements java.io.Serializable{
         this.assessmentType = assessmentType;
     }
 
+
     public AssessmentComponent(AssessmentComponent another)
     {
         this.weightage = another.weightage;
