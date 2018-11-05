@@ -12,7 +12,7 @@ public class EditingManager
 {
     public void RegisterStudentToCourseLecture(Student thisStudent, String courseTitle, DataContainer dataContainer) {
         ArrayList<Course> courseList = dataContainer.getCourseList();
-        ArrayList<Student> courseStudentList = new ArrayList<>();
+        ArrayList<Student> courseStudentList;
 
         for (Course course : courseList) {
             if (courseTitle.equals(course.GetCourseTitle())) {
@@ -22,13 +22,14 @@ public class EditingManager
         }
 
         HashMap<String,ArrayList<AssessmentComponent>> studentCourseList = thisStudent.GetCourseAndResult();
-        studentCourseList.put(courseTitle,null);
+        ArrayList<AssessmentComponent> result = new ArrayList<>();
+        studentCourseList.put(courseTitle,result);
 
 
         System.out.println("Student "+thisStudent.getMatricNumber()+" "+thisStudent.GetStudentName()+" has been registered to Course "+courseTitle);
     }
 
-    public void RegisterStudentToTutorial(Student student, String courseTitle, String tutorialName, DataContainer dataContainer){
+    public boolean RegisterStudentToTutorial(Student student, String courseTitle, String tutorialName, DataContainer dataContainer){
 
         ArrayList<Course> courseList = dataContainer.getCourseList();
         ArrayList<Tutorial> tutorialList = new ArrayList<>();
@@ -54,12 +55,15 @@ public class EditingManager
 
          System.out.println("Student "+student.getMatricNumber()+" "+student.GetStudentName()+" has been registered to "+ tutorialName+ "of course "+courseTitle);
 
+         return true;
         }
         catch (TutorialGroupNonExistentException e){
             System.out.println(e.getMessage());
+            return false;
         }
         catch (TutorialOrLabNoVacancyException e){
             System.out.println(e.getMessage());
+            return false;
         }
     }
 
@@ -381,7 +385,9 @@ public class EditingManager
         float courseWorkAve = courseWorkResult/studentSize;
         float overallAve = examAve * result.get(0).getWeightage()+courseWorkAve*result.get(1).getWeightage();
 
-        System.out.println("Course" + courseTitle+" Statistics: Overall Percentage - "+overallAve +" Exam Percentage - "+examAve+" Course Work Percentage - "+ courseWorkAve);
+
+        System.out.println("Course" + courseTitle+" Statistics: Overall Percentage - "+overallAve +" Exam Percentage - "+examAve+" Course Work Percentage - "+courseWorkAve);
+
 
         }
 
