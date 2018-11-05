@@ -2,17 +2,10 @@ package com.group1;
 
 
 import Exceptions.*;
-import org.graalvm.compiler.nodes.extended.ValueAnchorNode;
-
-
-import javax.xml.crypto.Data;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.awt.*;
-import java.util.Map;
 import java.util.Scanner;
 
 public class EditingManager
@@ -212,27 +205,30 @@ public class EditingManager
     public static void AssignComponentResults(String matricnumber, String coursetitle, DataContainer container)
     {
         Scanner scanner = new Scanner(System.in);
-        Student student = new Student("Default", "88888");
-        Course course = new Course("default");
+        Student student = null;
+        Course course = null;
 
         for(Course mycourse: container.getCourseList())
         {
-            if (mycourse.GetCourseTitle()==coursetitle)
+            if (mycourse.GetCourseTitle().equals(coursetitle))
+            {
                 course = mycourse;
+            }
         }
         for(Student mystudent: container.getStudentsList())
         {
-            if (mystudent.getMatricNumber()==matricnumber)
+            if (mystudent.getMatricNumber().equals(matricnumber))
+            {
                 student = mystudent;
+            }
         }
-
         try
         {
             if ( !Validation.CheckWhetherStudentRegisteredForACourse(student, coursetitle))
             {
                 throw new StudentNotRegisteredForTheCourse();
             }
-            else if (Validation.CheckWhetherHasAssessmentWeightage(course))
+            else if ( !Validation.CheckWhetherHasAssessmentWeightage(course))
             {
                 throw new CourseNoExamComponentException();
             }
@@ -248,29 +244,42 @@ public class EditingManager
             scanner.next();
             return;
         }
+
         int x = 1;
         int y = 1;
         while (y == 1)
         {
             while (x == 1)
             {
-
+                System.out.println(course.GetComponents().size());
                 for(AssessmentComponent component: course.GetComponents())
                 {
                     AssessmentComponent newcomponent = new AssessmentComponent(component);
-                    if (newcomponent.getAssessmentType() == "Coursework")
+                    if (newcomponent.getAssessmentType().equals("Coursework"))
                     {
                         newcomponent.setResult(-1);
+                        System.out.println("I am here");
                         student.GetCourseAndResult().get(coursetitle).add(newcomponent);
                         x = 0;
                         break;
                     }
                     System.out.println("Please enter the student's result for " + newcomponent.getAssessmentType() + ", you should enter a mark between 0-100.");
-                    String mark = scanner.nextLine();
+                    String mark = scanner.next();
+                    System.out.println("llalala");
                     if (Validation.ValidateFloatInput(mark) && Float.parseFloat(mark) >= 0 && Float.parseFloat(mark) <= 100)
                     {
                         newcomponent.setResult(Float.parseFloat(mark));
-                        student.GetCourseAndResult().get(coursetitle).add(newcomponent);
+                        System.out.println("hahah");
+                        try
+                        {
+                            student.GetCourseAndResult().get(coursetitle).add(newcomponent);
+                        }
+                        catch (Exception e)
+                        {
+                            e.printStackTrace();
+                        }
+                        System.out.println("lalala");
+
                         x = 0;
                     }
                     else
@@ -284,6 +293,7 @@ public class EditingManager
                 }
 
             }
+            System.out.println("-----------");
 
             for(AssessmentComponent component: course.GetSubComponents())
             {

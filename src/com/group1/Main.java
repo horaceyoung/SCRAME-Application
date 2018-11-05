@@ -259,6 +259,7 @@ public class Main {
                         String matric = scanner.next();
                         if(Validation.studentExists(matric, dataContainer))
                         {
+
                             EditingManager.AssignComponentResults(matric, title7, dataContainer);
                         }
                         else

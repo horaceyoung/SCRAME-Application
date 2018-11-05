@@ -53,10 +53,10 @@ public class Validation
     {
         for(String key:student.GetCourseAndResult().keySet())
         {
-            if (key == coursetitle)
+            if (key.equals(coursetitle))
             {
                 ArrayList<AssessmentComponent> listtemp = student.GetCourseAndResult().get(key);
-                if (listtemp.isEmpty())
+                if (listtemp == null)
                     return false;
             }
         }
@@ -67,7 +67,7 @@ public class Validation
     {
         for(String key:student.GetCourseAndResult().keySet())
         {
-            if (key == coursetitle)
+            if (key.equals(coursetitle))
                 return true;
         }
         return false;
