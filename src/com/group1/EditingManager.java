@@ -272,11 +272,12 @@ public class EditingManager
                     }
                     System.out.println("Please enter the student's result for " + newcomponent.getAssessmentType() + ", you should enter a mark between 0-100.");
                     String mark = scanner.next();
-                    System.out.println("llalala");
+
                     if (Validation.ValidateFloatInput(mark) && Float.parseFloat(mark) >= 0 && Float.parseFloat(mark) <= 100)
                     {
                         newcomponent.setResult(Float.parseFloat(mark));
-                        System.out.println("hahah");
+
+
                         try
                         {
                             student.GetCourseAndResult().get(coursetitle).add(newcomponent);
@@ -285,7 +286,8 @@ public class EditingManager
                         {
                             e.printStackTrace();
                         }
-                        System.out.println("lalala");
+
+
 
                         x = 0;
                     }
