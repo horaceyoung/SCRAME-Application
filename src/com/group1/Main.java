@@ -290,8 +290,8 @@ public class Main {
 
 
 
-         case 9:
-        	 //testcase 9: Print course statistics
+         case 8:
+        	 //testcase 8: Print course statistics
         	 //Show grade percentage for overall (exam + coursework)
         	 //exam only and coursework only.
             	System.out.println("Please enter Course Code to check for course statistics");
@@ -300,12 +300,12 @@ public class Main {
                     if (!Validation.CheckCourseExisted(coursetitle, dataContainer))
                         System.out.println("The course you entered does not exist. Please enter another course code.\n");
                     else{
-                    	EditingManager.printCourseStatistics(coursetitle, dataContainer);
+                    	ReadingManager.printCourseStatistics(coursetitle, dataContainer);
                      }
                     break;
 
-            case 10:
-            	//Print student transcript.
+            case 9:
+            	//test case 9: Print student transcript.
             	//individual overall course mark and grade for all the courses registered
             	//individual component marks ¨C exam, coursework, subcomponents from Result.txt 
             	//The configured weightages should be displayed as well
@@ -316,7 +316,7 @@ public class Main {
             			 System.out.println("The Matric Number does not exist.\n");
             	}
             	else {
-            			EditingManager.printTranscript(studentMatricTranscript, dataContainer);
+            			ReadingManager.printTranscript(studentMatricTranscript, dataContainer);
             	}
                 break;
 
@@ -333,9 +333,6 @@ public class Main {
                     catch (Exception e){
                         System.out.println(e.getMessage());
                     }
-
-
-
             }
         }
     }

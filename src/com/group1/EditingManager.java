@@ -152,7 +152,6 @@ public class EditingManager
                     System.out.println("Input not valid, please enter 0 or 1\n");
                 }
 
-
             }
 
             if (Integer.parseInt(temp) == 0) {
@@ -189,7 +188,6 @@ public class EditingManager
                 
                 for (AssessmentComponent componentnew : newcourse6.GetSubComponents()) {
 
-                    System.out.println(componentnew.getAssessmentType()+ "\t"+subweightagesum);
                     subweightagesum += componentnew.getWeightage();
                 }
                 if (Validation.ValidateWeightageSum(subweightagesum)) {
@@ -197,11 +195,8 @@ public class EditingManager
                 } else {
                     System.out.println("The total weightage you have entered is not valid. It should sum up to 1\n");
                     newcourse6.ClearSubComponentWeightage();
-
                     System.out.println(subweightagesum);
-
                 }
-                subweightagesum = 0;
             }
             break;
 
@@ -359,8 +354,8 @@ public class EditingManager
     
     public static void printCourseStatistics(String courseTitle, DataContainer datacontainer){
     	Course thisCourse = null;
-    	//HashMap<String, ArrayList<AssessmentComponent>> courseResult;
     	ArrayList<Student> studentList = new ArrayList<>();
+    	
         for(Course course: datacontainer.getCourseList()){
             if (course.getCourseTitle().equals(courseTitle.toUpperCase())) {
             	thisCourse = course;
