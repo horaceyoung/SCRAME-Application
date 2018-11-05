@@ -322,7 +322,7 @@ public class EditingManager
 
     }
 
-    public static void printTranscript(String studentMatricTranscript, DataContainer dataContainer) throws FileNotFoundException{
+    public static void printTranscript(String studentMatricTranscript, DataContainer dataContainer){
 
         String transcriptOutcome = "Matric No: " + studentMatricTranscript + "\n";
         HashMap<String, ArrayList<AssessmentComponent>> courseAndResult;
@@ -347,7 +347,6 @@ public class EditingManager
     
     
     public static void printCourseStatistics(String courseTitle, DataContainer datacontainer){
-    	String courseStatistics = "Course Title: " + courseTitle + "\n";
     	Course thisCourse = null;
     	//HashMap<String, ArrayList<AssessmentComponent>> courseResult;
     	ArrayList<Student> studentList = new ArrayList<>();

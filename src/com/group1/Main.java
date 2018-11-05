@@ -292,16 +292,11 @@ public class Main {
             	System.out.println("Please enter Course Code to check for course statistics");
                 Scanner sc1 = new Scanner(System.in);
                 String coursetitle = sc1.nextLine();
-                try{
                     if (!Validation.CheckCourseExisted(coursetitle, dataContainer))
                         System.out.println("The course you entered does not exist. Please enter another course code.\n");
                     else{
-                    	StudentManager.printCourseStatistics(coursetitle);
+                    	EditingManager.printCourseStatistics(coursetitle, dataContainer);
                      }
-                }catch (IOException e)
-                {
-                    System.out.println(e.getMessage());
-                }
                     break;
 
             case 10:
@@ -312,15 +307,11 @@ public class Main {
             	System.out.println("Please enter the Student Matric Number to check for transcript");
             	Scanner sc2 = new Scanner(System.in);
             	String studentMatricTranscript = sc2.nextLine();
-            	try {
-            		if (!Validation.studentExists(studentMatricTranscript, dataContainer)) {
+            	if (!Validation.studentExists(studentMatricTranscript, dataContainer)) {
             			 System.out.println("The Matric Number does not exist.\n");
-            		}
-            		else {
+            	}
+            	else {
             			EditingManager.printTranscript(studentMatricTranscript, dataContainer);
-            		}
-            	}catch (IOException e) {
-            		System.out.println(e.getMessage());
             	}
                 break;
 
