@@ -5,7 +5,7 @@ import com.group1.Student;
 
 public class StudentResultNotExistentException extends Exception {
     public StudentResultNotExistentException(Student student, Course course){
-        super("StudentResultNotExistentException: The student "+student.GetStudentName()+" has no result records in this course "+ course.GetCourseTitle());
+        super("StudentResultNotExistentException: The student "+student.GetStudentName()+" has no result records in this course "+ course.getCourseTitle());
     }
 
 }

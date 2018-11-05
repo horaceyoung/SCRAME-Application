@@ -2,14 +2,9 @@ package com.group1;
 
 import Exceptions.*;
 
-import javax.imageio.stream.FileImageOutputStream;
-import javax.xml.crypto.Data;
 import java.io.*;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
-
-import static com.group1.ReadingManager.CheckStudentRegisteredForCourse;
 
 public class Main {
 
@@ -119,7 +114,7 @@ public class Main {
 
                         ArrayList<Course> courseList = dataContainer.getCourseList();
                         for (Course course : courseList) {
-                            if (courseTitle.equals(course.GetCourseTitle())) {
+                            if (courseTitle.equals(course.getCourseTitle())) {
                                 newCourse = course;
                                 break;
 

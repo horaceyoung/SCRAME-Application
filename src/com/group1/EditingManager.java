@@ -2,8 +2,7 @@ package com.group1;
 
 
 import Exceptions.*;
-import java.io.File;
-import java.lang.reflect.Array;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
@@ -15,7 +14,7 @@ public class EditingManager
         ArrayList<Student> courseStudentList;
 
         for (Course course : courseList) {
-            if (courseTitle.equals(course.GetCourseTitle())) {
+            if (courseTitle.equals(course.getCourseTitle())) {
                 courseStudentList=course.GetStudentList();
                 courseStudentList.add(thisStudent);
             }
@@ -36,7 +35,7 @@ public class EditingManager
         Tutorial thisTutorial=null;
         boolean found=false;
         for (Course course : courseList) {
-            if (courseTitle.equals(course.GetCourseTitle())) {
+            if (courseTitle.equals(course.getCourseTitle())) {
                 tutorialList = course.GetTutorialList();
             }
         }
@@ -74,7 +73,7 @@ public class EditingManager
         Lab thisLab=null;
         boolean found = false;
         for (Course course : courseList) {
-            if (courseTitle.equals(course.GetCourseTitle())) {
+            if (courseTitle.equals(course.getCourseTitle())) {
                 labList = course.GetLabList();
             }
         }
@@ -109,7 +108,7 @@ public class EditingManager
 
         Course newcourse6 = null;
         for ( Course course:container.getCourseList()){
-            if (course.GetCourseTitle().equals(courtsetitle))
+            if (course.getCourseTitle().equals(courtsetitle))
                 newcourse6 = course;
         }
 
@@ -123,7 +122,7 @@ public class EditingManager
 
         while (true) {
             for (String compname : component) {
-                newcourse6.AssignComponentWeightage(newcourse6.GetComponents(), compname);
+                newcourse6.assignComponentWeightage(newcourse6.GetComponents(), compname);
             }
             float weightagesum = 0;
             for (AssessmentComponent componentnew : newcourse6.GetComponents()) {
@@ -185,7 +184,7 @@ public class EditingManager
 
                 float subweightagesum = 0;
                 for (String subcomname : subcoponent) {
-                    newcourse6.AssignComponentWeightage(newcourse6.GetSubComponents(), subcomname);
+                    newcourse6.assignComponentWeightage(newcourse6.GetSubComponents(), subcomname);
                 }
                 
                 for (AssessmentComponent componentnew : newcourse6.GetSubComponents()) {
@@ -221,7 +220,7 @@ public class EditingManager
 
         for(Course mycourse: container.getCourseList())
         {
-            if (mycourse.GetCourseTitle().equals(coursetitle))
+            if (mycourse.getCourseTitle().equals(coursetitle))
             {
                 course = mycourse;
             }
@@ -363,7 +362,7 @@ public class EditingManager
     	//HashMap<String, ArrayList<AssessmentComponent>> courseResult;
     	ArrayList<Student> studentList = new ArrayList<>();
         for(Course course: datacontainer.getCourseList()){
-            if (course.GetCourseTitle().equals(courseTitle.toUpperCase())) {
+            if (course.getCourseTitle().equals(courseTitle.toUpperCase())) {
             	thisCourse = course;
             	break;
             	}

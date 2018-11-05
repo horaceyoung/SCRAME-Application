@@ -1,14 +1,9 @@
 package com.group1;
 
-import Exceptions.CourseNotFoundException;
 import Exceptions.TutorialLabNotAvailableException;
 
-import javax.xml.crypto.Data;
-import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class ReadingManager
 {
@@ -16,7 +11,7 @@ public class ReadingManager
 
     public static void printStudentListByLecture(String courseName, DataContainer dataContainer) throws IOException {
         for (Course currCourse : dataContainer.getCourseList()) {
-            if (currCourse.GetCourseTitle().equals(courseName.toUpperCase())) {
+            if (currCourse.getCourseTitle().equals(courseName.toUpperCase())) {
                 System.out.println("Students registered in " + courseName + " : ");
                 for (Tutorial currTut : currCourse.GetTutorialList()) {
                     {
@@ -34,7 +29,7 @@ public class ReadingManager
 
     public static void printStudentListByTutorial(String courseName, String tutGroupName, DataContainer dataContainer) throws IOException {
         for (Course currCourse : dataContainer.getCourseList()) {
-            if (currCourse.GetCourseTitle().equals(courseName.toUpperCase())) {
+            if (currCourse.getCourseTitle().equals(courseName.toUpperCase())) {
                 for (Tutorial currTut : currCourse.GetTutorialList()) {
                     System.out.println("Students registered in " + tutGroupName + " : ");
                     {
@@ -51,7 +46,7 @@ public class ReadingManager
 
     public static void printStudentListByLab(String courseName, String labGroupName, DataContainer dataContainer) throws IOException {
         for (Course currCourse : dataContainer.getCourseList()) {
-            if (currCourse.GetCourseTitle().equals(courseName.toUpperCase())) {
+            if (currCourse.getCourseTitle().equals(courseName.toUpperCase())) {
                 for (Lab currLab : currCourse.GetLabList()) {
                     System.out.println("Students registered in " + labGroupName + " : ");
                     {
@@ -82,7 +77,7 @@ public class ReadingManager
         ArrayList<Course> courseList = dataContainer.getCourseList();
         try {
             for (Course course : courseList) {
-                if (courseTitle.equals(course.GetCourseTitle())) {
+                if (courseTitle.equals(course.getCourseTitle())) {
                     if (course.HaveTutorial() == false)
                         throw new TutorialLabNotAvailableException();
                     else tutorialList = course.GetTutorialList();
@@ -110,7 +105,7 @@ public class ReadingManager
         ArrayList<Course> courseList = dataContainer.getCourseList();
         try {
             for (Course course : courseList) {
-                if (courseTitle.equals(course.GetCourseTitle())) {
+                if (courseTitle.equals(course.getCourseTitle())) {
                     if (course.HaveLab() == false)
                         throw new TutorialLabNotAvailableException();
                     else labList= course.GetLabList();
@@ -134,7 +129,7 @@ public class ReadingManager
         ArrayList<Course> courseList = dataContainer.getCourseList();
         Course thisCourse=null;
         for (Course course : courseList) {
-            if (courseTitle.equals(course.GetCourseTitle())) {
+            if (courseTitle.equals(course.getCourseTitle())) {
                 thisCourse=course;
                 break;
             }
