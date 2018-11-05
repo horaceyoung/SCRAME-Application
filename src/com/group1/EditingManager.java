@@ -131,7 +131,7 @@ public class EditingManager
             } else {
                 System.out.println("The total weightage you have entered is not valid. It should sum up to 1\n");
                 newcourse6.ClearComponentWeightage();
-
+                weightagesum = 0;
             }
         }
 
@@ -178,20 +178,27 @@ public class EditingManager
 
             }
             while (true) {
+
+                float subweightagesum = 0;
                 for (String subcomname : subcoponent) {
                     newcourse6.AssignComponentWeightage(newcourse6.GetSubComponents(), subcomname);
                 }
-                float subweightagesum = 0;
+                
                 for (AssessmentComponent componentnew : newcourse6.GetSubComponents()) {
+
+                    System.out.println(componentnew.getAssessmentType()+ "\t"+subweightagesum);
                     subweightagesum += componentnew.getWeightage();
                 }
                 if (Validation.ValidateWeightageSum(subweightagesum)) {
                     break;
                 } else {
-                    System.out.println(subweightagesum);
                     System.out.println("The total weightage you have entered is not valid. It should sum up to 1\n");
                     newcourse6.ClearSubComponentWeightage();
+
+                    System.out.println(subweightagesum);
+
                 }
+                subweightagesum = 0;
             }
             break;
 
