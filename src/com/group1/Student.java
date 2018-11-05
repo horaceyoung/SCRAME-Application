@@ -23,32 +23,15 @@ public class Student implements java.io.Serializable
         return studentName;
         }
 
-	
-	public static String getNameFromMatric (String marticNumber) {
-
-			File courseFile = new File("data/Students.txt");
-			String name = "default";
-			try{
-
-				Scanner studentScanner = new Scanner(courseFile);
-				while(studentScanner.hasNext()) {
-					String[] studentInfo = studentScanner.nextLine().split("\t");
-					if(marticNumber.equals(studentInfo[1])) {
-						name = studentInfo[0];
-						return name;
-					}
-				}
-			}
-			catch (Exception e){
-				System.out.println(e.getMessage());
-			}
-
-			return name;
-		}
 
 	public HashMap<String,ArrayList<AssessmentComponent>> GetCourseAndResult(){
 			return courseAndResult;
 	}
+	public void ClearHashmapValue (String key)
+	{
+		courseAndResult.get(key).clear();
+	}
+
 }
 	
 
