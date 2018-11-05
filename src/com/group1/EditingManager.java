@@ -3,7 +3,6 @@ package com.group1;
 
 import Exceptions.*;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -378,7 +377,7 @@ public class EditingManager
         float courseWorkAve = courseWorkResult/studentSize;
         float overallAve = examAve * result.get(0).getWeightage()+courseWorkAve*result.get(1).getWeightage();
 
-        System.out.println("Course" + courseTitle+" Statistics: Overall Percentage - "+overallAve +" Exam Percentage - "+examAve+" Course Work Percentage - "+courseWorkeAve);
+        System.out.println("Course" + courseTitle+" Statistics: Overall Percentage - "+overallAve +" Exam Percentage - "+examAve+" Course Work Percentage - "+ courseWorkAve);
 
         }
 
