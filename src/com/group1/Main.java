@@ -295,7 +295,7 @@ public class Main {
 
 
 
-         case 9:
+         case 8:
         	 //testcase 9: Print course statistics
         	 //Show grade percentage for overall (exam + coursework)
         	 //exam only and coursework only.
@@ -309,7 +309,7 @@ public class Main {
                      }
                     break;
 
-            case 10:
+            case 9:
             	//Print student transcript.
             	//individual overall course mark and grade for all the courses registered
             	//individual component marks ¨C exam, coursework, subcomponents from Result.txt 
@@ -338,9 +338,6 @@ public class Main {
                     catch (Exception e){
                         System.out.println(e.getMessage());
                     }
-
-
-
             }
         }
     }
