@@ -3,7 +3,6 @@ package com.group1;
 
 import Exceptions.*;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -270,11 +269,12 @@ public class EditingManager
                     }
                     System.out.println("Please enter the student's result for " + newcomponent.getAssessmentType() + ", you should enter a mark between 0-100.");
                     String mark = scanner.next();
-                    System.out.println("llalala");
+
                     if (Validation.ValidateFloatInput(mark) && Float.parseFloat(mark) >= 0 && Float.parseFloat(mark) <= 100)
                     {
                         newcomponent.setResult(Float.parseFloat(mark));
-                        System.out.println("hahah");
+
+
                         try
                         {
                             student.GetCourseAndResult().get(coursetitle).add(newcomponent);
@@ -283,7 +283,8 @@ public class EditingManager
                         {
                             e.printStackTrace();
                         }
-                        System.out.println("lalala");
+
+
 
                         x = 0;
                     }
@@ -326,7 +327,7 @@ public class EditingManager
 
     }
 
-    public static void printTranscript(String studentMatricTranscript, DataContainer dataContainer) throws FileNotFoundException{
+    public static void printTranscript(String studentMatricTranscript, DataContainer dataContainer){
 
         String transcriptOutcome = "Matric No: " + studentMatricTranscript + "\n";
         HashMap<String, ArrayList<AssessmentComponent>> courseAndResult;
@@ -351,7 +352,6 @@ public class EditingManager
     
     
     public static void printCourseStatistics(String courseTitle, DataContainer datacontainer){
-    	String courseStatistics = "Course Title: " + courseTitle + "\n";
     	Course thisCourse = null;
     	//HashMap<String, ArrayList<AssessmentComponent>> courseResult;
     	ArrayList<Student> studentList = new ArrayList<>();
@@ -383,7 +383,11 @@ public class EditingManager
         float courseWorkAve = courseWorkResult/studentSize;
         float overallAve = examAve * result.get(0).getWeightage()+courseWorkAve*result.get(1).getWeightage();
 
+<<<<<<< HEAD
         System.out.println("Course" + courseTitle+" Statistics: Overall Percentage - "+overallAve +" Exam Percentage - "+examAve+" Course Work Percentage - "+courseWorkAve);
+=======
+        System.out.println("Course" + courseTitle+" Statistics: Overall Percentage - "+overallAve +" Exam Percentage - "+examAve+" Course Work Percentage - "+ courseWorkAve);
+>>>>>>> ad2f5e825d832fa78b089152340c354838a1a854
 
         }
 
