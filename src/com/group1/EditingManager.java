@@ -316,17 +316,8 @@ public class EditingManager
                     break;
                 }
 
-
-
             }
         }
-
-
-
-
-
-
-
 
     }
 
@@ -349,9 +340,6 @@ public class EditingManager
                         transcriptOutcome += "\t" + component.getAssessmentType() + " " + component.getWeightage() + " " + component.getResult() + "\n";
                     }
             }
-
-
-
         }
         System.out.println(transcriptOutcome);
     }
