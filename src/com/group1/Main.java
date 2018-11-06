@@ -378,7 +378,7 @@ public class Main {
                     if (!Validation.CheckCourseExisted(coursetitle, dataContainer))
                         System.out.println("The course you entered does not exist. Please enter another course code.\n");
                     else{
-                    	EditingManager.printCourseStatistics(coursetitle, dataContainer);
+                    	ReadingManager.printCourseStatistics(coursetitle, dataContainer);
                      }
                     break;
 
@@ -394,7 +394,7 @@ public class Main {
             			 System.out.println("The Matric Number does not exist.\n");
             	}
             	else {
-            			EditingManager.printTranscript(studentMatricTranscript, dataContainer);
+            			ReadingManager.printTranscript(studentMatricTranscript, dataContainer);
             	}
                 break;
 
