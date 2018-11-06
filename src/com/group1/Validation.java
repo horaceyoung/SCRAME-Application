@@ -57,7 +57,7 @@ public class Validation
             if (key.equals(coursetitle))
             {
                 ArrayList<AssessmentComponent> listtemp = student.GetCourseAndResult().get(key);
-                if (listtemp == null)
+                if (listtemp.isEmpty())
                     return false;
             }
         }
