@@ -9,6 +9,95 @@ import java.util.Scanner;
 
 public class EditingManager
 {
+    public static void Register(DataContainer dataContainer){
+        String studentMatric;
+        String courseTitle;
+        String tutorialName;
+        String labName;
+        Student newStudent = null;
+        Course newCourse = null;
+
+        Scanner in = new Scanner(System.in);
+        while(true){
+
+
+            System.out.println("Register course: Please input the matric number of the student to register: (Enter 0 to exit)");
+            EditingManager EM = new EditingManager();
+            studentMatric = in.nextLine();
+            if(studentMatric.equals("0"))
+                break;
+            try{
+                if(!Validation.studentExists(studentMatric,dataContainer))
+                    throw new StudentNotExistException();
+                else{
+                    ArrayList<Student> studentList = dataContainer.getStudentsList();
+                    for(Student student:studentList){
+                        if(studentMatric.equals(student.getMatricNumber()))
+                            newStudent = student;
+                    }
+
+                }
+
+                System.out.println("Register course: Please input the course title you want to register with: (Enter 0 to exit)");
+                courseTitle = in.nextLine();
+                if(courseTitle.equals("0"))
+                    break;
+
+                if(!Validation.CheckCourseExisted(courseTitle,dataContainer)){
+                    throw new CourseNotFoundException();
+                }
+                newCourse=ReadingManager.findCourse(courseTitle,dataContainer);
+
+
+                if(!ReadingManager.CourseHaveVacancy(courseTitle,dataContainer)){
+                    throw new CourseNoVacancyException();}
+                if(ReadingManager.CheckStudentRegisteredForCourse(newStudent,newCourse)){
+                    throw new StudentAlreadyRegisteredForThisCourseException(newStudent,newCourse);
+                }
+
+                EM.RegisterStudentToCourseLecture(newStudent,newCourse);
+
+                if(newCourse.HaveTutorial()==false)
+                    break;
+                while(true) {
+                    System.out.println("Please type the name of a tutorial to be enrolled in: ");
+
+                    int i = 1;
+                    while (i <= newCourse.GetTutorialList().size()) {
+                        System.out.println(i + ". " + newCourse.GetTutorialList().get(i - 1).sessionName + "\t Vacancy: "+(newCourse.GetTutorialList().get(i - 1).GetTotalVacancy()-newCourse.GetTutorialList().get(i - 1).GetRegisteredStudent().size()));
+                        i++;
+                    }
+                    tutorialName = in.nextLine();
+
+                    if (EM.RegisterStudentToTutorial(newStudent, newCourse, tutorialName))
+                        break;
+                }
+
+
+                while(true){
+                    if(newCourse.HaveLab()==false)
+                        break;
+
+                    System.out.println("Please select a lab to be enrolled in:");
+                    int i=1;
+                    while(i<=newCourse.GetLabList().size()){
+                        System.out.println(i+". "+newCourse.GetLabList().get(i-1).sessionName+"\t Vacancy: "+(newCourse.GetLabList().get(i - 1).GetTotalVacancy()-newCourse.GetLabList().get(i - 1).GetRegisteredStudent().size()));
+                        i++;
+                    }
+                    labName = in.nextLine();
+
+                    if(EM.RegisterStudentToLab(newStudent,newCourse,labName))
+                        break;
+                }
+                break;
+            }
+            catch (CourseNoVacancyException e){System.out.println(e.getMessage());}
+            catch (StudentAlreadyRegisteredForThisCourseException e){System.out.print( e.getMessage());}
+            catch (CourseNotFoundException e){System.out.println(e.getMessage());}
+            catch (StudentNotExistException e){System.out.println(e.getMessage());}
+        }
+    }
+
     public void RegisterStudentToCourseLecture(Student thisStudent, Course course)
     {
         course.GetStudentList().add(thisStudent);

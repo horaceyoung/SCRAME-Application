@@ -1,11 +1,13 @@
 package com.group1;
 
+import Exceptions.CourseNotFoundException;
 import Exceptions.StudentResultNotExistentException;
 import Exceptions.TutorialLabNotAvailableException;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Scanner;
 
 public class ReadingManager
 {
@@ -93,6 +95,17 @@ public class ReadingManager
     }
 
 
+    public static Course findCourse(String courseTitle, DataContainer dataContainer){
+        Course newCourse = null;
+        ArrayList<Course> courseList = dataContainer.getCourseList();
+        for(Course course:courseList){
+            if(courseTitle.equals(course.getCourseTitle())){
+                newCourse=course;
+                break;
+            }
+        }
+        return newCourse;
+    }
 
     public static void PrintLabVacancy(String courseTitle, DataContainer dataContainer) throws IOException, TutorialLabNotAvailableException {
         ArrayList<Lab> labList = new ArrayList<>();
@@ -203,5 +216,42 @@ public class ReadingManager
         }
 
 
+    public static void PrintVacancy(DataContainer dataContainer){
+        String studentMatric;
+        String courseTitle;
+        String tutorialName;
+        String labName;
+        Student newStudent = null;
+        Course newCourse = null;
+        while(true){
+        Scanner in = new Scanner(System.in);
+        System.out.println("Check Session Vacancy: Please input the course title you want to check: ");
+        courseTitle = in.nextLine();
 
+            try{
+                if(Validation.CheckCourseExisted(courseTitle, dataContainer)){
+                    int sessionChoice;
+                    System.out.println("Check Session Vacancy: Please select the type of session you wish to check by inputting corresponding integer value: \n 1. Tutorial \n2.Lab \n");
+                    sessionChoice=in.nextInt();
+                    switch (sessionChoice){
+                        case 1:
+                            ReadingManager.PrintTutorialVacancy(courseTitle, dataContainer);
+                            break;
+                        case 2:
+                            ReadingManager.PrintLabVacancy(courseTitle, dataContainer);
+                            break;
+                    }
+                    break;
+                }
+                else {
+                    throw new CourseNotFoundException();
+                }
+
+            }
+            catch (Exception e){
+                System.out.println(e.getMessage());
+                continue;
+            }
+        }
+    }
 }
