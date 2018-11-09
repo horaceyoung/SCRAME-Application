@@ -162,22 +162,23 @@ public class ReadingManager
         float overallMark = 0;
         //read Results file to get results
         for(Student student : dataContainer.getStudentsList()) {
-            if (student.getMatricNumber().equals(studentMatricTranscript)){
+            if (student.getMatricNumber().toUpperCase().equals(studentMatricTranscript.toUpperCase())) {
                 transcriptOutcome += "Student Name: " + student.GetStudentName() + "\n";
-            }
 
-            courseAndResult = student.GetCourseAndResult();
-            for (String key : courseAndResult.keySet()){
+                courseAndResult = student.GetCourseAndResult();
+                for (String key : courseAndResult.keySet()) {
                     transcriptOutcome += key + "\n" + "Overall Mark: " + "\n";
                     ArrayList<AssessmentComponent> components = courseAndResult.get(key);
-                    for (AssessmentComponent component : components){
-                        if (count > 0){
+                    for (AssessmentComponent component : components) {
+                        if (count > 0) {
                             overallMark += component.getWeightage() * component.getResult();
                             count--;
                         }
                         transcriptOutcome += "\t" + component.getAssessmentType() + " " + component.getWeightage() + " "
                                 + component.getResult() + "\n";
                     }
+                }
+
             }
         }transcriptOutcome += "\tOverall (Exam + Coursework): " + overallMark;
         System.out.println(transcriptOutcome);
