@@ -158,6 +158,8 @@ public class ReadingManager
         String transcriptOutcome = "Matric No: " + studentMatricTranscript + "\n";
         HashMap<String, ArrayList<AssessmentComponent>> courseAndResult;
         HashMap<String, ArrayList<AssessmentComponent>> currentCourse;
+        int count = 2;
+        float overallMark = 0;
         //read Results file to get results
         for(Student student : dataContainer.getStudentsList()) {
             if (student.getMatricNumber().equals(studentMatricTranscript)){
@@ -169,10 +171,15 @@ public class ReadingManager
                     transcriptOutcome += key + "\n" + "Overall Mark: " + "\n";
                     ArrayList<AssessmentComponent> components = courseAndResult.get(key);
                     for (AssessmentComponent component : components){
-                        transcriptOutcome += "\t" + component.getAssessmentType() + " " + component.getWeightage() + " " + component.getResult() + "\n";
+                        if (count > 0){
+                            overallMark += component.getWeightage() * component.getResult();
+                            count--;
+                        }
+                        transcriptOutcome += "\t" + component.getAssessmentType() + " " + component.getWeightage() + " "
+                                + component.getResult() + "\n";
                     }
             }
-        }
+        }transcriptOutcome += "\tOverall (Exam + Coursework): " + overallMark;
         System.out.println(transcriptOutcome);
     }
     
