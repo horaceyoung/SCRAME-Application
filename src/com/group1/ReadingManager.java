@@ -3,6 +3,7 @@ package com.group1;
 import Exceptions.CourseNotFoundException;
 import Exceptions.StudentResultNotExistentException;
 import Exceptions.TutorialLabNotAvailableException;
+import com.sun.xml.internal.ws.api.Component;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -158,6 +159,8 @@ public class ReadingManager
         String transcriptOutcome = "Matric No: " + studentMatricTranscript + "\n";
         HashMap<String, ArrayList<AssessmentComponent>> courseAndResult;
         HashMap<String, ArrayList<AssessmentComponent>> currentCourse;
+        int count = 2;
+        float overallMark = 0;
         //read Results file to get results
         for(Student student : dataContainer.getStudentsList()) {
             if (student.getMatricNumber().equals(studentMatricTranscript)){
@@ -169,10 +172,16 @@ public class ReadingManager
                     transcriptOutcome += key + "\n" + "Overall Mark: " + "\n";
                     ArrayList<AssessmentComponent> components = courseAndResult.get(key);
                     for (AssessmentComponent component : components){
-                        transcriptOutcome += "\t" + component.getAssessmentType() + " " + component.getWeightage() + " " + component.getResult() + "\n";
+                        if (count > 0){
+                            overallMark += component.getWeightage() * component.getResult();
+                            count --;
+                        }
+                        transcriptOutcome += "\t" + component.getAssessmentType() + " " + component.getWeightage() + " "
+                                + component.getResult() +"\n";
                     }
+
             }
-        }
+        }transcriptOutcome += "\tOverall (Exam + Coursework): " + overallMark;
         System.out.println(transcriptOutcome);
     }
     
@@ -182,7 +191,7 @@ public class ReadingManager
     	ArrayList<Student> studentList = new ArrayList<>();
     	
         for(Course course: datacontainer.getCourseList()){
-            if (course.getCourseTitle().equals(courseTitle.toUpperCase())) {
+            if (course.getCourseTitle().toUpperCase().equals(courseTitle.toUpperCase())) {
             	thisCourse = course;
             	break;
             	}
@@ -210,7 +219,8 @@ public class ReadingManager
         float overallAve = examAve * result.get(0).getWeightage()+courseWorkAve*result.get(1).getWeightage();
 
 
-        System.out.println("Course" + courseTitle+" Statistics: Overall Percentage - "+overallAve +" Exam Percentage - "+examAve+" Course Work Percentage - "+courseWorkAve);
+        System.out.println("Course: " + courseTitle+" Statistics: " + "\n\tOverall Percentage - "+ overallAve + "\n\tExam Percentage - "
+                + examAve+ "\n\tCourse Work Percentage - "+courseWorkAve);
 
 
         }
