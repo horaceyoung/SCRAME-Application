@@ -31,11 +31,11 @@ public class ReadingManager
 
     public static void printStudentList(Tutorial tutorial) throws IOException {
         if(tutorial.GetRegisteredStudent().isEmpty()){
-            System.out.println(tutorial.sessionName+ " currently has no student enrolled in.");
+            System.out.println(tutorial.GetName()+ " currently has no student enrolled in.");
             return;
         }
-        System.out.println("Students registered in tutorial group " + tutorial.sessionName + " : ");
-        ArrayList<Student> studentList = tutorial.getStudentList();
+        System.out.println("Students registered in tutorial group " + tutorial.GetName() + " : ");
+        ArrayList<Student> studentList = tutorial.GetRegisteredStudent();
         for(Student student : studentList){
             System.out.println(student.getMatricNumber() + student.GetStudentName());
         }
@@ -43,13 +43,13 @@ public class ReadingManager
 
     public static void printStudentList(Lab lab) throws IOException {
         if(lab.GetRegisteredStudent().isEmpty()){
-            System.out.println(lab.sessionName+ " currently has no student enrolled in.");
+            System.out.println(lab.GetName()+ " currently has no student enrolled in.");
             return;
         }
 
 
-        System.out.println("Students registered in lab group" + lab.sessionName + " : ");
-        ArrayList<Student> studentList = lab.getStudentList();
+        System.out.println("Students registered in lab group" + lab.GetName() + " : ");
+        ArrayList<Student> studentList = lab.GetRegisteredStudent();
         for(Student student : studentList){
             System.out.println(student.getMatricNumber() + student.GetStudentName());
         }
@@ -86,7 +86,7 @@ public class ReadingManager
             System.out.println("The Vacancy of Tutorial Groups of " + courseTitle + " is as following: ");
 
             for (Tutorial tutorial : tutorialList) {
-                System.out.println(tutorial.sessionName + " " + tutorial.GetRegisteredStudent().size() + "/" + tutorial.totalVacancy);
+                System.out.println(tutorial.GetName() + " " + tutorial.GetRegisteredStudent().size() + "/" + tutorial.GetTotalVacancy());
 
 
             }
@@ -123,7 +123,7 @@ public class ReadingManager
             System.out.println("The Vacancy of Lab Groups of " + courseTitle + " is as following: ");
 
             for (Lab lab : labList) {
-                System.out.println(lab.sessionName + " " + lab.GetRegisteredStudent().size() + "/" + lab.totalVacancy);
+                System.out.println(lab.GetName() + " " + lab.GetRegisteredStudent().size() + "/" + lab.GetTotalVacancy());
 
 
             }

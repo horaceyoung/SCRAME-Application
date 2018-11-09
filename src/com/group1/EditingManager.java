@@ -64,7 +64,7 @@ public class EditingManager
 
                     int i = 1;
                     while (i <= newCourse.GetTutorialList().size()) {
-                        System.out.println(i + ". " + newCourse.GetTutorialList().get(i - 1).sessionName + "\t Vacancy: "+(newCourse.GetTutorialList().get(i - 1).GetTotalVacancy()-newCourse.GetTutorialList().get(i - 1).GetRegisteredStudent().size()));
+                        System.out.println(i + ". " + newCourse.GetTutorialList().get(i - 1).GetName() + "\t Vacancy: "+(newCourse.GetTutorialList().get(i - 1).GetTotalVacancy()-newCourse.GetTutorialList().get(i - 1).GetRegisteredStudent().size()));
                         i++;
                     }
                     tutorialName = in.nextLine();
@@ -81,7 +81,7 @@ public class EditingManager
                     System.out.println("Please select a lab to be enrolled in:");
                     int i=1;
                     while(i<=newCourse.GetLabList().size()){
-                        System.out.println(i+". "+newCourse.GetLabList().get(i-1).sessionName+"\t Vacancy: "+(newCourse.GetLabList().get(i - 1).GetTotalVacancy()-newCourse.GetLabList().get(i - 1).GetRegisteredStudent().size()));
+                        System.out.println(i+". "+newCourse.GetLabList().get(i-1).GetName()+"\t Vacancy: "+(newCourse.GetLabList().get(i - 1).GetTotalVacancy()-newCourse.GetLabList().get(i - 1).GetRegisteredStudent().size()));
                         i++;
                     }
                     labName = in.nextLine();
@@ -120,7 +120,7 @@ public class EditingManager
         {
             for (Tutorial tutorial : tutorialList)
             {
-                if (tutorialName.equals(tutorial.sessionName))
+                if (tutorialName.equals(tutorial.GetName()))
                 {
                     thisTutorial = tutorial;
                     found = true;
@@ -157,7 +157,7 @@ public class EditingManager
         {
             for (Lab lab : labList)
             {
-                if (labName.equals(lab.sessionName))
+                if (labName.equals(lab.GetName()))
                 {
                     thisLab = lab;
                     found = true;
