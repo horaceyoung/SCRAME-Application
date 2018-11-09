@@ -263,7 +263,7 @@ public class Main {
         	 //exam only and coursework only.
             	System.out.println("Please enter Course Code to check for course statistics");
                 Scanner sc1 = new Scanner(System.in);
-                String coursetitle = sc1.nextLine();
+                String coursetitle = sc1.nextLine().toUpperCase();
                     if (!Validation.CheckCourseExisted(coursetitle, dataContainer))
                         System.out.println("The course you entered does not exist. Please enter another course code.\n");
                     else{
