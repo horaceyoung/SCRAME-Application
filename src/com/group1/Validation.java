@@ -25,43 +25,22 @@ public class Validation
         }
         return false;
     }
-    public static boolean CheckTutExisted(String courseName, String tutGroupName, DataContainer container){
-        for ( Course currCourse:container.getCourseList()){
-            if (currCourse.getCourseTitle().equals(courseName.toUpperCase())) {
-                for (Tutorial currTut: currCourse.GetTutorialList()){
-                    if(currTut.GetName().equals(tutGroupName.toUpperCase()))
-                        return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    public static boolean CheckLabExisted(String courseName, String labGroupName, DataContainer container){
-        for ( Course currCourse:container.getCourseList()){
-            if (currCourse.getCourseTitle().equals(courseName.toUpperCase())) {
-                for (Lab currLab: currCourse.GetLabList()){
-                    if(currLab.GetName().equals(labGroupName.toUpperCase()))
-                        return true;
-                }
-            }
-        }
-        return false;
-    }
 
 
-    public static Boolean CheckStudentResultsRecord(Student student, String coursetitle)
+
+    public static int CheckStudentResultsRecord(Student student, String coursetitle)
     {
         for(String key:student.GetCourseAndResult().keySet())
         {
             if (key.equals(coursetitle))
             {
                 ArrayList<AssessmentComponent> listtemp = student.GetCourseAndResult().get(key);
-                if (listtemp.isEmpty())
-                    return false;
+                return listtemp.size();
             }
         }
-        return true;
+
+        return 0;
+
     }
 
     public static Boolean CheckWhetherStudentRegisteredForACourse(Student student, String coursetitle)

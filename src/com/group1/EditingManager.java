@@ -98,7 +98,7 @@ public class EditingManager
         }
     }
 
-    public void RegisterStudentToCourseLecture(Student thisStudent, Course course)
+    public static void RegisterStudentToCourseLecture(Student thisStudent, Course course)
     {
         course.GetStudentList().add(thisStudent);
 
@@ -109,7 +109,7 @@ public class EditingManager
         System.out.println("Student " + thisStudent.getMatricNumber() + " " + thisStudent.GetStudentName() + " has been registered to Course " + course.getCourseTitle());
     }
 
-    public boolean RegisterStudentToTutorial(Student student, Course course, String tutorialName)
+    public static boolean RegisterStudentToTutorial(Student student, Course course, String tutorialName)
     {
 
         ArrayList<Tutorial> tutorialList = course.GetTutorialList();
@@ -146,7 +146,7 @@ public class EditingManager
         }
     }
 
-    public boolean RegisterStudentToLab(Student student, Course course, String labName)
+    public static boolean RegisterStudentToLab(Student student, Course course, String labName)
     {
 
         ArrayList<Lab> labList = course.GetLabList();
@@ -222,7 +222,7 @@ public class EditingManager
             } else
             {
                 System.out.println("The total weightage you have entered is not valid. It should sum up to 1\n");
-                newcourse6.ClearComponentWeightage();
+                newcourse6.GetComponents().clear();
                 weightagesum = 0;
             }
         }
@@ -297,7 +297,7 @@ public class EditingManager
                 } else
                 {
                     System.out.println("The total weightage you have entered is not valid. It should sum up to 1\n");
-                    newcourse6.ClearSubComponentWeightage();
+                    newcourse6.GetSubComponents().clear();
                     System.out.println(subweightagesum);
                 }
             }
@@ -305,11 +305,12 @@ public class EditingManager
 
 
         }
+        System.out.println("Component weightage have been successfully entered.");
 
 
     }
 
-    public static void AssignComponentResults(String matricnumber, String coursetitle, DataContainer container)
+    public static void AssignExamResults(String matricnumber, String coursetitle, DataContainer container)
     {
         Scanner scanner = new Scanner(System.in);
         Student student = null;
@@ -337,7 +338,7 @@ public class EditingManager
             } else if (!Validation.CheckWhetherHasAssessmentWeightage(course))
             {
                 throw new CourseNoExamComponentException();
-            } else if (Validation.CheckStudentResultsRecord(student, coursetitle))
+            } else if (Validation.CheckStudentResultsRecord(student, coursetitle) != 0)
             {
                 throw new StudentResultAlreadyExistsException();
             }
@@ -349,44 +350,118 @@ public class EditingManager
             return;
         }
 
-        int x = 1;
-        int y = 1;
-        float courseworkresult = 0;
-        while (y == 1)
+
+        while (true)
         {
-            while (x == 1)
+            AssessmentComponent newcomponent = new AssessmentComponent(course.GetComponents().get(0));
+
+            System.out.println("Please enter the student's result for " + newcomponent.getAssessmentType() + ", you should enter a mark between 0-100.");
+            String mark = scanner.nextLine();
+
+            if (Validation.ValidateFloatInput(mark) && Float.parseFloat(mark) >= 0 && Float.parseFloat(mark) <= 100)
             {
-                for (AssessmentComponent component : course.GetComponents())
-                {
-                    AssessmentComponent newcomponent = new AssessmentComponent(component);
-                    if (newcomponent.getAssessmentType().equals("Coursework"))
-                    {
-                        newcomponent.setResult(-1);
-                        student.GetCourseAndResult().get(coursetitle).add(newcomponent);
-                        x = 0;
-                        break;
-                    }
-                    System.out.println("Please enter the student's result for " + newcomponent.getAssessmentType() + ", you should enter a mark between 0-100.");
-                    String mark = scanner.nextLine();
+                newcomponent.setResult(Float.parseFloat(mark));
+                student.GetCourseAndResult().get(coursetitle).add(newcomponent);
+                break;
 
-                    if (Validation.ValidateFloatInput(mark) && Float.parseFloat(mark) >= 0 && Float.parseFloat(mark) <= 100)
-                    {
-                        newcomponent.setResult(Float.parseFloat(mark));
-                        student.GetCourseAndResult().get(coursetitle).add(newcomponent);
-
-                        x = 0;
-                    } else
-                    {
-                        System.out.println("MarkNotValidException: The mark you entered for the component is not valid. Please check format. You are going to restart mark entering");
-                        student.ClearHashmapValue(coursetitle);
-                        x = 1;
-                        break;
-                    }
-
-                }
-
+            } else
+            {
+                System.out.println("MarkNotValidException: The mark you entered for the component is not valid. Please check format. You are going to restart mark entering");
+                student.ClearHashmapValue(coursetitle);
             }
 
+
+
+        }
+
+        System.out.println("You have successfully assigned the result for this student. Press any key to continue.");
+        scanner.next();
+
+
+    }
+
+
+    public static void AssignCourseworkResults(String matricnumber, String coursetitle, DataContainer container)
+    {
+        Scanner scanner = new Scanner(System.in);
+        Student student = null;
+        Course course = null;
+
+        for (Course mycourse : container.getCourseList())
+        {
+            if (mycourse.getCourseTitle().equals(coursetitle))
+            {
+                course = mycourse;
+            }
+        }
+        for (Student mystudent : container.getStudentsList())
+        {
+            if (mystudent.getMatricNumber().equals(matricnumber))
+            {
+                student = mystudent;
+            }
+        }
+        try
+        {
+            if (!Validation.CheckWhetherStudentRegisteredForACourse(student, coursetitle))
+            {
+                throw new StudentNotRegisteredForTheCourse();
+            } else if (!Validation.CheckWhetherHasAssessmentWeightage(course))
+            {
+                throw new CourseNoExamComponentException();
+            } else if (Validation.CheckStudentResultsRecord(student, coursetitle) > 1)
+            {
+                throw new StudentResultAlreadyExistsException();
+            } else if (Validation.CheckStudentResultsRecord(student, coursetitle) < 1)
+            {
+                throw new StudentResultNotExistentException(student, course);
+            }
+        } catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Press any key to continue.");
+            scanner.next();
+            return;
+        }
+
+        int y = 1;
+        int z = 1;
+        float courseworkresult = 0;
+
+        while ( z == 1)
+        {
+            if (course.GetSubComponents().isEmpty())
+            {
+                y = 0 ;
+                AssessmentComponent newcomponent = new AssessmentComponent(course.GetComponents().get(1));
+                System.out.println("Please enter the student's result for " + newcomponent.getAssessmentType() + ", you should enter a mark between 0-100.");
+                String mark = scanner.nextLine();
+                if (Validation.ValidateFloatInput(mark) && Float.parseFloat(mark) >= 0 && Float.parseFloat(mark) <= 100)
+                {
+
+                    courseworkresult = newcomponent.getWeightage() * Float.parseFloat(mark);
+                    newcomponent.setResult(courseworkresult);
+                    student.GetCourseAndResult().get(coursetitle).add(newcomponent);
+                    z = 0;
+                } else
+                {
+                    System.out.println("MarkNotValidException: The mark you entered for the component is not valid. Please check format. You are going to restart mark entering");
+                    student.ClearHashmapValue(coursetitle);
+                    courseworkresult = 0;
+                    z = 1;
+                }
+            }
+            else
+            {
+                y = 1;
+                AssessmentComponent newcomponent = new AssessmentComponent(course.GetComponents().get(1));
+                student.GetCourseAndResult().get(coursetitle).add(newcomponent);
+                z = 0;
+            }
+        }
+
+        while (y == 1)
+        {
             for (AssessmentComponent component : course.GetSubComponents())
             {
                 AssessmentComponent newcomponent = new AssessmentComponent(component);
@@ -404,7 +479,7 @@ public class EditingManager
                     System.out.println("MarkNotValidException: The mark you entered for the component is not valid. Please check format. You are going to restart mark entering");
                     student.ClearHashmapValue(coursetitle);
                     courseworkresult = 0;
-                    x = 1;
+
                     y = 1;
                     break;
                 }
@@ -412,11 +487,14 @@ public class EditingManager
             }
         }
 
+
+
         student.GetCourseAndResult().get(coursetitle).get(1).setResult(courseworkresult);
 
-        System.out.println("You have successfully assigned the result for this student. Press any key to continue.");
+        System.out.println("You have successfully assigned the course work result for this student. Press any key to continue.");
         scanner.next();
 
 
     }
+
 }
