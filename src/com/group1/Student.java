@@ -22,8 +22,6 @@ public class Student implements java.io.Serializable
 	public String GetStudentName(){
         return studentName;
         }
-
-
 	public HashMap<String,ArrayList<AssessmentComponent>> GetCourseAndResult(){
 			return courseAndResult;
 	}

@@ -5,7 +5,6 @@ import Exceptions.TutorialLabNameInvalidException;
 import Exceptions.TutorialLabNumberInvalidException;
 import Exceptions.WeightageNotValidException;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -113,7 +112,7 @@ public class Course implements java.io.Serializable{
         }
     }
 
-    public void AssignComponentWeightage(ArrayList<AssessmentComponent> components, String assessmenttype){
+    public void assignComponentWeightage(ArrayList<AssessmentComponent> components, String assessmenttype){
         Scanner in = new Scanner(System.in);
         System.out.println("Assign Components and Weightages:\nPlease input the weightage of the " + assessmenttype + " : (a float number between 0-1)");
         String rawExamWeightage = in.nextLine();
@@ -128,12 +127,11 @@ public class Course implements java.io.Serializable{
         }
         catch (WeightageNotValidException e){
             System.out.println(e.getMessage());
-            AssignComponentWeightage(components, assessmenttype);
+            assignComponentWeightage(components, assessmenttype);
         }
 
     }
-    public void ClearComponentWeightage() { components.clear();}
-    public void ClearSubComponentWeightage() { components.clear();}
+
 
     public void AddTutorial(Tutorial sessionName){
         this.tutorialGroups.add(sessionName);
@@ -143,7 +141,7 @@ public class Course implements java.io.Serializable{
         this.labGroups.add(sessionName);
     }
 
-    public String GetCourseTitle(){
+    public String getCourseTitle(){
         return courseTitle;
     }
     public Coordinator GetCoordinator(){return coordinator;}

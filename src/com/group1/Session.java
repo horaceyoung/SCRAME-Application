@@ -7,9 +7,9 @@ import Exceptions.WeightageNotValidException;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Scanner;
-public abstract class Session implements java.io.Serializable{
-    String sessionName;
-    int totalVacancy;
+public class Session implements java.io.Serializable{
+    private String sessionName;
+    private int totalVacancy;
     private ArrayList<Student> registeredStudent = new ArrayList<>();
 
 
@@ -25,10 +25,6 @@ public abstract class Session implements java.io.Serializable{
 
     public String GetName(){
         return sessionName;
-    }
-
-    public ArrayList<Student> getStudentList(){
-        return registeredStudent;
     }
 
     public int GetTotalVacancy(){ return totalVacancy; }
