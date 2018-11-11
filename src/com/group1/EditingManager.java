@@ -439,7 +439,7 @@ public class EditingManager
                 if (Validation.ValidateFloatInput(mark) && Float.parseFloat(mark) >= 0 && Float.parseFloat(mark) <= 100)
                 {
 
-                    courseworkresult = newcomponent.getWeightage() * Float.parseFloat(mark);
+                    courseworkresult =Float.parseFloat(mark);// newcomponent.getWeightage() *
                     newcomponent.setResult(courseworkresult);
                     student.GetCourseAndResult().get(coursetitle).add(newcomponent);
                     z = 0;

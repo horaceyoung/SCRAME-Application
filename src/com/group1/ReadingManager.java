@@ -205,7 +205,7 @@ public class ReadingManager
             for (Student student : studentList) {
                 resultList = student.GetCourseAndResult();
                 result = resultList.get(courseTitle);
-                if (result.get(0) == null && result.get(1) ==null)
+                if (result.size()<1)
                     throw new StudentResultNotExistentException(student, thisCourse);
                 examResult += result.get(0).getResult();
                 courseWorkResult += result.get(1).getResult();
