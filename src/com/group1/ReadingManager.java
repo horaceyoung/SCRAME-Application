@@ -31,11 +31,11 @@ public class ReadingManager
 
     public static void printStudentList(Tutorial tutorial) throws IOException {
         if(tutorial.GetRegisteredStudent().isEmpty()){
-            System.out.println(tutorial.sessionName+ " currently has no student enrolled in.");
+            System.out.println(tutorial.GetName()+ " currently has no student enrolled in.");
             return;
         }
-        System.out.println("Students registered in tutorial group " + tutorial.sessionName + " : ");
-        ArrayList<Student> studentList = tutorial.getStudentList();
+        System.out.println("Students registered in tutorial group " + tutorial.GetName() + " : ");
+        ArrayList<Student> studentList = tutorial.GetRegisteredStudent();
         for(Student student : studentList){
             System.out.println(student.getMatricNumber() + student.GetStudentName());
         }
@@ -43,13 +43,13 @@ public class ReadingManager
 
     public static void printStudentList(Lab lab) throws IOException {
         if(lab.GetRegisteredStudent().isEmpty()){
-            System.out.println(lab.sessionName+ " currently has no student enrolled in.");
+            System.out.println(lab.GetName()+ " currently has no student enrolled in.");
             return;
         }
 
 
-        System.out.println("Students registered in lab group" + lab.sessionName + " : ");
-        ArrayList<Student> studentList = lab.getStudentList();
+        System.out.println("Students registered in lab group" + lab.GetName() + " : ");
+        ArrayList<Student> studentList = lab.GetRegisteredStudent();
         for(Student student : studentList){
             System.out.println(student.getMatricNumber() + student.GetStudentName());
         }
@@ -86,7 +86,7 @@ public class ReadingManager
             System.out.println("The Vacancy of Tutorial Groups of " + courseTitle + " is as following: ");
 
             for (Tutorial tutorial : tutorialList) {
-                System.out.println(tutorial.sessionName + " " + tutorial.GetRegisteredStudent().size() + "/" + tutorial.totalVacancy);
+                System.out.println(tutorial.GetName() + " " + tutorial.GetRegisteredStudent().size() + "/" + tutorial.GetTotalVacancy());
 
 
             }
@@ -123,7 +123,7 @@ public class ReadingManager
             System.out.println("The Vacancy of Lab Groups of " + courseTitle + " is as following: ");
 
             for (Lab lab : labList) {
-                System.out.println(lab.sessionName + " " + lab.GetRegisteredStudent().size() + "/" + lab.totalVacancy);
+                System.out.println(lab.GetName() + " " + lab.GetRegisteredStudent().size() + "/" + lab.GetTotalVacancy());
 
 
             }
@@ -158,21 +158,29 @@ public class ReadingManager
         String transcriptOutcome = "Matric No: " + studentMatricTranscript + "\n";
         HashMap<String, ArrayList<AssessmentComponent>> courseAndResult;
         HashMap<String, ArrayList<AssessmentComponent>> currentCourse;
+        int count = 2;
+        float overallMark = 0;
         //read Results file to get results
         for(Student student : dataContainer.getStudentsList()) {
-            if (student.getMatricNumber().equals(studentMatricTranscript)){
+            if (student.getMatricNumber().toUpperCase().equals(studentMatricTranscript.toUpperCase())) {
                 transcriptOutcome += "Student Name: " + student.GetStudentName() + "\n";
-            }
 
-            courseAndResult = student.GetCourseAndResult();
-            for (String key : courseAndResult.keySet()){
+                courseAndResult = student.GetCourseAndResult();
+                for (String key : courseAndResult.keySet()) {
                     transcriptOutcome += key + "\n" + "Overall Mark: " + "\n";
                     ArrayList<AssessmentComponent> components = courseAndResult.get(key);
-                    for (AssessmentComponent component : components){
-                        transcriptOutcome += "\t" + component.getAssessmentType() + " " + component.getWeightage() + " " + component.getResult() + "\n";
+                    for (AssessmentComponent component : components) {
+                        if (count > 0) {
+                            overallMark += component.getWeightage() * component.getResult();
+                            count--;
+                        }
+                        transcriptOutcome += "\t" + component.getAssessmentType() + " " + component.getWeightage() + " "
+                                + component.getResult() + "\n";
                     }
+                }
+
             }
-        }
+        }transcriptOutcome += "\tOverall (Exam + Coursework): " + overallMark;
         System.out.println(transcriptOutcome);
     }
     
