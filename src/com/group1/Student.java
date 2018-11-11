@@ -19,16 +19,18 @@ public class Student implements java.io.Serializable, People
 	public String getName(){
         return studentName;
         }
+<<<<<<< HEAD
 
     public void setName(String name){
 	    this.studentName=name;
     }
 
 
+=======
+>>>>>>> a4991a1b4d2351ecd2f8bb0fe63db0f105609121
 	public HashMap<String,ArrayList<AssessmentComponent>> GetCourseAndResult(){
 			return courseAndResult;
 	}
-
 	public void ClearHashmapValue (String key)
 	{
 		courseAndResult.get(key).clear();

@@ -22,9 +22,13 @@ public class Session implements java.io.Serializable{
         return sessionName;
     }
 
+<<<<<<< HEAD
     public ArrayList<Student> getStudentList(){ return registeredStudent; }
 
     public int getTotalVacancy(){ return totalVacancy; }
+=======
+    public int GetTotalVacancy(){ return totalVacancy; }
+>>>>>>> a4991a1b4d2351ecd2f8bb0fe63db0f105609121
 
     public boolean haveVacancy(){
         if(registeredStudent.size()<totalVacancy)

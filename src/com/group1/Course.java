@@ -131,8 +131,7 @@ public class Course implements java.io.Serializable{
         }
 
     }
-    public void ClearComponentWeightage() { components.clear();}
-    public void ClearSubComponentWeightage() { subcomponents.clear();}
+
 
     public void AddTutorial(Tutorial sessionName){
         this.tutorialGroups.add(sessionName);

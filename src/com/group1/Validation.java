@@ -25,6 +25,7 @@ public class Validation
         }
         return false;
     }
+<<<<<<< HEAD
     public static boolean CheckTutExisted(String courseName, String tutGroupName, DataContainer container){
         for ( Course currCourse:container.getCourseList()){
             if (currCourse.getCourseTitle().equals(courseName.toUpperCase())) {
@@ -48,20 +49,24 @@ public class Validation
         }
         return false;
     }
+=======
+
+>>>>>>> a4991a1b4d2351ecd2f8bb0fe63db0f105609121
 
 
-    public static Boolean CheckStudentResultsRecord(Student student, String coursetitle)
+    public static int CheckStudentResultsRecord(Student student, String coursetitle)
     {
         for(String key:student.GetCourseAndResult().keySet())
         {
             if (key.equals(coursetitle))
             {
                 ArrayList<AssessmentComponent> listtemp = student.GetCourseAndResult().get(key);
-                if (listtemp.isEmpty())
-                    return false;
+                return listtemp.size();
             }
         }
-        return true;
+
+        return 0;
+
     }
 
     public static Boolean CheckWhetherStudentRegisteredForACourse(Student student, String coursetitle)
