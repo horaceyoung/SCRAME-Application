@@ -29,28 +29,18 @@ public class ReadingManager
 
 
     public static void printStudentList(Tutorial tutorial) throws IOException {
-<<<<<<< HEAD
         if(tutorial.getRegisteredStudent().isEmpty()){
             System.out.println(tutorial.getSessionName()+ " currently has no student enrolled in.");
             return;
         }
         System.out.println("Students registered in tutorial group " + tutorial.getSessionName() + " : ");
         ArrayList<Student> studentList = tutorial.getStudentList();
-=======
-        if(tutorial.GetRegisteredStudent().isEmpty()){
-            System.out.println(tutorial.GetName()+ " currently has no student enrolled in.");
-            return;
-        }
-        System.out.println("Students registered in tutorial group " + tutorial.GetName() + " : ");
-        ArrayList<Student> studentList = tutorial.GetRegisteredStudent();
->>>>>>> a4991a1b4d2351ecd2f8bb0fe63db0f105609121
         for(Student student : studentList){
             System.out.println(student.getMatricNumber() + student.getName());
         }
     }
 
     public static void printStudentList(Lab lab) throws IOException {
-<<<<<<< HEAD
         if(lab.getRegisteredStudent().isEmpty()){
             System.out.println(lab.getSessionName()+ " currently has no student enrolled in.");
             return;
@@ -58,16 +48,6 @@ public class ReadingManager
 
         System.out.println("Students registered in lab group" + lab.getSessionName() + " : ");
         ArrayList<Student> studentList = lab.getStudentList();
-=======
-        if(lab.GetRegisteredStudent().isEmpty()){
-            System.out.println(lab.GetName()+ " currently has no student enrolled in.");
-            return;
-        }
-
-
-        System.out.println("Students registered in lab group" + lab.GetName() + " : ");
-        ArrayList<Student> studentList = lab.GetRegisteredStudent();
->>>>>>> a4991a1b4d2351ecd2f8bb0fe63db0f105609121
         for(Student student : studentList){
             System.out.println(student.getMatricNumber() + student.getName());
         }
@@ -104,11 +84,7 @@ public class ReadingManager
             System.out.println("The Vacancy of Tutorial Groups of " + courseTitle + " is as following: ");
 
             for (Tutorial tutorial : tutorialList) {
-<<<<<<< HEAD
                 System.out.println(tutorial.getSessionName() + " " + tutorial.getRegisteredStudent().size() + "/" + tutorial.getTotalVacancy());
-=======
-                System.out.println(tutorial.GetName() + " " + tutorial.GetRegisteredStudent().size() + "/" + tutorial.GetTotalVacancy());
->>>>>>> a4991a1b4d2351ecd2f8bb0fe63db0f105609121
 
 
             }
@@ -145,11 +121,7 @@ public class ReadingManager
             System.out.println("The Vacancy of Lab Groups of " + courseTitle + " is as following: ");
 
             for (Lab lab : labList) {
-<<<<<<< HEAD
                 System.out.println(lab.getSessionName() + " " + lab.getRegisteredStudent().size() + "/" + lab.getTotalVacancy());
-=======
-                System.out.println(lab.GetName() + " " + lab.GetRegisteredStudent().size() + "/" + lab.GetTotalVacancy());
->>>>>>> a4991a1b4d2351ecd2f8bb0fe63db0f105609121
 
 
             }
@@ -184,35 +156,21 @@ public class ReadingManager
         String transcriptOutcome = "Matric No: " + studentMatricTranscript + "\n";
         HashMap<String, ArrayList<AssessmentComponent>> courseAndResult;
         HashMap<String, ArrayList<AssessmentComponent>> currentCourse;
-        int count = 2;
-        float overallMark = 0;
         //read Results file to get results
         for(Student student : dataContainer.getStudentsList()) {
-<<<<<<< HEAD
             if (student.getMatricNumber().equals(studentMatricTranscript)){
                 transcriptOutcome += "Student Name: " + student.getName() + "\n";
             }
-=======
-            if (student.getMatricNumber().toUpperCase().equals(studentMatricTranscript.toUpperCase())) {
-                transcriptOutcome += "Student Name: " + student.GetStudentName() + "\n";
->>>>>>> a4991a1b4d2351ecd2f8bb0fe63db0f105609121
 
-                courseAndResult = student.GetCourseAndResult();
-                for (String key : courseAndResult.keySet()) {
+            courseAndResult = student.GetCourseAndResult();
+            for (String key : courseAndResult.keySet()){
                     transcriptOutcome += key + "\n" + "Overall Mark: " + "\n";
                     ArrayList<AssessmentComponent> components = courseAndResult.get(key);
-                    for (AssessmentComponent component : components) {
-                        if (count > 0) {
-                            overallMark += component.getWeightage() * component.getResult();
-                            count--;
-                        }
-                        transcriptOutcome += "\t" + component.getAssessmentType() + " " + component.getWeightage() + " "
-                                + component.getResult() + "\n";
+                    for (AssessmentComponent component : components){
+                        transcriptOutcome += "\t" + component.getAssessmentType() + " " + component.getWeightage() + " " + component.getResult() + "\n";
                     }
-                }
-
             }
-        }transcriptOutcome += "\tOverall (Exam + Coursework): " + overallMark;
+        }
         System.out.println(transcriptOutcome);
     }
     
