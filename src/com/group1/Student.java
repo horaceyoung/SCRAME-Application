@@ -1,12 +1,9 @@
 package com.group1;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.io.File;
-import java.util.Scanner;
 
-public class Student implements java.io.Serializable
+public class Student implements java.io.Serializable, People
 {
 	private String studentName;
 	private String marticNumber;
@@ -19,9 +16,13 @@ public class Student implements java.io.Serializable
     public String getMatricNumber(){
         return this.marticNumber;
     }
-	public String GetStudentName(){
+	public String getName(){
         return studentName;
         }
+
+    public void setName(String name){
+	    this.studentName=name;
+    }
 
 
 	public HashMap<String,ArrayList<AssessmentComponent>> GetCourseAndResult(){
