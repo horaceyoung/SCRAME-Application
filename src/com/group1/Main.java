@@ -103,8 +103,7 @@ public class Main {
                         try{
                             if (!Validation.CheckCourseExisted(courseName.toUpperCase(),dataContainer)) {
                                 System.out.println("The course you entered does not exist. Please add this course first.\n");
-                                System.out.println("Please key in Course Code");
-                                courseName = sc.nextLine();
+                                continue;
 
                             }
                             else{
