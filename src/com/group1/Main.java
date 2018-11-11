@@ -4,6 +4,7 @@ import Exceptions.*;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -126,7 +127,7 @@ public class Main {
                                         System.out.println("Please type the name of a tutorial to check students enrolled in: ");
                                         int i = 1;
                                         while (i <= newCourse.GetTutorialList().size()) {
-                                            System.out.println(i + ". " + newCourse.GetTutorialList().get(i - 1).getSessionName());
+                                            System.out.println(i + ". " + newCourse.GetTutorialList().get(i - 1).sessionName);
                                             i++;
                                         }
                                         tutorialName = in.nextLine();
@@ -137,7 +138,7 @@ public class Main {
                                         boolean found=false;
 
                                         for(Tutorial tutorial:tutorialList){
-                                            if(tutorialName.equals(tutorial.getSessionName())){
+                                            if(tutorialName.equals(tutorial.sessionName)){
                                                 thisTutorial = tutorial;
                                                 found=true;
                                                 }
@@ -152,7 +153,7 @@ public class Main {
                                         System.out.println("Please type the name of a lab to check students enrolled in: ");
                                         int i = 1;
                                         while (i <= newCourse.GetLabList().size()) {
-                                            System.out.println(i + ". " + newCourse.GetLabList().get(i - 1).getSessionName());
+                                            System.out.println(i + ". " + newCourse.GetLabList().get(i - 1).sessionName);
                                             i++;
                                         }
                                         labName = in.nextLine();
@@ -163,7 +164,7 @@ public class Main {
                                         boolean found=false;
 
                                         for(Lab lab:labList){
-                                            if(labName.equals(lab.getSessionName())){
+                                            if(labName.equals(lab.sessionName)){
                                                 thisLab = lab;
                                                 found=true;
                                             }

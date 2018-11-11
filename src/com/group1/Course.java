@@ -83,13 +83,13 @@ public class Course implements java.io.Serializable{
                             Tutorial newSession = new Tutorial(GroupName, vacancy);
                             tutorialGroups.add(newSession);
                             System.out.println("Add " + type + " No." + String.valueOf(i+1)+ " Success: " + "The tutorial group name is "+
-                                    newSession.getSessionName() + " and the vacancy is " + String.valueOf(newSession.getTotalVacancy())+". ");
+                                    newSession.GetName() + " and the vacancy is " + String.valueOf(newSession.GetTotalVacancy())+". ");
                         }
                         else if(type.equals("Lab")){
                             Lab newSession = new Lab(GroupName, vacancy);
                             labGroups.add((newSession));
                             System.out.println("Add " + type + " No." + String.valueOf(i+1)+ " Success: " + "The lab group name is "+
-                                    newSession.getSessionName() + " and the vacancy is " + String.valueOf(newSession.getTotalVacancy())+". ");
+                                    newSession.GetName() + " and the vacancy is " + String.valueOf(newSession.GetTotalVacancy())+". ");
                         }
                     }
                     else{

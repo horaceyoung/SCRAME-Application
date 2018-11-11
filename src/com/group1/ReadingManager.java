@@ -19,37 +19,39 @@ public class ReadingManager
             return;
         }
 
+
         System.out.println("Students registered in " + course.getCourseTitle() + " : ");
         ArrayList<Student> studentList = course.GetStudentList();
         for(Student student : studentList){
-            System.out.println(student.getMatricNumber() + student.getName());
+            System.out.println(student.getMatricNumber() + student.GetStudentName());
         }
     }
 
 
 
     public static void printStudentList(Tutorial tutorial) throws IOException {
-        if(tutorial.getRegisteredStudent().isEmpty()){
-            System.out.println(tutorial.getSessionName()+ " currently has no student enrolled in.");
+        if(tutorial.GetRegisteredStudent().isEmpty()){
+            System.out.println(tutorial.sessionName+ " currently has no student enrolled in.");
             return;
         }
-        System.out.println("Students registered in tutorial group " + tutorial.getSessionName() + " : ");
+        System.out.println("Students registered in tutorial group " + tutorial.sessionName + " : ");
         ArrayList<Student> studentList = tutorial.getStudentList();
         for(Student student : studentList){
-            System.out.println(student.getMatricNumber() + student.getName());
+            System.out.println(student.getMatricNumber() + student.GetStudentName());
         }
     }
 
     public static void printStudentList(Lab lab) throws IOException {
-        if(lab.getRegisteredStudent().isEmpty()){
-            System.out.println(lab.getSessionName()+ " currently has no student enrolled in.");
+        if(lab.GetRegisteredStudent().isEmpty()){
+            System.out.println(lab.sessionName+ " currently has no student enrolled in.");
             return;
         }
 
-        System.out.println("Students registered in lab group" + lab.getSessionName() + " : ");
+
+        System.out.println("Students registered in lab group" + lab.sessionName + " : ");
         ArrayList<Student> studentList = lab.getStudentList();
         for(Student student : studentList){
-            System.out.println(student.getMatricNumber() + student.getName());
+            System.out.println(student.getMatricNumber() + student.GetStudentName());
         }
     }
 
@@ -84,7 +86,7 @@ public class ReadingManager
             System.out.println("The Vacancy of Tutorial Groups of " + courseTitle + " is as following: ");
 
             for (Tutorial tutorial : tutorialList) {
-                System.out.println(tutorial.getSessionName() + " " + tutorial.getRegisteredStudent().size() + "/" + tutorial.getTotalVacancy());
+                System.out.println(tutorial.sessionName + " " + tutorial.GetRegisteredStudent().size() + "/" + tutorial.totalVacancy);
 
 
             }
@@ -121,7 +123,7 @@ public class ReadingManager
             System.out.println("The Vacancy of Lab Groups of " + courseTitle + " is as following: ");
 
             for (Lab lab : labList) {
-                System.out.println(lab.getSessionName() + " " + lab.getRegisteredStudent().size() + "/" + lab.getTotalVacancy());
+                System.out.println(lab.sessionName + " " + lab.GetRegisteredStudent().size() + "/" + lab.totalVacancy);
 
 
             }
@@ -143,7 +145,7 @@ public class ReadingManager
 
         ArrayList<Tutorial> tutorialList = thisCourse.GetTutorialList();
         for(Tutorial tutorial:tutorialList){
-            if(tutorial.haveVacancy())
+            if(tutorial.HaveVacancy())
                 haveVacancy = true;
         }
 
@@ -159,7 +161,7 @@ public class ReadingManager
         //read Results file to get results
         for(Student student : dataContainer.getStudentsList()) {
             if (student.getMatricNumber().equals(studentMatricTranscript)){
-                transcriptOutcome += "Student Name: " + student.getName() + "\n";
+                transcriptOutcome += "Student Name: " + student.GetStudentName() + "\n";
             }
 
             courseAndResult = student.GetCourseAndResult();

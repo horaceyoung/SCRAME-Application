@@ -64,7 +64,7 @@ public class EditingManager
 
                     int i = 1;
                     while (i <= newCourse.GetTutorialList().size()) {
-                        System.out.println(i + ". " + newCourse.GetTutorialList().get(i - 1).sessionName + "\t Vacancy: "+(newCourse.GetTutorialList().get(i - 1).getTotalVacancy()-newCourse.GetTutorialList().get(i - 1).getRegisteredStudent().size()));
+                        System.out.println(i + ". " + newCourse.GetTutorialList().get(i - 1).sessionName + "\t Vacancy: "+(newCourse.GetTutorialList().get(i - 1).GetTotalVacancy()-newCourse.GetTutorialList().get(i - 1).GetRegisteredStudent().size()));
                         i++;
                     }
                     tutorialName = in.nextLine();
@@ -81,7 +81,7 @@ public class EditingManager
                     System.out.println("Please select a lab to be enrolled in:");
                     int i=1;
                     while(i<=newCourse.GetLabList().size()){
-                        System.out.println(i+". "+newCourse.GetLabList().get(i-1).sessionName+"\t Vacancy: "+(newCourse.GetLabList().get(i - 1).getTotalVacancy()-newCourse.GetLabList().get(i - 1).getRegisteredStudent().size()));
+                        System.out.println(i+". "+newCourse.GetLabList().get(i-1).sessionName+"\t Vacancy: "+(newCourse.GetLabList().get(i - 1).GetTotalVacancy()-newCourse.GetLabList().get(i - 1).GetRegisteredStudent().size()));
                         i++;
                     }
                     labName = in.nextLine();
@@ -106,7 +106,7 @@ public class EditingManager
         ArrayList<AssessmentComponent> result = new ArrayList<>();
         studentCourseList.put(course.getCourseTitle(), result);
 
-        System.out.println("Student " + thisStudent.getMatricNumber() + " " + thisStudent.getName() + " has been registered to Course " + course.getCourseTitle());
+        System.out.println("Student " + thisStudent.getMatricNumber() + " " + thisStudent.GetStudentName() + " has been registered to Course " + course.getCourseTitle());
     }
 
     public boolean RegisterStudentToTutorial(Student student, Course course, String tutorialName)
@@ -128,11 +128,11 @@ public class EditingManager
             }
             if (found == false) throw new TutorialGroupNonExistentException();
 
-            if (!thisTutorial.haveVacancy())
+            if (!thisTutorial.HaveVacancy())
                 throw new TutorialOrLabNoVacancyException();
-            thisTutorial.getRegisteredStudent().add(student);
+            thisTutorial.GetRegisteredStudent().add(student);
 
-            System.out.println("Student " + student.getMatricNumber() + " " + student.getName() + " has been registered to " + tutorialName + "  bof course " + course.getCourseTitle());
+            System.out.println("Student " + student.getMatricNumber() + " " + student.GetStudentName() + " has been registered to " + tutorialName + "  bof course " + course.getCourseTitle());
 
             return true;
         } catch (TutorialGroupNonExistentException e)
@@ -167,11 +167,11 @@ public class EditingManager
             if (found == false)
                 throw new LabGroupNonExistentException();
 
-            if (!thisLab.haveVacancy())
+            if (!thisLab.HaveVacancy())
                 throw new TutorialOrLabNoVacancyException();
-            thisLab.getRegisteredStudent().add(student);
+            thisLab.GetRegisteredStudent().add(student);
 
-            System.out.println("Student " + student.getMatricNumber() + " " + student.getName() + " has been registered to " + labName + " of course " + course.getCourseTitle());
+            System.out.println("Student " + student.getMatricNumber() + " " + student.GetStudentName() + " has been registered to " + labName + " of course " + course.getCourseTitle());
             return true;
         } catch (LabGroupNonExistentException e)
         {

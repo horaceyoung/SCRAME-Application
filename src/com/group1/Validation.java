@@ -29,7 +29,7 @@ public class Validation
         for ( Course currCourse:container.getCourseList()){
             if (currCourse.getCourseTitle().equals(courseName.toUpperCase())) {
                 for (Tutorial currTut: currCourse.GetTutorialList()){
-                    if(currTut.getSessionName().equals(tutGroupName.toUpperCase()))
+                    if(currTut.GetName().equals(tutGroupName.toUpperCase()))
                         return true;
                 }
             }
@@ -41,7 +41,7 @@ public class Validation
         for ( Course currCourse:container.getCourseList()){
             if (currCourse.getCourseTitle().equals(courseName.toUpperCase())) {
                 for (Lab currLab: currCourse.GetLabList()){
-                    if(currLab.getSessionName().equals(labGroupName.toUpperCase()))
+                    if(currLab.GetName().equals(labGroupName.toUpperCase()))
                         return true;
                 }
             }

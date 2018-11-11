@@ -1,10 +1,15 @@
 package com.group1;
+import Exceptions.NameNotValidException;
+import Exceptions.TutorialLabNameInvalidException;
+import Exceptions.TutorialLabNumberInvalidException;
+import Exceptions.WeightageNotValidException;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
-
+import java.util.Scanner;
 public class Session implements java.io.Serializable{
-    private String sessionName;
-    private int totalVacancy;
+    String sessionName;
+    int totalVacancy;
     private ArrayList<Student> registeredStudent = new ArrayList<>();
 
 
@@ -16,17 +21,17 @@ public class Session implements java.io.Serializable{
         this.sessionName = sessionName;
         this.totalVacancy = totalVacancy;
     }
-    public ArrayList<Student> getRegisteredStudent(){return registeredStudent;}
+    public ArrayList<Student> GetRegisteredStudent(){return registeredStudent;}
 
-    public String getSessionName(){
+    public String GetName(){
         return sessionName;
     }
 
     public ArrayList<Student> getStudentList(){ return registeredStudent; }
 
-    public int getTotalVacancy(){ return totalVacancy; }
+    public int GetTotalVacancy(){ return totalVacancy; }
 
-    public boolean haveVacancy(){
+    public boolean HaveVacancy(){
         if(registeredStudent.size()<totalVacancy)
             return true;
         return false;
