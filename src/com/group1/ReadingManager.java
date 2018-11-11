@@ -256,6 +256,14 @@ public class ReadingManager
                 }
 
             }
+            catch (TutorialLabNotAvailableException e){
+                System.out.println(e.getMessage());
+                continue;
+            }
+            catch (CourseNotFoundException e){
+                System.out.println(e.getMessage());
+                continue;
+            }
             catch (Exception e){
                 System.out.println(e.getMessage());
                 continue;
