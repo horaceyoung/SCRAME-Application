@@ -95,14 +95,18 @@ public class Main {
                     break;
                 case 5:
                 //Testcase 5: Print student list by lecture, tutorial or lab
-                    System.out.println("Please key in Course Code");
-                    Scanner sc = new Scanner(System.in);
-                    String courseName = sc.nextLine();
-                    while (true) {
-                        try{
-                            if (!Validation.CheckCourseExisted(courseName.toUpperCase(),dataContainer))
-                                System.out.println("The course you entered does not exist. Please add this course first.\n");
 
+                    while (true) {
+                        System.out.println("Please key in Course Code");
+                        Scanner sc = new Scanner(System.in);
+                        String courseName = sc.nextLine();
+                        try{
+                            if (!Validation.CheckCourseExisted(courseName.toUpperCase(),dataContainer)) {
+                                System.out.println("The course you entered does not exist. Please add this course first.\n");
+                                System.out.println("Please key in Course Code");
+                                courseName = sc.nextLine();
+
+                            }
                             else{
                                 ArrayList<Course> courseList = dataContainer.getCourseList();
                                 for(Course course:courseList){
@@ -121,6 +125,11 @@ public class Main {
                                     break;
                                 }
                                 else if(printList.equals("TUT")) {
+                                    if(!newCourse.HaveTutorial())
+                                    {
+                                        System.out.println("The course you have chosen does not have tutorials.");
+                                        continue;
+                                    }
                                     System.out.println("Please type the name of a tutorial to check students enrolled in: ");
                                     int i = 1;
                                     while (i <= newCourse.GetTutorialList().size()) {
@@ -147,6 +156,11 @@ public class Main {
                                     break;
                                 }
                                 else if(printList.equals("LAB")) {
+                                    if(!newCourse.HaveLab())
+                                    {
+                                        System.out.println("The course you have chosen does not have labs.");
+                                        continue;
+                                    }
                                     System.out.println("Please type the name of a lab to check students enrolled in: ");
                                     int i = 1;
                                     while (i <= newCourse.GetLabList().size()) {
