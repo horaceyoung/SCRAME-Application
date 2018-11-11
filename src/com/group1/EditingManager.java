@@ -361,13 +361,13 @@ public class EditingManager
             if (Validation.ValidateFloatInput(mark) && Float.parseFloat(mark) >= 0 && Float.parseFloat(mark) <= 100)
             {
                 newcomponent.setResult(Float.parseFloat(mark));
-                student.GetCourseAndResult().get(coursetitle).add(newcomponent);
+                student.GetCourseAndResult().get(coursetitle).add(0,newcomponent);
                 break;
 
             } else
             {
                 System.out.println("MarkNotValidException: The mark you entered for the component is not valid. Please check format. You are going to restart mark entering");
-                student.ClearHashmapValue(coursetitle);
+
             }
 
 
@@ -386,6 +386,7 @@ public class EditingManager
         Scanner scanner = new Scanner(System.in);
         Student student = null;
         Course course = null;
+        ArrayList<AssessmentComponent> templist = new ArrayList<>();
 
         for (Course mycourse : container.getCourseList())
         {
@@ -427,7 +428,7 @@ public class EditingManager
         int y = 1;
         int z = 1;
         float courseworkresult = 0;
-
+        AssessmentComponent coursework = new AssessmentComponent(0,"coursework");
         while ( z == 1)
         {
             if (course.GetSubComponents().isEmpty())
@@ -441,12 +442,15 @@ public class EditingManager
 
                     courseworkresult =Float.parseFloat(mark);// newcomponent.getWeightage() *
                     newcomponent.setResult(courseworkresult);
-                    student.GetCourseAndResult().get(coursetitle).add(newcomponent);
+                    templist.add(newcomponent);
+                    coursework = newcomponent;
+                    //student.GetCourseAndResult().get(coursetitle).add(newcomponent);
                     z = 0;
                 } else
                 {
                     System.out.println("MarkNotValidException: The mark you entered for the component is not valid. Please check format. You are going to restart mark entering");
-                    student.ClearHashmapValue(coursetitle);
+                    templist.clear();
+                    //student.ClearHashmapValue(coursetitle);
                     courseworkresult = 0;
                     z = 1;
                 }
@@ -455,7 +459,9 @@ public class EditingManager
             {
                 y = 1;
                 AssessmentComponent newcomponent = new AssessmentComponent(course.GetComponents().get(1));
-                student.GetCourseAndResult().get(coursetitle).add(newcomponent);
+                templist.add(newcomponent);
+                coursework = newcomponent;
+                //student.GetCourseAndResult().get(coursetitle).add(newcomponent);
                 z = 0;
             }
         }
@@ -472,12 +478,15 @@ public class EditingManager
                 {
                     newcomponent.setResult(Float.parseFloat(mark));
                     courseworkresult += newcomponent.getWeightage() * newcomponent.getResult();
-                    student.GetCourseAndResult().get(coursetitle).add(newcomponent);
+                    templist.add(newcomponent);
+                    //student.GetCourseAndResult().get(coursetitle).add(newcomponent);
                     y = 0;
                 } else
                 {
                     System.out.println("MarkNotValidException: The mark you entered for the component is not valid. Please check format. You are going to restart mark entering");
-                    student.ClearHashmapValue(coursetitle);
+                    //student.ClearHashmapValue(coursetitle);
+                    templist.clear();
+                    templist.add(coursework);
                     courseworkresult = 0;
 
                     y = 1;
@@ -488,9 +497,12 @@ public class EditingManager
         }
 
 
-
-        student.GetCourseAndResult().get(coursetitle).get(1).setResult(courseworkresult);
-
+        templist.get(0).setResult(courseworkresult);
+        //student.GetCourseAndResult().get(coursetitle).get(1).setResult(courseworkresult);
+        for (AssessmentComponent item : templist)
+        {
+            student.GetCourseAndResult().get(coursetitle).add(item);
+        }
         System.out.println("You have successfully assigned the course work result for this student. Press any key to continue.");
         scanner.next();
 
