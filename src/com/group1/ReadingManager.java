@@ -238,14 +238,18 @@ public class ReadingManager
 
             try{
                 if(Validation.CheckCourseExisted(courseTitle, dataContainer)){
-                    int sessionChoice;
-                    System.out.println("Check Session Vacancy: Please select the type of session you wish to check by inputting corresponding integer value: \n 1. Tutorial \n2.Lab \n");
-                    sessionChoice=in.nextInt();
+                    System.out.println("Check Session Vacancy: Please select the type of session you wish to check by inputting corresponding integer value:\n 1. Tutorial \n2.Lab \n");
+                    String sessionChoice=in.next();
+                    if(!sessionChoice.equals("1")&&!sessionChoice.equals("2"))
+                    {
+                        System.out.println("Please input valid choices.");
+                        continue;
+                    }
                     switch (sessionChoice){
-                        case 1:
+                        case "1":
                             ReadingManager.PrintTutorialVacancy(courseTitle, dataContainer);
                             break;
-                        case 2:
+                        case "2":
                             ReadingManager.PrintLabVacancy(courseTitle, dataContainer);
                             break;
                     }
