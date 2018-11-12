@@ -188,7 +188,6 @@ public class ReadingManager
     public static void printCourseStatistics(String courseTitle, DataContainer datacontainer){
     	Course thisCourse = null;
     	ArrayList<Student> studentList = new ArrayList<>();
-    	
         for(Course course: datacontainer.getCourseList()){
             if (course.getCourseTitle().equals(courseTitle.toUpperCase())) {
             	thisCourse = course;
