@@ -264,7 +264,7 @@ public class Main {
 
                 case 9:
 
-                 //testcase 8: Print course statistics
+                 //testcase 9: Print course statistics
                  //Show grade percentage for overall (exam + coursework)
                  //exam only and coursework only.
                     System.out.println("Please enter Course Code to check for course statistics");
@@ -278,7 +278,7 @@ public class Main {
                         break;
 
             case 10:
-            	//test case 9: Print student transcript.
+            	//test case 10: Print student transcript.
             	//individual overall course mark and grade for all the courses registered
             	//individual component marks ¨C exam, coursework, subcomponents from Result.txt 
             	//The configured weightages should be displayed as well
