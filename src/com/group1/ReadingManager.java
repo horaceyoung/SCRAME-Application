@@ -188,7 +188,6 @@ public class ReadingManager
     public static void printCourseStatistics(String courseTitle, DataContainer datacontainer){
     	Course thisCourse = null;
     	ArrayList<Student> studentList = new ArrayList<>();
-    	
         for(Course course: datacontainer.getCourseList()){
             if (course.getCourseTitle().equals(courseTitle.toUpperCase())) {
             	thisCourse = course;
@@ -218,7 +217,7 @@ public class ReadingManager
         float overallAve = examAve * result.get(0).getWeightage()+courseWorkAve*result.get(1).getWeightage();
 
 
-        System.out.println("Course" + courseTitle+" Statistics: Overall Percentage - "+overallAve +" Exam Percentage - "+examAve+" Course Work Percentage - "+courseWorkAve);
+        System.out.println("Course: " + courseTitle+"\nStatistics: Overall Percentage - "+overallAve +"\nExam Percentage - "+examAve+"\nCourse Work Percentage - "+courseWorkAve);
 
 
         }

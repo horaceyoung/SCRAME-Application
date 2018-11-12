@@ -264,21 +264,26 @@ public class Main {
 
                 case 9:
 
-                 //testcase 8: Print course statistics
+                 //testcase 9: Print course statistics
                  //Show grade percentage for overall (exam + coursework)
                  //exam only and coursework only.
                     System.out.println("Please enter Course Code to check for course statistics");
                     Scanner sc1 = new Scanner(System.in);
-                    String coursetitle = sc1.nextLine().toUpperCase();
-                        if (!Validation.CheckCourseExisted(coursetitle, dataContainer))
+                    String courseTitleName = sc1.nextLine().toUpperCase();
+                    try{
+                        if (!Validation.CheckCourseExisted(courseTitleName, dataContainer))
                             System.out.println("The course you entered does not exist. Please enter another course code.\n");
                         else{
-                            ReadingManager.printCourseStatistics(coursetitle, dataContainer);
-                         }
-                        break;
+                            ReadingManager.printCourseStatistics(courseTitleName, dataContainer);
+                            }
+                        }catch (IndexOutOfBoundsException e) {
+                        System.out.println("The course is currently empty. Please enter the course statistics before printing Course Statistics!");
+                    }
+                    break;
+
 
             case 10:
-            	//test case 9: Print student transcript.
+            	//test case 10: Print student transcript.
             	//individual overall course mark and grade for all the courses registered
             	//individual component marks ¨C exam, coursework, subcomponents from Result.txt 
             	//The configured weightages should be displayed as well
@@ -287,7 +292,7 @@ public class Main {
             	String studentMatricTranscript = sc2.nextLine();
             	if (!Validation.studentExists(studentMatricTranscript, dataContainer)) {
             			 System.out.println("The Matric Number does not exist.\n");
-            	}
+            	    }
             	else {
             			ReadingManager.printTranscript(studentMatricTranscript, dataContainer);
             	}
