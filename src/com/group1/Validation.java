@@ -15,7 +15,7 @@ public class Validation
         }
         return false;
     }
-    public static boolean CheckCourseExisted(String courseCode, DataContainer container){
+    public static boolean checkCourseExisted(String courseCode, DataContainer container){
 
         if(container.getCourseList().isEmpty())
             return false;
@@ -28,13 +28,13 @@ public class Validation
 
 
 
-    public static int CheckStudentResultsRecord(Student student, String coursetitle)
+    public static int checkStudentResultsRecord(Student student, String coursetitle)
     {
-        for(String key:student.GetCourseAndResult().keySet())
+        for(String key:student.getCourseAndResult().keySet())
         {
             if (key.equals(coursetitle))
             {
-                ArrayList<AssessmentComponent> listtemp = student.GetCourseAndResult().get(key);
+                ArrayList<AssessmentComponent> listtemp = student.getCourseAndResult().get(key);
                 return listtemp.size();
             }
         }
@@ -43,9 +43,9 @@ public class Validation
 
     }
 
-    public static Boolean CheckWhetherStudentRegisteredForACourse(Student student, String coursetitle)
+    public static Boolean checkWhetherStudentRegisteredForACourse(Student student, String coursetitle)
     {
-        for(String key:student.GetCourseAndResult().keySet())
+        for(String key:student.getCourseAndResult().keySet())
         {
             if (key.equals(coursetitle))
                 return true;
@@ -53,9 +53,9 @@ public class Validation
         return false;
     }
 
-    public static Boolean CheckWhetherHasAssessmentWeightage(Course course)
+    public static Boolean checkWhetherHasAssessmentWeightage(Course course)
     {
-        if (course.GetComponents().isEmpty())
+        if (course.getComponents().isEmpty())
             return false;
         else
             return true;
@@ -64,7 +64,7 @@ public class Validation
 
 
 
-    public static boolean ValidateNumberInput(String str){
+    public static boolean validateNumberInput(String str){
         try{
             int x = Integer.parseInt(str);
             return true;
@@ -76,7 +76,7 @@ public class Validation
     }
 
 
-    public static boolean ValidateFloatInput(String str){
+    public static boolean validateFloatInput(String str){
         try{
             float x = Float.parseFloat(str);
             return true;
@@ -85,7 +85,7 @@ public class Validation
             return false;
         }
     }
-    public static boolean ValidateWeightageSum(float f)
+    public static boolean validateWeightageSum(float f)
     {
         if (f == 1)
             return true;
@@ -93,14 +93,14 @@ public class Validation
             return false;
     }
 
-    public static boolean ValidateNameInput(String str){
+    public static boolean validateNameInput(String str){
         if (str.matches("[a-zA-Z\\s]*")) {
             return true;
         }
         else return false;
     }
 
-    public static boolean ValidateGroupNameInput(String str){
+    public static boolean validateGroupNameInput(String str){
         if (str.matches("[a-zA-Z0-9]*")) {
             return true;
         }
