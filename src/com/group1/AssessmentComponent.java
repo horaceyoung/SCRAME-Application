@@ -54,13 +54,13 @@ public class AssessmentComponent implements java.io.Serializable{
 
     /**
      * A method that gets the result of the assessment
-     * @return the value of result attribute
+     * @return the value of result attribute in float
      */
     public float getResult() {return result;}
 
     /**
      * A method that gets the type of the assessment
-     * @return the value of assessmentType attribute
+     * @return the value of assessmentType attribute in float
      */
     public String getAssessmentType(){return assessmentType;}
 

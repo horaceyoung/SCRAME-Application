@@ -39,15 +39,24 @@ public class Course implements java.io.Serializable{
      * An arraylsit of all labs for the course
      */
     private ArrayList<Lab> labGroups = new ArrayList<>();
-    private int maxTutorialsNumber = 20;
-    private int maxLabsNumber = 20;
+    /**
+     * An arraylist of all students that are registered to this course
+     */
     private ArrayList<Student> studentList = new ArrayList<>();
 
 
-
+    /**
+     * Constructing the course by entering the tile fo the course
+     * @param courseTitle Assigning the title of the course
+     */
     public Course(String courseTitle){
         this.courseTitle = courseTitle;
     }
+
+    /**
+     * A method to assign the coordinator of the course
+     * @param dataContainer the general class that contains everything
+     */
 
     public void AssignCoordinator(DataContainer dataContainer){
         Scanner in = new Scanner(System.in);
@@ -79,6 +88,11 @@ public class Course implements java.io.Serializable{
             AssignCoordinator(dataContainer); // Call the function again to perform the task
         }
     }
+
+    /**
+     * A method that adds a tutorial or lab to the respective arraylist.
+     * @param type A tutorial or a lab
+     */
 
     public void AddTutorialLabGroups(String type){
         Scanner in = new Scanner(System.in);
@@ -136,6 +150,12 @@ public class Course implements java.io.Serializable{
         }
     }
 
+    /**
+     * A method that assign a type of assessment to respective arraylist
+     * @param components A main component or a sub component
+     * @param assessmenttype The name of the component
+     */
+
     public void assignComponentWeightage(ArrayList<AssessmentComponent> components, String assessmenttype){
         Scanner in = new Scanner(System.in);
         System.out.println("Assign Components and Weightages:\nPlease input the weightage of the " + assessmenttype + " : (a float number between 0-1)");
@@ -156,21 +176,61 @@ public class Course implements java.io.Serializable{
 
     }
 
+    /**
+     * Get the title of the course
+     * @return the tile fo course in string
+     */
+
 
     public String getCourseTitle(){
         return courseTitle;
     }
+
+    /**
+     * Get the list of tutorial the course has
+     * @return an arraylist of tutorials
+     */
     public ArrayList<Tutorial> getTutorialList(){return tutorialGroups;}
+
+    /**
+     * Get the list of lab the course has
+     * @return an arraylist of labs
+     */
     public ArrayList<Lab> getLabList(){return labGroups;}
+
+    /**
+     * Get the main assessment component of the course
+     * @return an arraylist of component
+     */
     public ArrayList<AssessmentComponent> getComponents(){return components;}
+
+    /**
+     * Get the sub assessment component of the coursework
+     * @return an arraylist of component
+     */
     public ArrayList<AssessmentComponent> getSubComponents(){return subcomponents;}
+
+    /**
+     * Get all the students registered to this course
+     * @return an arraylist of students
+     */
     public ArrayList<Student> getStudentList(){ return studentList;}
+
+    /**
+     * Check whether the course has tutorial or not
+     * @return  true or flase
+     */
 
     public boolean haveTutorial(){
         if(this.tutorialGroups.isEmpty())
             return false;
         else return true;
     }
+
+    /**
+     * Check whether the course has lab or not
+     * @return  true or false
+     */
 
     public boolean haveLab(){
         if(this.labGroups.isEmpty())

@@ -7,8 +7,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 
+/**
+ * A controller class that incorporate all methods that related to editing the current classes
+ */
 public class EditingManager
 {
+    /**
+     * A method that handles the registration of  a sutdent into a course
+     * @param dataContainer a datacontainer that contains the student and the course
+     */
     public static void register(DataContainer dataContainer){
         String studentMatric;
         String courseTitle;
@@ -98,6 +105,12 @@ public class EditingManager
         }
     }
 
+    /**
+     * A method that register a student to a course
+     * @param thisStudent The student to be registered
+     * @param course The course to be registered to
+     */
+
     public static void registerStudentToCourseLecture(Student thisStudent, Course course)
     {
         course.getStudentList().add(thisStudent);
@@ -108,6 +121,14 @@ public class EditingManager
 
         System.out.println("Student " + thisStudent.getMatricNumber() + " " + thisStudent.getName() + " has been registered to Course " + course.getCourseTitle());
     }
+
+    /**
+     * A method to register a student for a tutorial of a course
+     * @param student The student to be registered
+     * @param course  The course of the tutorial
+     * @param tutorialName the name of the tutorial
+     * @return a bool whether the registration is successful
+     */
 
     public static boolean registerStudentToTutorial(Student student, Course course, String tutorialName)
     {

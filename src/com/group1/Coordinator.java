@@ -14,7 +14,7 @@ public class Coordinator implements java.io.Serializable{
     private String school;
 
     /**
-     *  Constructing the class by inputing the attribute values
+     *  Constructing the coordinator by inputing the attribute values
      * @param name Assigning the name of the coordinator
      * @param school Assigning the school of the coordinator
      */
@@ -25,7 +25,7 @@ public class Coordinator implements java.io.Serializable{
 
     /**
      * A method getting the name of the coordinator
-     * @return the name
+     * @return the name in string
      */
 
     public String getCoordinatorName(){
@@ -34,7 +34,7 @@ public class Coordinator implements java.io.Serializable{
 
     /**
      * A method getting the school of the coordinator
-     * @return the school name
+     * @return the school name in string
      */
 
     public String getCoordinatorSchool(){
