@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+
 public class Main {
 
     public static void main(String[] args)
@@ -31,6 +32,7 @@ public class Main {
             FileInputStream fileIn = new FileInputStream("data/SerializableDataContainer.ser");
             ObjectInputStream objectIn = new ObjectInputStream(fileIn);
             dataContainer = (DataContainer) objectIn.readObject();
+            ReadingManager.readProefessors(dataContainer);
             dataContainer.professors.add(new Professor("Li Fang", "SCSE"));
             dataContainer.professors.add(new Professor("Jack", "SCSE"));
             dataContainer.professors.add(new Professor("John", "SCSE"));
