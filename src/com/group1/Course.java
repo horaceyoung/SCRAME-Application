@@ -8,36 +8,12 @@ import Exceptions.WeightageNotValidException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-/**
- * A serializable class that comprehends all relevant information for a course
- */
 public class Course implements java.io.Serializable{
-
-    /**
-     * A string representing the title of the course
-     */
     private String courseTitle;
-    /**
-     * A coordinator in charge of this course
-     */
     private Coordinator coordinator;
-    /**
-     * An arraylist of main assessment component ( exam and coursework)
-     */
     private ArrayList<AssessmentComponent> components = new ArrayList<>();
-
-    /**
-     * An arraylist of sub-components of coursework
-     */
     private ArrayList<AssessmentComponent> subcomponents = new ArrayList<>();
-
-    /**
-     * An arraylist of all tutorials for the course
-     */
     private ArrayList<Tutorial> tutorialGroups = new ArrayList<>();
-    /**
-     * An arraylsit of all labs for the course
-     */
     private ArrayList<Lab> labGroups = new ArrayList<>();
     private int maxTutorialsNumber = 20;
     private int maxLabsNumber = 20;
@@ -57,7 +33,7 @@ public class Course implements java.io.Serializable{
             System.out.println("Assign the coordinator of the course: " + courseTitle + ". Please Input the name of the coordinator: ");
             String coordinatorName = in.nextLine();
 
-            if(!Validation.validateNameInput(coordinatorName)) // If the input is not valid, throws exception
+            if(!Validation.ValidateNameInput(coordinatorName)) // If the input is not valid, throws exception
                 throw new NameNotValidException();
 
             for (Professor prof : dataContainer.getProfessors()){
@@ -87,33 +63,33 @@ public class Course implements java.io.Serializable{
             String rawNumTutorialGroups = in.nextLine();
             int numTutorialGroups;
 
-            if(Validation.validateNumberInput(rawNumTutorialGroups)){ // If the parse result returns true, AKA the input is a valid integer, otherwise throw exception in else block
+            if(Validation.ValidateNumberInput(rawNumTutorialGroups)){ // If the parse result returns true, AKA the input is a valid integer, otherwise throw exception in else block
                 numTutorialGroups = Integer.parseInt(rawNumTutorialGroups);
                 for(int i = 0 ; i < numTutorialGroups ; i++){
                     System.out.println("Add " + type + " NO." + String.valueOf(i+1) + ". Please input the name of the "+ type + "Group: ");
                     String GroupName = in.nextLine();
 
-                    if (!Validation.validateGroupNameInput(GroupName))
+                    if (!Validation.ValidateGroupNameInput(GroupName))
                         throw new TutorialLabNameInvalidException();
 
                     System.out.println("Add " + type + " NO." + String.valueOf(i+1) + ". Please input the vacancy of the "+ type + " Group: ");
                     String rawTutorialVacancy = in.nextLine();
 
                     int vacancy;
-                    if(Validation.validateNumberInput(rawTutorialVacancy)){
+                    if(Validation.ValidateNumberInput(rawTutorialVacancy)){
                         vacancy = Integer.parseInt(rawTutorialVacancy);
                         // The following block works differently for Tutorial and Lab
                         if(type.equals("Tutorial")) {
                             Tutorial newSession = new Tutorial(GroupName, vacancy);
                             tutorialGroups.add(newSession);
                             System.out.println("Add " + type + " No." + String.valueOf(i+1)+ " Success: " + "The tutorial group name is "+
-                                    newSession.getName() + " and the vacancy is " + String.valueOf(newSession.getTotalVacancy())+". ");
+                                    newSession.GetName() + " and the vacancy is " + String.valueOf(newSession.GetTotalVacancy())+". ");
                         }
                         else if(type.equals("Lab")){
                             Lab newSession = new Lab(GroupName, vacancy);
                             labGroups.add((newSession));
                             System.out.println("Add " + type + " No." + String.valueOf(i+1)+ " Success: " + "The lab group name is "+
-                                    newSession.getName() + " and the vacancy is " + String.valueOf(newSession.getTotalVacancy())+". ");
+                                    newSession.GetName() + " and the vacancy is " + String.valueOf(newSession.GetTotalVacancy())+". ");
                         }
                     }
                     else{
@@ -141,7 +117,7 @@ public class Course implements java.io.Serializable{
         System.out.println("Assign Components and Weightages:\nPlease input the weightage of the " + assessmenttype + " : (a float number between 0-1)");
         String rawWeightage = in.nextLine();
         try{
-            if(!Validation.validateFloatInput(rawWeightage) ||  Float.parseFloat(rawWeightage ) <= 0 || Float.parseFloat(rawWeightage ) >= 1){
+            if(!Validation.ValidateFloatInput(rawWeightage) ||  Float.parseFloat(rawWeightage ) <= 0 || Float.parseFloat(rawWeightage ) >= 1){
                 throw new WeightageNotValidException();
             }
             float examWeightage = Float.parseFloat(rawWeightage);
@@ -157,22 +133,31 @@ public class Course implements java.io.Serializable{
     }
 
 
+    public void AddTutorial(Tutorial sessionName){
+        this.tutorialGroups.add(sessionName);
+    }
+
+    public void AddLab(Lab sessionName){
+        this.labGroups.add(sessionName);
+    }
+
     public String getCourseTitle(){
         return courseTitle;
     }
-    public ArrayList<Tutorial> getTutorialList(){return tutorialGroups;}
-    public ArrayList<Lab> getLabList(){return labGroups;}
-    public ArrayList<AssessmentComponent> getComponents(){return components;}
-    public ArrayList<AssessmentComponent> getSubComponents(){return subcomponents;}
-    public ArrayList<Student> getStudentList(){ return studentList;}
+    public Coordinator GetCoordinator(){return coordinator;}
+    public ArrayList<Tutorial> GetTutorialList(){return tutorialGroups;}
+    public ArrayList<Lab> GetLabList(){return labGroups;}
+    public ArrayList<AssessmentComponent> GetComponents(){return components;}
+    public ArrayList<AssessmentComponent> GetSubComponents(){return subcomponents;}
+    public ArrayList<Student> GetStudentList(){ return studentList;}
 
-    public boolean haveTutorial(){
+    public boolean HaveTutorial(){
         if(this.tutorialGroups.isEmpty())
             return false;
         else return true;
     }
 
-    public boolean haveLab(){
+    public boolean HaveLab(){
         if(this.labGroups.isEmpty())
             return false;
         else return true;
