@@ -19,7 +19,6 @@ public class ReadingManager
             BufferedReader profIn = new BufferedReader(new FileReader("data/Professors.txt"));
             while((line = profIn.readLine())!=null){
                 Prof = line.split("\t");
-                System.out.println(dataContainer.professors.size());
                 dataContainer.professors.add(new Professor(Prof[0], Prof[1]));
             }
         }
