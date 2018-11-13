@@ -7,8 +7,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 
+/**
+ * A controller class that incorporate all methods that related to editing the current classes
+ */
 public class EditingManager
 {
+    /**
+     * A method that handles the registration of  a sutdent into a course
+     * @param dataContainer a datacontainer that contains the student and the course
+     */
     public static void register(DataContainer dataContainer){
         String studentMatric;
         String courseTitle;
@@ -98,6 +105,12 @@ public class EditingManager
         }
     }
 
+    /**
+     * A method that register a student to a course
+     * @param thisStudent The student to be registered
+     * @param course The course to be registered to
+     */
+
     public static void registerStudentToCourseLecture(Student thisStudent, Course course)
     {
         course.getStudentList().add(thisStudent);
@@ -108,6 +121,14 @@ public class EditingManager
 
         System.out.println("Student " + thisStudent.getMatricNumber() + " " + thisStudent.getName() + " has been registered to Course " + course.getCourseTitle());
     }
+
+    /**
+     * A method to register a student for a tutorial of a course
+     * @param student The student to be registered
+     * @param course  The course of the tutorial
+     * @param tutorialName the name of the tutorial
+     * @return a bool whether the registration is successful
+     */
 
     public static boolean registerStudentToTutorial(Student student, Course course, String tutorialName)
     {
@@ -145,6 +166,14 @@ public class EditingManager
             return false;
         }
     }
+
+    /**
+     * A method to register a student for a lab of a course
+     * @param student The student to be registered
+     * @param course  The course of the lab
+     * @param labName the name of the lab
+     * @return a bool whether the registration is successful
+     */
 
     public static boolean registerStudentToLab(Student student, Course course, String labName)
     {
@@ -184,6 +213,12 @@ public class EditingManager
         }
 
     }
+
+    /**
+     * A method to add an assessment component to the course
+     * @param courtsetitle the course tile of the course
+     * @param container the general container that contains everything
+     */
 
 
     public static void addCourseComponent(String courtsetitle, DataContainer container)
@@ -310,6 +345,13 @@ public class EditingManager
 
     }
 
+    /**
+     * A method to assign the exam result to a student
+     * @param matricnumber The student's matric number
+     * @param coursetitle The course of the result
+     * @param container The datacontainer that conatains everything
+     */
+
     public static void assignExamResults(String matricnumber, String coursetitle, DataContainer container)
     {
         Scanner scanner = new Scanner(System.in);
@@ -379,6 +421,13 @@ public class EditingManager
 
 
     }
+
+    /**
+     * A method to assign a coursework result to a student
+     * @param matricnumber The matric number of the student
+     * @param coursetitle The title of the course to be assesses
+     * @param container The datacontainer that contains everything
+     */
 
 
     public static void assignCourseworkResults(String matricnumber, String coursetitle, DataContainer container)

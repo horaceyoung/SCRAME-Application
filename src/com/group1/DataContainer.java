@@ -11,24 +11,52 @@ public class DataContainer implements java.io.Serializable{
 
     }
 
+    /**
+     * An arraylist of the student cohort
+     */
+
     private ArrayList<Student> studentsList = new ArrayList<>();
+
+    /**
+     * An arraylist of all courses
+     */
     private ArrayList<Course> courseList = new ArrayList<>();
+
+    /**
+     * An arraylist of all professors
+     */
     public ArrayList<Professor> professors = new ArrayList<>();
+
+    /**
+     * Gets all the course objects
+     * @return an arraylist of courses
+     */
 
     public ArrayList<Course> getCourseList()
     {
         return courseList;
     }
 
+    /**
+     * Get all the student objects
+     * @return an arraylist of student
+     */
     public ArrayList<Student> getStudentsList()
     {
         return studentsList;
     }
 
+    /**
+     * Get all the professors
+     * @return an arraylist of professors
+     */
+
     public ArrayList<Professor> getProfessors(){return professors;}
 
 
-
+    /**
+     * A method to create and add a new course object into the datacontainer
+     */
     public void addCourse() {
         System.out.println("Add Course: Please input the course title of the course. The course title shall only contain alphabets and numbers, not spaces.");
         Scanner in = new Scanner(System.in);
@@ -66,6 +94,10 @@ public class DataContainer implements java.io.Serializable{
             System.out.println(e.getMessage());
         }
     }
+
+    /**
+     * A method to create and add a new student object to the datacontainer
+     */
 
     public void addStudent(){
         Scanner sc = new Scanner(System.in);
