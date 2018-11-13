@@ -92,6 +92,7 @@ public class Main {
                     EditingManager.Register(dataContainer);
 =======
                    EditingManager.register(dataContainer);
+>>>>>>> d360b50fe57c9771d8597408cb8de74c0b86ac03
                     break;
                 case 4:
                 // Testcase 4: Check available slot in a class
