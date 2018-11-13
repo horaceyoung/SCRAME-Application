@@ -4,7 +4,7 @@ import Exceptions.CourseNotFoundException;
 import Exceptions.StudentResultNotExistentException;
 import Exceptions.TutorialLabNotAvailableException;
 
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
@@ -12,6 +12,23 @@ import java.util.Scanner;
 public class ReadingManager
 {
 
+    public static void readProefessors(DataContainer dataContainer){
+        String line;
+        String[] Prof;
+        try{
+            BufferedReader profIn = new BufferedReader(new FileReader("data/Professors.txt"));
+            while((line = profIn.readLine())!=null){
+                Prof = line.split("\t");
+                System.out.println(dataContainer.professors.size());
+                dataContainer.professors.add(new Professor(Prof[0], Prof[1]));
+            }
+        }
+        catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+
+
+    }
 
     public static void printStudentList(Course course) throws IOException {
         if(course.GetStudentList().isEmpty()){
