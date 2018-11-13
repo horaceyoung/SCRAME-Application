@@ -307,6 +307,7 @@ public class Main {
                         out.close();
                         fileOut.close();
                         System.out.println("The data has been successfully saved");
+                        System.exit(0);
 
                     }
                     catch (Exception e){
