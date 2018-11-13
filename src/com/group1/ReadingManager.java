@@ -9,9 +9,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 
+/**
+ * Reading Manager is the control class in charge of reading data from the dataContainer and prepare the data for other classes' use
+ */
 public class ReadingManager
 {
-
+    /**
+     * read the information of professors from an external txt file
+     * @param dataContainer the read professor object will be stored in the dataContainer
+     */
     public static void readProefessors(DataContainer dataContainer){
         String line;
         String[] Prof;
@@ -29,7 +35,12 @@ public class ReadingManager
 
     }
 
-    public static void printStudentList(Course course) throws IOException {
+    /**
+     * Print the list of students who registered a designated course
+     * @param course the course code the user wish to inquire
+     */
+
+    public static void printStudentList(Course course) {
         if(course.getStudentList().isEmpty()){
             System.out.println(course.getCourseTitle() + " currently has no student enrolled in.");
             return;
@@ -44,8 +55,11 @@ public class ReadingManager
     }
 
 
-
-    public static void printStudentList(Tutorial tutorial) throws IOException {
+    /**
+     * Print the list of students who registered a designated tutorial group
+     * @param tutorial the tutorial the user wish to inquire
+     */
+    public static void printStudentList(Tutorial tutorial) {
         if(tutorial.getRegisteredStudent().isEmpty()){
             System.out.println(tutorial.getName()+ " currently has no student enrolled in.");
             return;
@@ -57,7 +71,11 @@ public class ReadingManager
         }
     }
 
-    public static void printStudentList(Lab lab) throws IOException {
+    /**
+     * Print the list of students who registered a designated lab group
+     * @param lab the lab the user wish to inquire
+     */
+    public static void printStudentList(Lab lab) {
         if(lab.getRegisteredStudent().isEmpty()){
             System.out.println(lab.getName()+ " currently has no student enrolled in.");
             return;
@@ -71,6 +89,12 @@ public class ReadingManager
         }
     }
 
+    /**
+     * Check if a student has registered a certain course
+     * @param thisStudent The student which the user wish to inquire
+     * @param course The course which the user wish to inquire
+     * @return if the student has registered this course return true, otherwise return false
+     */
     public static boolean checkStudentRegisteredForCourse(Student thisStudent, Course course){
 
         ArrayList<Student> studentList = course.getStudentList();
@@ -83,8 +107,12 @@ public class ReadingManager
         return false;
     }
 
-
-    public static void printTutorialVacancy(String courseTitle, DataContainer dataContainer) throws IOException, TutorialLabNotAvailableException {
+    /**
+     *Print the vacancy of a designated tutorial
+     * @param courseTitle the course title that the tutorial belongs to
+     * @param dataContainer the dataContainer object that contains all the data
+     */
+    public static void printTutorialVacancy(String courseTitle, DataContainer dataContainer)  throws TutorialLabNotAvailableException{
         ArrayList<Tutorial> tutorialList = new ArrayList<>();
         ArrayList<Course> courseList = dataContainer.getCourseList();
         try {
@@ -110,7 +138,12 @@ public class ReadingManager
         catch (TutorialLabNotAvailableException e){System.out.println(e.getMessage());}
     }
 
-
+    /**
+     * Search a certain course from the database
+     * @param courseTitle The course title that the user wish to inquire
+     * @param dataContainer The dataContainer object that contains all the data
+     * @return a course if the course title exists, otherwise return null
+     */
     public static Course findCourse(String courseTitle, DataContainer dataContainer){
         Course newCourse = null;
         ArrayList<Course> courseList = dataContainer.getCourseList();
@@ -123,7 +156,12 @@ public class ReadingManager
         return newCourse;
     }
 
-    public static void printLabVacancy(String courseTitle, DataContainer dataContainer) throws IOException, TutorialLabNotAvailableException {
+    /**
+     * Print the vacancy of a certain lab
+     * @param courseTitle The course title that the lab belongs to
+     * @param dataContainer The dataContainer object that contains all the data
+     */
+    public static void printLabVacancy(String courseTitle, DataContainer dataContainer) {
         ArrayList<Lab> labList = new ArrayList<>();
         ArrayList<Course> courseList = dataContainer.getCourseList();
         try {
@@ -147,6 +185,12 @@ public class ReadingManager
         catch (TutorialLabNotAvailableException e){System.out.println(e.getMessage());}
     }
 
+    /**
+     * Check if the course still has vacancy, aka, both tutorials and lab groups have vacancies if the course has either tutorial or lab sessions, or the course only has lecture
+     * @param courseTitle The title of the course which the user wish to inquire
+     * @param dataContainer The dataContainer object that contains all the data
+     * @return
+     */
     public static boolean courseHaveVacancy(String courseTitle, DataContainer dataContainer){
         boolean haveVacancy = false;
         ArrayList<Course> courseList = dataContainer.getCourseList();
@@ -168,7 +212,12 @@ public class ReadingManager
         return haveVacancy;
 
     }
-    
+
+    /**
+     * Print the transcript of a student
+     * @param studentMatricTranscript The matriculation number of the student the user wish to inquire
+     * @param dataContainer The dataContainer object that contains all the data
+     */
     public static void printTranscript(String studentMatricTranscript, DataContainer dataContainer){
 
         String transcriptOutcome = "Matric No: " + studentMatricTranscript + "\n";
@@ -200,7 +249,11 @@ public class ReadingManager
         System.out.println(transcriptOutcome);
     }
 
-
+    /**
+     * Print the course's statistics, including the overall average grades, grades for individual components, and grades percentages
+     * @param courseTitle The course title which the user wish to inquire
+     * @param datacontainer The dataContainer object that contains all the data
+     */
     public static void printCourseStatistics(String courseTitle, DataContainer datacontainer){
         Course thisCourse = null;
         ArrayList<Student> studentList = new ArrayList<>();
@@ -403,7 +456,10 @@ public class ReadingManager
 
     }
 
-
+    /**
+     * The generic method to print vacancy for a specific type of session
+     * @param dataContainer The dataContainer object that contains all the data
+     */
     public static void printVacancy(DataContainer dataContainer){
         String studentMatric;
         String courseTitle;

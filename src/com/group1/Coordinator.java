@@ -1,5 +1,6 @@
 package com.group1;
 
+
 /**
  * A Serializable class of the coordinator of a course
  */
