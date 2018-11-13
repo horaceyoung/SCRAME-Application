@@ -53,7 +53,6 @@ public class Main {
         }
         catch (Exception e)
         {
-            System.out.println(e.getMessage());
             e.printStackTrace();
         }
         
@@ -75,8 +74,9 @@ public class Main {
                         + "| 8: Enter coursework marks for students            |" + "\n"
                         + "| 9. Print course statistics                        |" + "\n"
                         + "| 10. Print student transcript                      |" + "\n"
+                        + "| 11. Quit                                          |" + "\n"
                         + "|===================================================|" + "\n"
-                        + "| 0. Save and quit                                  |" + "\n"
+                        + "| 0. Save                                           |" + "\n"
                         + "|===================================================|" + "\n";
 
 
