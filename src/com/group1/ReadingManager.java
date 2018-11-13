@@ -31,16 +31,16 @@ public class ReadingManager
     }
 
     public static void printStudentList(Course course) throws IOException {
-        if(course.GetStudentList().isEmpty()){
+        if(course.getStudentList().isEmpty()){
             System.out.println(course.getCourseTitle() + " currently has no student enrolled in.");
             return;
         }
 
 
         System.out.println("Students registered in " + course.getCourseTitle() + " : ");
-        ArrayList<Student> studentList = course.GetStudentList();
+        ArrayList<Student> studentList = course.getStudentList();
         for(Student student : studentList){
-            System.out.println(student.getMatricNumber() + student.GetStudentName());
+            System.out.println(student.getMatricNumber() + student.getName());
         }
     }
 
@@ -54,7 +54,7 @@ public class ReadingManager
         System.out.println("Students registered in tutorial group " + tutorial.GetName() + " : ");
         ArrayList<Student> studentList = tutorial.GetRegisteredStudent();
         for(Student student : studentList){
-            System.out.println(student.getMatricNumber() + student.GetStudentName());
+            System.out.println(student.getMatricNumber() + student.getName());
         }
     }
 
@@ -68,13 +68,13 @@ public class ReadingManager
         System.out.println("Students registered in lab group" + lab.GetName() + " : ");
         ArrayList<Student> studentList = lab.GetRegisteredStudent();
         for(Student student : studentList){
-            System.out.println(student.getMatricNumber() + student.GetStudentName());
+            System.out.println(student.getMatricNumber() + student.getName());
         }
     }
 
     public static boolean CheckStudentRegisteredForCourse(Student thisStudent,Course course){
 
-        ArrayList<Student> studentList = course.GetStudentList();
+        ArrayList<Student> studentList = course.getStudentList();
 
         for(Student student:studentList){
             if(thisStudent.getMatricNumber().equals(student.getMatricNumber()))
@@ -91,9 +91,9 @@ public class ReadingManager
         try {
             for (Course course : courseList) {
                 if (courseTitle.equals(course.getCourseTitle())) {
-                    if (course.HaveTutorial() == false)
+                    if (course.haveTutorial() == false)
                         throw new TutorialLabNotAvailableException();
-                    else tutorialList = course.GetTutorialList();
+                    else tutorialList = course.getTutorialList();
 
                 }
             }
@@ -130,9 +130,9 @@ public class ReadingManager
         try {
             for (Course course : courseList) {
                 if (courseTitle.equals(course.getCourseTitle())) {
-                    if (course.HaveLab() == false)
+                    if (course.haveLab() == false)
                         throw new TutorialLabNotAvailableException();
-                    else labList= course.GetLabList();
+                    else labList= course.getLabList();
                 break;
                 }
             }
@@ -158,9 +158,9 @@ public class ReadingManager
                 break;
             }
         }
-        if(!thisCourse.HaveTutorial()) return true;
+        if(!thisCourse.haveTutorial()) return true;
 
-        ArrayList<Tutorial> tutorialList = thisCourse.GetTutorialList();
+        ArrayList<Tutorial> tutorialList = thisCourse.getTutorialList();
         for(Tutorial tutorial:tutorialList){
             if(tutorial.HaveVacancy())
                 haveVacancy = true;
@@ -180,7 +180,7 @@ public class ReadingManager
         //read Results file to get results
         for(Student student : dataContainer.getStudentsList()) {
             if (student.getMatricNumber().toUpperCase().equals(studentMatricTranscript.toUpperCase())) {
-                transcriptOutcome += "Student Name: " + student.GetStudentName() + "\n";
+                transcriptOutcome += "Student Name: " + student.getName() + "\n";
 
                 courseAndResult = student.GetCourseAndResult();
                 for (String key : courseAndResult.keySet()) {
@@ -211,7 +211,7 @@ public class ReadingManager
             	break;
             	}
         }
-        studentList=thisCourse.GetStudentList();
+        studentList=thisCourse.getStudentList();
         float examResult=0;
         float courseWorkResult=0;
         HashMap<String,ArrayList<AssessmentComponent>> resultList = new HashMap<>();

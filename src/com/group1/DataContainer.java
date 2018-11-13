@@ -29,7 +29,7 @@ public class DataContainer implements java.io.Serializable{
 
 
 
-    public void AddCourse() {
+    public void addCourse() {
         System.out.println("Add Course: Please input the course title of the course. The course title shall only contain alphabets and numbers, not spaces.");
         Scanner in = new Scanner(System.in);
         String courseTitle = "Default";
@@ -67,7 +67,7 @@ public class DataContainer implements java.io.Serializable{
         }
     }
 
-    public void AddStudent (){
+    public void addStudent(){
         Scanner sc = new Scanner(System.in);
         System.out.println("Add Student: Please input the Student Name.");
         String studentName = "Default";

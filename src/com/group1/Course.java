@@ -133,31 +133,22 @@ public class Course implements java.io.Serializable{
     }
 
 
-    public void AddTutorial(Tutorial sessionName){
-        this.tutorialGroups.add(sessionName);
-    }
-
-    public void AddLab(Lab sessionName){
-        this.labGroups.add(sessionName);
-    }
-
     public String getCourseTitle(){
         return courseTitle;
     }
-    public Coordinator GetCoordinator(){return coordinator;}
-    public ArrayList<Tutorial> GetTutorialList(){return tutorialGroups;}
-    public ArrayList<Lab> GetLabList(){return labGroups;}
-    public ArrayList<AssessmentComponent> GetComponents(){return components;}
-    public ArrayList<AssessmentComponent> GetSubComponents(){return subcomponents;}
-    public ArrayList<Student> GetStudentList(){ return studentList;}
+    public ArrayList<Tutorial> getTutorialList(){return tutorialGroups;}
+    public ArrayList<Lab> getLabList(){return labGroups;}
+    public ArrayList<AssessmentComponent> getComponents(){return components;}
+    public ArrayList<AssessmentComponent> getSubComponents(){return subcomponents;}
+    public ArrayList<Student> getStudentList(){ return studentList;}
 
-    public boolean HaveTutorial(){
+    public boolean haveTutorial(){
         if(this.tutorialGroups.isEmpty())
             return false;
         else return true;
     }
 
-    public boolean HaveLab(){
+    public boolean haveLab(){
         if(this.labGroups.isEmpty())
             return false;
         else return true;

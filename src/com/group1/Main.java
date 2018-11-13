@@ -4,7 +4,6 @@ import Exceptions.*;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 
@@ -81,15 +80,15 @@ public class Main {
             switch (choice){
                 case 1:
 		            //Testcase 1: Add in student
-                    dataContainer.AddStudent();
+                    dataContainer.addStudent();
                     break;
                 case 2:
                     // Testcase 2: Create the course
-                    dataContainer.AddCourse();
+                    dataContainer.addCourse();
                     break;
                 case 3:
                 // Testcase 3: Register student for a course
-                   EditingManager.Register(dataContainer);
+                   EditingManager.register(dataContainer);
                     break;
                 case 4:
                 // Testcase 4: Check available slot in a class
@@ -126,21 +125,21 @@ public class Main {
                                     break;
                                 }
                                 else if(printList.equals("TUT")) {
-                                    if(!newCourse.HaveTutorial())
+                                    if(!newCourse.haveTutorial())
                                     {
                                         System.out.println("The course you have chosen does not have tutorials.");
                                         continue;
                                     }
                                     System.out.println("Please type the name of a tutorial to check students enrolled in: ");
                                     int i = 1;
-                                    while (i <= newCourse.GetTutorialList().size()) {
-                                        System.out.println(i + ". " + newCourse.GetTutorialList().get(i - 1).GetName());
+                                    while (i <= newCourse.getTutorialList().size()) {
+                                        System.out.println(i + ". " + newCourse.getTutorialList().get(i - 1).GetName());
                                         i++;
                                     }
                                     tutorialName = in.nextLine();
 
 
-                                    tutorialList = newCourse.GetTutorialList();
+                                    tutorialList = newCourse.getTutorialList();
                                     Tutorial thisTutorial=null;
                                     boolean found=false;
 
@@ -157,21 +156,21 @@ public class Main {
                                     break;
                                 }
                                 else if(printList.equals("LAB")) {
-                                    if(!newCourse.HaveLab())
+                                    if(!newCourse.haveLab())
                                     {
                                         System.out.println("The course you have chosen does not have labs.");
                                         continue;
                                     }
                                     System.out.println("Please type the name of a lab to check students enrolled in: ");
                                     int i = 1;
-                                    while (i <= newCourse.GetLabList().size()) {
-                                        System.out.println(i + ". " + newCourse.GetLabList().get(i - 1).GetName());
+                                    while (i <= newCourse.getLabList().size()) {
+                                        System.out.println(i + ". " + newCourse.getLabList().get(i - 1).GetName());
                                         i++;
                                     }
                                     labName = in.nextLine();
 
 
-                                    labList = newCourse.GetLabList();
+                                    labList = newCourse.getLabList();
                                     Lab thisLab = null;
                                     boolean found=false;
 

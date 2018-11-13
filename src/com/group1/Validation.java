@@ -55,7 +55,7 @@ public class Validation
 
     public static Boolean CheckWhetherHasAssessmentWeightage(Course course)
     {
-        if (course.GetComponents().isEmpty())
+        if (course.getComponents().isEmpty())
             return false;
         else
             return true;
