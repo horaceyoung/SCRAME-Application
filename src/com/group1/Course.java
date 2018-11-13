@@ -8,12 +8,36 @@ import Exceptions.WeightageNotValidException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * A serializable class that comprehends all relevant information for a course
+ */
 public class Course implements java.io.Serializable{
+
+    /**
+     * A string representing the title of the course
+     */
     private String courseTitle;
+    /**
+     * A coordinator in charge of this course
+     */
     private Coordinator coordinator;
+    /**
+     * An arraylist of main assessment component ( exam and coursework)
+     */
     private ArrayList<AssessmentComponent> components = new ArrayList<>();
+
+    /**
+     * An arraylist of sub-components of coursework
+     */
     private ArrayList<AssessmentComponent> subcomponents = new ArrayList<>();
+
+    /**
+     * An arraylist of all tutorials for the course
+     */
     private ArrayList<Tutorial> tutorialGroups = new ArrayList<>();
+    /**
+     * An arraylsit of all labs for the course
+     */
     private ArrayList<Lab> labGroups = new ArrayList<>();
     private int maxTutorialsNumber = 20;
     private int maxLabsNumber = 20;
