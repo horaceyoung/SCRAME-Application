@@ -29,7 +29,7 @@ public class DataContainer implements java.io.Serializable{
 
 
 
-    public void AddCourse() {
+    public void addCourse() {
         System.out.println("Add Course: Please input the course title of the course. The course title shall only contain alphabets and numbers, not spaces.");
         Scanner in = new Scanner(System.in);
         String courseTitle = "Default";
@@ -38,7 +38,7 @@ public class DataContainer implements java.io.Serializable{
         while (!titleValid) {
             courseTitle = in.nextLine();
             try {
-                if (!Validation.ValidateGroupNameInput(courseTitle)) {
+                if (!Validation.validateGroupNameInput(courseTitle)) {
                     throw new CourseNameNotValidException();
                 }
                 titleValid = true;
@@ -50,7 +50,7 @@ public class DataContainer implements java.io.Serializable{
         }
 
         try{
-            if(Validation.CheckCourseExisted(courseTitle, this)){
+            if(Validation.checkCourseExisted(courseTitle, this)){
                 System.out.println("Add Course Failed: a course with the same course title has already been added");
             }
             else{
@@ -67,14 +67,14 @@ public class DataContainer implements java.io.Serializable{
         }
     }
 
-    public void AddStudent (){
+    public void addStudent(){
         Scanner sc = new Scanner(System.in);
         System.out.println("Add Student: Please input the Student Name.");
         String studentName = "Default";
         String matric = "Default";
         studentName = sc.nextLine();
         try {
-            if (!Validation. ValidateNameInput(studentName))
+            if (!Validation.validateNameInput(studentName))
                 throw new NameNotValidException();
             if(Validation.studentExists(matric,this)){
                 System.out.println("Add Student Failed: Student has already been added.");
