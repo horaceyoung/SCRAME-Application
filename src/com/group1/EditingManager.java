@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 public class EditingManager
 {
-    public static void Register(DataContainer dataContainer){
+    public static void register(DataContainer dataContainer){
         String studentMatric;
         String courseTitle;
         String tutorialName;
@@ -43,50 +43,50 @@ public class EditingManager
                 if(courseTitle.equals("0"))
                     break;
 
-                if(!Validation.CheckCourseExisted(courseTitle,dataContainer)){
+                if(!Validation.checkCourseExisted(courseTitle,dataContainer)){
                     throw new CourseNotFoundException();
                 }
                 newCourse=ReadingManager.findCourse(courseTitle,dataContainer);
 
 
-                if(!ReadingManager.CourseHaveVacancy(courseTitle,dataContainer)){
+                if(!ReadingManager.courseHaveVacancy(courseTitle,dataContainer)){
                     throw new CourseNoVacancyException();}
-                if(ReadingManager.CheckStudentRegisteredForCourse(newStudent,newCourse)){
+                if(ReadingManager.checkStudentRegisteredForCourse(newStudent,newCourse)){
                     throw new StudentAlreadyRegisteredForThisCourseException(newStudent,newCourse);
                 }
 
-                EM.RegisterStudentToCourseLecture(newStudent,newCourse);
+                EM.registerStudentToCourseLecture(newStudent,newCourse);
 
-                if(newCourse.HaveTutorial()==false)
+                if(newCourse.haveTutorial()==false)
                     break;
                 while(true) {
                     System.out.println("Please type the name of a tutorial to be enrolled in: ");
 
                     int i = 1;
-                    while (i <= newCourse.GetTutorialList().size()) {
-                        System.out.println(i + ". " + newCourse.GetTutorialList().get(i - 1).GetName() + "\t Vacancy: "+(newCourse.GetTutorialList().get(i - 1).GetTotalVacancy()-newCourse.GetTutorialList().get(i - 1).GetRegisteredStudent().size()));
+                    while (i <= newCourse.getTutorialList().size()) {
+                        System.out.println(i + ". " + newCourse.getTutorialList().get(i - 1).getName() + "\t Vacancy: "+(newCourse.getTutorialList().get(i - 1).getTotalVacancy()-newCourse.getTutorialList().get(i - 1).getRegisteredStudent().size()));
                         i++;
                     }
                     tutorialName = in.nextLine();
 
-                    if (EM.RegisterStudentToTutorial(newStudent, newCourse, tutorialName))
+                    if (EM.registerStudentToTutorial(newStudent, newCourse, tutorialName))
                         break;
                 }
 
 
                 while(true){
-                    if(newCourse.HaveLab()==false)
+                    if(newCourse.haveLab()==false)
                         break;
 
                     System.out.println("Please select a lab to be enrolled in:");
                     int i=1;
-                    while(i<=newCourse.GetLabList().size()){
-                        System.out.println(i+". "+newCourse.GetLabList().get(i-1).GetName()+"\t Vacancy: "+(newCourse.GetLabList().get(i - 1).GetTotalVacancy()-newCourse.GetLabList().get(i - 1).GetRegisteredStudent().size()));
+                    while(i<=newCourse.getLabList().size()){
+                        System.out.println(i+". "+newCourse.getLabList().get(i-1).getName()+"\t Vacancy: "+(newCourse.getLabList().get(i - 1).getTotalVacancy()-newCourse.getLabList().get(i - 1).getRegisteredStudent().size()));
                         i++;
                     }
                     labName = in.nextLine();
 
-                    if(EM.RegisterStudentToLab(newStudent,newCourse,labName))
+                    if(EM.registerStudentToLab(newStudent,newCourse,labName))
                         break;
                 }
                 break;
@@ -98,21 +98,21 @@ public class EditingManager
         }
     }
 
-    public static void RegisterStudentToCourseLecture(Student thisStudent, Course course)
+    public static void registerStudentToCourseLecture(Student thisStudent, Course course)
     {
-        course.GetStudentList().add(thisStudent);
+        course.getStudentList().add(thisStudent);
 
-        HashMap<String, ArrayList<AssessmentComponent>> studentCourseList = thisStudent.GetCourseAndResult();
+        HashMap<String, ArrayList<AssessmentComponent>> studentCourseList = thisStudent.getCourseAndResult();
         ArrayList<AssessmentComponent> result = new ArrayList<>();
         studentCourseList.put(course.getCourseTitle(), result);
 
-        System.out.println("Student " + thisStudent.getMatricNumber() + " " + thisStudent.GetStudentName() + " has been registered to Course " + course.getCourseTitle());
+        System.out.println("Student " + thisStudent.getMatricNumber() + " " + thisStudent.getName() + " has been registered to Course " + course.getCourseTitle());
     }
 
-    public static boolean RegisterStudentToTutorial(Student student, Course course, String tutorialName)
+    public static boolean registerStudentToTutorial(Student student, Course course, String tutorialName)
     {
 
-        ArrayList<Tutorial> tutorialList = course.GetTutorialList();
+        ArrayList<Tutorial> tutorialList = course.getTutorialList();
         Tutorial thisTutorial = null;
         boolean found = false;
 
@@ -120,7 +120,7 @@ public class EditingManager
         {
             for (Tutorial tutorial : tutorialList)
             {
-                if (tutorialName.equals(tutorial.GetName()))
+                if (tutorialName.equals(tutorial.getName()))
                 {
                     thisTutorial = tutorial;
                     found = true;
@@ -128,11 +128,11 @@ public class EditingManager
             }
             if (found == false) throw new TutorialGroupNonExistentException();
 
-            if (!thisTutorial.HaveVacancy())
+            if (!thisTutorial.haveVacancy())
                 throw new TutorialOrLabNoVacancyException();
-            thisTutorial.GetRegisteredStudent().add(student);
+            thisTutorial.getRegisteredStudent().add(student);
 
-            System.out.println("Student " + student.getMatricNumber() + " " + student.GetStudentName() + " has been registered to " + tutorialName + "  bof course " + course.getCourseTitle());
+            System.out.println("Student " + student.getMatricNumber() + " " + student.getName() + " has been registered to " + tutorialName + "  bof course " + course.getCourseTitle());
 
             return true;
         } catch (TutorialGroupNonExistentException e)
@@ -146,10 +146,10 @@ public class EditingManager
         }
     }
 
-    public static boolean RegisterStudentToLab(Student student, Course course, String labName)
+    public static boolean registerStudentToLab(Student student, Course course, String labName)
     {
 
-        ArrayList<Lab> labList = course.GetLabList();
+        ArrayList<Lab> labList = course.getLabList();
         Lab thisLab = null;
         boolean found = false;
 
@@ -157,7 +157,7 @@ public class EditingManager
         {
             for (Lab lab : labList)
             {
-                if (labName.equals(lab.GetName()))
+                if (labName.equals(lab.getName()))
                 {
                     thisLab = lab;
                     found = true;
@@ -167,11 +167,11 @@ public class EditingManager
             if (found == false)
                 throw new LabGroupNonExistentException();
 
-            if (!thisLab.HaveVacancy())
+            if (!thisLab.haveVacancy())
                 throw new TutorialOrLabNoVacancyException();
-            thisLab.GetRegisteredStudent().add(student);
+            thisLab.getRegisteredStudent().add(student);
 
-            System.out.println("Student " + student.getMatricNumber() + " " + student.GetStudentName() + " has been registered to " + labName + " of course " + course.getCourseTitle());
+            System.out.println("Student " + student.getMatricNumber() + " " + student.getName() + " has been registered to " + labName + " of course " + course.getCourseTitle());
             return true;
         } catch (LabGroupNonExistentException e)
         {
@@ -186,7 +186,7 @@ public class EditingManager
     }
 
 
-    public static void AddCourseComponent(String courtsetitle, DataContainer container)
+    public static void addCourseComponent(String courtsetitle, DataContainer container)
     {
 
         Course newcourse6 = null;
@@ -196,7 +196,7 @@ public class EditingManager
                 newcourse6 = course;
         }
 
-        if (!newcourse6.GetComponents().isEmpty())
+        if (!newcourse6.getComponents().isEmpty())
         {
             System.out.println("This course's component weightage has already been assigned.");
             return;
@@ -208,21 +208,21 @@ public class EditingManager
         {
             for (String compname : component)
             {
-                newcourse6.assignComponentWeightage(newcourse6.GetComponents(), compname);
+                newcourse6.assignComponentWeightage(newcourse6.getComponents(), compname);
             }
             float weightagesum = 0;
-            for (AssessmentComponent componentnew : newcourse6.GetComponents())
+            for (AssessmentComponent componentnew : newcourse6.getComponents())
             {
                 weightagesum += componentnew.getWeightage();
             }
             System.out.println(weightagesum);
-            if (Validation.ValidateWeightageSum(weightagesum))
+            if (Validation.validateWeightageSum(weightagesum))
             {
                 break;
             } else
             {
                 System.out.println("The total weightage you have entered is not valid. It should sum up to 1\n");
-                newcourse6.GetComponents().clear();
+                newcourse6.getComponents().clear();
                 weightagesum = 0;
             }
         }
@@ -236,7 +236,7 @@ public class EditingManager
                 System.out.println("Do we have sub-component for coursework? Yes: Enter 1  No: Enter 0");
                 Scanner ynscanner = new Scanner(System.in);
                 temp = ynscanner.nextLine();
-                if (Validation.ValidateNumberInput(temp))
+                if (Validation.validateNumberInput(temp))
                 {
                     break;
 
@@ -257,7 +257,7 @@ public class EditingManager
                 System.out.println("How many sub-components do u have?");
                 Scanner numscanner = new Scanner(System.in);
                 temp = numscanner.nextLine();
-                if (Validation.ValidateNumberInput(temp) && Integer.parseInt(temp) > 1)
+                if (Validation.validateNumberInput(temp) && Integer.parseInt(temp) > 1)
                 {
                     break;
 
@@ -283,21 +283,21 @@ public class EditingManager
                 float subweightagesum = 0;
                 for (String subcomname : subcoponent)
                 {
-                    newcourse6.assignComponentWeightage(newcourse6.GetSubComponents(), subcomname);
+                    newcourse6.assignComponentWeightage(newcourse6.getSubComponents(), subcomname);
                 }
 
-                for (AssessmentComponent componentnew : newcourse6.GetSubComponents())
+                for (AssessmentComponent componentnew : newcourse6.getSubComponents())
                 {
 
                     subweightagesum += componentnew.getWeightage();
                 }
-                if (Validation.ValidateWeightageSum(subweightagesum))
+                if (Validation.validateWeightageSum(subweightagesum))
                 {
                     break;
                 } else
                 {
                     System.out.println("The total weightage you have entered is not valid. It should sum up to 1\n");
-                    newcourse6.GetSubComponents().clear();
+                    newcourse6.getSubComponents().clear();
                     System.out.println(subweightagesum);
                 }
             }
@@ -310,7 +310,7 @@ public class EditingManager
 
     }
 
-    public static void AssignExamResults(String matricnumber, String coursetitle, DataContainer container)
+    public static void assignExamResults(String matricnumber, String coursetitle, DataContainer container)
     {
         Scanner scanner = new Scanner(System.in);
         Student student = null;
@@ -332,13 +332,13 @@ public class EditingManager
         }
         try
         {
-            if (!Validation.CheckWhetherStudentRegisteredForACourse(student, coursetitle))
+            if (!Validation.checkWhetherStudentRegisteredForACourse(student, coursetitle))
             {
                 throw new StudentNotRegisteredForTheCourse();
-            } else if (!Validation.CheckWhetherHasAssessmentWeightage(course))
+            } else if (!Validation.checkWhetherHasAssessmentWeightage(course))
             {
                 throw new CourseNoExamComponentException();
-            } else if (Validation.CheckStudentResultsRecord(student, coursetitle) != 0)
+            } else if (Validation.checkStudentResultsRecord(student, coursetitle) != 0)
             {
                 throw new StudentResultAlreadyExistsException();
             }
@@ -353,15 +353,15 @@ public class EditingManager
 
         while (true)
         {
-            AssessmentComponent newcomponent = new AssessmentComponent(course.GetComponents().get(0));
+            AssessmentComponent newcomponent = new AssessmentComponent(course.getComponents().get(0));
 
             System.out.println("Please enter the student's result for " + newcomponent.getAssessmentType() + ", you should enter a mark between 0-100.");
             String mark = scanner.nextLine();
 
-            if (Validation.ValidateFloatInput(mark) && Float.parseFloat(mark) >= 0 && Float.parseFloat(mark) <= 100)
+            if (Validation.validateFloatInput(mark) && Float.parseFloat(mark) >= 0 && Float.parseFloat(mark) <= 100)
             {
                 newcomponent.setResult(Float.parseFloat(mark));
-                student.GetCourseAndResult().get(coursetitle).add(0,newcomponent);
+                student.getCourseAndResult().get(coursetitle).add(0,newcomponent);
                 break;
 
             } else
@@ -381,7 +381,7 @@ public class EditingManager
     }
 
 
-    public static void AssignCourseworkResults(String matricnumber, String coursetitle, DataContainer container)
+    public static void assignCourseworkResults(String matricnumber, String coursetitle, DataContainer container)
     {
         Scanner scanner = new Scanner(System.in);
         Student student = null;
@@ -404,16 +404,16 @@ public class EditingManager
         }
         try
         {
-            if (!Validation.CheckWhetherStudentRegisteredForACourse(student, coursetitle))
+            if (!Validation.checkWhetherStudentRegisteredForACourse(student, coursetitle))
             {
                 throw new StudentNotRegisteredForTheCourse();
-            } else if (!Validation.CheckWhetherHasAssessmentWeightage(course))
+            } else if (!Validation.checkWhetherHasAssessmentWeightage(course))
             {
                 throw new CourseNoExamComponentException();
-            } else if (Validation.CheckStudentResultsRecord(student, coursetitle) > 1)
+            } else if (Validation.checkStudentResultsRecord(student, coursetitle) > 1)
             {
                 throw new StudentResultAlreadyExistsException();
-            } else if (Validation.CheckStudentResultsRecord(student, coursetitle) < 1)
+            } else if (Validation.checkStudentResultsRecord(student, coursetitle) < 1)
             {
                 throw new StudentResultNotExistentException(student, course);
             }
@@ -431,16 +431,16 @@ public class EditingManager
         AssessmentComponent coursework = new AssessmentComponent(0,"coursework");
         while ( z == 1)
         {
-            if (course.GetSubComponents().isEmpty())
+            if (course.getSubComponents().isEmpty())
             {
                 y = 0 ;
-                AssessmentComponent newcomponent = new AssessmentComponent(course.GetComponents().get(1));
+                AssessmentComponent newcomponent = new AssessmentComponent(course.getComponents().get(1));
                 System.out.println("Please enter the student's result for " + newcomponent.getAssessmentType() + ", you should enter a mark between 0-100.");
                 String mark = scanner.nextLine();
-                if (Validation.ValidateFloatInput(mark) && Float.parseFloat(mark) >= 0 && Float.parseFloat(mark) <= 100)
+                if (Validation.validateFloatInput(mark) && Float.parseFloat(mark) >= 0 && Float.parseFloat(mark) <= 100)
                 {
 
-                    courseworkresult =Float.parseFloat(mark);// newcomponent.getWeightage() *
+                    courseworkresult =Float.parseFloat(mark);// newcomponent.GetWeightage() *
                     newcomponent.setResult(courseworkresult);
                     templist.add(newcomponent);
                     coursework = newcomponent;
@@ -458,7 +458,7 @@ public class EditingManager
             else
             {
                 y = 1;
-                AssessmentComponent newcomponent = new AssessmentComponent(course.GetComponents().get(1));
+                AssessmentComponent newcomponent = new AssessmentComponent(course.getComponents().get(1));
                 templist.add(newcomponent);
                 coursework = newcomponent;
                 //student.GetCourseAndResult().get(coursetitle).add(newcomponent);
@@ -468,13 +468,13 @@ public class EditingManager
 
         while (y == 1)
         {
-            for (AssessmentComponent component : course.GetSubComponents())
+            for (AssessmentComponent component : course.getSubComponents())
             {
                 AssessmentComponent newcomponent = new AssessmentComponent(component);
 
                 System.out.println("Please enter the student's result for " + newcomponent.getAssessmentType() + ", you should enter a mark between 0-100.");
                 String mark = scanner.nextLine();
-                if (Validation.ValidateFloatInput(mark) && Float.parseFloat(mark) >= 0 && Float.parseFloat(mark) <= 100)
+                if (Validation.validateFloatInput(mark) && Float.parseFloat(mark) >= 0 && Float.parseFloat(mark) <= 100)
                 {
                     newcomponent.setResult(Float.parseFloat(mark));
                     courseworkresult += newcomponent.getWeightage() * newcomponent.getResult();
@@ -501,7 +501,7 @@ public class EditingManager
         //student.GetCourseAndResult().get(coursetitle).get(1).setResult(courseworkresult);
         for (AssessmentComponent item : templist)
         {
-            student.GetCourseAndResult().get(coursetitle).add(item);
+            student.getCourseAndResult().get(coursetitle).add(item);
         }
         System.out.println("You have successfully assigned the course work result for this student. Press any key to continue.");
         scanner.next();
