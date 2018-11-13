@@ -1,10 +1,7 @@
 package com.group1;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.io.File;
-import java.util.Scanner;
 
 public class Student implements java.io.Serializable, People
 {
@@ -22,12 +19,8 @@ public class Student implements java.io.Serializable, People
 	public String getName(){
         return studentName;
         }
-	public HashMap<String,ArrayList<AssessmentComponent>> GetCourseAndResult(){
+	public HashMap<String,ArrayList<AssessmentComponent>> getCourseAndResult(){
 			return courseAndResult;
-	}
-	public void ClearHashmapValue (String key)
-	{
-		courseAndResult.get(key).clear();
 	}
 
 	@Override

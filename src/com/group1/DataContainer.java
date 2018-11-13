@@ -38,7 +38,7 @@ public class DataContainer implements java.io.Serializable{
         while (!titleValid) {
             courseTitle = in.nextLine();
             try {
-                if (!Validation.ValidateGroupNameInput(courseTitle)) {
+                if (!Validation.validateGroupNameInput(courseTitle)) {
                     throw new CourseNameNotValidException();
                 }
                 titleValid = true;
@@ -50,7 +50,7 @@ public class DataContainer implements java.io.Serializable{
         }
 
         try{
-            if(Validation.CheckCourseExisted(courseTitle, this)){
+            if(Validation.checkCourseExisted(courseTitle, this)){
                 System.out.println("Add Course Failed: a course with the same course title has already been added");
             }
             else{
@@ -74,7 +74,7 @@ public class DataContainer implements java.io.Serializable{
         String matric = "Default";
         studentName = sc.nextLine();
         try {
-            if (!Validation. ValidateNameInput(studentName))
+            if (!Validation.validateNameInput(studentName))
                 throw new NameNotValidException();
             if(Validation.studentExists(matric,this)){
                 System.out.println("Add Student Failed: Student has already been added.");
