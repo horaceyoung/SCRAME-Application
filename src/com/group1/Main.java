@@ -69,7 +69,7 @@ public class Main {
 
 
         int choice = 0;
-        while(choice!=11)
+        while(choice!=42)
         {
             System.out.println(intro);
             choice = in.nextInt();
@@ -89,7 +89,7 @@ public class Main {
                     break;
                 case 3:
                 // Testcase 3: Register student for a course
-                   EditingManager.Register(dataContainer);
+                    EditingManager.Register(dataContainer);
                     break;
                 case 4:
                 // Testcase 4: Check available slot in a class
