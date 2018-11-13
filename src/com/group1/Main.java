@@ -6,8 +6,21 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * STUDENT COURSE REGISTRATION AND MARK ENTRY Application
+ * The application allows the creation of courses and adding of student records.
+ *
+ *
+ *
+ * @author Group1 BCG2
+ * @version Final version
+ */
 
 public class Main {
+    /**
+     * Main method to the programme that handle user interaction through console GUI
+     * @param args
+     */
 
     public static void main(String[] args)
     {

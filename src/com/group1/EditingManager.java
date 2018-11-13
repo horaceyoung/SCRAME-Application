@@ -167,6 +167,14 @@ public class EditingManager
         }
     }
 
+    /**
+     * A method to register a student for a lab of a course
+     * @param student The student to be registered
+     * @param course  The course of the lab
+     * @param labName the name of the lab
+     * @return a bool whether the registration is successful
+     */
+
     public static boolean registerStudentToLab(Student student, Course course, String labName)
     {
 
@@ -205,6 +213,12 @@ public class EditingManager
         }
 
     }
+
+    /**
+     * A method to add an assessment component to the course
+     * @param courtsetitle the course tile of the course
+     * @param container the general container that contains everything
+     */
 
 
     public static void addCourseComponent(String courtsetitle, DataContainer container)
@@ -331,6 +345,13 @@ public class EditingManager
 
     }
 
+    /**
+     * A method to assign the exam result to a student
+     * @param matricnumber The student's matric number
+     * @param coursetitle The course of the result
+     * @param container The datacontainer that conatains everything
+     */
+
     public static void assignExamResults(String matricnumber, String coursetitle, DataContainer container)
     {
         Scanner scanner = new Scanner(System.in);
@@ -400,6 +421,13 @@ public class EditingManager
 
 
     }
+
+    /**
+     * A method to assign a coursework result to a student
+     * @param matricnumber The matric number of the student
+     * @param coursetitle The title of the course to be assesses
+     * @param container The datacontainer that contains everything
+     */
 
 
     public static void assignCourseworkResults(String matricnumber, String coursetitle, DataContainer container)
