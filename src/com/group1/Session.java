@@ -21,15 +21,15 @@ public class Session implements java.io.Serializable{
         this.sessionName = sessionName;
         this.totalVacancy = totalVacancy;
     }
-    public ArrayList<Student> getRegisteredStudent(){return registeredStudent;}
+    public ArrayList<Student> GetRegisteredStudent(){return registeredStudent;}
 
-    public String getName(){
+    public String GetName(){
         return sessionName;
     }
 
-    public int getTotalVacancy(){ return totalVacancy; }
+    public int GetTotalVacancy(){ return totalVacancy; }
 
-    public boolean haveVacancy(){
+    public boolean HaveVacancy(){
         if(registeredStudent.size()<totalVacancy)
             return true;
         return false;

@@ -4,6 +4,7 @@ import Exceptions.*;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 
@@ -80,23 +81,19 @@ public class Main {
             switch (choice){
                 case 1:
 		            //Testcase 1: Add in student
-                    dataContainer.addStudent();
+                    dataContainer.AddStudent();
                     break;
                 case 2:
                     // Testcase 2: Create the course
-                    dataContainer.addCourse();
+                    dataContainer.AddCourse();
                     break;
                 case 3:
                 // Testcase 3: Register student for a course
-<<<<<<< HEAD
                     EditingManager.Register(dataContainer);
-=======
-                   EditingManager.register(dataContainer);
->>>>>>> d360b50fe57c9771d8597408cb8de74c0b86ac03
                     break;
                 case 4:
                 // Testcase 4: Check available slot in a class
-                    ReadingManager.printVacancy(dataContainer);
+                    ReadingManager.PrintVacancy(dataContainer);
                     break;
                 case 5:
                 //Testcase 5: Print student list by lecture, tutorial or lab
@@ -106,7 +103,7 @@ public class Main {
                         Scanner sc = new Scanner(System.in);
                         String courseName = sc.nextLine();
                         try{
-                            if (!Validation.checkCourseExisted(courseName.toUpperCase(),dataContainer)) {
+                            if (!Validation.CheckCourseExisted(courseName.toUpperCase(),dataContainer)) {
                                 System.out.println("The course you entered does not exist. Please add this course first.\n");
                                 continue;
 
@@ -129,26 +126,26 @@ public class Main {
                                     break;
                                 }
                                 else if(printList.equals("TUT")) {
-                                    if(!newCourse.haveTutorial())
+                                    if(!newCourse.HaveTutorial())
                                     {
                                         System.out.println("The course you have chosen does not have tutorials.");
                                         continue;
                                     }
                                     System.out.println("Please type the name of a tutorial to check students enrolled in: ");
                                     int i = 1;
-                                    while (i <= newCourse.getTutorialList().size()) {
-                                        System.out.println(i + ". " + newCourse.getTutorialList().get(i - 1).getName());
+                                    while (i <= newCourse.GetTutorialList().size()) {
+                                        System.out.println(i + ". " + newCourse.GetTutorialList().get(i - 1).GetName());
                                         i++;
                                     }
                                     tutorialName = in.nextLine();
 
 
-                                    tutorialList = newCourse.getTutorialList();
+                                    tutorialList = newCourse.GetTutorialList();
                                     Tutorial thisTutorial=null;
                                     boolean found=false;
 
                                     for(Tutorial tutorial:tutorialList){
-                                        if(tutorialName.equals(tutorial.getName())){
+                                        if(tutorialName.equals(tutorial.GetName())){
                                             thisTutorial = tutorial;
                                             found=true;
                                             }
@@ -160,26 +157,26 @@ public class Main {
                                     break;
                                 }
                                 else if(printList.equals("LAB")) {
-                                    if(!newCourse.haveLab())
+                                    if(!newCourse.HaveLab())
                                     {
                                         System.out.println("The course you have chosen does not have labs.");
                                         continue;
                                     }
                                     System.out.println("Please type the name of a lab to check students enrolled in: ");
                                     int i = 1;
-                                    while (i <= newCourse.getLabList().size()) {
-                                        System.out.println(i + ". " + newCourse.getLabList().get(i - 1).getName());
+                                    while (i <= newCourse.GetLabList().size()) {
+                                        System.out.println(i + ". " + newCourse.GetLabList().get(i - 1).GetName());
                                         i++;
                                     }
                                     labName = in.nextLine();
 
 
-                                    labList = newCourse.getLabList();
+                                    labList = newCourse.GetLabList();
                                     Lab thisLab = null;
                                     boolean found=false;
 
                                     for(Lab lab:labList){
-                                        if(labName.equals(lab.getName())){
+                                        if(labName.equals(lab.GetName())){
                                             thisLab = lab;
                                             found=true;
                                         }
@@ -212,13 +209,13 @@ public class Main {
                     String title6 = scanner6.nextLine();
                     try
                     {
-                        if (!Validation.checkCourseExisted(title6, dataContainer))
+                        if (!Validation.CheckCourseExisted(title6, dataContainer))
                         {
                             System.out.println("The course you entered does not exist. Please add this course first.\n");
                         }
                         else
                         {
-                            EditingManager.addCourseComponent(title6, dataContainer);
+                            EditingManager.AddCourseComponent(title6, dataContainer);
                         }
                     }
                     catch (Exception e)
@@ -232,11 +229,11 @@ public class Main {
                     Scanner scanner = new Scanner(System.in);
                     String title7 = scanner.next();
                     try {
-                        if (Validation.checkCourseExisted(title7, dataContainer)) {
+                        if (Validation.CheckCourseExisted(title7, dataContainer)) {
                             System.out.println("Please enter the student's matriculation number:");
                             String matric = scanner.next();
                             if(Validation.studentExists(matric, dataContainer)) {
-                                EditingManager.assignExamResults(matric, title7, dataContainer); }
+                                EditingManager.AssignExamResults(matric, title7, dataContainer); }
                             else { throw new StudentNotExistException(); }
                         } else { throw new CourseNotFoundException(); }
                     }
@@ -251,11 +248,11 @@ public class Main {
                     Scanner scanner8 = new Scanner(System.in);
                     String title8 = scanner8.next();
                     try {
-                        if (Validation.checkCourseExisted(title8, dataContainer)) {
+                        if (Validation.CheckCourseExisted(title8, dataContainer)) {
                             System.out.println("Please enter the student's matriculation number:");
                             String matric = scanner8.next();
                             if(Validation.studentExists(matric, dataContainer)) {
-                                EditingManager.assignCourseworkResults(matric, title8, dataContainer); }
+                                EditingManager.AssignCourseworkResults(matric, title8, dataContainer); }
                             else { throw new StudentNotExistException(); }
                         } else { throw new CourseNotFoundException(); }
                     }
@@ -276,7 +273,7 @@ public class Main {
                     Scanner sc1 = new Scanner(System.in);
                     String courseTitleName = sc1.nextLine().toUpperCase();
                     try{
-                        if (!Validation.checkCourseExisted(courseTitleName, dataContainer))
+                        if (!Validation.CheckCourseExisted(courseTitleName, dataContainer))
                             System.out.println("The course you entered does not exist. Please enter another course code.\n");
                         else{
                             ReadingManager.printCourseStatistics(courseTitleName, dataContainer);

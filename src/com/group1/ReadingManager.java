@@ -31,50 +31,50 @@ public class ReadingManager
     }
 
     public static void printStudentList(Course course) throws IOException {
-        if(course.getStudentList().isEmpty()){
+        if(course.GetStudentList().isEmpty()){
             System.out.println(course.getCourseTitle() + " currently has no student enrolled in.");
             return;
         }
 
 
         System.out.println("Students registered in " + course.getCourseTitle() + " : ");
-        ArrayList<Student> studentList = course.getStudentList();
+        ArrayList<Student> studentList = course.GetStudentList();
         for(Student student : studentList){
-            System.out.println(student.getMatricNumber() + student.getName());
+            System.out.println(student.getMatricNumber() + student.GetStudentName());
         }
     }
 
 
 
     public static void printStudentList(Tutorial tutorial) throws IOException {
-        if(tutorial.getRegisteredStudent().isEmpty()){
-            System.out.println(tutorial.getName()+ " currently has no student enrolled in.");
+        if(tutorial.GetRegisteredStudent().isEmpty()){
+            System.out.println(tutorial.GetName()+ " currently has no student enrolled in.");
             return;
         }
-        System.out.println("Students registered in tutorial group " + tutorial.getName() + " : ");
-        ArrayList<Student> studentList = tutorial.getRegisteredStudent();
+        System.out.println("Students registered in tutorial group " + tutorial.GetName() + " : ");
+        ArrayList<Student> studentList = tutorial.GetRegisteredStudent();
         for(Student student : studentList){
-            System.out.println(student.getMatricNumber() + student.getName());
+            System.out.println(student.getMatricNumber() + student.GetStudentName());
         }
     }
 
     public static void printStudentList(Lab lab) throws IOException {
-        if(lab.getRegisteredStudent().isEmpty()){
-            System.out.println(lab.getName()+ " currently has no student enrolled in.");
+        if(lab.GetRegisteredStudent().isEmpty()){
+            System.out.println(lab.GetName()+ " currently has no student enrolled in.");
             return;
         }
 
 
-        System.out.println("Students registered in lab group" + lab.getName() + " : ");
-        ArrayList<Student> studentList = lab.getRegisteredStudent();
+        System.out.println("Students registered in lab group" + lab.GetName() + " : ");
+        ArrayList<Student> studentList = lab.GetRegisteredStudent();
         for(Student student : studentList){
-            System.out.println(student.getMatricNumber() + student.getName());
+            System.out.println(student.getMatricNumber() + student.GetStudentName());
         }
     }
 
-    public static boolean checkStudentRegisteredForCourse(Student thisStudent, Course course){
+    public static boolean CheckStudentRegisteredForCourse(Student thisStudent,Course course){
 
-        ArrayList<Student> studentList = course.getStudentList();
+        ArrayList<Student> studentList = course.GetStudentList();
 
         for(Student student:studentList){
             if(thisStudent.getMatricNumber().equals(student.getMatricNumber()))
@@ -85,15 +85,15 @@ public class ReadingManager
     }
 
 
-    public static void printTutorialVacancy(String courseTitle, DataContainer dataContainer) throws IOException, TutorialLabNotAvailableException {
+    public static void PrintTutorialVacancy(String courseTitle, DataContainer dataContainer) throws IOException, TutorialLabNotAvailableException {
         ArrayList<Tutorial> tutorialList = new ArrayList<>();
         ArrayList<Course> courseList = dataContainer.getCourseList();
         try {
             for (Course course : courseList) {
                 if (courseTitle.equals(course.getCourseTitle())) {
-                    if (course.haveTutorial() == false)
+                    if (course.HaveTutorial() == false)
                         throw new TutorialLabNotAvailableException();
-                    else tutorialList = course.getTutorialList();
+                    else tutorialList = course.GetTutorialList();
 
                 }
             }
@@ -103,7 +103,7 @@ public class ReadingManager
             System.out.println("The Vacancy of Tutorial Groups of " + courseTitle + " is as following: ");
 
             for (Tutorial tutorial : tutorialList) {
-                System.out.println(tutorial.getName() + " " + tutorial.getRegisteredStudent().size() + "/" + tutorial.getTotalVacancy());
+                System.out.println(tutorial.GetName() + " " + tutorial.GetRegisteredStudent().size() + "/" + tutorial.GetTotalVacancy());
 
 
             }
@@ -124,15 +124,15 @@ public class ReadingManager
         return newCourse;
     }
 
-    public static void printLabVacancy(String courseTitle, DataContainer dataContainer) throws IOException, TutorialLabNotAvailableException {
+    public static void PrintLabVacancy(String courseTitle, DataContainer dataContainer) throws IOException, TutorialLabNotAvailableException {
         ArrayList<Lab> labList = new ArrayList<>();
         ArrayList<Course> courseList = dataContainer.getCourseList();
         try {
             for (Course course : courseList) {
                 if (courseTitle.equals(course.getCourseTitle())) {
-                    if (course.haveLab() == false)
+                    if (course.HaveLab() == false)
                         throw new TutorialLabNotAvailableException();
-                    else labList= course.getLabList();
+                    else labList= course.GetLabList();
                 break;
                 }
             }
@@ -140,7 +140,7 @@ public class ReadingManager
             System.out.println("The Vacancy of Lab Groups of " + courseTitle + " is as following: ");
 
             for (Lab lab : labList) {
-                System.out.println(lab.getName() + " " + lab.getRegisteredStudent().size() + "/" + lab.getTotalVacancy());
+                System.out.println(lab.GetName() + " " + lab.GetRegisteredStudent().size() + "/" + lab.GetTotalVacancy());
 
 
             }
@@ -148,7 +148,7 @@ public class ReadingManager
         catch (TutorialLabNotAvailableException e){System.out.println(e.getMessage());}
     }
 
-    public static boolean courseHaveVacancy(String courseTitle, DataContainer dataContainer){
+    public static boolean CourseHaveVacancy(String courseTitle, DataContainer dataContainer){
         boolean haveVacancy = false;
         ArrayList<Course> courseList = dataContainer.getCourseList();
         Course thisCourse=null;
@@ -158,11 +158,11 @@ public class ReadingManager
                 break;
             }
         }
-        if(!thisCourse.haveTutorial()) return true;
+        if(!thisCourse.HaveTutorial()) return true;
 
-        ArrayList<Tutorial> tutorialList = thisCourse.getTutorialList();
+        ArrayList<Tutorial> tutorialList = thisCourse.GetTutorialList();
         for(Tutorial tutorial:tutorialList){
-            if(tutorial.haveVacancy())
+            if(tutorial.HaveVacancy())
                 haveVacancy = true;
         }
 
@@ -180,9 +180,9 @@ public class ReadingManager
         //read Results file to get results
         for(Student student : dataContainer.getStudentsList()) {
             if (student.getMatricNumber().toUpperCase().equals(studentMatricTranscript.toUpperCase())) {
-                transcriptOutcome += "Student Name: " + student.getName() + "\n";
+                transcriptOutcome += "Student Name: " + student.GetStudentName() + "\n";
 
-                courseAndResult = student.getCourseAndResult();
+                courseAndResult = student.GetCourseAndResult();
                 for (String key : courseAndResult.keySet()) {
                     transcriptOutcome += key + "\n" + "Overall Mark: " + "\n";
                     ArrayList<AssessmentComponent> components = courseAndResult.get(key);
@@ -211,7 +211,7 @@ public class ReadingManager
             	break;
             	}
         }
-        studentList=thisCourse.getStudentList();
+        studentList=thisCourse.GetStudentList();
         float examResult=0;
         float courseWorkResult=0;
         HashMap<String,ArrayList<AssessmentComponent>> resultList = new HashMap<>();
@@ -219,7 +219,7 @@ public class ReadingManager
 
         try {
             for (Student student : studentList) {
-                resultList = student.getCourseAndResult();
+                resultList = student.GetCourseAndResult();
                 result = resultList.get(courseTitle);
                 if (result.size()<1)
                     throw new StudentResultNotExistentException(student, thisCourse);
@@ -240,7 +240,7 @@ public class ReadingManager
         }
 
 
-    public static void printVacancy(DataContainer dataContainer){
+    public static void PrintVacancy(DataContainer dataContainer){
         String studentMatric;
         String courseTitle;
         String tutorialName;
@@ -253,7 +253,7 @@ public class ReadingManager
         courseTitle = in.nextLine();
 
             try{
-                if(Validation.checkCourseExisted(courseTitle, dataContainer)){
+                if(Validation.CheckCourseExisted(courseTitle, dataContainer)){
                     System.out.println("Check Session Vacancy: Please select the type of session you wish to check by inputting corresponding integer value:\n 1. Tutorial \n2.Lab \n");
                     String sessionChoice=in.next();
                     if(!sessionChoice.equals("1")&&!sessionChoice.equals("2"))
@@ -263,10 +263,10 @@ public class ReadingManager
                     }
                     switch (sessionChoice){
                         case "1":
-                            ReadingManager.printTutorialVacancy(courseTitle, dataContainer);
+                            ReadingManager.PrintTutorialVacancy(courseTitle, dataContainer);
                             break;
                         case "2":
-                            ReadingManager.printLabVacancy(courseTitle, dataContainer);
+                            ReadingManager.PrintLabVacancy(courseTitle, dataContainer);
                             break;
                     }
                     break;
