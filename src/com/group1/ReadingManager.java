@@ -199,32 +199,127 @@ public class ReadingManager
         }transcriptOutcome += "\tOverall (Exam + Coursework): " + overallMark;
         System.out.println(transcriptOutcome);
     }
-    
-    
+
+
     public static void printCourseStatistics(String courseTitle, DataContainer datacontainer){
-    	Course thisCourse = null;
-    	ArrayList<Student> studentList = new ArrayList<>();
+        Course thisCourse = null;
+        ArrayList<Student> studentList = new ArrayList<>();
         for(Course course: datacontainer.getCourseList()){
             if (course.getCourseTitle().equals(courseTitle.toUpperCase())) {
-            	thisCourse = course;
-            	break;
-            	}
+                thisCourse = course;
+                break;
+            }
         }
         studentList=thisCourse.getStudentList();
         float examResult=0;
         float courseWorkResult=0;
+        int studentNumCounter = 0;
+        int examAGrade = 0;
+        int examBGrade = 0;
+        int examCGrade=0;
+        int examDGrade=0;
+        int examFGrade=0;
+        int courseworkAGrade=0;
+        int courseworkBGrade=0;
+        int courseworkCGrade=0;
+        int courseworkDGrade=0;
+        int courseworkFGrade=0;
+        int overallResultA =0;
+        int overallResultB =0;
+        int overallResultC =0;
+        int overallResultD =0;
+        int overallResultF =0;
+
         HashMap<String,ArrayList<AssessmentComponent>> resultList = new HashMap<>();
         ArrayList<AssessmentComponent> result = new ArrayList<>();
 
         try {
             for (Student student : studentList) {
+
                 resultList = student.getCourseAndResult();
                 result = resultList.get(courseTitle);
                 if (result.size()<1)
                     throw new StudentResultNotExistentException(student, thisCourse);
                 examResult += result.get(0).getResult();
                 courseWorkResult += result.get(1).getResult();
+                studentNumCounter++;
             }
+
+            for (Student student : studentList) {
+
+                resultList = student.getCourseAndResult();
+                result = resultList.get(courseTitle);
+                if (result.size()<1)
+                    throw new StudentResultNotExistentException(student, thisCourse);
+
+                if (result.get(0).getResult() >= 75){
+                    examAGrade++;
+                }
+                else if (result.get(0).getResult() >= 65 && result.get(0).getResult() <= 74){
+                    examBGrade++;
+                }
+                else if (result.get(0).getResult() >= 55 && result.get(0).getResult() <= 64){
+                    examCGrade++;
+                }
+                else if (result.get(0).getResult() >= 45 && result.get(0).getResult() <= 54){
+                    examDGrade++;
+                }
+                else if (result.get(0).getResult() < 45){
+                    examFGrade++;
+                }
+            }
+
+            for (Student student : studentList) {
+
+                resultList = student.getCourseAndResult();
+                result = resultList.get(courseTitle);
+                if (result.size()<1)
+                    throw new StudentResultNotExistentException(student, thisCourse);
+
+                if (result.get(1).getResult() >= 75){
+                    courseworkAGrade++;
+                }
+                else if (result.get(1).getResult() >= 65 && result.get(1).getResult() <= 74){
+                    courseworkBGrade++;
+                }
+                else if (result.get(1).getResult() >= 55 && result.get(1).getResult() <= 64){
+                    courseworkCGrade++;
+                }
+                else if (result.get(1).getResult() >= 45 && result.get(1).getResult() <= 54){
+                    courseworkDGrade++;
+                }
+                else if (result.get(1).getResult() < 45){
+                    courseworkFGrade++;
+                }
+            }
+
+            for (Student student : studentList) {
+
+                resultList = student.getCourseAndResult();
+                result = resultList.get(courseTitle);
+                if (result.size() < 1)
+                    throw new StudentResultNotExistentException(student, thisCourse);
+
+                float overallResult = 0;
+                float personalexamResult = result.get(0).getResult();
+                float personalCourseworkResult = result.get(1).getResult();
+                overallResult =personalexamResult * result.get(0).getWeightage()+ personalCourseworkResult * result.get(1).getWeightage();
+
+                if (overallResult >= 75) {
+                    overallResultA++;
+                } else if (overallResult >= 65 && overallResult <= 74) {
+                    overallResultB++;
+                } else if (overallResult >= 55 && overallResult <= 64) {
+                    overallResultC++;
+                } else if (overallResult >= 45 && overallResult <= 54) {
+                    overallResultD++;
+                } else if (overallResult < 45) {
+                    overallResultF++;
+                }
+            }
+
+
+
         }catch (StudentResultNotExistentException e){System.out.println(e.getMessage());}
 
         int studentSize = studentList.size();
@@ -232,11 +327,81 @@ public class ReadingManager
         float courseWorkAve = courseWorkResult/studentSize;
         float overallAve = examAve * result.get(0).getWeightage()+courseWorkAve*result.get(1).getWeightage();
 
+        float studentNumCounterFloat = studentNumCounter;
+        //A
+        float examAGradeFloat = examAGrade;
+        float examAPercentage = examAGradeFloat/studentNumCounterFloat;
 
-        System.out.println("Course: " + courseTitle+"\nStatistics: Overall Percentage - "+overallAve +"\nExam Percentage - "+examAve+"\nCourse Work Percentage - "+courseWorkAve);
+        float courseworkAGradeFloat = courseworkAGrade;
+        float courseworkAGradePercentage = courseworkAGradeFloat / studentNumCounterFloat;
+
+        float overallResultAFloat = overallResultA;
+        float overallResultAFloatPercentage = overallResultAFloat / studentNumCounterFloat;
+
+        //B
+        float examBGradeFloat = examBGrade;
+        float examBPercentage = examBGradeFloat/studentNumCounterFloat;
+
+        float courseworkBGradeFloat = courseworkBGrade;
+        float courseworkBGradePercentage = courseworkBGradeFloat / studentNumCounterFloat;
+
+        float overallResultBFloat = overallResultB;
+        float overallResultBFloatPercentage = overallResultBFloat / studentNumCounterFloat;
+        //C
+        float examCGradeFloat = examCGrade;
+        float examCPercentage = examCGradeFloat/studentNumCounterFloat;
+
+        float courseworkCGradeFloat = courseworkCGrade;
+        float courseworkCGradePercentage = courseworkCGradeFloat / studentNumCounterFloat;
+
+        float overallResultCFloat = overallResultC;
+        float overallResultCFloatPercentage = overallResultCFloat / studentNumCounterFloat;
+        //D
+        float examDGradeFloat = examDGrade;
+        float examDPercentage = examDGradeFloat/studentNumCounterFloat;
+
+        float courseworkDGradeFloat = courseworkDGrade;
+        float courseworkDGradePercentage = courseworkDGradeFloat / studentNumCounterFloat;
+
+        float overallResultDFloat = overallResultD;
+        float overallResultDFloatPercentage = overallResultDFloat / studentNumCounterFloat;
+        //F
+        float examFGradeFloat = examFGrade;
+        float examFPercentage = examFGradeFloat/studentNumCounterFloat;
+
+        float courseworkFGradeFloat = courseworkFGrade;
+        float courseworkFGradePercentage = courseworkFGradeFloat / studentNumCounterFloat;
+
+        float overallResultFFloat = overallResultF;
+        float overallResultFFloatPercentage = overallResultFFloat / studentNumCounterFloat;
 
 
-        }
+
+        System.out.println(
+                "number of student:" + studentNumCounter
+                        + "\nCourse: " + courseTitle
+                        + "\nAverage Exam Mark - "+examAve + "\n"
+                        + "A Grade: " + (examAPercentage)*100 + "%\n"
+                        + "B Grade: " + (examBPercentage)*100 + "%\n"
+                        + "C Grade: " + (examCPercentage)*100 + "%\n"
+                        + "D Grade: " + (examDPercentage)*100 + "%\n"
+                        + "F Grade: " + (examFPercentage)*100 + "%\n"
+                        +"\nAverage Course Work Mark - "+courseWorkAve + "\n"
+                        + "A Grade: " + (courseworkAGradePercentage)*100 + "%\n"
+                        + "B Grade: " + (courseworkBGradePercentage)*100 + "%\n"
+                        + "C Grade: " + (courseworkCGradePercentage)*100 + "%\n"
+                        + "D Grade: " + (courseworkDGradePercentage)*100 + "%\n"
+                        + "F Grade: " + (courseworkFGradePercentage)*100 + "%\n"
+                        +"\nAverage (Exam + Course Work) Mark - "+overallAve + "\n"
+                        + "A Grade: " + (overallResultAFloatPercentage)*100 + "%\n"
+                        + "B Grade: " + (overallResultBFloatPercentage)*100 + "%\n"
+                        + "C Grade: " + (overallResultCFloatPercentage)*100 + "%\n"
+                        + "D Grade: " + (overallResultDFloatPercentage)*100 + "%\n"
+                        + "F Grade: " + (overallResultFFloatPercentage)*100 + "%\n"
+        );
+
+
+    }
 
 
     public static void printVacancy(DataContainer dataContainer){
