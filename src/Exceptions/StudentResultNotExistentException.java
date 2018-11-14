@@ -1,7 +1,7 @@
 package Exceptions;
 
-import com.group1.Course;
-import com.group1.Student;
+import SCRAME_grp1.Course;
+import SCRAME_grp1.Student;
 
 public class StudentResultNotExistentException extends Exception {
     public StudentResultNotExistentException(Student student, Course course){
