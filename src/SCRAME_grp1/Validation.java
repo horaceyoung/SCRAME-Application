@@ -48,7 +48,7 @@ public class Validation
      * A methods that checks the student results record of course titles
      * @param student The student which the user wish to inquire
      * @param coursetitle The course which the user wish to inquire
-     * @return Returns the list of student with the course code
+     * @return Returns the list of student result with the course code
      */
     public static int checkStudentResultsRecord(Student student, String coursetitle)
     {
