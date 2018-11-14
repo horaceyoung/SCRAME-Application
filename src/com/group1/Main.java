@@ -312,6 +312,10 @@ public class Main {
             	}
                 break;
 
+                case 11:
+                    //to quit
+                    break;
+
                 case 0:
                     try{
                         FileOutputStream fileOut = new FileOutputStream("data/SerializableDataContainer.ser");
