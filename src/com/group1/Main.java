@@ -206,11 +206,11 @@ public class Main {
                         }
                         catch (TutorialGroupNonExistentException e){System.out.println(e.getMessage());}
                         catch (LabGroupNonExistentException e){System.out.println((e.getMessage()));}
-                        catch (IOException e)
+                       /* catch (IOException e)
                         {
                             System.out.println(e.getMessage());
                         }
-
+*/
                         }
                     break;
                 case 6:
@@ -314,6 +314,7 @@ public class Main {
 
                 case 11:
                     //to quit
+                	System.out.println("Congratulations! You have successfully quit the program");
                     break;
 
                 case 0:
