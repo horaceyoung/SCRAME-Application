@@ -15,7 +15,7 @@ public class EditingManager
 {
     /**
      * A method that handles the registration of  a sutdent into a course
-     * @param dataContainer a datacontainer that contains the student and the course
+     * @param dataContainer A datacontainer that contains the student and the course
      */
     public static void register(DataContainer dataContainer){
         String studentMatric;
